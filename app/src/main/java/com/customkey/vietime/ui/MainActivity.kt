@@ -63,6 +63,8 @@ import com.customkey.vietime.ui.onboarding.SwipePracticeScreen
 import com.customkey.vietime.ui.onboarding.TypingSandbox
 import com.customkey.vietime.ui.onboarding.rememberImeStatus
 import com.customkey.vietime.ui.settings.LayoutScreen
+import com.customkey.vietime.ui.settings.PlusCard
+import com.customkey.vietime.ui.settings.ToolsScreen
 import com.customkey.vietime.ui.settings.SoundHapticsScreen
 import com.customkey.vietime.ui.settings.ThemeStudioScreen
 import com.customkey.vietime.ui.theme.GlassCard
@@ -102,7 +104,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private enum class Screen { HOME, PRACTICE, ABOUT, THEME, SOUND, LAYOUT }
+private enum class Screen { HOME, PRACTICE, ABOUT, THEME, SOUND, LAYOUT, TOOLS }
 
 @Composable
 private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPickIme: () -> Unit) {
@@ -124,10 +126,12 @@ private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPick
                 CustomizeTile("🔊", "Âm thanh & Rung", "Phím cơ Blue/Brown/Red, máy đánh chữ, giọt nước, âm riêng") { screen = Screen.SOUND }
                 CustomizeTile("📐", "Bố cục", "Hàng số, chiều cao, tách đôi, thời gian giữ phím") { screen = Screen.LAYOUT }
                 SectionLabel("Tính năng")
+                CustomizeTile("🧰", "Công cụ", "Thêm dấu cả câu, máy tính, clipboard thông minh, mẫu câu") { screen = Screen.TOOLS }
                 FeatureTile(R.drawable.img_swipe_practice, "Luyện gõ vuốt",
                     "Vuốt qua các chữ để gõ cả từ — chấm điểm từng nét.", "Bắt đầu") { screen = Screen.PRACTICE }
                 FeatureTile(R.drawable.img_privacy_safe, "Riêng tư tuyệt đối",
                     "Chạy 100% trên máy. Không thu thập phím gõ, không gửi gì lên mạng.", null) {}
+                PlusCard()
                 SectionLabel("Kiểu gõ")
                 TypingModeCard()
                 Footer { screen = Screen.ABOUT }
@@ -137,6 +141,7 @@ private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPick
             Screen.THEME -> ThemeStudioScreen(onBack = { screen = Screen.HOME })
             Screen.SOUND -> SoundHapticsScreen(onBack = { screen = Screen.HOME })
             Screen.LAYOUT -> LayoutScreen(onBack = { screen = Screen.HOME })
+            Screen.TOOLS -> ToolsScreen(onBack = { screen = Screen.HOME })
             Screen.ABOUT -> Column(Modifier.verticalScroll(rememberScrollState())) { AboutScreen(onBack = { screen = Screen.HOME }) }
         }
     }

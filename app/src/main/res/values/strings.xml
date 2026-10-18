@@ -4,4 +4,5 @@
     <!-- Tên hiện trong Cài đặt hệ thống › Bàn phím và hộp thoại chọn bàn phím -->
     <string name="ime_name">TxTelex – Bàn phím Việt thông minh</string>
     <string name="subtype_vi">Tiếng Việt · Telex &amp; VNI</string>
+    <string name="module_translate">Dịch trên máy</string>
 </resources>

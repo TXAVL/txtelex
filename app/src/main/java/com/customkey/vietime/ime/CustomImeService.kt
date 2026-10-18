@@ -52,6 +52,7 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
     private val keyboard: KeyboardView? get() = panel?.keyboard
     private val strip: SuggestionStripView? get() = panel?.strip
     private lateinit var custom: KeyboardCustomizer
+    private lateinit var tools: ToolsController
 
     private var swipeDecoder: SwipeDecoder? = null
     private val swipeLock = Any()
@@ -70,6 +71,8 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
         worker.post { session.seedLanguageModel() }
         custom = KeyboardCustomizer(this) { applyCustomization() }
         custom.reloadAll()
+        tools = ToolsController(this, proxy, session, { panel }, handler, worker, { b -> edit(b) }, { refreshBar() })
+        tools.start()
         prefs.registerOnSharedPreferenceChangeListener(this)
         readPrefs()
         Log.d(TAG, "onCreate ${SystemClock.elapsedRealtime() - t0} ms")
@@ -79,6 +82,7 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
         prefs.unregisterOnSharedPreferenceChangeListener(this)
         runCatching { session.lm.close() }
         custom.release()
+        tools.stop()
         worker.looper.quitSafely()
         super.onDestroy()
     }
@@ -104,6 +108,7 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
         val p = KeyboardPanel(this)
         p.keyboard.listener = this
         p.strip.listener = this
+        p.tools.listener = tools
         panel = p
         applyCustomization()
         return p
@@ -130,6 +135,8 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
             swipeTyping = prefs.getBoolean(ImePrefs.SWIPE_TYPING, true) && !cfg.passthrough && !cfg.isSecure
         }
         applyCustomization()
+        panel?.showTools(false)
+        strip?.showToolsButton = !cfg.isSecure && !cfg.rawKeys
         strip?.showUndo(false)
         strip?.showMessage(null)
         applyAutoShift()
@@ -162,7 +169,7 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
 
     // MARK: sửa chữ
 
-    private inline fun edit(block: () -> Unit) {
+    private fun edit(block: () -> Unit) {
         if (!proxy.begin()) return
         try { block() } finally { proxy.end() }
         if (proxy.takeFailure()) session.externalSelectionChange()
@@ -185,7 +192,8 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
     private fun refreshBar() {
         val s = strip ?: return
         val list = runCatching { session.suggestions(proxy) }.getOrElse { emptyList() }
-        s.show(list)
+        val special = runCatching { tools.specialChip() }.getOrNull()
+        s.show(if (special != null) (listOf(special) + list).take(3) else list)
     }
 
     // MARK: KeyboardView.Listener
@@ -195,6 +203,7 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
     override fun onText(text: String) {
         edit { session.text(text, proxy) }
         strip?.showUndo(false)
+        if (text.any { it in ".,!?;:" }) tools.scheduleTones()
         afterKey()
     }
 
@@ -203,6 +212,7 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
         strip?.showUndo(false)
         // Đang ở plane ký hiệu: dấu cách đưa về bàn chữ (như iOS).
         keyboard?.let { if (it.plane == KeyboardPlane.SYMBOLS || it.plane == KeyboardPlane.SYMBOLS2) it.plane = KeyboardPlane.LETTERS }
+        tools.scheduleTones()
         afterKey()
     }
 
@@ -285,7 +295,10 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
 
     // MARK: SuggestionStripView.Listener
 
+    override fun onToolsButton() = tools.toggle()
+
     override fun onSuggestion(s: Suggestion) {
+        if (s.special) { tools.accept(s); onFeedback(KeyboardView.FeedbackKind.KEY); afterKey(); return }
         edit { session.accept(s, proxy) }
         onFeedback(KeyboardView.FeedbackKind.KEY)
         afterKey()

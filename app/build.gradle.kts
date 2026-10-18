@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId = "nm.txa.telex"
         minSdk = 26; targetSdk = 35
-        versionCode = 2; versionName = "0.2.0-alpha"
+        versionCode = 3; versionName = "0.3.0-alpha"
     }
     buildTypes { release {
         isMinifyEnabled = true; isShrinkResources = true
@@ -20,6 +20,8 @@ android {
     // Blob từ điển/LM đọc bằng mmap — không nén trong APK.
     androidResources { noCompress += listOf("bin") }
     testOptions { unitTests.all { it.maxHeapSize = "2g" } }
+    // Module Play Feature Delivery (on-demand) — chỉ vào AAB; APK debug/GitHub không có.
+    dynamicFeatures += setOf(":translate")
 }
 dependencies {
     implementation("androidx.core:core-ktx:1.13.1")
@@ -28,6 +30,11 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
+    // TxTelex Plus — Google Play Billing (chỉ hoạt động khi PlusGate.PAYWALL_ENABLED = true).
+    implementation("com.android.billingclient:billing-ktx:8.0.0")
+    // Tải module Dịch on-demand từ Google Play.
+    implementation("com.google.android.play:feature-delivery:2.1.0")
+    implementation("com.google.android.play:feature-delivery-ktx:2.1.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
     testImplementation(kotlin("test"))
     testImplementation("junit:junit:4.13.2")

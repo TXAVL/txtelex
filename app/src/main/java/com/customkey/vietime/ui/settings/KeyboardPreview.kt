@@ -106,6 +106,7 @@ fun KeyboardPreview(modifier: Modifier = Modifier, hint: String = "Gõ thử tr�
                         panel.strip.show(session.suggestions(mem))
                     }
                     panel.keyboard.spaceLabel = "TxTelex"
+                    panel.strip.showToolsButton = false
                     panel.keyboard.listener = object : KeyboardView.Listener {
                         override fun onLetter(ch: Char) { session.letter(ch, mem); sync() }
                         override fun onText(text: String) { session.text(text, mem); sync() }

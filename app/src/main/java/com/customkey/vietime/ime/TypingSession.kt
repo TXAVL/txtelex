@@ -15,9 +15,18 @@ import com.customkey.vietime.engine.TypingTimings
 import com.customkey.vietime.engine.UserLangModel
 import com.customkey.vietime.engine.VNSuggest
 
-/** Một ô trên thanh gợi ý. */
-data class Suggestion(val text: String, val kind: Kind) {
+/** Một ô trên thanh gợi ý. [payload] = chữ chèn khi khác chữ hiển thị (chip dán, thêm dấu…). */
+data class Suggestion(val text: String, val kind: Kind, val payload: String? = null) {
+    /** Chip đặc biệt (phép tính / thêm dấu / dán nhanh) — tô nổi, IME tự xử lý khi chạm. */
+    val special: Boolean get() = kind == Kind.MATH || kind == Kind.TONES || kind == Kind.PASTE
+
     enum class Kind {
+        /** Kết quả phép tính sau "=". */
+        MATH,
+        /** Thêm dấu cho câu không dấu trước con trỏ. */
+        TONES,
+        /** Dán nhanh nội dung vừa copy (OTP, link…). */
+        PASTE,
         /** Đúng chữ đang gõ (giữ nguyên). */
         LITERAL,
         /** Hoàn tất từ đang gõ. */

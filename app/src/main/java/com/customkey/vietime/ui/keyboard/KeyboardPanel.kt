@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.RectF
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 
 /**
@@ -16,9 +17,25 @@ import android.widget.LinearLayout
 class KeyboardPanel(context: Context) : LinearLayout(context) {
     val strip = SuggestionStripView(context).also { it.drawsBackground = false }
     val keyboard = KeyboardView(context).also { it.drawsBackground = false }
+    /** Bảng công cụ (Clipboard / Mẫu câu…) — đè lên vùng phím, giữ nguyên chiều cao. */
+    val tools = ToolsPaneView(context).also { it.visibility = GONE }
+    private val body = FrameLayout(context)
 
     var style: KeyboardStyle = KeyboardStyle.neon
-        set(v) { field = v; strip.style = v; keyboard.style = v; invalidate() }
+        set(v) { field = v; strip.style = v; keyboard.style = v; tools.style = v; invalidate() }
+
+    val toolsShown: Boolean get() = tools.visibility == VISIBLE
+
+    fun showTools(show: Boolean) {
+        // Chiều cao cố định = vùng phím: danh sách dài không được kéo cao bàn phím.
+        if (show) tools.layoutParams = (tools.layoutParams as FrameLayout.LayoutParams).apply {
+            height = keyboard.height.takeIf { it > 0 } ?: keyboard.desiredHeight()
+        }
+        tools.visibility = if (show) VISIBLE else GONE
+        keyboard.visibility = if (show) INVISIBLE else VISIBLE
+        strip.toolsOpen = show
+        if (show) keyboard.cancelAllTouches()
+    }
 
     private val src = Rect()
     private val dst = RectF()
@@ -28,7 +45,9 @@ class KeyboardPanel(context: Context) : LinearLayout(context) {
         orientation = VERTICAL
         setWillNotDraw(false)
         addView(strip, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
-        addView(keyboard, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
+        body.addView(keyboard, FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
+        body.addView(tools, FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
+        addView(body, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
     }
 
     /** Ẩn/hiện thanh gợi ý (bản xem trước luyện vuốt không cần). */

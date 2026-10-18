@@ -7,7 +7,9 @@
             <action android:name="android.view.InputMethod" />
         </intent>
     </queries>
+    <!-- SplitCompatApplication: nạp được lớp của module on-demand (Dịch) ngay sau khi Play tải về. -->
     <application
+        android:name="com.google.android.play.core.splitcompat.SplitCompatApplication"
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
