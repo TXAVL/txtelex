@@ -9,8 +9,12 @@ android {
     defaultConfig {
         applicationId = "nm.txa.telex"
         minSdk = 26; targetSdk = 35
-        versionCode = 4; versionName = "0.3.1-alpha"
+        versionCode = 5; versionName = "0.4.0-alpha"
+        // Bộ bắt crash native (libtxaguard.so) cho mọi CPU Android phổ biến.
+        ndk { abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64", "x86") }
     }
+    ndkVersion = "27.2.12479018"
+    externalNativeBuild { cmake { path = file("src/main/cpp/CMakeLists.txt"); version = "3.22.1" } }
     buildTypes { release {
         isMinifyEnabled = true; isShrinkResources = true
         proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro") } }

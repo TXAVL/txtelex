@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.os.Handler
 import android.os.Looper
+import com.customkey.vietime.diag.TxaLogger
 import com.customkey.vietime.engine.Keys
 import com.customkey.vietime.ime.ImePrefs
 import com.customkey.vietime.ui.keyboard.KeyboardPanel
@@ -22,6 +23,9 @@ class KeyboardCustomizer(context: Context, private val onChanged: () -> Unit) {
     private val main = Handler(Looper.getMainLooper())
     private val io = Executors.newSingleThreadExecutor { r -> Thread(r, "txtelex-custom").apply { isDaemon = true } }
 
+    /** Việc nền có ghi lỗi (ảnh nền hỏng / file âm thanh lạ không làm sập bàn phím). */
+    private fun bg(block: () -> Unit) = io.execute { TxaLogger.guard("Customizer", "tác vụ nền", Unit) { block() } }
+
     val sound = SoundEffectPool(ctx)
     val haptic = HapticController(ctx)
 
@@ -36,7 +40,7 @@ class KeyboardCustomizer(context: Context, private val onChanged: () -> Unit) {
         haptic.config = HapticConfig.load { prefs.all[it] }
         sound.volume = prefs.getInt(SoundEffectPool.KEY_VOLUME, 60) / 100f
         val wantWall = theme.wallpaper
-        io.execute {
+        bg {
             wallpaper = if (wantWall) ThemeStore.loadWallpaper(ctx) else null
             sound.setProfile(SoundProfile.of(prefs.getString(SoundEffectPool.KEY_PROFILE, null)))
             main.post(onChanged)
@@ -50,19 +54,19 @@ class KeyboardCustomizer(context: Context, private val onChanged: () -> Unit) {
             ThemeStore.KEY_THEME -> {
                 val old = theme
                 theme = ThemeStore.load(ctx)
-                if (theme.wallpaper != old.wallpaper) io.execute {
+                if (theme.wallpaper != old.wallpaper) bg {
                     wallpaper = if (theme.wallpaper) ThemeStore.loadWallpaper(ctx) else null
                     main.post(onChanged)
                 }
             }
-            ThemeStore.KEY_WALL_VERSION -> io.execute {
+            ThemeStore.KEY_WALL_VERSION -> bg {
                 wallpaper = if (theme.wallpaper) ThemeStore.loadWallpaper(ctx) else null
                 main.post(onChanged)
             }
             SoundEffectPool.KEY_PROFILE, SoundEffectPool.KEY_CUSTOM_VERSION -> {
                 val p = SoundProfile.of(prefs.getString(SoundEffectPool.KEY_PROFILE, null))
                 val force = key == SoundEffectPool.KEY_CUSTOM_VERSION
-                io.execute { sound.setProfile(p, force) }
+                bg { sound.setProfile(p, force) }
                 return true
             }
             SoundEffectPool.KEY_VOLUME -> { sound.volume = prefs.getInt(key, 60) / 100f; return true }

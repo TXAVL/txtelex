@@ -2,15 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Chỉ để ghi loại kết nối vào báo cáo lỗi khi người dùng xuất. -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- Hộp thoại chọn bàn phím / phát hiện IME khác dưới package visibility. -->
     <queries>
         <intent>
             <action android:name="android.view.InputMethod" />
         </intent>
     </queries>
-    <!-- SplitCompatApplication: nạp được lớp của module on-demand (Dịch) ngay sau khi Play tải về. -->
+    <!-- TxaApp: cài bộ bắt sự cố sớm nhất; kế thừa SplitCompatApplication (module on-demand Dịch). -->
     <application
-        android:name="com.google.android.play.core.splitcompat.SplitCompatApplication"
+        android:name="com.customkey.vietime.diag.TxaApp"
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -34,6 +36,22 @@
             android:name="com.google.mlkit.common.internal.MlKitInitProvider"
             android:authorities="${applicationId}.mlkitinitprovider"
             tools:node="remove" />
+        <!-- Màn báo lỗi: tiến trình riêng ⇒ vẫn mở được khi tiến trình chính vừa crash. -->
+        <activity
+            android:name=".diag.TxaErrorScreen"
+            android:process=":txa_crash"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:taskAffinity="${applicationId}.txa_crash"
+            android:launchMode="singleTask" />
+        <!-- Chia sẻ file báo cáo lỗi (cache/txa_export). -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.txa.files"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/txa_file_paths" />
+        </provider>
         <service
             android:name=".ime.CustomImeService"
             android:label="@string/ime_name"

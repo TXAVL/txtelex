@@ -55,6 +55,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.customkey.vietime.BuildConfig
 import com.customkey.vietime.R
+import com.customkey.vietime.diag.TxaLogCenter
+import com.customkey.vietime.diag.showPendingCrash
 import com.customkey.vietime.engine.Keys
 import com.customkey.vietime.ime.AssetBlobs
 import com.customkey.vietime.ime.ImePrefs
@@ -98,13 +100,19 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Sự cố lần trước (bàn phím / native / ANR) chưa được xem ⇒ mở màn báo lỗi.
+        showPendingCrash(this)
+    }
+
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) focusTick.intValue++
     }
 }
 
-private enum class Screen { HOME, PRACTICE, ABOUT, THEME, SOUND, LAYOUT, TOOLS }
+private enum class Screen { HOME, PRACTICE, ABOUT, THEME, SOUND, LAYOUT, TOOLS, LOGS }
 
 @Composable
 private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPickIme: () -> Unit) {
@@ -142,7 +150,8 @@ private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPick
             Screen.SOUND -> SoundHapticsScreen(onBack = { screen = Screen.HOME })
             Screen.LAYOUT -> LayoutScreen(onBack = { screen = Screen.HOME })
             Screen.TOOLS -> ToolsScreen(onBack = { screen = Screen.HOME })
-            Screen.ABOUT -> Column(Modifier.verticalScroll(rememberScrollState())) { AboutScreen(onBack = { screen = Screen.HOME }) }
+            Screen.ABOUT -> Column(Modifier.verticalScroll(rememberScrollState())) { AboutScreen(onBack = { screen = Screen.HOME }, onLogs = { screen = Screen.LOGS }) }
+            Screen.LOGS -> Column(Modifier.verticalScroll(rememberScrollState())) { TxaLogCenter(onBack = { screen = Screen.ABOUT }) }
         }
     }
 }
@@ -241,7 +250,7 @@ private fun Footer(onAbout: () -> Unit) {
  * giấy phép MIT của lõi bộ gõ (phải kèm thông báo bản quyền gốc trong mọi bản phân phối).
  */
 @Composable
-private fun AboutScreen(onBack: () -> Unit) {
+private fun AboutScreen(onBack: () -> Unit, onLogs: () -> Unit) {
     val ctx = LocalContext.current
     var showOss by remember { mutableStateOf(false) }
     val mit = remember { runCatching { ctx.assets.open("licenses/viettelex-LICENSE.txt").bufferedReader().readText() }.getOrDefault("") }
@@ -257,6 +266,15 @@ private fun AboutScreen(onBack: () -> Unit) {
             Spacer(Modifier.height(6.dp))
             Text("Tên, logo, giao diện và hệ thống tuỳ biến TxTelex thuộc về TXA.",
                 style = MaterialTheme.typography.bodySmall, color = Tx.TextDim)
+        }
+        GlassCard(onClick = onLogs) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text("Nhật ký & báo lỗi", style = MaterialTheme.typography.titleSmall, color = Tx.Text)
+                    Text("Sự cố đã ghi, xuất nhật ký gửi TXA", style = MaterialTheme.typography.bodySmall, color = Tx.TextDim)
+                }
+                Text("›", color = Tx.Cyan, fontSize = 22.sp)
+            }
         }
         GlassCard(onClick = { showOss = !showOss }) {
             Row(verticalAlignment = Alignment.CenterVertically) {

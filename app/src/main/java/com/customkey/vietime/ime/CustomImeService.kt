@@ -7,7 +7,6 @@ import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
 import android.os.SystemClock
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -22,6 +21,7 @@ import com.customkey.vietime.engine.SwipeSuggest
 import com.customkey.vietime.engine.SyllableLM
 import com.customkey.vietime.engine.UserLangModel
 import com.customkey.vietime.customization.KeyboardCustomizer
+import com.customkey.vietime.diag.TxaLogger
 import com.customkey.vietime.ui.keyboard.KeyboardPanel
 import com.customkey.vietime.ui.keyboard.KeyboardPlane
 import com.customkey.vietime.ui.keyboard.KeyboardView
@@ -75,7 +75,7 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
         tools.start()
         prefs.registerOnSharedPreferenceChangeListener(this)
         readPrefs()
-        Log.d(TAG, "onCreate ${SystemClock.elapsedRealtime() - t0} ms")
+        TxaLogger.crumb("Bàn phím khởi động ${SystemClock.elapsedRealtime() - t0} ms")
     }
 
     override fun onDestroy() {
@@ -117,6 +117,8 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
     override fun onStartInputView(info: EditorInfo?, restarting: Boolean) {
         super.onStartInputView(info, restarting)
         val cfg = FieldClassifier.classify(info)
+        // Chỉ ghi LOẠI ô + app chủ — không bao giờ ghi nội dung ô.
+        TxaLogger.crumb("Gõ vào ${info?.packageName ?: "?"} · ô ${cfg.kind}${if (cfg.isSecure) " (mật khẩu)" else ""}${if (cfg.otp) " (OTP)" else ""}")
         proxy.startInput(cfg, info?.initialSelStart ?: -1, info?.initialSelEnd ?: -1)
         val settings = EngineSettings.load { key -> prefs.all[key] }
         session.startInput(settings, cfg.toTraits())
@@ -147,6 +149,7 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
         super.onFinishInputView(finishingInput)
         keyboard?.cancelAllTouches()
         session.finishInput()
+        TxaLogger.d(TAG, "finishInputView")
         handler.removeCallbacks(refreshRun)
     }
 
@@ -191,8 +194,8 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
 
     private fun refreshBar() {
         val s = strip ?: return
-        val list = runCatching { session.suggestions(proxy) }.getOrElse { emptyList() }
-        val special = runCatching { tools.specialChip() }.getOrNull()
+        val list = TxaLogger.guard(TAG, "gợi ý", emptyList()) { session.suggestions(proxy) }
+        val special = TxaLogger.guard(TAG, "chip công cụ", null) { tools.specialChip() }
         s.show(if (special != null) (listOf(special) + list).take(3) else list)
     }
 
@@ -285,7 +288,9 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
     override fun onSwipeTypingEnd(path: SwipePath, case: SwipeSuggest.Case) {
         val dec = swipeDecoder ?: return
         val ctx = session.swipeContext()
-        val cands = synchronized(swipeLock) { dec.decode(path, SwipeSuggest.TOP_K, ctx.folded, ctx.english, null) }
+        val cands = TxaLogger.guard(TAG, "giải mã nét vuốt (${path.count} điểm)", emptyList()) {
+            synchronized(swipeLock) { dec.decode(path, SwipeSuggest.TOP_K, ctx.folded, ctx.english, null) }
+        }
         val choice = session.resolveSwipe(cands, ctx, case)
         if (choice != null) edit { session.commitSwipe(choice, proxy) }
         strip?.showUndo(false)
