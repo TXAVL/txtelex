@@ -1,0 +1,93 @@
+{
+  "createdAt" : "2026-09-27T08:00:00Z",
+  "format" : "viettelex-backup",
+  "learnedWords" : {
+    "bi" : {
+      "cảm" : {
+        "ơn" : 5
+      }
+    },
+    "manual" : [
+      "VietTelex"
+    ],
+    "tri" : {
+      "cảm\u0001ơn" : {
+        "nhiều" : 3
+      }
+    },
+    "uni" : {
+      "cảm" : 7,
+      "nhiều" : 4,
+      "viettelex" : 5,
+      "ơn" : 6
+    }
+  },
+  "minReaderVersion" : 1,
+  "platform" : "ios",
+  "settings" : {
+    "addTonesChip" : false,
+    "autoCapitalize" : false,
+    "autoCorrect" : true,
+    "autoFixAdjacent" : true,
+    "autoRestore" : true,
+    "autoSpaceAfterPunct" : true,
+    "contextualEnglish" : true,
+    "emojiSuggest" : true,
+    "filterSensitive" : true,
+    "freeMarking" : true,
+    "hapticFeedback" : true,
+    "keyLabelTransparency" : 20,
+    "keySound" : true,
+    "keySoundStyle" : "wood",
+    "keySoundVolume" : 70,
+    "keyboardTransparency" : 40,
+    "liveSpellCheck" : true,
+    "longPressNumbers" : true,
+    "longPressSymbols" : false,
+    "mathResults" : true,
+    "modernTone" : true,
+    "numberChips" : true,
+    "numberRow" : true,
+    "numberRowFullHeight" : false,
+    "pasteButton" : true,
+    "quickTelex" : false,
+    "reEditWords" : false,
+    "rowHeightAdjust" : -3,
+    "showSpaceLogo" : false,
+    "shortcutsEnabled" : true,
+    "showSuggestions" : true,
+    "simpleTelex" : true,
+    "smartTouch" : true,
+    "spaceSwipeLanguage" : false,
+    "suggestInNoSuggestFields" : false,
+    "swipeEnglish" : true,
+    "swipeKeyCommands" : false,
+    "swipeTyping" : true,
+    "systemBackdropContrast" : false,
+    "systemBackdropLavender" : false,
+    "systemBackdropMint" : false,
+    "systemBackdropOled" : false,
+    "systemBackdropPeach" : false,
+    "systemBackdropSky" : false,
+    "teencode" : false,
+    "templatesEnabled" : true,
+    "textToolsEnabled" : true,
+    "uiLanguage" : "en"
+  },
+  "shortcuts" : {
+    "ko" : "không",
+    "stk" : "số tài khoản",
+    "đc" : "được"
+  },
+  "templates" : [
+    {
+      "label" : "👋",
+      "text" : "Chào buổi sáng"
+    },
+    {
+      "label" : "",
+      "text" : "Anh nói \"ok\" nhé\nDòng 2"
+    }
+  ],
+  "version" : 1
+}

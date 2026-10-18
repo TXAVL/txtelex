@@ -1,0 +1,623 @@
+// MIT License — Copyright (c) 2026 Phil Trinh
+// Extracted from ptrinh/viettelex (https://github.com/ptrinh/viettelex), see assets/licenses/viettelex-LICENSE.txt.
+// Modified for com.customkey.vietime.
+
+package com.customkey.vietime.engine
+
+
+/**
+ * Keo giữa TelexEngine và [TextProxy] — port 1:1 iOS EngineBridge. Mỗi phím →
+ * diff tối thiểu (xoá N code point + chèn). Không Android API.
+ */
+class EngineBridge(settings: EngineSettings = EngineSettings()) {
+    private var settings = settings
+    private val engine = TelexEngine().also { configure(it, true) }
+
+    /** Ô không autocorrect (mã/username): gõ LITERAL, bỏ engine. */
+    var passthrough = false
+
+    /**
+     * Ô email (FieldTraits.emailCompose): Telex/VNI BẬT để tìm người nhận theo tên ("Sown" →
+     * "Sơn"), nhưng token có "@"/"." được trả về đúng phím thô và gõ thô tới hết token
+     * ([EmailTokenGuard]). Không gõ tắt / không với lại từ đã chốt (không viết lại chữ app chèn).
+     */
+    var emailField = false
+        set(v) { field = v; email.invalidate() }
+    private val email = EmailTokenGuard()
+    private val emailActive: Boolean get() = emailField && !englishMode
+    /** Với lại từ đã chốt (⌫ mở lại, phím dấu nạp lại từ trước con trỏ): không ở ô email. */
+    private val reEdit: Boolean get() = settings.reEditWords && !emailField
+
+    /** Cho phép gõ tắt ở ô này (session TẮT ở ô URL/omnibox). Mật khẩu/email đã passthrough. */
+    var shortcutsAllowed = true
+
+    /** Lần bung gõ tắt gần nhất — ⌫ NGAY SAU đó trả lại đúng chữ đã gõ (một lần). */
+    private class ExpansionUndo(val typed: String, val expansion: String, val boundary: String, val autoCorrect: Boolean = false)
+    private var expansionUndo: ExpansionUndo? = null
+    /** boundary() vừa rồi đã bung gõ tắt / tự sửa (session: không mời hoàn tác khôi phục, học nội dung). */
+    var expandedAtLastBoundary = false
+        private set
+
+    /**
+     * Tự sửa từ gõ sai ([AutoCorrect]): phím thô của từ vừa gõ → từ sửa hoặc null. Session chỉ
+     * gắn khi công tắc BẬT và ô cho phép; null ⇒ boundary không tốn thêm gì.
+     */
+    var autoCorrector: ((String) -> String?)? = null
+    /** ⌫ / chip vừa trả lại chữ gốc của một lần tự sửa: chữ gốc (một lần — session đọc rồi xoá). */
+    var revertedAutoCorrect: String? = null
+    /** Lần tự sửa còn hoàn tác được (chữ gốc, từ đã sửa) — chip "↩︎ chữ gốc" trên thanh gợi ý. */
+    val autoCorrectUndo: Pair<String, String>? get() = expansionUndo?.takeIf { it.autoCorrect }?.let { it.typed to it.expansion }
+
+    /**
+     * Ký tự ngay trước con trỏ là ranh giới CHÍNH MÌNH vừa chèn ⇒ không có từ nào để nạp
+     * lại, khỏi đọc context (IPC) ở chữ đầu mỗi từ.
+     */
+    private var afterOwnBoundary = false
+
+    /**
+     * Ghi checkpoint mỗi phím chữ để [undoLastLetter] huỷ được đúng phím đó khi nó hoá ra
+     * là đầu một đường VUỐT (gõ vuốt). Tắt (mặc định) ⇒ không tốn gì.
+     */
+    var trackLetterUndo = false
+        set(v) { field = v; if (!v) undo.valid = false }
+
+    /**
+     * Checkpoint của phím CHỮ gần nhất (port iOS `LetterUndo`). KHÔNG dùng ⌫ để huỷ:
+     * engine.backspace() xoá chữ cuối ĐANG HIỆN chứ không gỡ phím vừa gõ — "tieng" + s
+     * rồi ⌫ ra "tiến". Mọi thao tác khác ngoài letter() đều xoá checkpoint.
+     * Engine snapshot cấp MỘT lần, copyInto mỗi phím (không cấp phát trên hot path).
+     */
+    private class LetterUndo {
+        val engine = TelexEngine()
+        var removed = ""      // chữ phím đó đã xoá khỏi màn hình
+        var inserted = ""     // chữ phím đó đã chèn
+        var ownBoundary = false
+        var valid = false
+        var enWord = ""
+    }
+    private val undo = LetterUndo()
+
+    /**
+     * Chế độ Tiếng Anh (vuốt phím cách): phím chữ chèn NGUYÊN VĂN (không Telex/VNI), từ đang gõ
+     * nằm ở [enWord] — gợi ý tiếng Anh, gõ tắt vẫn bung. Đổi giữa chừng qua [setEnglish]. Giống iOS.
+     */
+    var englishMode = false
+        private set
+    private var enWord = ""
+
+    /**
+     * Đổi Tiếng Việt ↔ Tiếng Anh: chốt từ đang gõ như ranh giới rỗng (auto-restore, không gõ
+     * tắt, không chèn ký tự nào) rồi đổi chế độ. Trả từ đã chốt (caller học).
+     */
+    fun setEnglish(on: Boolean, proxy: TextProxy): String {
+        if (on == englishMode) return ""
+        val final = if (isComposing) boundary("", proxy, expand = false) else ""
+        englishMode = on
+        engine.reset(); engine.forgetLastCommit()
+        // phím kế là đầu từ MỚI của ngôn ngữ kia — không nạp lại / nối vào từ vừa chốt
+        enWord = ""; undo.valid = false; afterOwnBoundary = true
+        email.invalidate()
+        return final
+    }
+
+    private fun checkpoint(ownBoundary: Boolean) {
+        if (!trackLetterUndo) return
+        engine.copyInto(undo.engine)
+        undo.enWord = enWord
+        undo.ownBoundary = ownBoundary
+    }
+
+    private fun recordUndo(action: TelexAction, before: String, literal: String) {
+        if (!trackLetterUndo) return
+        when (action) {
+            is TelexAction.Replace -> {
+                undo.removed = before.substring(Cp.dropLast(before, action.backspaces).length)
+                undo.inserted = action.insert
+            }
+            TelexAction.Passthrough -> { undo.removed = ""; undo.inserted = literal }
+            TelexAction.None -> { undo.removed = ""; undo.inserted = "" }
+        }
+        undo.valid = true
+    }
+
+    /**
+     * Huỷ phím chữ vừa gõ (chỉ khi chưa có thao tác nào khác xen vào): trả màn hình và
+     * engine về đúng trước phím đó. Chữ trước con trỏ không kết thúc bằng thứ phím đó
+     * đã chèn ⇒ không sửa gì, trả false (caller tự xử lý).
+     */
+    fun undoLastLetter(proxy: TextProxy): Boolean {
+        expansionUndo = null
+        if (!undo.valid) return false
+        undo.valid = false
+        if (!proxy.confirmTail(undo.inserted)) return false
+        val n = Cp.count(undo.inserted)
+        if (n > 0) proxy.deleteCodePoints(n)
+        if (undo.removed.isNotEmpty()) proxy.insertText(undo.removed)
+        undo.engine.copyInto(engine)
+        enWord = undo.enWord
+        afterOwnBoundary = undo.ownBoundary
+        TouchLog.write("undo letter: -$n +${Cp.count(undo.removed)}")
+        return true
+    }
+
+    /**
+     * Từ vừa chèn nguyên khối (gõ vuốt) thành composition đang mở: phím dấu Telex sửa được,
+     * ⌫ engine như từ gõ tay. false = từ không round-trip qua engine (engine để trống).
+     */
+    fun adoptWord(word: String): Boolean {
+        undo.valid = false
+        expansionUndo = null
+        afterOwnBoundary = false
+        enWord = ""
+        val ok = engine.seed(word)
+        if (!ok) engine.reset()
+        return ok
+    }
+
+    /**
+     * Từ vừa chèn NGUYÊN VĂN (vuốt ra từ tiếng Anh): engine không giữ gì (phím dấu Telex
+     * không đụng vào từ), ⌫ không mở lại từ chốt trước đó.
+     */
+    fun adoptLiteral() {
+        undo.valid = false
+        expansionUndo = null
+        afterOwnBoundary = false
+        enWord = ""
+        engine.reset()
+        engine.forgetLastCommit()
+    }
+
+    /**
+     * Từ nguyên văn vừa được chốt: ngữ cảnh tiếng Anh của engine. Biết chữ thì từ chức năng
+     * ("it" rồi gõ "is" giữ "is") mở mạch; từ nội dung ("check") chỉ mở khi là từ Anh thứ hai.
+     */
+    fun noteExternalWord(english: Boolean, word: String? = null) = engine.noteExternalWord(word, english)
+
+    private fun configure(e: TelexEngine, contextual: Boolean) {
+        e.freeMarking = settings.freeMarking
+        e.simpleTelex = settings.simpleTelex
+        e.liveSpellCheck = settings.liveSpellCheck
+        e.quickTelex = settings.quickTelex
+        e.modernTone = settings.modernTone
+        e.teencode = settings.teencode
+        e.vniMode = settings.vniMode
+        if (contextual) e.contextualEnglish = settings.contextualEnglish
+    }
+
+    /**
+     * Settings đổi khi bàn phím ĐANG hiện (Android: app settings cùng màn hình với ô Thử gõ,
+     * không có onStartInputView mới) — áp ngay vào engine, không reset chữ đang gõ.
+     */
+    fun applySettings(s: EngineSettings) { settings = s; configure(engine, true) }
+
+    /** Phím chữ (đã theo shift). */
+    fun letter(ch: Char, proxy: TextProxy) {
+        undo.valid = false
+        expansionUndo = null
+        if (proxy.isSecure || passthrough) {
+            checkpoint(afterOwnBoundary)
+            proxy.insertText(ch.toString())
+            recordUndo(TelexAction.Passthrough, "", ch.toString())
+            return
+        }
+        if (emailActive) {
+            if (!email.synced) email.sync(proxy.contextBeforeInput())
+            if (email.literal) {                     // token địa chỉ: phím thô, ⌫ thường
+                proxy.insertText(ch.toString())
+                email.appended(ch.toString(), ch.toString())
+                afterOwnBoundary = false
+                return
+            }
+        }
+        if (englishMode) {
+            checkpoint(afterOwnBoundary)
+            afterOwnBoundary = false
+            enWord += ch
+            proxy.insertText(ch.toString())
+            recordUndo(TelexAction.Passthrough, "", ch.toString())
+            return
+        }
+        val ownBoundary = afterOwnBoundary
+        val seedable = reEdit && engine.isEmpty && !afterOwnBoundary && ReEdit.isTransformKey(ch, settings.vniMode)
+        afterOwnBoundary = false
+        checkpoint(ownBoundary)
+        if (seedable && trySeed(ch, proxy)) return
+        val before = engine.composed
+        val action = engine.feed(ch)
+        if (action is TelexAction.Replace && action.backspaces > 0 && !proxy.confirmTail(before)) {
+            // Chữ trên màn hình không còn là từ engine đang giữ (ô bị đổi mà không được báo):
+            // KHÔNG xoá mù — quên từ, bắt đầu từ mới bằng chính phím này.
+            TouchLog.write("tail mismatch (letter) → reset")
+            reset()
+            val fresh = engine.feed(ch)
+            if (fresh is TelexAction.Replace && fresh.backspaces > 0) { reset(); proxy.insertText(ch.toString()) }
+            else apply(fresh, ch.toString(), proxy)
+            return
+        }
+        apply(action, ch.toString(), proxy)
+        recordUndo(action, before, ch.toString())
+    }
+
+    /** Kiểu gõ đang là VNI. */
+    val vniMode: Boolean get() = settings.vniMode
+
+    /**
+     * Phím SỐ ở kiểu gõ VNI (hàng số, plane 123, bàn phím cứng). true = đã xử lý như phím của
+     * từ: đang soạn ⇒ feed engine (áp dấu khi áp được, không thì số nằm trong từ — "mp3", như
+     * macOS); engine trống ⇒ chỉ thử sửa dấu từ ngay trước con trỏ (1–5/0/7/8). false = ngoài
+     * từ ⇒ caller chèn số như ký hiệu (boundary) — "2026" vẫn là số. Telex ⇒ luôn false.
+     */
+    fun vniDigit(ch: Char, proxy: TextProxy): Boolean {
+        if (!settings.vniMode || englishMode || ch !in '0'..'9' || proxy.isSecure || passthrough) return false
+        if (emailActive && email.literal) return false  // token địa chỉ: số là số
+        if (!engine.isEmpty) { letter(ch, proxy); return true }
+        if (!reEdit || afterOwnBoundary || !ReEdit.isTransformKey(ch, true)) return false
+        undo.valid = false
+        checkpoint(false)
+        return trySeed(ch, proxy)
+    }
+
+    /**
+     * Space / return / dấu câu: boundary → auto-restore rồi chèn [text]. Trả từ ĐÃ
+     * CHỐT (sau auto-restore) để model học đúng thứ nằm trên màn hình.
+     */
+    fun boundary(text: String, proxy: TextProxy, lineBreak: Boolean = false, expand: Boolean = true): String {
+        // [lineBreak]: [text] là "\n" chèn thật ([TextProxy.insertLineBreak]), không gửi action.
+        // [expand] = false: không gõ tắt (từ vuốt — từ từ điển, không phải chữ tắt).
+        fun put(text: String) = if (lineBreak) proxy.insertLineBreak() else proxy.insertText(text)
+        undo.valid = false
+        expansionUndo = null
+        expandedAtLastBoundary = false
+        if (proxy.isSecure || passthrough) { put(text); return "" }
+        afterOwnBoundary = text.isNotEmpty() && !Character.isLetterOrDigit(text.codePointBefore(text.length))
+        if (emailActive) return emailBoundary(text, proxy, ::put)
+        // Gõ tắt TRƯỚC tự khôi phục tiếng Anh.
+        if (expand) tryExpandShortcut(text, proxy, ::put)?.let { return it }
+        if (englishMode) {
+            val word = enWord
+            enWord = ""
+            put(text)
+            return word
+        }
+        if (expand) autoCorrector?.let { ac -> tryAutoCorrect(ac, text, proxy, ::put)?.let { return it } }
+        val before = engine.composed
+        val action = engine.commitBoundary(settings.autoRestore)
+        if (action is TelexAction.Replace && action.backspaces > 0 && !proxy.confirmTail(before)) {
+            // Auto-restore cần xoá nhưng chữ trước con trỏ không khớp: bỏ restore, không học.
+            TouchLog.write("tail mismatch (boundary) → reset")
+            reset()
+            put(text)
+            return ""
+        }
+        var final = before
+        if (action is TelexAction.Replace) final = Cp.dropLast(before, action.backspaces) + action.insert
+        apply(action, "", proxy)
+        put(text)
+        return final
+    }
+
+    /**
+     * Phím dấu/mũ khi engine rỗng, con trỏ ở CUỐI một từ đã có trên màn hình ("viet|" + j):
+     * seed engine bằng từ đó rồi feed phím ⇒ "việt". Chỉ nhận khi seed khớp đúng từ VÀ phím
+     * thật sự biến đổi nó; mọi trường hợp khác trả false (caller gõ literal như cũ).
+     */
+    private fun trySeed(ch: Char, proxy: TextProxy): Boolean {
+        if (!proxy.canReEdit) return false
+        val before = proxy.contextBeforeInput() ?: return false
+        val word = ReEdit.trailingWord(before) ?: return false
+        val after = proxy.contextAfterInput() ?: return false
+        if (!ReEdit.atWordEnd(after) || proxy.hasSelection) return false
+        if (!engine.seed(word)) return false
+        val action = engine.feed(ch)
+        if (action !is TelexAction.Replace || action.backspaces <= 0 ||
+            engine.composed == word + ch) {
+            engine.reset()
+            return false
+        }
+        TouchLog.write("re-edit: seeded ${Cp.count(word)} chars")
+        apply(action, ch.toString(), proxy)
+        // Checkpoint = engine TRỐNG trước seed; màn hình: đuôi từ bị thay ↔ phần chèn.
+        recordUndo(action, word, ch.toString())
+        return true
+    }
+
+    /**
+     * ⌫. Trả true khi vừa MỞ LẠI từ chốt trước: ⌫ xoá ký tự ranh giới như thường và
+     * engine giữ lại đúng từ đó ("tháy" ␣ ⌫ a → "thấy"). Chỉ khi chữ trước con trỏ khớp
+     * đúng từ + ranh giới; lệch ⇒ quên từ, ⌫ thường.
+     */
+    fun backspace(proxy: TextProxy): Boolean {
+        undo.valid = false
+        expansionUndo?.let { u ->
+            expansionUndo = null
+            if (undoExpansion(u, proxy)) return false
+        }
+        if (proxy.isSecure || passthrough) { proxy.deleteBackward(); return false }
+        afterOwnBoundary = false
+        if (englishMode) {
+            if (enWord.isNotEmpty()) enWord = enWord.dropLast(1)
+            proxy.deleteBackward()
+            return false
+        }
+        if (engine.isEmpty) {
+            if (emailActive) email.deletedOne()
+            val reopened = reEdit && engine.canReopenLastCommit && tryReopen(proxy)
+            if (!reopened) { engine.forgetLastCommit(); proxy.deleteBackward() }
+            return reopened
+        }
+        val before = engine.composed
+        when (val a = engine.backspace()) {
+            is TelexAction.Replace -> {
+                if (a.backspaces > 0 && !proxy.confirmTail(before)) {
+                    // Từ đang soạn không còn trên màn hình: ⌫ thường, quên từ.
+                    TouchLog.write("tail mismatch (backspace) → reset")
+                    reset()
+                    proxy.deleteBackward()
+                    return false
+                }
+                if (a.backspaces > 0) proxy.deleteCodePoints(a.backspaces)
+                if (a.insert.isNotEmpty()) proxy.insertText(a.insert)
+            }
+            else -> proxy.deleteBackward()
+        }
+        return false
+    }
+
+    private fun tryReopen(proxy: TextProxy): Boolean {
+        if (!proxy.canReEdit || proxy.hasSelection) return false
+        val before = proxy.contextBeforeInput() ?: return false
+        val word = engine.reopenLastCommit() ?: return false
+        if (!ReEdit.endsWithWordThenBoundary(before, word)) {
+            // App nuốt ranh giới / tự sửa chữ / con trỏ lệch: không sửa màn hình.
+            TouchLog.write("re-open: screen disagrees → reset")
+            engine.reset()
+            return false
+        }
+        proxy.deleteBackward()          // xoá ký tự ranh giới
+        TouchLog.write("re-open: ${Cp.count(word)} chars back")
+        return true
+    }
+
+    /** Bỏ snapshot mở lại (Enter có thể đã gửi tin / xuống dòng mà ⌫ không đảo được). */
+    fun forgetLastCommit() { engine.forgetLastCommit(); expansionUndo = null }
+
+    /** Đổi ô / con trỏ dời / ẩn bàn phím → quên từ + ngữ cảnh tiếng Anh. */
+    fun reset() {
+        engine.reset(); engine.resetContext(); afterOwnBoundary = false; undo.valid = false; expansionUndo = null; enWord = ""
+        email.invalidate()
+    }
+
+    // MARK: ô email ([EmailTokenGuard]) — port iOS EngineBridge.emailBoundary
+
+    /**
+     * Ranh giới ở ô email. Token chưa là địa chỉ + phím không phải "@"/"." ⇒ chốt như thường
+     * (auto-restore). Phím "@"/"." ⇒ phần token mình gõ + từ đang soạn trả về ĐÚNG phím thô
+     * (fail-safe confirmTail: chỉ khi chữ trước con trỏ đúng là nó; không thì chỉ từ đang soạn;
+     * không nữa thì không sửa gì), chèn ranh giới, gõ thô tới hết token. Không gõ tắt / tự sửa.
+     */
+    private fun emailBoundary(text: String, proxy: TextProxy, put: (String) -> Unit): String {
+        if (!email.synced) email.sync(proxy.contextBeforeInput())
+        if (!email.needsRestore(text)) {
+            val before = engine.composed
+            val raw = engine.rawKeystrokes
+            val action = engine.commitBoundary(settings.autoRestore)
+            if (action is TelexAction.Replace && action.backspaces > 0 && !proxy.confirmTail(before)) {
+                TouchLog.write("tail mismatch (email boundary) → reset")
+                reset()
+                put(text)
+                return ""
+            }
+            var final = before
+            if (action is TelexAction.Replace) final = Cp.dropLast(before, action.backspaces) + action.insert
+            apply(action, "", proxy)
+            put(text)
+            email.appended(final, raw, text)
+            return final
+        }
+        val composed = engine.composed
+        val composedRaw = engine.rawKeystrokes
+        engine.reset()
+        engine.forgetLastCommit()
+        val plan = email.restorePlan(composed, composedRaw)
+        when {
+            plan == null -> { put(text); email.appended(composed, composedRaw, text) }
+            proxy.confirmTail(plan.first) -> {
+                TouchLog.write("email: restore raw -${Cp.count(plan.first)} +${Cp.count(plan.second)}")
+                proxy.deleteCodePoints(Cp.count(plan.first))
+                proxy.insertText(plan.second)
+                put(text)
+                email.restored(plan.second, text)
+            }
+            composed != composedRaw && proxy.confirmTail(composed) -> {
+                TouchLog.write("email: restore word only -${Cp.count(composed)} +${Cp.count(composedRaw)}")
+                proxy.deleteCodePoints(Cp.count(composed))
+                proxy.insertText(composedRaw)
+                put(text)
+                email.appended(composedRaw, composedRaw, text)
+            }
+            else -> {
+                TouchLog.write("email: screen disagrees → no rewrite")
+                put(text)
+                email.appended(composed, composedRaw, text)
+            }
+        }
+        return ""
+    }
+
+    // MARK: gõ tắt (port iOS EngineBridge.tryExpandShortcut)
+
+    /**
+     * Bung gõ tắt ở ranh giới [text] nếu khớp ([ShortcutTable]): xoá chữ đã gõ (chỉ khi chữ
+     * trước con trỏ đúng là nó — confirmTail, không xoá mù), chèn nội dung rồi ranh giới qua
+     * [put]. Trả nội dung đã bung, null = không bung.
+     */
+    private fun tryExpandShortcut(text: String, proxy: TextProxy, put: (String) -> Unit): String? {
+        val table = settings.shortcuts
+        if (!settings.shortcutsEnabled || !shortcutsAllowed || table.isEmpty) return null
+        if (!typedEmpty && ShortcutTable.triggersWord(text)) {
+            val composed = typedWord
+            val e = table.wordExpansion(composed, typedRaw)
+            if (e != null) {
+                val ctx = proxy.contextBeforeInput()
+                val glued = ShortcutTable.isGlued(composed, ctx)
+                if (!glued && proxy.confirmTail(composed)) return applyExpansion(composed, e, text, proxy, put)
+                // Dính trước ("2fa": "fa" sau số) — cả cụm có thể là khoá chữ+số (#109).
+                if (!glued) return null
+            }
+        }
+        // Khoá ký hiệu/số: khoảng trắng/Enter. Khoá chữ+số (#109): cả dấu câu, như khoá chữ.
+        val tokenTrigger = ShortcutTable.triggersToken(text)
+        if (table.hasTokenKeys && (tokenTrigger || ShortcutTable.triggersAlnum(text)) && !proxy.hasSelection) {
+            val ctx = proxy.contextBeforeInput() ?: return null
+            val (token, e) = table.tokenExpansion(ctx) ?: return null
+            if (!tokenTrigger && !ShortcutTable.isAlnumKey(token)) return null
+            if (!typedEmpty && !token.endsWith(typedWord)) return null
+            return applyExpansion(token, e, text, proxy, put)
+        }
+        return null
+    }
+
+    private fun applyExpansion(typed: String, expansion: String, text: String, proxy: TextProxy,
+                               put: (String) -> Unit): String {
+        engine.reset()
+        enWord = ""
+        engine.forgetLastCommit()                 // ⌫ không mở lại chữ tắt qua engine
+        engine.noteExternalWord(false)
+        val n = Cp.count(typed)
+        if (TouchLog.enabled) TouchLog.edit(n, Cp.count(expansion), expansion)
+        proxy.deleteCodePoints(n)
+        proxy.insertText(expansion)
+        put(text)
+        expandedAtLastBoundary = true
+        // Enter có thể đã gửi tin — không hứa hoàn tác qua nó.
+        if (!text.contains('\n')) expansionUndo = ExpansionUndo(typed, expansion, text)
+        return expansion
+    }
+
+    /**
+     * Tự sửa ở ranh giới [text]: chỉ khi ô đọc/sửa được, chữ trước con trỏ đúng là từ đang soạn
+     * (không dính URL/email/số — [ShortcutTable.isGlued]), chữ hoa hợp lệ ([AutoCorrect.caseAllows]).
+     * Thay từ + ranh giới; ⌫ ngay sau trả lại đúng chữ boundary lẽ ra đã chốt (như hoàn tác gõ tắt).
+     */
+    private fun tryAutoCorrect(ac: (String) -> String?, text: String, proxy: TextProxy, put: (String) -> Unit): String? {
+        if (engine.isEmpty || !AutoCorrect.triggers(text) || !proxy.canReEdit || proxy.hasSelection) return null
+        val raw = engine.rawKeystrokes
+        val fix = ac(raw) ?: return null
+        val shown = engine.composed
+        val ctx = proxy.contextBeforeInput() ?: return null
+        if (ShortcutTable.isGlued(shown, ctx) || !proxy.confirmTail(shown)) return null
+        if (!AutoCorrect.caseAllows(raw, AutoCorrect.isSentenceStart(Cp.dropLast(ctx, Cp.count(shown))))) return null
+        val original = engine.peekCommitText(settings.autoRestore)
+        if (fix == original) return null
+        engine.reset()
+        engine.forgetLastCommit()
+        engine.noteExternalWord(false)
+        TouchLog.write("autocorrect: -${Cp.count(shown)} +${Cp.count(fix)}")
+        proxy.deleteCodePoints(Cp.count(shown))
+        proxy.insertText(fix)
+        put(text)
+        expandedAtLastBoundary = true
+        expansionUndo = ExpansionUndo(original, fix, text, autoCorrect = true)
+        return fix
+    }
+
+    /** Chip "↩︎ chữ gốc": trả lại chữ gốc của lần tự sửa vừa rồi (như ⌫ ngay sau). */
+    fun revertAutoCorrect(proxy: TextProxy): Boolean {
+        val u = expansionUndo?.takeIf { it.autoCorrect } ?: return false
+        expansionUndo = null
+        return undoExpansion(u, proxy)
+    }
+
+    /** ⌫ ngay sau khi bung: màn hình phải kết thúc ĐÚNG bằng nội dung + ranh giới. */
+    private fun undoExpansion(u: ExpansionUndo, proxy: TextProxy): Boolean {
+        if (proxy.isSecure || passthrough || proxy.hasSelection) return false
+        val tail = u.expansion + u.boundary
+        val ctx = proxy.contextBeforeInput()
+        if (ctx == null || !ctx.endsWith(tail)) {
+            TouchLog.write("shortcut undo: screen disagrees → ⌫ thường")
+            return false
+        }
+        proxy.deleteCodePoints(Cp.count(tail))
+        proxy.insertText(u.typed + u.boundary)
+        engine.reset()
+        enWord = ""
+        engine.forgetLastCommit()
+        afterOwnBoundary = u.boundary.isNotEmpty() && !Character.isLetterOrDigit(u.boundary.codePointBefore(u.boundary.length))
+        TouchLog.write("shortcut undo: -${Cp.count(u.expansion)} +${Cp.count(u.typed)}")
+        if (u.autoCorrect) revertedAutoCorrect = u.typed
+        return true
+    }
+
+    /** Bảng gõ tắt hiệu lực (từ vựng vuốt: [SwipeVocab.setShortcuts]) — rỗng khi tắt Gõ tắt. */
+    val effectiveShortcuts: ShortcutTable
+        get() = if (settings.shortcutsEnabled) settings.shortcuts else ShortcutTable()
+
+    /**
+     * Nội dung sẽ chèn khi VUỐT ra [word] (đã áp Shift: "vn" / "Vn" / "VN") — đúng như gõ [word] +
+     * dấu cách: chỉ khoá thuần chữ, theo công tắc Gõ tắt + ô cho phép (không passthrough / URL /
+     * email). null = không phải khoá. = iOS EngineBridge.swipeShortcutExpansion.
+     */
+    fun swipeShortcutExpansion(word: String): String? {
+        if (!settings.shortcutsEnabled || !shortcutsAllowed || passthrough || emailField ||
+            settings.shortcuts.isEmpty || !ShortcutTable.isWordKey(word)) return null
+        return settings.shortcuts.expansion(word)
+    }
+
+    /** Nội dung sẽ bung nếu gõ ranh giới ngay bây giờ (thanh gợi ý). Chỉ khoá chữ. */
+    val shortcutPreview: String?
+        get() {
+            if (!settings.shortcutsEnabled || !shortcutsAllowed || passthrough || emailField || typedEmpty || settings.shortcuts.isEmpty) return null
+            return settings.shortcuts.wordExpansion(typedWord, typedRaw)
+        }
+
+    /** Từ đang gõ tay (engine, hoặc nguyên văn ở chế độ Tiếng Anh) — cho gõ tắt. */
+    private val typedEmpty: Boolean get() = if (englishMode) enWord.isEmpty() else engine.isEmpty
+    private val typedWord: String get() = if (englishMode) enWord else engine.composed
+    private val typedRaw: String get() = if (englishMode) enWord else engine.rawKeystrokes
+
+    val isComposing: Boolean get() = !typedEmpty
+    val composedWord: String get() = typedWord
+    val rawWord: String get() = typedRaw
+    val autoFixAdjacent: Boolean get() = settings.autoFixAdjacent
+
+    /** Cache AdjacentKeyFixer theo raw — sống cùng bridge (cùng setting). */
+    val adjacentFixCache = AdjacentKeyFixer.Cache()
+
+    /**
+     * Dạng hiển thị engine SẼ ra cho [raw] với đúng setting — engine scratch riêng
+     * (như iOS: KHÔNG set contextualEnglish). Gọi được ngoài main thread.
+     */
+    fun composeTrial(raw: String): String {
+        // Một engine scratch MỖI LUỒNG (main + vt-suggest), đưa về đúng trạng thái engine mới
+        // bằng copyInto từ bản gốc — không cấp phát ~12 IntArray mỗi ứng viên (RAM-AUDIT #8).
+        val e = trialEngine.get()!!
+        PRISTINE.copyInto(e)
+        configure(e, false)
+        for (ch in raw) e.feed(ch)
+        return e.composed
+    }
+
+    private companion object {
+        /** Engine chưa từng gõ — chỉ đọc (copyInto không ghi vào nguồn). */
+        val PRISTINE = TelexEngine()
+        val trialEngine: ThreadLocal<TelexEngine> = ThreadLocal.withInitial { TelexEngine() }
+    }
+
+    /** Từ boundary SẼ chốt (peek non-mutating). */
+    val predictedCommit: String get() = if (englishMode) enWord else engine.peekCommitText(settings.autoRestore)
+
+    private fun apply(action: TelexAction, literal: String, proxy: TextProxy) {
+        when (action) {
+            is TelexAction.Replace -> {
+                if (TouchLog.enabled) TouchLog.edit(action.backspaces, Cp.count(action.insert), action.insert)
+                if (action.backspaces > 0) proxy.deleteCodePoints(action.backspaces)
+                if (action.insert.isNotEmpty()) proxy.insertText(action.insert)
+            }
+            TelexAction.Passthrough -> {
+                if (TouchLog.enabled) TouchLog.edit(0, Cp.count(literal), literal)
+                if (literal.isNotEmpty()) proxy.insertText(literal)
+            }
+            TelexAction.None -> {}
+        }
+    }
+}

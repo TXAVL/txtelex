@@ -1,0 +1,27 @@
+
+# Gradle / build
+.gradle/
+build/
+.kotlin/
+*.apk
+*.aab
+*.ap_
+*.dex
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Máy cục bộ & bí mật
+local.properties
+keystore.properties
+*.jks
+*.keystore
+google-services.json
+
+# IDE / OS
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+*.log

@@ -1,0 +1,881 @@
+# suggest-trigram-parity v1 — SuggestRank.contextNext(prev, prev2, 6) (N) + inlinePmi ×16 (I). Sinh bởi android SuggestTrigramTests.parityFixture (VT_WRITE_FIXTURE=1); iOS SuggestTrigramTests khớp từng dòng.
+N chúc mừng sinh,bạn,nhé,giáng,anh,cậu
+I chúc mừng sinh sính:0,sình:0
+N thì khó khăn,mà,lòng,có,chịu,hiểu
+I thì khó khan khăn:116,kháng:0,khẩn:0,khán:0,khẳng:0,khánh:0,khang:0,khăng:0,khanh:0,khấn:0,khàn:0,khảnh:0,khản:0,khàng:0,khắn:0,khắng:0,khạng:0,khảng:0,khẳn:0,khặn:0,khằng:0,khặng:0,khành:0
+N tiếc vì đã,nghe,vậy,điều,thế,sao
+I tiếc vì chuyen chuyện:23,chuyển:-29,chuyên:0,chuyến:0,chuyền:0
+N cũng muốn làm,đi,biết,nói,gặp,được
+I cũng muốn tin tình:1,tính:-17,tinh:0,tỉnh:-36,tĩnh:0,tín:0,tịnh:0,tìn:0
+N bằng tuổi cậu,bạn,cháu,nhau,con,em
+I bằng tuổi cau cậu:65,câu:0,cầu:0,cấu:0,cáu:0,cẩu:0,càu:0,cảu:0
+N và anh ấy,ta,sẽ,đã,không,trai
+I và anh ta tại:-19,tất:-24,tâm:-32,tay:0,tập:-28,tao:-21,tài:-22,tạo:-29,tác:0,tăng:-29,tàu:0,tây:-55,tai:0,tạm:-25,tấn:-19,tận:-18,tặng:4,tầm:0,tải:0,tắm:1,tầng:0,tắt:-4,tấm:0,tắc:0
+N dành nhiều thời,tình,tiếng,sự,tâm,năm
+I dành nhiều thoi thôi:-28,thời:92,thói:19,thổi:0,thối:0,thòi:0,thỏi:0,thơi:0,thới:0,thởi:0
+N con chó của,săn,sủa,đang,ngu,này
+I con chó hang hàng:0,hạng:0,hằng:0,hãng:0,hăng:0,hẵng:0,hắng:0,hẫng:0,háng:0,hảng:0
+N người đàn ông,bà,anh,áp,hồi,em
+I người đàn ba bạn:0,bao:0,bảo:-9,bản:0,bắt:0,bà:83,bằng:-12,bài:0,bất:0,báo:0,bác:0,bây:0,bán:0,bay:0,bàn:0,ban:0,bánh:0,bắn:0,bắc:0,bại:0,băng:16,bận:0,bầu:33,bạc:0
+N ấy là một,người,ai,bạn,cái,gì
+I ấy là can cần:-8,cảnh:16,càng:-29,căn:10,cạnh:-27,cẩn:-24,cánh:0,cân:-13,căng:-10,cận:-11,cản:-20,canh:-17,cắn:-27,cạn:-21,cảng:10,cán:14,cành:-8,cặn:16,cằn:0,càn:3,cấn:0,cẳng:0,cáng:0,cang:0
+N có cuốn sách,hút,tiểu,sổ,trôi,băng
+I có cuốn sach sách:102,sạch:32
+N giơ tay lên,ra,phải,của,vợt,trái
+I giơ tay co có:-20,cô:15,con:0,còn:-1,công:-34,cơ:-24,cố:0,cổ:-7,coi:0,cộng:-17,cơn:0,cơm:0,cờ:16,cổng:0,cốc:0,cỏ:0,cỡ:0,cởi:0,cóc:0,cột:0,côn:17,cốt:0,cớ:0,cống:0
+N đi bệnh viện,nhân,tật,ung,viêm,tim
+I đi bệnh vien viên:2,viện:117,viễn:0,viền:0,viếng:0,viển:0,viêng:0,viềng:0
+N mỹ không thể,có,phải,biết,muốn,cần
+I mỹ không tach tách:-2,tạch:0
+N khẳng định rằng,mình,là,vị,được,sẽ
+I khẳng định don động:-49,đồng:-38,đơn:-18,đông:0,đóng:-3,dòng:-15,đón:-14,dọn:2,đồn:0,đống:0,đớn:0,đòn:0,dồn:0,dong:0,đôn:0,độn:0,đọng:0,đốn:0,đong:0,đổng:0,dông:0,đờn:0,dõng:0,dộng:0
+N của chị em,ấy,gái,tôi,là,đã
+I của chị khong không:15,khổng:0,khống:0,khồng:0,khộng:0,khỏng:0
+N theo ước tính,mơ,gì,quốc,muốn,ao
+I theo ước tinh tình:-14,tính:107,tỉnh:0,tĩnh:0,tịnh:0
+N ấy ra khỏi,ngoài,đi,sao,cổng,mà
+I ấy ra pho phòng:-21,phố:-17,phong:-11,phổ:-5,phóng:-10,phó:0,phối:0,phỏng:0,phô:0,phổi:0,phơi:17,phông:0,phớt:0,phồng:0,phở:0,phò:0,phôi:0,phộng:0,phỏm:0,phồn:0,phốt:0,phơ:0,phờ:0,phới:0
+N năng mua sắm,bán,một,vé,lại,đồ
+I năng mua cai cái:32,cải:0,cãi:0,cài:0
+N lớn hơn nhiều,so,cả,nữa,và,rất
+I lớn hơn dan đang:-27,đánh:-38,đáng:33,dân:-32,đàn:-3,dẫn:-30,danh:0,dành:-7,đăng:0,dàng:0,dạng:0,dần:0,đằng:0,dáng:0,đạn:0,đảng:0,đẳng:0,dàn:0,dán:0,đan:0,đắn:0,đành:0,đàng:0,dâng:0
+N nhìn sang bên,trọng,chảnh,tiếng,một,đánh
+I nhìn sang phai phải:10,phái:0,phài:0
+N ấy xuống dưới,đất,đây,đi,sàn,còn
+I ấy xuống cau cậu:0,câu:0,cầu:26,cấu:0,cáu:0,cẩu:0,càu:0,cảu:0
+N lễ đính hôn,kèm,chính,ước,hồi,đá
+I lễ đính hon hơn:0,hôn:129,hồng:0,hồn:0,hỏng:0,hòn:0,hỗn:0,họng:0,hong:0,hông:0,hòng:0,hổng:0,hờn:0,hóng:0,hổn:0,hớn:0,hống:0,hỏn:0,hỗng:0,hón:0,hởn:0
+N cầu bạn phải,giúp,có,sẽ,bè,đang
+I cầu bạn noi nói:7,nơi:0,nổi:-8,nội:0,nỗi:0,nối:-22,nồi:0,nới:0,nôi:0,nòi:0,nọi:0,nởi:0
+N phiền muộn vì,của,rồi,gì,hơn,phiền
+I phiền muộn vi việc:0,vì:61,viên:0,vị:0,viết:0,việt:0,viện:0,ví:0,viêm:0,vinh:0,vĩ:0,vĩnh:0,viễn:0,vịt:0,vịnh:0,viền:0,viếng:0,vít:0,vỉa:0,víu:0,vin:0,vía:0,vịn:0,vỉ:0
+N anh ấy đã,không,đang,sẽ,là,có
+I anh ấy sang sáng:-19,sàng:0,sảng:0,sắng:0,săng:0,sẵng:0,sằng:0,sâng:0
+N được xe buýt,đạp,hơi,tăng,máy,tải
+I được xe hoi hỏi:0,hội:0,hơi:78,hồi:0,hối:0,hôi:0,hỡi:0,hời:0,hói:0,hổi:0,hợi:0,hòi:0,hởi:0,hới:0,họi:0
+N nghe tiếng anh,chuông,súng,khóc,sấm,nói
+I nghe tiếng nha nhà:-47,nhất:27,nhân:-43,nhận:0,nhau:0,nhanh:0,nhật:61,nhập:0,nhạc:18,nhắc:0,nhảy:0,nhắn:0,nhẫn:0,nhầm:0,nhằm:0,nhấn:0,nhàng:0,nhắm:0,nhạy:0,nhạt:0,nhặt:0,nhãn:0,nhát:0,nhã:0
+N có vô số,vàn,khối,hạn,cùng,địch
+I có vô ke kết:0,kẻ:0,kế:-20,kể:10,kéo:0,kèo:0,kém:0,kêu:0,kê:0,kem:0,kèm:0,kệ:0,kẹt:0,kênh:0,kẹo:0,kẹp:0,ken:0,keo:0,kép:0,két:0,kề:0,kèn:0,kẻo:0,kẽ:0
+N tôi chẳng biết,có,hiểu,hề,muốn,cần
+I tôi chẳng nho nhớ:55,nhỏ:0,nhờ:8,nhóm:0,nhóc:0,nhở:0,nhốt:0,nhổ:0,nhỡ:0,nhồi:0,nhọc:0,nhõm:0,nhơn:0,nhọn:0,nhộn:0,nhôm:0,nhờn:0,nhớt:0,nhói:0,nhoáng:0,nhơ:0,nhô:0,nhót:0,nhòa:0
+N tôi rất vui,tiếc,thích,muốn,cảm,xin
+I tôi rất mo một:0,mọi:0,mới:-13,mơ:1,mỗi:0,mở:0,mong:72,món:0,mời:0,mối:0,môi:0,môn:0,mô:0,mộng:0,mộ:0,mỏi:0,mông:0,mò:0,móc:0,mồ:0,mồm:0,mờ:32,mỡ:0,mổ:0
+N thì bình thường,tĩnh,luận,đẳng,toàn,dương
+I thì bình sat sát:0,sắt:0,sạt:0,sất:0,sật:0,sặt:0
+N mì và dầu,tự,đường,lúa,tôi,các
+I mì và sua sửa:6,sữa:11,suất:-41,sủa:0,sưa:0,sứa:0,súa:0,sụa:0
+N từ trước đến,tới,khi,đó,rồi,à
+I từ trước den đến:70,đen:0,đèn:2,đền:16,đên:0,đênh:0,dền:0,dến:0,đễnh:0,đén:0,đển:0,dên:0,deng:0,dềnh:0,đễn:0,dèn:0,đẻn:0,đeng:0,dếnh:0
+N cương vị này,là,tổng,huấn,chủ,lãnh
+I cương vị cong công:-3,cộng:0,cổng:0,cống:0,còng:0,cóng:0,cõng:0,cọng:0,cồng:0
+N nỗi lo sợ,lắng,của,ngại,cho,chuyện
+I nỗi lo lang lắng:122,làng:0,lặng:0,lãng:0,lăng:0,láng:0,lảng:0,lạng:0,lẳng:0,lâng:0,lằng:0,lẵng:0
+N xin đừng quên,làm,nói,uống,lo,có
+I xin đừng tiet tiết:-7,tiệt:0
+N nói chuyện với,này,gì,về,đó,riêng
+I nói chuyện voi với:65,vời:0,vội:0,vòi:0,vơi:0,vôi:0,vói:0,vợi:0,vối:0,vởi:0
+N thể tin tưởng,được,nổi,là,rằng,cậy
+I thể tin la là:35,làm:-29,lại:-31,lần:-33,lắm:5,lấy:-32,lâu:0,lập:0,lạc:0,lạ:0,lắng:0,lạnh:0,lá:0,lái:0,lai:0,lao:0,lan:-17,lầm:-4,lành:76,lão:0,làng:0,lặng:0,lãnh:0,lẫn:0
+N chiều nay trời,tôi,không,mưa,là,đã
+I chiều nay di đi:-3,điều:-42,định:-42,điểm:0,điện:-28,đình:0,dịch:-29,diễn:-19,địa:0,diện:0,điên:0,đích:0,dĩ:0,dị:0,diệt:0,địch:0,điển:0,điềm:0,dính:0,đỉnh:0,dì:20,đĩa:0,điếm:0,điệu:0
+N không thể nào,làm,nói,tin,hiểu,thiếu
+I không thể tin tình:-35,tính:-4,tinh:-23,tỉnh:-22,tĩnh:-15,tín:0,tịnh:0,tìn:0
+N kiểm tra giá,xem,việc,lại,sức,chất
+I kiểm tra do đó:-31,động:-34,đồng:-26,đối:6,đồ:-12,độ:16,đổi:0,đời:0,đội:0,đơn:4,đợi:0,đọc:0,đôi:0,đông:0,độc:6,doanh:-14,đóng:0,đô:0,đoán:0,đỡ:0,dối:0,đỏ:0,đoạn:0,đoàn:0
+N gì trong đó,cuộc,tay,tủ,túi,hộp
+I gì trong loi lời:-3,lỗi:0,lợi:-45,lối:3,lôi:0,lõi:28,lội:0,lòi:0,lồi:0,lỏi:0,lọi:0,lơi:0,lới:0,lói:0,lởi:0
+N chế nước ngoài,mắt,biển,cộng,pháp,này
+I chế nước dai đại:5,dài:-32,đài:-22,đãi:0,đai:0,dại:0,dải:0,đái:42,dãi:60,dái:0
+N phán là một,chánh,người,gì,những,bạn
+I phán là co có:-9,cô:6,con:17,còn:-26,công:2,cơ:9,cố:-2,cổ:-7,coi:-20,cộng:-5,cơn:6,cơm:-10,cờ:-9,cổng:0,cốc:-7,cỏ:-1,cỡ:-8,cởi:-13,cóc:0,cột:3,côn:11,cốt:17,cớ:-5,cống:-5
+N hàng rào cản,chắn,bảo,điện,cây,rào
+I hàng rào va và:4,vậy:0,vào:12,vẫn:0,vâng:0,vấn:0,vật:0,vài:0,văn:0,vàng:0,vận:0,vai:0,vân:0,vay:0,váy:0,vả:0,vang:0,vạn:0,ván:0,vất:0,vẩn:0,vạch:0,vắng:0,vải:0
+N tôi sát nhân,hại,viên,việc,thủ,trưởng
+I tôi sát vach vạch:0,vách:41
+N trong một bài,cuộc,thời,số,buổi,cái
+I trong một thang tháng:9,thắng:-12,thằng:33,thẳng:0,thăng:-30,thảng:0,thặng:0,thàng:0
+N khà năng lượng,lực,của,suất,này,làm
+I khà năng cua của:23,cửa:0,cưa:0,cựa:0,cứa:0,cùa:0,cũa:0,cúa:0,cừa:0
+N ra lỗi lầm,không,vì,chú,của,cho
+I ra lỗi lam làm:-20,lắm:5,lầm:123,lâm:0,lạm:0,lãm:0,lăm:0,lẩm:0,lẫm:0,lảm:0,lấm:0,lậm:0
+N khác thường xuyên,của,và,được,vụ,là
+I khác thường cua của:20,cửa:0,cưa:0,cựa:0,cứa:0,cùa:0,cũa:0,cúa:0,cừa:0
+N quẩn đâu rồi,có,phải,mà,đó,vậy
+I quẩn đâu day đây:9,đấy:32,đầy:0,dậy:0,dạy:0,dây:0,đẩy:0,dày:0,đáy:0,dãy:0,đậy:0,đày:0,đay:0,dấy:0,dầy:0,dáy:0,đẫy:0,dẫy:0
+N trung tâm thương,thành,của,nghiên,mua,hành
+I trung tâm dieu điều:12,điệu:0,diệu:0,điếu:0,điêu:0,diều:0,diễu:0,điểu:0,diêu:0,diểu:0,diếu:0
+N tính hài hước,lòng,hòa,kịch,cốt,nhi
+I tính hài huoc hước:107
+N biết rằng tom,anh,bạn,tôi,chúng,cô
+I biết rằng nguoi người:9,ngươi:8,nguội:0,nguôi:0,ngưới:0,ngưởi:0,nguồi:0,ngượi:0
+N ấy nói với,rằng,gì,chuyện,là,dối
+I ấy nói tieng tiếng:54,tiêng:70,tiễng:0,tiềng:0,tiểng:0
+N đừng quên mang,chia,rằng,hỏi,trả,là
+I đừng quên goi gọi:17,gợi:0,gói:0,gối:0,gội:0,gởi:0,gỏi:0,gòi:0,gới:0,gôi:0
+N đã nhận được,ra,thấy,lời,xét,thức
+I đã nhận toi tôi:-31,tới:-32,tối:0,tội:47,tồi:0,tỏi:0,tơi:0,tòi:0,tời:0,tói:0,tổi:0,tợi:0
+N tính trồng cây,lúa,thủy,rau,rừng,được
+I tính trồng no nói:0,nó:6,nơi:6,nổi:0,nội:0,nóng:0,nỗi:0,nổ:0,nối:0,nợ:0,nông:20,nỗ:0,nộp:0,nở:0,nô:0,non:0,nọ:0,nồi:0,nôn:0,nồng:0,nốt:0,nón:0,nộ:0,nom:0
+N xa quê hương,nhà,ở,quán,mùa,tôi
+I xa quê huong hướng:0,hưởng:0,hương:110,huống:0,hường:0,hưỡng:0,huổng:0
+N tom bỏ quên,qua,lỡ,đi,phiếu,rơi
+I tom bỏ quen quên:132,quèn:0,quện:0,quềnh:0
+N được rất nhiều,ít,lâu,tốt,vui,khó
+I được rất nhieu nhiều:94,nhiêu:0,nhiễu:0,nhiểu:0,nhiếu:0,nhiệu:0
+N đã cấm tôi,đảm,đoán,hành,túc,kỵ
+I đã cấm toi tôi:43,tới:0,tối:0,tội:0,tồi:0,tỏi:0,tơi:0,tòi:0,tời:0,tói:0,tổi:0,tợi:0
+N đề như vậy,thế,một,là,sau,anh
+I đề như vay vậy:65,váy:0,vây:-9,vầy:83,vẫy:0,vảy:0,vấy:0,vẩy:0,vạy:0
+N được điều đó,gì,chỉnh,này,khiển,trị
+I được điều do đó:58,động:51,đồng:0,đối:-50,đồ:0,độ:-8,đổi:0,đời:0,đội:0,đơn:-12,đợi:0,đọc:0,đôi:0,đông:0,độc:-24,doanh:0,đóng:0,đô:0,đoán:0,đỡ:0,dối:-3,đỏ:0,đoạn:0,đoàn:0
+N uống thêm bia,một,nước,hình,nữa,vào
+I uống thêm bia bịa:0,bìa:0,bía:0,bỉa:0
+N không ai biết,có,dám,muốn,được,hiểu
+I không ai tin tình:-26,tính:-32,tinh:0,tỉnh:-27,tĩnh:0,tín:0,tịnh:0,tìn:0
+N là ý tưởng,hay,kiến,gì,tồi,của
+I là ý gi gì:48,giờ:0,gia:-33,giúp:4,gian:0,giải:-26,giá:0,giới:0,giết:6,giống:0,giữ:-4,giao:-20,giáo:0,giả:-12,giữa:-15,giấc:0,giác:0,giảm:-15,giỏi:0,giản:0,già:0,giấy:0,giận:-3,giám:0
+N nó là một,gì,con,cái,đứa,thứ
+I nó là chiec chiếc:33,chiệc:0
+N tôi đã nói,không,làm,tìm,gặp,thấy
+I tôi đã ket kết:16,kẹt:-11,két:0
+N giấy để viết,làm,tôi,tìm,có,tránh
+I giấy để viet viết:87,việt:-42
+N vẻ như anh,chúng,cô,là,nó,cậu
+I vẻ như toi tôi:18,tới:-51,tối:-17,tội:-12,tồi:0,tỏi:0,tơi:0,tòi:0,tời:0,tói:0,tổi:0,tợi:0
+N ta chuyên môn,nghiệp,gia,ngành,chở,dùng
+I ta chuyên mon mong:0,món:0,môn:101,mộng:0,mông:0,mỏng:0,móng:0,mòn:0,mọng:0,mọn:0,mồng:0,mơn:0,mòng:0,mống:0,mồn:0,mởn:0,mốn:0,mớn:0
+N muốn những thứ,điều,người,gì,kẻ,lời
+I muốn những cau cậu:-23,câu:46,cầu:2,cấu:14,cáu:0,cẩu:0,càu:0,cảu:0
+N tôi không biết,thể,muốn,nghĩ,thích,có
+I tôi không nua nữa:-19,nửa:0,nứa:0,nưa:0,nùa:0,núa:0,nủa:0
+N vào bài giảng,hát,viết,tập,thơ,học
+I vào bài kiem kiểm:54,kiếm:0,kiệm:0,kiềm:0,kiêm:0
+N tôi là một,người,ai,bạn,anh,bác
+I tôi là ban bạn:29,bản:-11,bằng:-12,bán:-12,bàn:-7,bánh:6,bắn:-15,băng:-3,bận:-8,bảng:-1,bang:-11,bẩn:0,bàng:-1,băn:0,banh:0,bành:5,bảnh:0,bần:-5,báng:-3,bân:0,bâng:0,bấn:0,bẳn:0,bẵng:0
+N đi mèo con,đen,hoang,của,trắng,vạc
+I đi mèo tha thấy:12,thật:0,thành:0,thân:0,tháng:0,thay:19,thần:0,tham:0,thanh:0,thắng:0,thằng:0,thái:0,thất:0,thầy:0,thận:0,thẳng:0,thậm:0,thăm:0,thẩm:0,thả:0,thai:0,thấp:0,thảo:0,thánh:0
+N không phải là,lúc,ai,lo,vì,người
+I không phải ai ái:-13,ải:0,ại:0
+N thứ nhất là,của,và,bùng,trong,ở
+I thứ nhất trung trùng:0,trứng:0,trúng:0,trưng:0,trừng:0,trũng:0,trụng:0,trủng:0
+N cho hỏi chỗ,thăm,tôi,rằng,anh,han
+I cho hỏi tram trăm:0,trạm:0,trầm:0,trẫm:0,trâm:0,trảm:0,trám:0,tràm:0,trắm:0,trằm:0
+N người nói chuyện,rằng,dối,tiếng,tom,với
+I người nói tieng tiếng:63,tiêng:70,tiễng:0,tiềng:0,tiểng:0
+N những câu chuyện,hỏi,nói,trả,chúc,lạc
+I những câu vi việc:0,vì:0,viên:0,vị:0,viết:-16,việt:0,viện:0,ví:46,viêm:0,vinh:0,vĩ:0,vĩnh:0,viễn:0,vịt:0,vịnh:0,viền:0,viếng:0,vít:0,vỉa:0,víu:0,vin:0,vía:0,vịn:0,vỉ:0
+N tao nhanh chóng,hơn,lên,nhẹn,nhất,thôi
+I tao nhanh hon hơn:61,hôn:0,hồng:0,hồn:0,hỏng:34,hòn:0,hỗn:0,họng:0,hong:0,hông:0,hòng:0,hổng:0,hờn:0,hóng:0,hổn:0,hớn:0,hống:0,hỏn:0,hỗng:0,hón:0,hởn:0
+N muốn được gặp,làm,yêu,nhìn,nghe,như
+I muốn được tu từ:-4,tự:33,từng:-31,tuyệt:-34,tưởng:-24,tư:-5,tuổi:-37,tử:-49,tục:0,tuần:-37,tương:-12,tượng:-45,tuy:-47,tức:-41,tướng:-13,tù:-32,tùy:-6,túi:-18,tụi:-20,tường:-8,tuyến:-21,túc:0,tươi:-8,tuyển:24
+N tôi đến đây,từ,để,gặp,muộn,đó
+I tôi đến tham thậm:0,thăm:72,thẩm:-14,thảm:6,thám:0,thầm:0,thâm:-1,thấm:0,thẳm:0,thắm:0,thẫm:0
+N tom rót rượu,cho,đầy,trà,vào,nước
+I tom rót do đó:0,động:0,đồng:0,đối:0,đồ:0,độ:0,đổi:0,đời:0,đội:0,đơn:0,đợi:0,đọc:0,đôi:0,đông:0,độc:0,doanh:0,đóng:0,đô:0,đoán:0,đỡ:0,dối:0,đỏ:0,đoạn:0,đoàn:0
+N nông dân nghèo,và,ở,đã,trồng,thuần
+I nông dân gieo 
+N tôi rất vui,tiếc,thích,muốn,cảm,xin
+I tôi rất buon buồn:68,buông:0,buôn:0,buồng:0,bướng:43,bươn:0,bương:0,bường:0,bưởng:0
+N về căn cứ,cước,bệnh,hộ,phòng,nhà
+I về căn nha nhà:50,nhất:0,nhân:0,nhận:0,nhau:0,nhanh:0,nhật:0,nhập:0,nhạc:0,nhắc:0,nhảy:0,nhắn:0,nhẫn:0,nhầm:0,nhằm:0,nhấn:0,nhàng:0,nhắm:0,nhạy:0,nhạt:0,nhặt:0,nhãn:0,nhát:0,nhã:0
+N chị tôi không,lấy,bị,đẹp,sống,hôm
+I chị tôi lay lấy:62,lạy:8,lây:0,lẫy:0,lầy:0,láy:0,lẩy:0,lậy:0,lày:0
+N tự kiểm tra,soát,điểm,duyệt,sát,toán
+I tự kiểm tra trả:2,trai:0,trang:0,trái:0,tranh:0,trận:0,tránh:0,trách:0,trạng:0,trắng:0,trải:0,trần:0,trăm:0,trà:0,trấn:0,trại:0,trao:0,trăng:0,tràn:0,trạm:0,trầm:0,trân:0,trào:0,tráng:0
+N này rất ngon,khó,quan,đẹp,dễ,nhiều
+I này rất phien phiền:33,phiên:0,phiến:0,phiện:0,phiêng:0,phiềng:0
+N ấy từng là,làm,hay,mua,thấy,có
+I ấy từng lam làm:50,lắm:0,lầm:0,lâm:0,lạm:0,lãm:0,lăm:0,lẩm:0,lẫm:0,lảm:0,lấm:0,lậm:0
+N nằm ở khu,phía,tỉnh,vĩ,đâu,độ
+I nằm ở dau đâu:41,đầu:0,đau:0,đấu:-30,dấu:0,dầu:0,đậu:13,dâu:0,dẫu:0,dậu:0,đẩu:0,đáu:0,đàu:0,dẩu:0,dáu:0
+N thể đi cùng,đâu,lại,đến,qua,bộ
+I thể đi den đến:36,đen:0,đèn:0,đền:0,đên:0,đênh:0,dền:0,dến:0,đễnh:0,đén:0,đển:0,dên:0,deng:0,dềnh:0,đễn:0,dèn:0,đẻn:0,đeng:0,dếnh:0
+N không chịu nổi,nghe,đựng,được,trách,nói
+I không chịu noi nói:37,nơi:0,nổi:89,nội:0,nỗi:39,nối:0,nồi:0,nới:0,nôi:0,nòi:0,nọi:0,nởi:0
+N ở đây không,để,à,là,được,có
+I ở đây khong không:21,khổng:0,khống:0,khồng:0,khộng:0,khỏng:0
+N tôi cúi xuống,đầu,chào,gằm,xin,mặt
+I tôi cúi xuong xuống:95,xương:0,xưởng:0,xướng:0,xuồng:0,xuông:0,xường:0
+N tên là gì,ken,tỉnh,nguyễn,lý,lê
+I tên là dao đạo:0,đảo:-3,đào:-8,dạo:-12,đáo:0,đao:-9,dào:0,dáo:0,dão:0,dảo:0
+N học số tiền,lượng,liệu,là,người,đó
+I học số hoc học:6,hóc:0,hốc:0,hộc:0
+N chúng tôi sẽ,đã,không,đang,có,muốn
+I chúng tôi da đã:44,đây:-25,đang:45,đâu:5,đầu:-25,đấy:-5,đại:-21,đánh:2,đáng:-6,dân:-76,đất:0,đặt:18,đàn:0,đặc:-6,đau:19,dẫn:-15,đấu:-30,dài:-42,danh:-46,dành:18,đá:-44,đạo:0,đầy:-19,dậy:13
+N hay nhất của,mọi,trong,là,mà,thế
+I hay nhất trong trọng:0,trông:0,trống:0,trồng:0,tròng:0,trỏng:0,trổng:0
+N vực đông nam,á,bắc,dân,dương,lạnh
+I vực đông nam năm:-4,nằm:-1,nắm:0,nấm:0,nám:0,nạm:0,nậm:0,nầm:0,nặm:0,nâm:0,nẫm:0
+N môn sinh học,vật,của,ra,nhật,viên
+I môn sinh vat vật:80,vất:0,vặt:0,vắt:0,vạt:0,vát:0
+N cho bạn bè,biết,gái,một,mượn,cảm
+I cho bạn lam làm:-5,lắm:-13,lầm:-10,lâm:0,lạm:0,lãm:0,lăm:0,lẩm:0,lẫm:0,lảm:0,lấm:0,lậm:0
+N không biết gì,phải,mình,là,làm,anh
+I không biết dap đáp:10,đập:0,đạp:0,đắp:0,dập:0,dấp:0,đặp:0
+N tôi ghế ngồi,bành,sô,này,dự,trong
+I tôi ghế khong không:-17,khổng:0,khống:0,khồng:0,khộng:0,khỏng:0
+N thảo luận về,với,và,vấn,trong,tại
+I thảo luận ve về:69,vẻ:0,vệ:0,vết:0,vẽ:0,vé:0,vẹn:0,ven:0,vẹt:0,vét:0,vén:0,vênh:0,vệt:0,vế:0,vẹo:0,vê:0,vèo:0,véo:0,véc:0,vè:0,veo:0,vể:0,vểnh:0,vẻn:0
+N tom có thể,lẽ,vẻ,một,quên,tàn
+I tom có ve về:-40,vẻ:74,vệ:-52,vết:20,vẽ:0,vé:12,vẹn:0,ven:0,vẹt:0,vét:0,vén:0,vênh:0,vệt:22,vế:0,vẹo:0,vê:0,vèo:0,véo:0,véc:0,vè:0,veo:0,vể:44,vểnh:0,vẻn:0
+N tôi có thể,một,cảm,vài,nhiều,rất
+I tôi có the thể:75,thế:-24,theo:-43,thêm:26,thẻ:-1,thề:-16,thèm:-1,thép:0,thê:0,thẹn:0,thét:0,thêu:12,then:0,thềm:0,thệ:0,thếp:0,them:0,thé:0,thẹo:30,thênh:0,thết:0,thè:0,thếch:0,thều:0
+N người khác nhau,mà,không,thì,nữa,làm
+I người khác ve về:-4,vẻ:0,vệ:0,vết:0,vẽ:0,vé:0,vẹn:0,ven:0,vẹt:0,vét:0,vén:0,vênh:0,vệt:0,vế:0,vẹo:0,vê:0,vèo:0,véo:0,véc:0,vè:0,veo:0,vể:0,vểnh:0,vẻn:0
+N trở lại với,đây,làm,ngay,bình,vào
+I trở lại vao vào:25,váo:0,vảo:0
+N như cậu ta,ấy,nói,đã,đang,nghĩ
+I như cậu lam làm:16,lắm:5,lầm:0,lâm:0,lạm:0,lãm:0,lăm:0,lẩm:0,lẫm:0,lảm:0,lấm:0,lậm:0
+N đợi đến khi,lúc,ngày,lượt,bao,sáng
+I đợi đến nam năm:20,nằm:-31,nắm:-20,nấm:0,nám:0,nạm:0,nậm:0,nầm:0,nặm:0,nâm:0,nẫm:0
+N một xe tải,buýt,tắc,đạp,cấp,hơi
+I một xe cuu cứu:36,cựu:0,cửu:0,cừu:0,cữu:0,cưu:0
+N sách này không,rất,là,được,có,nói
+I sách này tro trong:-4,trở:14,trọng:0,trời:-37,trò:0,trông:20,trợ:0,trốn:-27,trộm:0,trống:-8,tròn:0,trồng:0,trôi:-5,trọn:0,trộn:0,trói:0,trơn:0,trội:0,trọ:0,trỏ:0,trơ:0,trọc:0,trỗi:0,tròng:0
+N những điều tốt,đó,này,kiện,mà,tuyệt
+I những điều ma mà:40,mặt:0,mất:0,máy:0,mày:-15,mang:-33,mắt:-37,mấy:0,mạnh:0,mặc:0,mai:0,màu:0,may:49,mạng:0,mật:0,máu:0,mãi:0,mái:0,mau:0,mẫu:0,mã:0,mắn:0,mắc:0,màn:0
+N cuộc điều tra,trần,đình,này,đó,gì
+I cuộc điều tra trả:0,trai:0,trang:0,trái:1,tranh:0,trận:0,tránh:0,trách:0,trạng:0,trắng:0,trải:0,trần:62,trăm:0,trà:0,trấn:0,trại:0,trao:0,trăng:0,tràn:0,trạm:0,trầm:0,trân:0,trào:0,tráng:0
+N lý do gì,tại,để,tôi,nào,mà
+I lý do chung chúng:21,chứng:-14,chừng:0,chủng:45,chưng:0,chửng:0,chững:0,chùng:0,chũng:0,chựng:0
+N rời đi ngay,rồi,sớm,lúc,vào,mà
+I rời đi cung cũng:-20,cùng:34,cứng:0,cưng:29,cúng:0,củng:0,cụng:0
+N ấy nhiều hơn,thông,năm,người,lần,lắm
+I ấy nhiều den đến:1,đen:0,đèn:-4,đền:19,đên:0,đênh:0,dền:0,dến:0,đễnh:0,đén:0,đển:0,dên:0,deng:0,dềnh:0,đễn:0,dèn:0,đẻn:0,đeng:0,dếnh:0
+N chuyện của anh,cô,bạn,tôi,mình,chúng
+I chuyện của tao tạo:-29,táo:-31,tào:22,tảo:3
+N gợi ý rằng,cho,một,về,tuyệt,của
+I gợi ý ban bạn:15,bản:-46,bằng:1,bán:-9,bàn:0,bánh:0,bắn:0,băng:0,bận:0,bảng:0,bang:0,bẩn:0,bàng:0,băn:0,banh:0,bành:0,bảnh:0,bần:0,báng:0,bân:0,bâng:0,bấn:0,bẳn:0,bẵng:0
+N hoàn toàn không,có,khác,đúng,mới,là
+I hoàn toàn trong trọng:0,trông:0,trống:43,trồng:0,tròng:0,trỏng:0,trổng:0
+N vệ môi trường,sinh,giới,son,cô,đỏ
+I vệ môi truong trường:101,trưởng:0,trương:0,trượng:0,truồng:0,trướng:0,truông:0
+N cuốn này có,là,không,sẽ,được,đã
+I cuốn này roi rồi:7,rời:-14,rơi:3,rối:0,rỗi:0,rôi:0,rọi:0,ròi:0,rổi:0,rỏi:0,rói:0
+N cắt phần mềm,lớn,của,trăm,còn,lan
+I cắt phần con còn:37,công:-3,cộng:0,cơn:0,cổng:0,côn:0,cống:0,cong:0,cồn:0,còng:0,cóng:0,cõng:0,cọng:0,cồng:0,cỏn:0,cổn:0,cón:0,cỡn:0,cợn:0,cọn:0,cõn:0,cờn:0
+N muốn về nhà,quê,thì,việc,phía,chuyện
+I muốn về nha nhà:77,nhất:-30,nhân:0,nhận:-23,nhau:-7,nhanh:-12,nhật:1,nhập:-12,nhạc:-7,nhắc:0,nhảy:-22,nhắn:-7,nhẫn:0,nhầm:0,nhằm:0,nhấn:0,nhàng:0,nhắm:0,nhạy:0,nhạt:0,nhặt:0,nhãn:13,nhát:0,nhã:0
+N bảo cậu ta,ấy,đừng,bé,không,có
+I bảo cậu de để:-12,đến:3,đề:-33,đều:1,đẹp:-2,dễ:-5,đêm:0,đen:0,đem:-4,đèn:0,đế:0,đeo:16,đệ:0,dẹp:0,đe:0,đẻ:0,đền:0,đếm:0,đê:0,đè:0,đệm:0,dê:0,dẻo:0,đẽ:0
+N dịp sinh nhật,ra,viên,sống,vật,học
+I dịp sinh nhat nhất:-39,nhật:122,nhạt:0,nhặt:0,nhát:0,nhắt:0
+N rằng tụi mình,tao,nó,mày,bây,em
+I rằng tụi minh mình:67,mính:0,mịnh:0
+N thấy bạn đang,bè,cũ,là,có,sẽ
+I thấy bạn cuoi cuối:-31,cười:5,cưới:0,cưỡi:0,cuội:0,cuổi:0,cươi:0
+N điện thoại di,của,thông,cho,reo,này
+I điện thoại di đi:8,điều:0,định:0,điểm:0,điện:-3,đình:0,dịch:0,diễn:0,địa:0,diện:0,điên:0,đích:0,dĩ:0,dị:0,diệt:0,địch:0,điển:0,điềm:0,dính:0,đỉnh:0,dì:0,đĩa:0,điếm:0,điệu:0
+N chẳng lành mạnh,lặn,vết,cho,và,tính
+I chẳng lành canh cảnh:0,cạnh:0,cánh:0,cành:58
+N xa trời ơi,mưa,ạ,đất,đã,sẽ
+I xa trời khong không:3,khổng:0,khống:0,khồng:0,khộng:0,khỏng:0
+N đã tấn công,dũng,phong,sang,và,hàng
+I đã tấn cong công:93,cộng:0,cổng:0,cống:0,còng:0,cóng:0,cõng:0,cọng:0,cồng:0
+N đây là một,lần,những,nơi,cách,chuyện
+I đây là bo bố:-2,bộ:17,bỏ:-19,bọn:10,bởi:5,bóng:-8,bốn:7,bơi:-18,bổ:-28,bò:-5,bờ:-7,bối:-6,bông:-3,bội:0,bom:-7,bột:28,bồi:-15,bớt:-16,bồ:3,bó:-11,bỏng:0,bốc:-8,bỗng:0,bọc:-18
+N tôi có thể,một,cảm,vài,nhiều,rất
+I tôi có mot một:40,mốt:0,mọt:0,mót:0
+N là người duy,đã,có,đầu,bạn,đứng
+I là người cao cáo:-41,cạo:0,cào:0,cảo:0
+N hiểu cảm giác,xúc,ơn,thấy,hứng,nhận
+I hiểu cảm giac giấc:0,giác:125,giặc:0,giắc:0
+N thao như bóng,vậy,thế,một,là,sau
+I thao như la là:16,làm:-21,lại:-43,lần:-2,lắm:0,lấy:-20,lâu:-18,lập:-32,lạc:-12,lạ:0,lắng:0,lạnh:0,lá:9,lái:-11,lai:17,lao:-26,lan:-17,lầm:0,lành:0,lão:6,làng:-11,lặng:0,lãnh:-18,lẫn:0
+N tôi một chút,cái,ly,cốc,mình,lần
+I tôi một cai cái:60,cải:-24,cãi:0,cài:0
+N tập thể dục,thao,lao,hình,và,của
+I tập thể duc đức:0,dục:112,đúc:0,đực:2,đục:7,dực:0,dức:0
+N ấy cho tôi,chó,nên,rằng,đến,chúng
+I ấy cho du được:-19,đúng:8,đừng:-54,dụng:0,đưa:-34,đường:-12,dùng:-25,dù:41,đủ:1,dưới:-49,đứa:13,dự:-2,đứng:-28,dừng:-13,duy:-29,đức:5,dung:-29,dựng:-19,dương:-9,dục:0,dữ:-29,đùa:0,đuổi:0,dụ:0
+N trở nên tồi,nổi,phổ,dễ,khó,giàu
+I trở nên thich thích:-16,thịch:0
+N côn trùng cắn,có,và,biến,nhỏ,đang
+I côn trùng nho nhớ:0,nhỏ:53,nhờ:0,nhóm:0,nhóc:0,nhở:0,nhốt:0,nhổ:0,nhỡ:0,nhồi:0,nhọc:0,nhõm:0,nhơn:0,nhọn:0,nhộn:0,nhôm:0,nhờn:0,nhớt:0,nhói:0,nhoáng:0,nhơ:0,nhô:0,nhót:0,nhòa:0
+N điện đang ở,làm,cố,nói,chờ,tìm
+I điện đang duoc được:14,dược:0,đuốc:0,đước:0,dước:0
+N với bệnh tật,nhân,viện,dịch,ung,viêm
+I với bệnh tat tất:0,tắt:0,tật:126,tát:0,tạt:0
+N nó khắp nơi,thế,mọi,cả,các,châu
+I nó khắp noi nói:0,nơi:89,nổi:0,nội:0,nỗi:0,nối:0,nồi:0,nới:0,nôi:0,nòi:0,nọi:0,nởi:0
+N sát hiện tượng,nay,tại,đại,ra,đang
+I sát hiện van vẫn:15,vâng:0,vấn:-21,văn:-4,vàng:0,vận:-11,vân:0,vang:0,vạn:0,ván:0,vẩn:0,vắng:0,vặn:0,vãn:0,vần:0,vành:0,văng:0,vàn:0,váng:0,vằn:0,vánh:0,vãng:0,vầng:0,vảng:0
+N ý những gì,chuyện,điều,điểm,người,kẻ
+I ý những chuyen chuyện:69,chuyển:-14,chuyên:10,chuyến:39,chuyền:0
+N tom đã không,nói,đi,bị,mua,làm
+I tom đã giet giết:41
+N bố bỗng dưng,nhiên,chốc,thấy,nghe,đâu
+I bố bỗng nhien nhiên:84,nhiện:0,nhiền:0,nhiễn:0,nhiển:0
+N của bạn sẽ,đang,là,không,bè,có
+I của bạn o ở:5,ông:-35,ơn:0,ơi:32,ổn:-4,ôi:0,ồ:0,ô:0,ôm:-4,ống:0,ốm:9,ờ:0,ong:0,ồn:0,ổng:0,ổ:0,óc:0,on:0,ơ:0,ôn:-2,ốc:0,ớt:0,oan:0,oán:0
+N đốc cho tất,tôi,anh,đến,bạn,phép
+I đốc cho tat tất:97,tắt:0,tật:0,tát:0,tạt:0
+N bạn muốn làm,nói,đi,gì,biết,uống
+I bạn muốn an anh:10,ăn:43,ảnh:-28,án:0,ấn:0,ánh:0,ẩn:2,ân:0,ắng:0,ăng:0,ang:0,áng:0,ạnh:0,ành:0,ẳng:0,àn:0,ần:0,ản:0,ầng:0,ảng:0,àng:0,âng:0
+N muốn đuổi theo,kịp,khỏi,việc,đi,tôi
+I muốn đuổi kip kịp:87,kíp:0
+N số các bạn,nhà,loại,loài,đơn,thành
+I số các khach khách:10
+N giống khí hậu,quyển,tượng,thải,hạt,và
+I giống khí hau hậu:88,hầu:0,hấu:0,hàu:0,háu:0,hâu:0,hẩu:0
+N môn võ thuật,này,sĩ,sư,công,nguyên
+I môn võ thuat thuật:98
+N cần nó nữa,để,hơn,sẽ,không,là
+I cần nó nua nữa:72,nửa:0,nứa:0,nưa:0,nùa:0,núa:0,nủa:0
+N anh ấy đã,không,đang,sẽ,là,có
+I anh ấy duoc được:-4,dược:0,đuốc:0,đước:0,dước:0
+N bạn xem cái,phim,nhanh,thêm,xét,là
+I bạn xem thiet thiết:-20,thiệt:0
+N làm xong bài,việc,rồi,cái,công,trước
+I làm xong cai cái:37,cải:0,cãi:0,cài:0
+N ảo nỉ xin,non,màu,xám,với,đấy
+I ảo nỉ mau màu:69,máu:0,mẫu:0,mâu:0,mậu:0,mẩu:0,mấu:0,mầu:0
+N sai hơn việc,nữa,là,cả,nhiều,một
+I sai hơn dich dịch:-32,đích:0,địch:0,dích:0
+N trong lúc đó,này,chờ,ấy,tôi,ngủ
+I trong lúc toi tôi:18,tới:-5,tối:2,tội:0,tồi:0,tỏi:0,tơi:0,tòi:0,tời:0,tói:0,tổi:0,tợi:0
+N nước sẽ không,làm,có,đi,giúp,được
+I nước sẽ gap gặp:40,gấp:1,gập:0,gắp:0,gáp:0
+N cha mình là,và,không,sẽ,đã,đang
+I cha mình ruou rượu:0
+N chữ nước nào,ngoài,mắt,biển,cộng,pháp
+I chữ nước nao nào:88,não:0,náo:0,nạo:0,nảo:0
+N mấy giờ rồi,thì,anh,thế,tôi,là
+I mấy giờ thi thì:48,thích:-6,thiết:0,thị:0,thiên:-17,thiếu:-1,thịt:-1,thiện:0,thiệu:0,thiệt:0,thí:0,thỉnh:0,thiếp:0,thiểu:0,thiệp:0,thịnh:0,thính:0,thiền:0,thiêu:0,thiêng:0,thìa:0,thỉu:0,thình:0,thím:0
+N không nghĩ là,rằng,anh,tom,đến,mình
+I không nghĩ la là:44,làm:-12,lại:20,lần:-9,lắm:-7,lấy:-11,lâu:-12,lập:0,lạc:-12,lạ:0,lắng:0,lạnh:0,lá:0,lái:0,lai:0,lao:0,lan:0,lầm:0,lành:0,lão:0,làng:0,lặng:0,lãnh:0,lẫn:0
+N vào những gì,năm,người,dịp,ngày,điều
+I vào những nam năm:54,nằm:0,nắm:-25,nấm:7,nám:0,nạm:0,nậm:0,nầm:0,nặm:0,nâm:0,nẫm:0
+N hiểu nổi cách,cái,vì,tại,sao,nguyên
+I hiểu nổi hanh hành:0,hạnh:0,hãnh:0,hảnh:0,hánh:0
+N mơ về một,anh,cô,bạn,em,tôi
+I mơ về em êm:0,ẻm:0,ém:0
+N ấy gây ra,tổn,thiệt,nên,rối,khó
+I ấy gây ra rất:-12,rằng:0,ràng:0,răng:0,rắc:82,rau:0,rác:0,rắn:0,rảnh:0,rãi:0,rào:0,râu:0,ranh:0,rạp:0,ray:0,rách:0,rập:0,rã:0,rán:0,rạng:0,ram:0,ráng:0,rang:0,rạn:0
+N cái hồ sơ,đẹp,này,chí,nào,bơi
+I cái hồ ma mà:-4,mặt:-9,mất:-18,máy:0,mày:0,mang:0,mắt:0,mấy:0,mạnh:0,mặc:0,mai:0,màu:0,may:0,mạng:0,mật:0,máu:0,mãi:0,mái:0,mau:0,mẫu:0,mã:0,mắn:0,mắc:0,màn:0
+N bắt đầu từ,đọc,vào,với,có,bằng
+I bắt đầu ve về:-12,vẻ:0,vệ:0,vết:0,vẽ:33,vé:0,vẹn:0,ven:0,vẹt:0,vét:0,vén:0,vênh:0,vệt:0,vế:0,vẹo:0,vê:0,vèo:0,véo:0,véc:0,vè:0,veo:0,vể:0,vểnh:0,vẻn:0
+N giờ lắng nghe,đọng,về,cho,gì,quá
+I giờ lắng nghe nghệ:0,nghề:0,nghèo:0,nghênh:0,nghếch:0,nghẹn:0,nghẽn:0,nghẹt:0,nghén:0,nghê:0,nghen:0,nghé:0,nghễ:0,nghêu:0,nghệch:0,nghẻ:0,nghè:0,nghét:0,nghẽo:0,nghèn:0,nghệp:0,nghẹ:0,nghển:0,nghéo:0
+N đang ở đâu,đây,trong,trên,nhà,chỗ
+I đang ở trong trọng:-54,trông:0,trống:0,trồng:0,tròng:0,trỏng:70,trổng:0
+N ra ngoài đi,cửa,rồi,ăn,để,kia
+I ra ngoài choi chơi:46,chối:0,chọi:0,chói:0,chổi:0,chồi:0,chội:0,chòi:0,chới:0,chời:0,chôi:0,chỏi:0
+N tôi cần phải,anh,cô,biết,một,nói
+I tôi cần phai phải:50,phái:0,phài:0
+N đi muộn thế,rồi,gì,hơn,phiền,màng
+I đi muộn nhu những:0,như:13,nhưng:6,nhuận:0,nhựa:0,nhục:0,nhường:0,nhược:0,nhung:0,nhượng:0,nhức:0,nhuộm:0,nhủ:0,nhũng:0,nhút:0,nhúng:0,nhuyễn:0,nhúc:0,nhử:0,nhũ:0,nhún:0,nhừ:0,nhuệ:0,nhuần:0
+N mà chúng ta,tôi,nó,có,đã,được
+I mà chúng that thật:-8,thất:-26,thắt:0,thát:0,thạt:0,thặt:0
+N vừa lịch sự,sử,trình,hẹn,lãm,sinh
+I vừa lịch su sự:92,sử:90,sức:0,sư:0,suy:0,suốt:0,sửa:0,súng:0,sữa:0,suất:0,sung:0,sứ:0,sướng:0,suýt:0,sụp:0,sưu:0,sương:0,sủa:0,súp:0,súc:0,sưởi:0,sườn:0,suối:33,sưng:0
+N mà thịt bò,lợn,gà,nướng,heo,chó
+I mà thịt da đã:-10,đây:0,đang:0,đâu:12,đầu:-14,đấy:5,đại:0,đánh:0,đáng:0,dân:0,đất:0,đặt:0,đàn:0,đặc:0,đau:0,dẫn:0,đấu:0,dài:0,danh:0,dành:0,đá:0,đạo:0,đầy:0,dậy:0
+N là một trong,người,đô,phần,xã,đứa
+I là một con còn:-67,công:11,cộng:-1,cơn:36,cổng:5,côn:0,cống:-19,cong:0,cồn:-2,còng:0,cóng:0,cõng:0,cọng:29,cồng:0,cỏn:0,cổn:0,cón:0,cỡn:0,cợn:0,cọn:0,cõn:0,cờn:0
+N chim sẻ cánh,với,những,về,cho,chia
+I chim sẻ canh cảnh:0,cạnh:0,cánh:91,cành:0
+N cao su để,không,và,có,thiên,tự
+I cao su dinh định:0,đình:0,dính:0,đỉnh:0,đinh:0,đính:0,dĩnh:0,đĩnh:0,dịnh:0,dình:0
+N đình là nơi,một,gia,người,gì,những
+I đình là mot một:42,mốt:14,mọt:0,mót:0
+N thần cũng như,không,có,là,được,sẽ
+I thần cũng giong giống:43,giọng:0,giông:0,gióng:0,giồng:0
+N đang rơi xuống,vào,à,vãi,ra,trúng
+I đang rơi o ở:17,ông:-16,ơn:0,ơi:0,ổn:0,ôi:0,ồ:0,ô:0,ôm:0,ống:0,ốm:0,ờ:0,ong:0,ồn:0,ổng:0,ổ:0,óc:0,on:0,ơ:0,ôn:0,ốc:0,ớt:0,oan:0,oán:0
+N bị sưng tấy,húp,lên,vù,đỏ,đau
+I bị sưng mot một:12,mốt:0,mọt:0,mót:0
+N vào ngày mai,hôm,thứ,mùng,nghỉ,sinh
+I vào ngày mai mãi:0,mái:0,mại:0,mài:0,mải:0
+N đều thở phào,dài,hổn,ra,sâu,cuối
+I đều thở phao pháo:0,phào:135,phảo:0
+N là anh ấy,ta,em,đã,sẽ,không
+I là anh ay ấy:65,ây:42,áy:0
+N bạn đang làm,xem,tìm,gặp,có,nói
+I bạn đang di đi:31,điều:6,định:6,điểm:0,điện:0,đình:-15,dịch:10,diễn:38,địa:0,diện:0,điên:19,đích:0,dĩ:0,dị:0,diệt:0,địch:0,điển:0,điềm:0,dính:22,đỉnh:0,dì:0,đĩa:0,điếm:0,điệu:0
+N bạn đang làm,xem,tìm,gặp,có,nói
+I bạn đang co có:25,cô:-30,con:0,còn:-7,công:-21,cơ:0,cố:55,cổ:-13,coi:8,cộng:-29,cơn:-9,cơm:0,cờ:0,cổng:0,cốc:0,cỏ:0,cỡ:0,cởi:19,cóc:0,cột:0,côn:0,cốt:0,cớ:0,cống:0
+N không nghĩ là,rằng,anh,tom,đến,mình
+I không nghĩ la là:44,làm:-12,lại:20,lần:-9,lắm:-7,lấy:-11,lâu:-12,lập:0,lạc:-12,lạ:0,lắng:0,lạnh:0,lá:0,lái:0,lai:0,lao:0,lan:0,lầm:0,lành:0,lão:0,làng:0,lặng:0,lãnh:0,lẫn:0
+N lễ bị bắt,thương,giết,mất,phạt,đau
+I lễ bị qua quá:-2,quan:-18,quả:-36,quay:-2,quân:21,quản:5,quần:-9,quanh:0,quái:0,quán:0,quà:3,quảng:0,quang:-6,quận:0,quát:0,quãng:0,quấy:48,quầy:0,quạt:0,quặc:0,quấn:19,quáng:0,quách:9,quăng:49
+N có thể làm,là,được,giúp,nói,tìm
+I có thể lua luật:-54,lựa:41,luận:-16,lửa:0,lừa:27,luân:0,lúa:0,lứa:0,lụa:0,lùa:0,luẩn:0,lữa:0,lưa:0,lũa:0,luấn:0
+N tri thức và,của,về,luận,là,khoa
+I tri thức la là:12,làm:-4,lại:-28,lần:-15,lắm:0,lấy:-2,lâu:6,lập:-10,lạc:0,lạ:0,lắng:0,lạnh:0,lá:0,lái:0,lai:0,lao:5,lan:0,lầm:0,lành:0,lão:0,làng:0,lặng:0,lãnh:-12,lẫn:18
+N cố như vậy,thế,một,là,sau,anh
+I cố như tom tóm:0,tôm:28,tởm:0,tõm:0,tòm:0
+N đang chất lượng,thải,lỏng,béo,độc,liệu
+I đang chất day đây:-30,đấy:-4,đầy:38,dậy:0,dạy:0,dây:0,đẩy:0,dày:0,đáy:0,dãy:0,đậy:0,đày:0,đay:0,dấy:0,dầy:0,dáy:0,đẫy:0,dẫy:0
+N đi úc thêm,không,với,và,mở,là
+I đi úc mua mưa:0,mùa:0,múa:0,mửa:0,mứa:0
+N anh ấy đã,không,đang,sẽ,là,có
+I anh ấy co có:18,cô:-31,con:-40,còn:13,công:-32,cơ:-22,cố:5,cổ:0,coi:0,cộng:0,cơn:0,cơm:0,cờ:0,cổng:0,cốc:0,cỏ:0,cỡ:0,cởi:13,cóc:0,cột:0,côn:0,cốt:-4,cớ:0,cống:0
+N tom đã không,nói,đi,bị,mua,làm
+I tom đã thay thấy:21,thầy:0,thây:0,thảy:0,thày:0,thẩy:0,tháy:0
+N tôi là một,người,ai,bạn,anh,bác
+I tôi là mot một:40,mốt:14,mọt:0,mót:0
+N ta cảm thấy,nhận,giác,ơn,xúc,hứng
+I ta cảm thay thấy:91,thầy:0,thây:0,thảy:0,thày:0,thẩy:0,tháy:0
+N bè cho tôi,anh,đến,bạn,phép,người
+I bè cho toi tôi:24,tới:31,tối:-17,tội:-2,tồi:0,tỏi:7,tơi:0,tòi:0,tời:0,tói:0,tổi:0,tợi:0
+N cảm xúc của,thật,và,tiêu,đó,gì
+I cảm xúc cua của:45,cửa:0,cưa:0,cựa:0,cứa:0,cùa:0,cũa:0,cúa:0,cừa:0
+N nên hầu hết,như,cho,gái,hạ,tước
+I nên hầu nhu những:0,như:83,nhưng:0,nhuận:0,nhựa:0,nhục:0,nhường:0,nhược:0,nhung:0,nhượng:0,nhức:0,nhuộm:0,nhủ:0,nhũng:0,nhút:0,nhúng:0,nhuyễn:0,nhúc:0,nhử:0,nhũ:0,nhún:0,nhừ:0,nhuệ:0,nhuần:0
+N hay là một,không,đi,anh,chúng,gì
+I hay là hoc học:-8,hóc:0,hốc:0,hộc:0
+N thời gian ngắn,để,rảnh,này,dài,trôi
+I thời gian de để:43,đến:-3,đề:0,đều:-7,đẹp:11,dễ:-5,đêm:0,đen:0,đem:0,đèn:0,đế:0,đeo:0,đệ:0,dẹp:0,đe:0,đẻ:0,đền:0,đếm:0,đê:0,đè:0,đệm:31,dê:0,dẻo:0,đẽ:0
+N tôi cần phải,anh,cô,biết,một,nói
+I tôi cần phai phải:50,phái:0,phài:0
+N cà dược phẩm,liệu,sư,sĩ,chất,học
+I cà dược trong trọng:0,trông:0,trống:0,trồng:0,tròng:0,trỏng:0,trổng:0
+N dan lại không,đây,cho,có,đi,là
+I dan lại tu từ:6,tự:2,từng:-7,tuyệt:-15,tưởng:-6,tư:-23,tuổi:-22,tử:-35,tục:0,tuần:-23,tương:-6,tượng:-37,tuy:0,tức:-4,tướng:-34,tù:-14,tùy:0,túi:-3,tụi:0,tường:-11,tuyến:-18,túc:0,tươi:1,tuyển:-16
+N tom sợ làm,hãi,sệt,gì,rằng,chết
+I tom sợ lam làm:68,lắm:47,lầm:0,lâm:0,lạm:0,lãm:0,lăm:0,lẩm:0,lẫm:0,lảm:0,lấm:0,lậm:0
+N đức với những,tôi,nhau,các,anh,cô
+I đức với toi tôi:15,tới:-20,tối:-35,tội:12,tồi:0,tỏi:10,tơi:0,tòi:0,tời:0,tói:0,tổi:0,tợi:0
+N hãy hỏi họ,những,cảnh,thăm,tôi,rằng
+I hãy hỏi bat bắt:0,bất:9,bật:0,bát:0,bạt:0,bặt:0
+N trong cái hộp,túi,nhà,hang,rủi,thế
+I trong cái hang hàng:-18,hạng:-5,hằng:0,hãng:0,hăng:0,hẵng:0,hắng:0,hẫng:0,háng:0,hảng:0
+N đây là một,lần,những,nơi,cách,chuyện
+I đây là buc bức:35,bực:9,bục:0,búc:0
+N về điều đó,này,gì,kiện,tra,ấy
+I về điều nay này:58,nãy:0,nảy:0,nấy:0,nầy:14,náy:0,nẩy:0,nạy:0,nậy:0
+N muốn thì bạn,cứ,mua,sao,không,phải
+I muốn thì ban bạn:54,bản:-21,bằng:-21,bán:-6,bàn:-10,bánh:-12,bắn:0,băng:-15,bận:7,bảng:0,bang:0,bẩn:0,bàng:0,băn:0,banh:0,bành:0,bảnh:0,bần:0,báng:0,bân:0,bâng:0,bấn:0,bẳn:0,bẵng:0
+N ra ngoài đi,cửa,rồi,ăn,để,kia
+I ra ngoài thi thì:20,thích:0,thiết:-17,thị:-1,thiên:-2,thiếu:0,thịt:0,thiện:0,thiệu:0,thiệt:0,thí:0,thỉnh:0,thiếp:0,thiểu:0,thiệp:0,thịnh:0,thính:0,thiền:0,thiêu:0,thiêng:0,thìa:0,thỉu:0,thình:0,thím:0
+N hoa anh đào,thảo,túc,ấy,ta,em
+I hoa anh dao đạo:-48,đảo:0,đào:125,dạo:-9,đáo:0,đao:0,dào:0,dáo:0,dão:0,dảo:0
+N đã mất trước,hơn,đi,rồi,tích,hứng
+I đã mất cong công:11,cộng:0,cổng:0,cống:0,còng:0,cóng:0,cõng:0,cọng:0,cồng:0
+N năm ngoái tom,anh,tôi,chúng,cô,bạn
+I năm ngoái toi tôi:18,tới:0,tối:0,tội:0,tồi:0,tỏi:0,tơi:0,tòi:0,tời:0,tói:0,tổi:0,tợi:0
+N rằng tỷ lệ,đồng,giá,số,trọng,đô
+I rằng tỷ le lên:0,lẽ:0,lệ:119,lễ:0,lệnh:0,lê:0,leo:0,lẻ:0,lệch:0,len:0,lén:0,lề:0,léo:0,lều:0,lẹ:0,lẻn:0,lẽo:0,lem:0,lét:0,lết:0,lẻo:0,lênh:0,lép:0,lèo:0
+N hẳn so với,sánh,dang,đo,cùng,bì
+I hẳn so voi với:83,vời:0,vội:0,vòi:0,vơi:0,vôi:0,vói:0,vợi:0,vối:0,vởi:0
+N cho bữa tiệc,tối,trưa,sáng,ăn,chưa
+I cho bữa an anh:-35,ăn:75,ảnh:0,án:0,ấn:0,ánh:0,ẩn:0,ân:0,ắng:0,ăng:0,ang:0,áng:0,ạnh:0,ành:0,ẳng:0,àn:0,ần:0,ản:0,ầng:0,ảng:0,àng:0,âng:0
+N xem bộ phim,sưu,trưởng,phận,luật,nhớ
+I xem bộ phim phím:0
+N ấy đã chết,không,làm,nói,đi,bị
+I ấy đã sai sài:0,sải:0,sái:0,sãi:0,sại:0
+N người trong số,chúng,nhà,cuộc,mộng,bọn
+I người trong cong công:11,cộng:35,cổng:-12,cống:-8,còng:0,cóng:0,cõng:0,cọng:0,cồng:0
+N thực sự là,không,muốn,rất,nghĩ,thích
+I thực sự muon muốn:48,muộn:0,mượn:0,muôn:0,muỗng:0,mường:0,mướn:0,muống:0,mương:0,muông:0,muồng:0,mươn:0
+N nghĩ là tom,tôi,anh,cô,bạn,mình
+I nghĩ là co có:18,cô:40,con:21,còn:-26,công:2,cơ:9,cố:-2,cổ:-7,coi:-20,cộng:-5,cơn:6,cơm:-10,cờ:-9,cổng:0,cốc:-7,cỏ:-1,cỡ:-8,cởi:-13,cóc:0,cột:3,côn:11,cốt:17,cớ:-5,cống:-5
+N anh trai tôi,của,mình,em,anh,cô
+I anh trai cua của:45,cửa:0,cưa:0,cựa:0,cứa:0,cùa:0,cũa:0,cúa:0,cừa:0
+N lạnh xem xét,là,thêm,phim,như,sao
+I lạnh xem co có:6,cô:9,con:0,còn:-11,công:-19,cơ:-24,cố:0,cổ:-19,coi:20,cộng:0,cơn:0,cơm:0,cờ:0,cổng:0,cốc:0,cỏ:0,cỡ:0,cởi:0,cóc:0,cột:0,côn:0,cốt:0,cớ:0,cống:0
+N trong đám cưới,tang,đông,trẻ,mây,họ
+I trong đám tre trên:0,trẻ:73,trễ:0,treo:0,trèo:0,trêu:0,trệ:0,trề:0,trẻo:0,trê:0,trẽn:0,trệt:0,trét:0,trẹo:0,trể:0,tréo:0,tren:0,trển:0,trệu:0,tré:0,trèm:0,trẹm:0,trến:0,treng:0
+N đã ăn cắp,trưa,thịt,bữa,trộm,hết
+I đã ăn com cơm:89,cớm:0,cốm:0,còm:0,cộm:0,cỡm:0,cồm:0,côm:0
+N cảm ơn vì,anh,bạn,cậu,cô,em
+I cảm ơn ban bạn:45,bản:0,bằng:-12,bán:0,bàn:0,bánh:0,bắn:0,băng:0,bận:0,bảng:0,bang:0,bẩn:0,bàng:0,băn:0,banh:0,bành:0,bảnh:0,bần:0,báng:0,bân:0,bâng:0,bấn:0,bẳn:0,bẵng:0
+N tom đã không,nói,đi,bị,mua,làm
+I tom đã nghi nghĩ:29,nghĩa:0,nghiệp:0,nghiệm:-34,nghỉ:49,nghị:0,nghiêm:-16,nghiên:15,nghìn:0,nghiện:-1,nghịch:-17,nghiêng:-2,nghiền:22,nghiệt:0,nghiến:0,nghĩnh:0,nghía:0,nghiêu:0,nghiễm:28,nghinh:0,nghịu:0,nghỉm:0,nghì:0,nghia:0
+N sự ở đây,nước,đó,đời,việt,biên
+I sự ở do đó:40,động:-20,đồng:-11,đối:-30,đồ:-44,độ:19,đổi:0,đời:58,đội:-5,đơn:-2,đợi:0,đọc:0,đôi:-27,đông:29,độc:-40,doanh:-14,đóng:0,đô:-13,đoán:0,đỡ:-29,dối:0,đỏ:0,đoạn:8,đoàn:-35
+N chuyện bắt đầu,cóc,buộc,nạt,giữ,được
+I chuyện bắt dau đâu:-26,đầu:91,đau:0,đấu:0,dấu:0,dầu:0,đậu:0,dâu:0,dẫu:0,dậu:0,đẩu:0,đáu:0,đàu:0,dẩu:0,dáu:0
+N trời đã tạnh,mưa,tối,xế,lặn,sáng
+I trời đã mua mưa:98,mùa:0,múa:8,mửa:17,mứa:0
+N vang trắng bệch,trợn,da,và,muốt,trẻo
+I vang trắng khong không:-3,khổng:28,khống:0,khồng:0,khộng:0,khỏng:0
+N nói với tôi,anh,cậu,cô,bạn,em
+I nói với toi tôi:43,tới:-20,tối:-35,tội:12,tồi:0,tỏi:10,tơi:0,tòi:0,tời:0,tói:0,tổi:0,tợi:0
+N bạn định mua,hôn,đi,thách,ở,dành
+I bạn định xin xinh:0,xỉn:0,xịn:0,xình:0,xỉnh:0,xìn:0,xĩnh:0,xính:0,xín:0
+N giờ tôi đang,sẽ,không,đã,muốn,phải
+I giờ tôi khong không:37,khổng:0,khống:0,khồng:0,khộng:0,khỏng:0
+N của ông ta,ấy,là,đã,được,có
+I của ông ay ấy:47,ây:0,áy:0
+N từ khi nào,còn,tôi,anh,chúng,cô
+I từ khi nguoi người:2,ngươi:10,nguội:22,nguôi:0,ngưới:0,ngưởi:0,nguồi:0,ngượi:0
+N là cô ấy,gái,ta,bé,không,đã
+I là cô ay ấy:74,ây:0,áy:39
+N thể xảy ra,đến,nghe,thấy,có,gặp
+I thể xảy ra rất:0,rằng:0,ràng:0,răng:0,rắc:0,rau:0,rác:0,rắn:0,rảnh:0,rãi:0,rào:0,râu:0,ranh:0,rạp:0,ray:0,rách:0,rập:0,rã:0,rán:0,rạng:0,ram:0,ráng:0,rang:0,rạn:0
+N cách lái xe,chiếc,ô,tàu,máy,buôn
+I cách lái o ở:-8,ông:0,ơn:0,ơi:0,ổn:0,ôi:0,ồ:0,ô:68,ôm:0,ống:0,ốm:0,ờ:0,ong:0,ồn:0,ổng:0,ổ:0,óc:0,on:0,ơ:0,ôn:0,ốc:0,ớt:0,oan:0,oán:0
+N cho tôi biết,xem,mượn,một,nghe,hỏi
+I cho tôi cai cái:30,cải:-35,cãi:0,cài:-12
+N có một cái,vài,người,con,số,cuộc
+I có một ai ái:-29,ải:0,ại:0
+N hứa là sẽ,không,một,người,gì,những
+I hứa là khong không:28,khổng:-2,khống:0,khồng:0,khộng:0,khỏng:0
+N khác một chút,cách,cơ,người,số,cái
+I khác một cach cách:76,cạch:0
+N không có gì,ai,mục,ý,tiền,khả
+I không có mot một:10,mốt:0,mọt:0,mót:0
+N quá lớn để,nên,so,khiến,và,nhất
+I quá lớn de để:43,đến:12,đề:0,đều:13,đẹp:0,dễ:0,đêm:0,đen:0,đem:0,đèn:0,đế:0,đeo:0,đệ:0,dẹp:0,đe:0,đẻ:0,đền:0,đếm:0,đê:0,đè:0,đệm:0,dê:0,dẻo:0,đẽ:0
+N có ai đó,ở,biết,muốn,có,nói
+I có ai thich thích:17,thịch:0
+N sẽ không bao,thể,có,làm,để,còn
+I sẽ không den đến:22,đen:-33,đèn:-30,đền:-18,đên:0,đênh:0,dền:0,dến:0,đễnh:0,đén:0,đển:0,dên:0,deng:0,dềnh:0,đễn:0,dèn:0,đẻn:0,đeng:0,dếnh:0
+N nếu cậu muốn,ấy,không,ta,có,nghĩ
+I nếu cậu can cần:46,cảnh:0,càng:0,căn:0,cạnh:0,cẩn:-1,cánh:0,cân:0,căng:2,cận:0,cản:0,canh:-8,cắn:0,cạn:0,cảng:0,cán:0,cành:0,cặn:0,cằn:0,càn:0,cấn:0,cẳng:0,cáng:0,cang:0
+N tom không muốn,biết,giỏi,phải,thể,thích
+I tom không muon muốn:66,muộn:-17,mượn:-23,muôn:0,muỗng:0,mường:0,mướn:0,muống:0,mương:0,muông:0,muồng:0,mươn:0
+N ta đã làm,nói,biết,bị,có,không
+I ta đã di đi:24,điều:-6,định:0,điểm:-39,điện:-43,đình:-36,dịch:-11,diễn:15,địa:0,diện:0,điên:-11,đích:-4,dĩ:0,dị:0,diệt:38,địch:0,điển:0,điềm:0,dính:22,đỉnh:0,dì:0,đĩa:0,điếm:0,điệu:0
+N đừng có mà,nói,làm,chây,lo,nhìn
+I đừng có thay thấy:-2,thầy:-12,thây:0,thảy:0,thày:0,thẩy:0,tháy:0
+N anh ấy đã,không,đang,sẽ,là,có
+I anh ấy la là:19,làm:13,lại:8,lần:1,lắm:1,lấy:-9,lâu:-12,lập:-29,lạc:0,lạ:0,lắng:-18,lạnh:-10,lá:0,lái:28,lai:0,lao:-26,lan:0,lầm:0,lành:0,lão:0,làng:0,lặng:0,lãnh:0,lẫn:0
+N cần biết chuyện,về,cách,bạn,rằng,là
+I cần biết truoc trước:16,trược:0
+N trạng say xỉn,mê,rượu,đắm,sưa,khướt
+I trạng say ruou rượu:94
+N giao thông đường,vận,công,trên,đang,này
+I giao thông o ở:5,ông:0,ơn:0,ơi:0,ổn:0,ôi:0,ồ:0,ô:0,ôm:0,ống:0,ốm:0,ờ:0,ong:0,ồn:0,ổng:0,ổ:0,óc:0,on:0,ơ:0,ôn:0,ốc:0,ớt:0,oan:0,oán:0
+N tom có thể,lẽ,vẻ,một,quên,tàn
+I tom có le lên:-38,lẽ:83,lệ:-29,lễ:-5,lệnh:9,lê:-32,leo:-26,lẻ:1,lệch:0,len:0,lén:-9,lề:4,léo:0,lều:0,lẹ:0,lẻn:0,lẽo:10,lem:0,lét:0,lết:0,lẻo:0,lênh:0,lép:0,lèo:0
+N sinh ra ở,trong,tại,một,từ,để
+I sinh ra o ở:51,ông:4,ơn:-20,ơi:0,ổn:-28,ôi:0,ồ:0,ô:-4,ôm:-1,ống:-13,ốm:0,ờ:0,ong:0,ồn:0,ổng:0,ổ:0,óc:0,on:0,ơ:0,ôn:0,ốc:0,ớt:0,oan:0,oán:8
+N lẽ bạn quá,nên,đang,sẽ,đã,không
+I lẽ bạn qua quá:80,quan:-11,quả:-36,quay:1,quân:0,quản:-23,quần:0,quanh:0,quái:0,quán:0,quà:0,quảng:-33,quang:0,quận:0,quát:0,quãng:0,quấy:0,quầy:0,quạt:0,quặc:0,quấn:0,quáng:0,quách:0,quăng:0
+N tình gặp gỡ,nhau,lại,rắc,anh,khó
+I tình gặp me mẹ:26,mệt:0,mèo:0,mê:0,mẽ:0,mềm:0,mệnh:0,mét:0,mến:0,mẻ:0,mẹo:0,men:0,mép:0,mề:0,meo:0,méo:0,mè:0,mênh:0,mễ:0,mền:0,mém:0,mé:0,mèm:0,mếu:0
+N bạn không thể,nên,cần,muốn,phải,biết
+I bạn không phai phải:41,phái:-40,phài:0
+N này đã được,bị,khiến,trở,không,gây
+I này đã bien biến:36,biển:-49,biên:-13,biện:-24,biếng:0,biền:0,biễn:0,biêng:0
+N vào thứ bảy,hai,sáu,ba,gì,tư
+I vào thứ hai hại:0,hài:0,hải:0,hãi:0,hái:0
+N cái điện thoại,tử,ảnh,ngầm,từ,hạ
+I cái điện thoai thoại:114,thoải:0,thoái:0
+N đó là một,lý,điều,những,cách,gì
+I đó là mot một:40,mốt:14,mọt:0,mót:0
+N nhân là người,một,do,gì,công,chủ
+I nhân là nguoi người:48,ngươi:-1,nguội:0,nguôi:0,ngưới:0,ngưởi:0,nguồi:0,ngượi:0
+N vấn nạn nhân,đói,xe,giao,lao,xảy
+I vấn nạn phat phát:-3,phạt:0,phật:0,phất:0,phắt:0
+N nhận con nuôi,người,gái,trai,bé,chó
+I nhận con nguoi người:48,ngươi:-1,nguội:0,nguôi:0,ngưới:0,ngưởi:0,nguồi:0,ngượi:0
+N chân thật nhất,luôn,và,của,sự,hơn
+I chân thật noi nói:-38,nơi:-22,nổi:-8,nội:0,nỗi:0,nối:0,nồi:0,nới:0,nôi:0,nòi:0,nọi:0,nởi:0
+N không có gì,ai,mục,ý,tiền,khả
+I không có ai ái:-10,ải:0,ại:0
+N biết mình đang,có,sẽ,không,muốn,đã
+I biết mình dang đang:70,đáng:-6,đăng:-4,dàng:0,dạng:0,đằng:0,dáng:0,đảng:0,đẳng:0,đàng:0,dâng:-6,đắng:0,đặng:7,đấng:0,đãng:0,dẳng:0,đẵng:0,dằng:0,dăng:0,đạng:0
+N có biết là,không,gì,ai,tôi,rằng
+I có biết no nói:16,nó:25,nơi:23,nổi:-29,nội:-21,nóng:0,nỗi:6,nổ:0,nối:0,nợ:0,nông:-19,nỗ:0,nộp:0,nở:0,nô:0,non:0,nọ:0,nồi:0,nôn:0,nồng:0,nốt:0,nón:0,nộ:0,nom:0
+N đứa lớn nhất,hơn,lên,thứ,của,tuổi
+I đứa lớn nhat nhất:63,nhật:0,nhạt:0,nhặt:0,nhát:0,nhắt:0
+N đã làm gì,việc,xong,cho,điều,phiền
+I đã làm ton tổng:20,tôn:-11,tồn:0,tổn:66,tốn:5,tông:-29,tống:0,tòng:0,tong:0,tợn:0,tỏng:0,tọng:0,tởn:0,tồng:0,tòn:0,tóng:0
+N trọng lúc nào,đó,này,nãy,ấy,đầu
+I trọng lúc nay này:45,nãy:94,nảy:0,nấy:0,nầy:44,náy:0,nẩy:0,nạy:0,nậy:0
+N đến như vậy,thế,là,một,những,sau
+I đến như vay vậy:72,váy:0,vây:-9,vầy:83,vẫy:0,vảy:0,vấy:0,vẩy:0,vạy:0
+N và quả xa,táo,là,của,thật,bom
+I và quả tao tạo:-17,táo:85,tào:20,tảo:0
+N làm sẽ không,làm,có,đi,giúp,được
+I làm sẽ khong không:36,khổng:0,khống:0,khồng:0,khộng:0,khỏng:0
+N ở trong phòng,nhà,đó,một,tù,bếp
+I ở trong rung rừng:65,rụng:0,rùng:0,rưng:0,rúng:0,rủng:0,rửng:0
+N tạo các ngành,bạn,trình,ngươi,loại,nhà
+I tạo các con còn:0,công:20,cộng:11,cơn:25,cổng:21,côn:-4,cống:7,cong:0,cồn:16,còng:0,cóng:0,cõng:0,cọng:0,cồng:0,cỏn:0,cổn:0,cón:0,cỡn:0,cợn:0,cọn:0,cõn:0,cờn:0
+N đọc báo cáo,mỗi,vừa,thấy,chí,cho
+I đọc báo voi với:10,vời:0,vội:0,vòi:0,vơi:0,vôi:0,vói:0,vợi:0,vối:0,vởi:0
+N khi bạn đang,đã,có,không,mơ,muốn
+I khi bạn song sống:1,sông:0,sóng:0,sòng:0,sổng:0,sõng:0,sồng:0,sộng:0
+N chuyển đến đây,sống,một,nơi,các,nhà
+I chuyển đến nha nhà:27,nhất:-42,nhân:-22,nhận:-14,nhau:-12,nhanh:3,nhật:9,nhập:-33,nhạc:-28,nhắc:0,nhảy:0,nhắn:0,nhẫn:0,nhầm:6,nhằm:-24,nhấn:0,nhàng:0,nhắm:0,nhạy:0,nhạt:0,nhặt:0,nhãn:0,nhát:0,nhã:0
+N những chiếc máy,xe,nhẫn,váy,áo,lá
+I những chiếc quan quân:0,quản:0,quần:66,quanh:0,quán:0,quảng:0,quang:0,quận:0,quãng:0,quấn:0,quáng:0,quăng:0,quẩn:0,quàng:0,quầng:0,quẳng:0,quặng:0,quạnh:0,quẫn:0,quằn:0,quặn:0,quăn:0,quánh:0,quạng:0
+N úc cách mạng,nào,đây,để,chơi,làm
+I úc cách viet viết:29,việt:-39
+N bình thường thôi,không,mà,thì,như,của
+I bình thường vao vào:-11,váo:0,vảo:0
+N chị có thể,biết,muốn,chắc,nghĩ,một
+I chị có biet biết:44,biệt:-12
+N đại của ông,mình,chúng,nó,thế,các
+I đại của khung khủng:-6,khùng:0,khựng:0,khừng:0
+N của mình để,và,là,với,cho,nhé
+I của mình va và:15,vậy:-3,vào:18,vẫn:3,vâng:0,vấn:0,vật:0,vài:-17,văn:0,vàng:-24,vận:-32,vai:0,vân:0,vay:8,váy:0,vả:0,vang:0,vạn:0,ván:0,vất:5,vẩn:0,vạch:0,vắng:0,vải:0
+N như không có,thể,bao,biết,còn,ai
+I như không co có:43,cô:-39,con:-37,còn:43,công:-16,cơ:-68,cố:8,cổ:-51,coi:4,cộng:-49,cơn:0,cơm:0,cờ:0,cổng:0,cốc:0,cỏ:0,cỡ:0,cởi:10,cóc:0,cột:0,côn:0,cốt:-13,cớ:0,cống:0
+N biển xanh lá,cát,lam,xao,da,tươi
+I biển xanh mat mặt:10,mất:0,mắt:6,mật:0,mát:65,mạt:0
+N ấm hơn nữa,là,cả,nhiều,một,so
+I ấm hơn trong trọng:-37,trông:-22,trống:0,trồng:0,tròng:0,trỏng:0,trổng:0
+N ấy rất vui,nhiều,thích,tốt,tuyệt,yêu
+I ấy rất ngheo nghèo:39,nghẽo:0,nghéo:0
+N nó vào trong,tay,thùng,một,cái,chỗ
+I nó vào thu thứ:18,thực:-7,thường:-41,thương:-21,thức:-23,thủ:-21,thư:-2,thử:-9,thuốc:-11,thuật:-44,thú:0,thưa:-8,thuộc:-41,thúc:0,thuyết:-7,thừa:0,thuận:-22,thủy:-21,thù:0,thua:0,thuê:0,thượng:-1,thưởng:0,thuyền:-3
+N sẽ dễ dàng,hơn,bị,thương,chịu,hiểu
+I sẽ dễ dang đang:0,đáng:0,đăng:0,dàng:93,dạng:0,đằng:0,dáng:0,đảng:0,đẳng:0,đàng:0,dâng:0,đắng:0,đặng:0,đấng:0,đãng:0,dẳng:0,đẵng:0,dằng:0,dăng:0,đạng:0
+N tiếp tục làm,đi,được,thực,sống,tìm
+I tiếp tục bat bắt:1,bất:-9,bật:0,bát:0,bạt:0,bặt:0
+N tôi không biết,thể,muốn,nghĩ,thích,có
+I tôi không biet biết:62,biệt:-60
+N tôi đã nói,không,làm,tìm,gặp,thấy
+I tôi đã hoan hoàn:30,hoàng:0,hoang:15,hoảng:7,hoãn:32,hoạn:0,hoành:0,hoán:4,hoằng:0,hoẵng:0,hoản:0,hoạnh:0,hoảnh:0,hoanh:0,hoằn:0
+N gia đình bạn,tôi,mình,của,anh,có
+I gia đình chung chúng:14,chứng:0,chừng:0,chủng:0,chưng:0,chửng:0,chững:0,chùng:0,chũng:0,chựng:0
+N cần phải làm,biết,lo,có,nói,đi
+I cần phải tap tập:29,tạp:0,tấp:0,táp:0,tắp:0
+N tôi đã nói,không,làm,tìm,gặp,thấy
+I tôi đã lam làm:34,lắm:-33,lầm:23,lâm:-22,lạm:10,lãm:0,lăm:0,lẩm:0,lẫm:0,lảm:0,lấm:0,lậm:0
+N vài phút nữa,thôi,trước,sau,để,giây
+I vài phút truoc trước:65,trược:0
+N cuộc tìm kiếm,thấy,hiểu,ra,được,cách
+I cuộc tìm kiem kiểm:0,kiếm:126,kiệm:0,kiềm:0,kiêm:0
+N đang trong quá,tình,giai,thời,cơn,một
+I đang trong gio giờ:27,giới:8,giống:-39,giỏi:0,gió:13,giọng:4,giơ:0,giọt:0,giỡn:0,giòn:0,giở:0,giỏ:38,giời:-1,giò:0,giỗ:0,giông:0,giô:0,giôn:0,gioan:0,giòi:0,gióng:0,giồng:0,giớ:0,giong:0
+N tránh nói chuyện,dối,gì,rằng,với,về
+I tránh nói chuyen chuyện:65,chuyển:0,chuyên:0,chuyến:0,chuyền:0
+N lái của xe,mình,bạn,tôi,anh,chúng
+I lái của ban bạn:32,bản:-1,bằng:-62,bán:-12,bàn:-13,bánh:-9,bắn:0,băng:3,bận:0,bảng:5,bang:12,bẩn:0,bàng:-7,băn:0,banh:0,bành:2,bảnh:0,bần:0,báng:0,bân:0,bâng:0,bấn:0,bẳn:0,bẵng:0
+N đất mới có,được,mẻ,là,biết,bắt
+I đất mới bi biết:31,bị:4,bình:-9,biệt:0,biến:-12,biển:0,bí:0,biểu:-6,biên:0,binh:0,bia:0,biện:0,bì:0,bỉ:0,biếng:0,bịa:0,bịch:0,bích:0,bịt:0,bìa:0,bịp:0,biếu:0,bin:0,bỉnh:0
+N không nên làm,nói,bỏ,ăn,để,quá
+I không nên lam làm:41,lắm:-22,lầm:-4,lâm:0,lạm:72,lãm:0,lăm:0,lẩm:0,lẫm:0,lảm:0,lấm:0,lậm:0
+N ngữ nhưng không,tôi,anh,nếu,mà,vẫn
+I ngữ nhưng ma mà:31,mặt:-8,mất:-12,máy:-15,mày:13,mang:-6,mắt:-13,mấy:9,mạnh:-16,mặc:-7,mai:-5,màu:-12,may:19,mạng:-29,mật:-24,máu:-16,mãi:20,mái:0,mau:0,mẫu:-19,mã:-29,mắn:0,mắc:0,màn:11
+N ở trong phòng,nhà,đó,một,tù,bếp
+I ở trong mot một:24,mốt:0,mọt:0,mót:0
+N không biết gì,phải,mình,là,làm,anh
+I không biết ve về:14,vẻ:0,vệ:0,vết:-13,vẽ:33,vé:0,vẹn:0,ven:0,vẹt:0,vét:0,vén:0,vênh:0,vệt:0,vế:0,vẹo:0,vê:0,vèo:0,véo:0,véc:0,vè:0,veo:0,vể:0,vểnh:0,vẻn:0
+N một cuốn sách,sổ,tiểu,từ,truyện,nhật
+I một cuốn sach sách:104,sạch:32
+N giải quyết khiếu,vấn,vụ,tranh,được,những
+I giải quyết tat tất:24,tắt:0,tật:0,tát:0,tạt:0
+N mày nghĩ mày,tao,cái,cô,rằng,là
+I mày nghĩ cai cái:51,cải:0,cãi:0,cài:0
+N cũ của anh,tôi,mình,cô,bạn,em
+I cũ của tom tóm:0,tôm:-2,tởm:0,tõm:0,tòm:0
+N ấy đang ở,làm,nói,đợi,cố,đi
+I ấy đang o ở:51,ông:0,ơn:0,ơi:0,ổn:44,ôi:0,ồ:0,ô:0,ôm:40,ống:0,ốm:40,ờ:0,ong:0,ồn:0,ổng:0,ổ:0,óc:0,on:0,ơ:0,ôn:13,ốc:0,ớt:0,oan:0,oán:0
+N là một trong,người,đô,phần,xã,đứa
+I là một chiec chiếc:33,chiệc:0
+N tom đã không,nói,đi,bị,mua,làm
+I tom đã chet chết:36,chét:0,chẹt:0
+N chó cứ sủa,ai,như,vào,điều,nghĩ
+I chó cứ sua sửa:-10,sữa:0,suất:0,sủa:155,sưa:0,sứa:0,súa:0,sụa:0
+N chuyện đó xảy,đâu,không,sẽ,nữa,đi
+I chuyện đó khi khiến:24,khí:0,khỉ:0,khiển:0,khích:0,khiếp:0,khiếu:0,khiêu:0,khinh:0,khiêm:0,khía:0,khiết:0,khiên:0,khiếm:0,khít:0,khiêng:0,khỉnh:0,khiễng:0,khịa:0,khịt:0,khim:0,khì:0,khiu:0,khị:0
+N bạn không thể,nên,cần,muốn,phải,biết
+I bạn không tim tìm:20,tím:0,tỉm:0
+N ở một mình,nơi,số,mức,vài,chỗ
+I ở một hieu hiểu:-44,hiệu:-14,hiếu:0,hiêu:0,hiều:0
+N tôi có thể,một,cảm,vài,nhiều,rất
+I tôi có mot một:40,mốt:0,mọt:0,mót:0
+N đã hẹn gặp,hò,với,sẽ,giờ,trước
+I đã hẹn ho họ:-5,hơn:0,học:0,hợp:0,hỏi:0,hôm:19,hoặc:0,hội:0,hoàn:0,hoa:0,hóa:0,hôn:0,hồ:0,hơi:0,hoàng:0,hoạt:0,hồi:0,hộ:0,hòa:0,hoạch:0,hỗ:0,hồng:0,hồn:0,hộp:0
+N sản phẩm này,của,được,có,mới,tốt
+I sản phẩm nay này:33,nãy:0,nảy:0,nấy:0,nầy:0,náy:0,nẩy:0,nạy:0,nậy:0
+N những gì anh,bạn,tôi,chúng,mình,mà
+I những gì dang đang:31,đáng:30,đăng:0,dàng:0,dạng:0,đằng:9,dáng:0,đảng:0,đẳng:0,đàng:0,dâng:0,đắng:0,đặng:-11,đấng:0,đãng:0,dẳng:0,đẵng:0,dằng:0,dăng:0,đạng:0
+N cuối cùng của,cũng,tôi,đã,là,thì
+I cuối cùng cua của:36,cửa:0,cưa:0,cựa:0,cứa:0,cùa:0,cũa:0,cúa:0,cừa:0
+N bụi đồ ăn,khốn,chơi,đạc,uống,ngốc
+I bụi đồ dac đặc:-11,đắc:27,đạc:107,dách:0,dắc:0,dặc:0,dạc:0,đạch:0,đác:0,dác:0,đách:0
+N cà phê nhé,sữa,không,muối,nóng,hay
+I cà phê dia địa:0,đĩa:0,dĩa:0,đỉa:0,đìa:0,đia:0,dìa:0,dịa:0,đía:0
+N tôi chưa từng,bao,hề,biết,thấy,ăn
+I tôi chưa bao bảo:-18,báo:-11,bào:0,bão:0,bạo:0
+N ghét hóa học,chất,ra,đơn,và,của
+I ghét hóa hoc học:97,hóc:0,hốc:0,hộc:0
+N tôi thích ăn,đi,xem,cái,những,nhất
+I tôi thích cong công:11,cộng:0,cổng:0,cống:0,còng:0,cóng:0,cõng:0,cọng:0,cồng:0
+N có thể làm,là,được,giúp,nói,tìm
+I có thể tuong tưởng:15,tương:-4,tượng:-11,tướng:0,tường:0,tuông:0,tuồng:0
+N thay thế cho,bằng,bởi,cụm,được,các
+I thay thế khong không:-18,khổng:0,khống:0,khồng:0,khộng:0,khỏng:0
+N tôi là một,người,ai,bạn,anh,bác
+I tôi là nguoi người:39,ngươi:-1,nguội:0,nguôi:0,ngưới:0,ngưởi:0,nguồi:0,ngượi:0
+N thấy mình đang,bị,đi,thật,không,khóc
+I thấy mình quen quên:13,quèn:0,quện:0,quềnh:0
+N thuộc vào việc,từng,chúng,sự,các,mức
+I thuộc vào nhap nhập:-33,nhấp:0,nháp:0,nhạp:0
+N bản xuất khẩu,sắc,hiện,bản,phát,thân
+I bản xuất ban bạn:0,bản:68,bằng:0,bán:-6,bàn:0,bánh:6,bắn:0,băng:-6,bận:0,bảng:0,bang:0,bẩn:0,bàng:0,băn:0,banh:0,bành:0,bảnh:0,bần:0,báng:0,bân:0,bâng:0,bấn:0,bẳn:0,bẵng:0
+N trong công việc,ty,viên,tác,nghiệp,cuộc
+I trong công vien viên:74,viện:0,viễn:0,viền:0,viếng:0,viển:0,viêng:0,viềng:0
+N cũng quyết định,không,tâm,vấn,khiếu,vụ
+I cũng quyết dinh định:91,đình:0,dính:0,đỉnh:0,đinh:0,đính:0,dĩnh:0,đĩnh:0,dịnh:0,dình:0
+N may quá khứ,trình,nhiều,muộn,rồi,mức
+I may quá khong không:-14,khổng:0,khống:0,khồng:0,khộng:0,khỏng:0
+N liệu này được,hoàn,cho,thiếu,của,có
+I liệu này co có:24,cô:-17,con:-25,còn:13,công:-40,cơ:-24,cố:-26,cổ:0,coi:-8,cộng:-32,cơn:0,cơm:0,cờ:0,cổng:0,cốc:0,cỏ:0,cỡ:0,cởi:0,cóc:0,cột:0,côn:0,cốt:-10,cớ:0,cống:0
+N tôi sẽ không,đi,làm,nói,đưa,gọi
+I tôi sẽ roi rồi:-48,rời:46,rơi:29,rối:-15,rỗi:0,rôi:0,rọi:0,ròi:0,rổi:0,rỏi:0,rói:0
+N đến việc giải,này,làm,đó,đi,bảo
+I đến việc tu từ:-8,tự:17,từng:-31,tuyệt:3,tưởng:-24,tư:-10,tuổi:0,tử:-26,tục:0,tuần:-2,tương:0,tượng:0,tuy:-31,tức:0,tướng:-37,tù:0,tùy:-9,túi:0,tụi:0,tường:0,tuyến:0,túc:0,tươi:0,tuyển:27
+N đó to bằng,lớn,be,hơn,the,tát
+I đó to the thể:0,thế:5,theo:-40,thêm:-19,thẻ:0,thề:0,thèm:0,thép:0,thê:0,thẹn:0,thét:0,thêu:0,then:0,thềm:0,thệ:0,thếp:0,them:66,thé:0,thẹo:0,thênh:0,thết:0,thè:0,thếch:0,thều:0
+N đợi bạn ở,gái,từ,có,sẽ,bè
+I đợi bạn han hàng:-21,hắn:-33,hành:-36,hạnh:10,hạn:-27,hẳn:-2,hàn:0,hạng:0,hằng:-3,hãng:0,hận:0,hang:0,hán:0,hân:0,hăng:0,hãnh:0,hãn:0,hằn:0,hẵng:0,hanh:0,hắng:0,hẫng:0,hấn:0,háng:0
+N là tôi sẽ,không,đã,muốn,đang,có
+I là tôi tinh tình:-17,tính:-14,tỉnh:-18,tĩnh:0,tịnh:0
+N trời mưa to,cả,nhưng,tôi,vào,rất
+I trời mưa ca các:0,cậu:0,cái:0,cả:46,cần:0,cảm:0,cách:0,cao:11,câu:0,cầu:0,cảnh:0,cấp:0,cá:0,càng:0,cây:0,căn:0,cạnh:0,cáo:0,cập:0,cà:0,cám:0,cẩn:0,cánh:0,cầm:0
+N có giấc mơ,ngủ,mộng,chiêm,nồng,nằm
+I có giấc mo một:0,mọi:0,mới:0,mơ:125,mỗi:0,mở:0,mong:0,món:0,mời:0,mối:0,môi:0,môn:0,mô:0,mộng:102,mộ:0,mỏi:0,mông:0,mò:0,móc:0,mồ:0,mồm:0,mờ:0,mỡ:0,mổ:0
+N đến vào lúc,buổi,thứ,ngày,hôm,thời
+I đến vào trua trưa:24,truất:0,truân:0,truật:0,trụa:0
+N tập về nhà,việc,phía,chuyện,mặt,những
+I tập về nha nhà:86,nhất:-30,nhân:0,nhận:-23,nhau:-7,nhanh:-12,nhật:1,nhập:-12,nhạc:-7,nhắc:0,nhảy:-22,nhắn:-7,nhẫn:0,nhầm:0,nhằm:0,nhấn:0,nhàng:0,nhắm:0,nhạy:0,nhạt:0,nhặt:0,nhãn:13,nhát:0,nhã:0
+N lãng phí thời,quá,tiền,trong,tài,thì
+I lãng phí tien tiếng:0,tiền:48,tiên:0,tiến:0,tiện:0,tiễn:0,tiêng:0,tiển:0,tiễng:0,tiềng:0,tiểng:0
+N ba mươi phút,sáu,tuổi,lăm,mốt,ngày
+I ba mươi mot một:0,mốt:120,mọt:0,mót:0
+N đã đi đâu,đến,qua,rồi,bơi,quá
+I đã đi ma mà:10,mặt:0,mất:36,máy:-3,mày:-12,mang:-24,mắt:0,mấy:-4,mạnh:-28,mặc:-22,mai:-32,màu:-27,may:-24,mạng:-11,mật:0,máu:0,mãi:17,mái:0,mau:30,mẫu:-28,mã:0,mắn:0,mắc:0,màn:0
+N hôm nay tôi,là,anh,chúng,trời,em
+I hôm nay la là:26,làm:-5,lại:8,lần:-30,lắm:-13,lấy:-5,lâu:0,lập:-26,lạc:0,lạ:0,lắng:0,lạnh:41,lá:0,lái:0,lai:0,lao:0,lan:0,lầm:0,lành:0,lão:0,làng:0,lặng:0,lãnh:0,lẫn:0
+N tôi không biết,thể,muốn,nghĩ,thích,có
+I tôi không yeu yêu:9,yếu:-27,yểu:0,yều:0
+N đầy hy vọng,lạp,sinh,tông,ngạc,nhan
+I đầy hy vong vọng:120,vòng:0,vồng:0,võng:0,vông:0,vống:0
+N sẽ cần phải,một,thêm,đến,nhiều,giúp
+I sẽ cần rat rất:27,rát:0,rắt:0,rặt:0,rạt:0,rật:0
+N họ không biết,thể,có,muốn,phải,còn
+I họ không chac chắc:38,chác:0,chạc:0,chậc:0,chặc:0,chạch:0
+N hộp thuốc lá,phiện,nổ,chữa,thú,giảm
+I hộp thuốc la là:-16,làm:-7,lại:-19,lần:0,lắm:0,lấy:0,lâu:-3,lập:0,lạc:0,lạ:0,lắng:0,lạnh:0,lá:90,lái:0,lai:0,lao:0,lan:0,lầm:0,lành:0,lão:0,làng:0,lặng:0,lãnh:0,lẫn:0
+N không coi trọng,là,như,chừng,nào,thường
+I không coi cau cậu:2,câu:0,cầu:0,cấu:0,cáu:0,cẩu:0,càu:0,cảu:0
+N đã ngoại tình,giao,trừ,ô,ngữ,tệ
+I đã ngoại tinh tình:101,tính:0,tỉnh:-7,tĩnh:0,tịnh:0
+N tôi đang cố,làm,nói,ở,tìm,nghĩ
+I tôi đang chinh chính:0,chỉnh:-8,chình:0,chĩnh:0
+N ăn trưa với,rồi,à,nhé,chưa,đi
+I ăn trưa o ở:28,ông:0,ơn:0,ơi:0,ổn:0,ôi:0,ồ:0,ô:0,ôm:0,ống:0,ốm:0,ờ:0,ong:0,ồn:0,ổng:0,ổ:0,óc:0,on:0,ơ:0,ôn:0,ốc:0,ớt:0,oan:0,oán:0
+N từ rất lâu,sớm,nhiều,xa,tốt,vui
+I từ rất dep đẹp:55,dẹp:0,dép:0,đệp:0
+N là chồng cô,tôi,của,em,mình,chị
+I là chồng toi tôi:43,tới:-17,tối:0,tội:0,tồi:46,tỏi:0,tơi:0,tòi:0,tời:0,tói:0,tổi:0,tợi:0
+N tại mỗi điểm,lần,người,khi,ngày,tuần
+I tại mỗi nga ngày:50,ngay:0,ngài:0,ngăn:10,ngân:-1,ngắn:0,ngành:14,ngại:0,ngạc:0,ngã:0,ngàn:0,ngang:0,ngắm:0,ngào:0,ngập:0,ngầm:0,ngầu:0,ngâm:0,ngất:0,ngây:0,ngẩn:0,ngẫu:0,ngắt:0,ngần:0
+N rất giỏi việc,trong,nhất,lắm,về,hơn
+I rất giỏi nau nấu:64,nâu:0,náu:0,nẫu:0,nậu:0,nàu:0,nẩu:0
+N có tom đã,không,đang,sẽ,nói,là
+I có tom moi mọi:0,mới:-4,mỗi:0,mời:0,mối:0,môi:0,mỏi:0,mồi:0,mói:0,mội:0,mòi:0,mơi:0,mõi:0,mởi:0,mợi:0
+N đồ thủ công,tục,tướng,đô,bóng,trưởng
+I đồ thủ cong công:84,cộng:0,cổng:0,cống:0,còng:0,cóng:0,cõng:0,cọng:0,cồng:0
+N tom thích đi,ăn,ngựa,nói,rượu,hợp
+I tom thích ca các:-3,cậu:16,cái:23,cả:-5,cần:0,cảm:0,cách:12,cao:-32,câu:17,cầu:0,cảnh:-11,cấp:0,cá:13,càng:0,cây:-6,căn:-3,cạnh:-12,cáo:0,cập:0,cà:39,cám:0,cẩn:0,cánh:0,cầm:0
+N họ đã làm,đi,bị,có,không,nói
+I họ đã chap chấp:36,chạp:0,chập:0,chắp:20,chặp:0
+N cái máy tính,ảnh,bay,quay,này,đó
+I cái máy nay này:40,nãy:0,nảy:0,nấy:0,nầy:0,náy:0,nẩy:0,nạy:0,nậy:0
+N cùng của tôi,mình,anh,chúng,ông,cuộc
+I cùng của anh ảnh:-40,ánh:5,ạnh:0,ành:0
+N tôi mới biết,là,có,phải,chỉ,bắt
+I tôi mới an anh:-53,ăn:5,ảnh:0,án:0,ấn:0,ánh:0,ẩn:0,ân:0,ắng:0,ăng:0,ang:0,áng:0,ạnh:0,ành:0,ẳng:0,àn:0,ần:0,ản:0,ầng:0,ảng:0,àng:0,âng:0
+N đã mua một,lại,vé,cho,xe,nó
+I đã mua qua quá:-17,quan:-24,quả:-5,quay:0,quân:0,quản:0,quần:48,quanh:0,quái:0,quán:0,quà:66,quảng:0,quang:0,quận:0,quát:0,quãng:0,quấy:0,quầy:0,quạt:0,quặc:0,quấn:0,quáng:0,quách:0,quăng:0
+N phố nào đó,cũng,để,mà,không,khác
+I phố nào day đây:9,đấy:17,đầy:0,dậy:0,dạy:6,dây:0,đẩy:0,dày:0,đáy:0,dãy:0,đậy:0,đày:0,đay:0,dấy:0,dầy:0,dáy:0,đẫy:0,dẫy:0
+N lạc trôi qua,dạt,chảy,đi,nổi,nhanh
+I lạc trôi di đi:41,điều:0,định:0,điểm:0,điện:0,đình:0,dịch:0,diễn:0,địa:0,diện:0,điên:0,đích:0,dĩ:0,dị:0,diệt:0,địch:0,điển:0,điềm:0,dính:0,đỉnh:0,dì:0,đĩa:0,điếm:0,điệu:0
+N không mua gì,nổi,được,cái,nó,thì
+I không mua cuon cuốn:43,cường:0,cương:0,cuồng:0,cuộn:0,cưỡng:0,cuống:0,cuồn:0,cuông:0,cươn:0,cuộng:0
+N vào làm việc,gì,ở,một,ơn,sao
+I vào làm tai tại:-22,tài:-13,tải:0,tái:-28
+N hóa học của,và,người,có,là,được
+I hóa học o ở:14,ông:-38,ơn:0,ơi:0,ổn:0,ôi:0,ồ:0,ô:0,ôm:0,ống:0,ốm:0,ờ:0,ong:0,ồn:0,ổng:0,ổ:0,óc:0,on:0,ơ:0,ôn:10,ốc:0,ớt:0,oan:0,oán:0
+N tôi đến đây,từ,để,gặp,muộn,đó
+I tôi đến de để:43,đến:-48,đề:-27,đều:-24,đẹp:0,dễ:-29,đêm:10,đen:-17,đem:-30,đèn:-7,đế:-24,đeo:0,đệ:-21,dẹp:-11,đe:0,đẻ:0,đền:15,đếm:0,đê:0,đè:0,đệm:0,dê:0,dẻo:0,đẽ:0
+N và mọi người,thứ,chuyện,việc,vật,công
+I và mọi thu thứ:79,thực:-28,thường:0,thương:0,thức:-29,thủ:-15,thư:0,thử:0,thuốc:0,thuật:0,thú:0,thưa:0,thuộc:0,thúc:0,thuyết:0,thừa:0,thuận:0,thủy:0,thù:0,thua:0,thuê:0,thượng:0,thưởng:0,thuyền:0
+N trẻ em có,dưới,mầm,và,được,bị
+I trẻ em duoi dưới:61,đuổi:-12,đuôi:0,đuối:0,duỗi:0,đười:0,dười:0,đưới:0,duối:0,duôi:0,đươi:0
+N làm gì vậy,với,đó,chứ,cả,thế
+I làm gì dai đại:-44,dài:0,đài:0,đãi:0,đai:0,dại:8,dải:0,đái:0,dãi:0,dái:0
+N tiêu của mình,chúng,bạn,tôi,họ,anh
+I tiêu của toi tôi:25,tới:0,tối:-45,tội:-21,tồi:0,tỏi:0,tơi:0,tòi:0,tời:0,tói:0,tổi:0,tợi:0
+N nên cuốc xẻng,bẫm,bộ,đất,lủi,xe
+I nên cuốc bo bố:0,bộ:59,bỏ:0,bọn:0,bởi:0,bóng:0,bốn:0,bơi:0,bổ:0,bò:0,bờ:0,bối:0,bông:0,bội:0,bom:0,bột:0,bồi:0,bớt:0,bồ:0,bó:0,bỏng:0,bốc:0,bỗng:0,bọc:0
+N phải chờ đợi,lâu,đến,một,chút,đã
+I phải chờ chut chút:65,chụt:0,chứt:0
+N sẵn sàng để,chưa,cho,rồi,giúp,làm
+I sẵn sàng cho chơi:23,chọn:0,chỗ:0,chờ:43,chồng:0,chó:0,chống:0,chóng:0,chối:0,chở:0,chợ:0,chôn:0,chốt:0,chọc:0,chớ:0,chớp:0,chợt:0,choi:0,chốn:0,chọi:0,chốc:0,choáng:0,chóc:0,choàng:0
+N tiền chưa đóng,từng,bao,có,biết,được
+I tiền chưa bi biết:40,bị:9,bình:-24,biệt:0,biến:-12,biển:0,bí:0,biểu:0,biên:0,binh:0,bia:0,biện:0,bì:0,bỉ:0,biếng:0,bịa:0,bịch:0,bích:0,bịt:0,bìa:0,bịp:0,biếu:0,bin:0,bỉnh:0
+N ta đang nói,ở,làm,tìm,cố,đi
+I ta đang phai phải:4,phái:-5,phài:0
+N thích những gì,thứ,người,món,cái,cô
+I thích những co có:-60,cô:33,con:26,còn:0,công:11,cơ:4,cố:-2,cổ:-13,coi:0,cộng:-7,cơn:48,cơm:0,cờ:0,cổng:3,cốc:-7,cỏ:-13,cỡ:0,cởi:0,cóc:0,cột:24,côn:-10,cốt:-1,cớ:-8,cống:29
+N và tây ban,nam,bắc,nguyên,âu,tạng
+I và tây ban bạn:0,bản:0,bằng:-21,bán:15,bàn:0,bánh:0,bắn:0,băng:0,bận:0,bảng:0,bang:-11,bẩn:0,bàng:0,băn:0,banh:0,bành:0,bảnh:0,bần:0,báng:0,bân:0,bâng:0,bấn:0,bẳn:0,bẵng:0
+N bức họa này,sĩ,tiết,cho,may,mi
+I bức họa nay này:58,nãy:0,nảy:0,nấy:0,nầy:0,náy:0,nẩy:0,nạy:0,nậy:0
+N chẳng cần phải,gì,thiết,biết,dẫn,một
+I chẳng cần lam làm:22,lắm:5,lầm:0,lâm:0,lạm:0,lãm:0,lăm:0,lẩm:0,lẫm:0,lảm:0,lấm:0,lậm:0
+N là đặt cược,tên,ra,hàng,chân,câu
+I là đặt muc mục:35,mức:5,mực:0,múc:0
+N hồi tất cả,nhiên,phải,yếu,liệt,là
+I hồi tất ca các:-24,cậu:0,cái:0,cả:95,cần:0,cảm:0,cách:0,cao:0,câu:0,cầu:0,cảnh:0,cấp:0,cá:0,càng:0,cây:0,căn:0,cạnh:0,cáo:0,cập:0,cà:0,cám:0,cẩn:0,cánh:0,cầm:0
+N tính toán sai,và,của,được,cho,kỹ
+I tính toán rang rằng:30,ràng:0,răng:0,rạng:0,ráng:0,rặng:0,rẳng:0,rảng:0,rầng:0
+N đuổi theo hắn,chúng,tôi,bọn,anh,cô
+I đuổi theo toi tôi:18,tới:-23,tối:0,tội:-15,tồi:0,tỏi:0,tơi:0,tòi:0,tời:0,tói:0,tổi:0,tợi:0
+N mức nhà nước,xuất,ở,thờ,máy,ga
+I mức nhà chuc chức:13,chúc:0,chục:0,chực:0
+N các truyện ngắn,thần,tranh,kiều,của,cổ
+I các truyện cua của:20,cửa:0,cưa:0,cựa:0,cứa:0,cùa:0,cũa:0,cúa:0,cừa:0
+N mình có thể,trách,một,cảm,nên,lỗi
+I mình có bao bảo:-15,báo:-14,bào:-21,bão:9,bạo:-13
+N quá nhiều thời,rồi,người,thứ,chuyện,lần
+I quá nhiều thu thứ:45,thực:-16,thường:-26,thương:2,thức:-11,thủ:-8,thư:0,thử:10,thuốc:9,thuật:-14,thú:8,thưa:0,thuộc:-20,thúc:0,thuyết:-16,thừa:0,thuận:-1,thủy:-21,thù:0,thua:0,thuê:0,thượng:0,thưởng:0,thuyền:3
+N trọng và bảo,yêu,có,không,cần,tội
+I trọng và hien hiện:-6,hiến:0,hiển:8,hiền:-10,hiên:0,hiêng:0,hiềng:0
+N xuống và nói,chờ,cài,khóc,bị,tôi
+I xuống và gay gây:13,gãy:-4,gậy:1,gầy:14,gáy:0,gẫy:0,gảy:0,gấy:0,gẩy:0,gày:0
+N phát xít đức,nhật,ý,đã,ở,và
+I phát xít la là:-5,làm:0,lại:14,lần:0,lắm:0,lấy:0,lâu:0,lập:0,lạc:0,lạ:0,lắng:0,lạnh:0,lá:0,lái:0,lai:0,lao:0,lan:0,lầm:0,lành:0,lão:0,làng:0,lặng:0,lãnh:0,lẫn:0
+N xe máy của,chuyên,đấy,mới,điện,đẹp
+I xe máy cua của:36,cửa:0,cưa:67,cựa:0,cứa:0,cùa:0,cũa:0,cúa:0,cừa:0
+N trang là một,người,gì,những,bạn,con
+I trang là chon chọn:-16,chồng:4,chống:-18,chóng:-44,chôn:-18,chốn:18,chồn:3,chông:0,chơn:-3,chong:0,chờn:0,chòng:0,chổng:0,chớn:0,chỏng:0,chộn:0,chõng:0,chón:0
+N người đều biết,có,đang,thích,nghĩ,nói
+I người đều hai hại:-16,hài:59,hải:0,hãi:0,hái:0
+N trước máy quay,bay,tính,móc,khử,giặt
+I trước máy tinh tình:-26,tính:76,tỉnh:0,tĩnh:0,tịnh:0
+N thú với việc,những,chuyện,nó,chuyến,điều
+I thú với am âm:5,ấm:0,ám:0,ẩm:4,ầm:0,ảm:0,ẵm:0,ậm:0,ăm:0,àm:0
+N anh ấy đã,không,đang,sẽ,là,có
+I anh ấy mua mưa:-23,mùa:0,múa:0,mửa:0,mứa:0
+N không phải là,lúc,ai,lo,vì,người
+I không phải den đến:-3,đen:0,đèn:0,đền:22,đên:0,đênh:0,dền:0,dến:0,đễnh:0,đén:0,đển:0,dên:0,deng:0,dềnh:0,đễn:0,dèn:0,đẻn:0,đeng:0,dếnh:0
+N loại lệch lạc,hướng,về,giữa,tâm,chuẩn
+I loại lệch lac lạc:81,lắc:0,lách:0,lác:0,lặc:0,lạch:0
+N bước người ta,khác,đàn,bạn,có,đã
+I bước người cha chắc:-19,chào:-12,cháu:-3,chẳng:-7,chất:-46,chạy:1,chân:-11,chắn:0,chăm:27,chàng:-29,chấp:16,châu:11,chả:-13,chà:-15,chán:-8,chậm:-17,chảy:0,chạm:-16,cháy:0,chặt:-17,chặn:-17,chấm:-19,chai:0,chăng:-17
+N một ngày nào,nọ,kia,tốt,tồi,đẹp
+I một ngày no nói:-56,nó:-11,nơi:0,nổi:0,nội:0,nóng:-11,nỗi:0,nổ:-31,nối:-30,nợ:0,nông:0,nỗ:0,nộp:23,nở:0,nô:0,non:0,nọ:107,nồi:0,nôn:0,nồng:0,nốt:0,nón:0,nộ:0,nom:0
+N hồ điệp đẹp,trắng,vàng,viên,khúc,dữ
+I hồ điệp cao cáo:0,cạo:0,cào:0,cảo:0
+N từ liền với,kề,sai,hỏi,đi,nhau
+I từ liền nhau nhậu:0,nhàu:0,nhảu:0,nhẩu:0
+N sở thích của,nào,cá,riêng,và,sưu
+I sở thích cua của:54,cửa:-4,cưa:0,cựa:0,cứa:0,cùa:0,cũa:0,cúa:0,cừa:0
+N mươi sáu tuổi,mươi,kế,giờ,tuần,người
+I mươi sáu nuoc nước:20,nuốc:0
+N đi ra ngoài,khỏi,cửa,đi,bãi,biển
+I đi ra cho chơi:-1,chọn:-40,chỗ:51,chờ:0,chồng:-19,chó:0,chống:-3,chóng:0,chối:0,chở:0,chợ:62,chôn:0,chốt:0,chọc:0,chớ:-21,chớp:0,chợt:0,choi:0,chốn:12,chọi:0,chốc:0,choáng:0,chóc:0,choàng:0
+N nhân viên của,y,bán,làm,mới,bảo
+I nhân viên co có:-3,cô:-45,con:-43,còn:2,công:25,cơ:3,cố:-5,cổ:-19,coi:-14,cộng:14,cơn:0,cơm:0,cờ:0,cổng:3,cốc:0,cỏ:0,cỡ:0,cởi:0,cóc:0,cột:0,côn:0,cốt:11,cớ:0,cống:0
+N anh ấy đã,không,đang,sẽ,là,có
+I anh ấy luon luôn:34,lượng:0,lương:0,lưỡng:0,lường:0,lượn:0,luồng:0,lươn:0,luồn:0,luống:0,lườn:0,luông:0,lưởng:0,luổng:0
+N trong số đó,những,các,họ,chúng,ít
+I trong số chung chúng:42,chứng:-1,chừng:0,chủng:-3,chưng:0,chửng:0,chững:0,chùng:0,chũng:0,chựng:0
+N hóa đơn điện,bán,tiền,muộn,này,của
+I hóa đơn di đi:-28,điều:0,định:0,điểm:0,điện:75,đình:-21,dịch:0,diễn:0,địa:0,diện:0,điên:0,đích:0,dĩ:0,dị:0,diệt:0,địch:0,điển:0,điềm:0,dính:0,đỉnh:0,dì:0,đĩa:0,điếm:0,điệu:60

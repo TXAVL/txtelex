@@ -1,0 +1,40 @@
+# Gõ tắt → từ vựng vuốt (SwipeVocab.shortcutEntries) — fixture CHUNG iOS (SwipeShortcutTests.swift)
+# và Android (SwipeShortcutTests.kt). [table]: khoá<TAB>nội dung; [entries]: từ<TAB>tần suất, đúng thứ tự;
+# [swipe]: đường vuốt (chữ không dấu)<TAB>Shift (lower|capitalized|upper)<TAB>chữ chèn.
+[table]
+vn	Việt Nam
+sdt	0912 345 678
+ko	không
+cty	Công ty SenPrints
+sp	SenPrints
+pk	Printik
+->	→
+k2	→→
+VN	Việt Nam
+x	xin
+đc	được
+addr	12 Đường Lê Lợi, Quận 1, TP.HCM
+gt	VietTelex,
+ok	okay
+[entries]
+addr	120
+cty	120
+gt	120
+ko	120
+ok	120
+pk	120
+sdt	120
+sp	120
+vn	120
+đc	120
+Printik	100
+SenPrints	100
+VietTelex	100
+[swipe]
+vn	lower	Việt Nam
+vn	capitalized	Việt Nam
+vn	upper	Việt Nam
+sdt	lower	0912 345 678
+senprints	lower	SenPrints
+senprints	upper	SENPRINTS
+viettelex	lower	VietTelex

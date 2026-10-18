@@ -1,0 +1,108 @@
+# number-chips v1 — bộ ca CHUNG cho iOS NumberChipsTests.swift và android NumberChipsTests.kt.
+# Hai bản NumberChips (Swift/Kotlin) phải cho đúng các kết quả này.
+#   spell|<số dạng chuẩn: -?chữsố(,chữsố)?>|<chữ, kiểu "linh">
+#   spellLe|<số>|<chữ, kiểu "lẻ">
+#   chip|<văn bản trước con trỏ>|<display>|<replace>|<insert>     (hoặc chip|<ctx>|- = không có chip)
+# ␣ = một dấu cách (để thấy được dấu cách cuối dòng).
+spell|0|không
+spell|5|năm
+spell|10|mười
+spell|11|mười một
+spell|14|mười bốn
+spell|15|mười lăm
+spell|20|hai mươi
+spell|21|hai mươi mốt
+spell|24|hai mươi bốn
+spell|25|hai mươi lăm
+spell|55|năm mươi lăm
+spell|100|một trăm
+spell|101|một trăm linh một
+spell|105|một trăm linh năm
+spell|110|một trăm mười
+spell|111|một trăm mười một
+spell|115|một trăm mười lăm
+spell|121|một trăm hai mươi mốt
+spell|999|chín trăm chín mươi chín
+spell|1000|một nghìn
+spell|1001|một nghìn không trăm linh một
+spell|1005|một nghìn không trăm linh năm
+spell|1010|một nghìn không trăm mười
+spell|1050|một nghìn không trăm năm mươi
+spell|1100|một nghìn một trăm
+spell|1234|một nghìn hai trăm ba mươi bốn
+spell|10000|mười nghìn
+spell|15000|mười lăm nghìn
+spell|21000|hai mươi mốt nghìn
+spell|100000|một trăm nghìn
+spell|105000|một trăm linh năm nghìn
+spell|1000000|một triệu
+spell|1000001|một triệu không trăm linh một
+spell|1005000|một triệu không trăm linh năm nghìn
+spell|1250000|một triệu hai trăm năm mươi nghìn
+spell|2000500|hai triệu năm trăm
+spell|123456789|một trăm hai mươi ba triệu bốn trăm năm mươi sáu nghìn bảy trăm tám mươi chín
+spell|1000000000|một tỷ
+spell|1000000005|một tỷ không trăm linh năm
+spell|1250000000|một tỷ hai trăm năm mươi triệu
+spell|2500000000|hai tỷ năm trăm triệu
+spell|5001000000|năm tỷ không trăm linh một triệu
+spell|1000000000000|một nghìn tỷ
+spell|1500000000000|một nghìn năm trăm tỷ
+spell|1000000000000000000|một tỷ tỷ
+spell|1000000000000000005|một tỷ tỷ không trăm linh năm
+spell|007|bảy
+spell|3,5|ba phẩy năm
+spell|3,14|ba phẩy mười bốn
+spell|3,05|ba phẩy không năm
+spell|3,141|ba phẩy một bốn một
+spell|3,50|ba phẩy năm
+spell|0,5|không phẩy năm
+spell|-5|âm năm
+spell|-0|không
+spell|-1250000|âm một triệu hai trăm năm mươi nghìn
+spell|1250000,75|một triệu hai trăm năm mươi nghìn phẩy bảy mươi lăm
+spellLe|105|một trăm lẻ năm
+spellLe|1000001|một triệu không trăm lẻ một
+spellLe|15|mười lăm
+chip|1250000|Một triệu hai trăm năm mươi nghìn|1250000|Một triệu hai trăm năm mươi nghìn
+chip|giá 1250000|một triệu hai trăm năm mươi nghìn|1250000|một triệu hai trăm năm mươi nghìn
+chip|giá 1250000␣|một triệu hai trăm năm mươi nghìn|1250000␣|một triệu hai trăm năm mươi nghìn␣
+chip|giá 1250000␣␣|-
+chip|Đầu câu. 5|Năm|5|Năm
+chip|Xong! 21|Hai mươi mốt|21|Hai mươi mốt
+chip|0|Không|0|Không
+chip|giá 1.250|một nghìn hai trăm năm mươi|1.250|một nghìn hai trăm năm mươi
+chip|giá 1.5|một phẩy năm|1.5|một phẩy năm
+chip|được 3,5|ba phẩy năm|3,5|ba phẩy năm
+chip|nhiệt độ -5|âm năm|-5|âm năm
+chip|số 1.000.000.000.000|một nghìn tỷ|1.000.000.000.000|một nghìn tỷ
+chip|giá 50k|50.000 ₫|50k|50.000 ₫
+chip|giá 50K|50.000 ₫|50K|50.000 ₫
+chip|giá -50k|-50.000 ₫|-50k|-50.000 ₫
+chip|giá 1tr2|1.200.000 ₫|1tr2|1.200.000 ₫
+chip|giá 1.2tr|1.200.000 ₫|1.2tr|1.200.000 ₫
+chip|giá 1,2tr|1.200.000 ₫|1,2tr|1.200.000 ₫
+chip|giá 1tr250|1.250.000 ₫|1tr250|1.250.000 ₫
+chip|giá 2k5|2.500 ₫|2k5|2.500 ₫
+chip|lương 15 triệu|15.000.000 ₫|15 triệu|15.000.000 ₫
+chip|nợ 2 tỷ|2.000.000.000 ₫|2 tỷ|2.000.000.000 ₫
+chip|nợ 2tỷ|2.000.000.000 ₫|2tỷ|2.000.000.000 ₫
+chip|nợ 1ty5|1.500.000.000 ₫|1ty5|1.500.000.000 ₫
+chip|1.2tr␣|1.200.000 ₫|1.2tr␣|1.200.000 ₫␣
+chip|mua 2 tỷ␣|2.000.000.000 ₫|2 tỷ␣|2.000.000.000 ₫␣
+chip|giá 1250000đ|1.250.000đ|1250000đ|1.250.000đ
+chip|giá 1250000₫|1.250.000 ₫|1250000₫|1.250.000 ₫
+chip|giá 1.250.000đ|một triệu hai trăm năm mươi nghìn đồng|1.250.000đ|một triệu hai trăm năm mươi nghìn đồng
+chip|giá 1.200.000 ₫|một triệu hai trăm nghìn đồng|1.200.000 ₫|một triệu hai trăm nghìn đồng
+chip|giá 500đ|năm trăm đồng|500đ|năm trăm đồng
+chip|giá 50000 đồng|năm mươi nghìn đồng|50000 đồng|năm mươi nghìn đồng
+chip|gọi 0912345678|-
+chip|mã 1234567890123|-
+chip|abc123|-
+chip|hello|-
+chip|tỷ|-
+chip|12 5k|5.000 ₫|5k|5.000 ₫
+chip|lúc 10:30|-
+chip|giá 1.2345678tr|-
+# "…=" thuộc MathResults (Fixtures/math-results.txt) — chip số không nhận.
+chip|12*3=|-

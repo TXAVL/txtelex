@@ -1,0 +1,55 @@
+# chat-cases v1 — Thêm dấu trên câu kiểu chat/nhắn tin: đầu vào không dấu ⇥ đáp án. 6 dòng đầu là
+# câu Phil thử 18/10/2026 (phải đúng nguyên văn — LMDataEvalTests.chatCases); phần còn lại tự soạn
+# cho dự án (MIT), dùng đo khi đổi dữ liệu vnlm.bin (docs/DATA-SOURCES.md mục "Nguồn hội thoại").
+Minh dang go tieng Viet khong dau.	Mình đang gõ tiếng Việt không dấu.
+Thu go tieng Viet khong dau xem sao.	Thử gõ tiếng Việt không dấu xem sao.
+go tieng Viet co dau	gõ tiếng Việt có dấu
+co dau chu re	cô dâu chú rể
+ngay mai minh se den	ngày mai mình sẽ đến
+lam gi co dau	làm gì có đâu
+toi nay di an lau khong	tối nay đi ăn lẩu không
+ban oi cho minh hoi chut	bạn ơi cho mình hỏi chút
+minh dang ban, ti nua goi lai nhe	mình đang bận, tí nữa gọi lại nhé
+cam on ban nhieu nha	cảm ơn bạn nhiều nha
+em vua tan lam xong	em vừa tan làm xong
+anh den chua?	anh đến chưa?
+sap toi roi, doi chut nhe	sắp tới rồi, đợi chút nhé
+hom nay troi nong qua	hôm nay trời nóng quá
+de minh kiem tra lai da	để mình kiểm tra lại đã
+gui cho minh dia chi voi	gửi cho mình địa chỉ với
+thoi khong sao dau	thôi không sao đâu
+chuc mung sinh nhat ban	chúc mừng sinh nhật bạn
+khi nao ranh thi nhan tin cho minh	khi nào rảnh thì nhắn tin cho mình
+minh ve den nha roi	mình về đến nhà rồi
+may gio hop vay?	mấy giờ họp vậy?
+cuoi tuan nay co ke hoach gi chua	cuối tuần này có kế hoạch gì chưa
+dien thoai minh het pin roi	điện thoại mình hết pin rồi
+de em hoi lai sep da	để em hỏi lại sếp đã
+anh nho mang theo o nhe, troi sap mua	anh nhớ mang theo ô nhé, trời sắp mưa
+xin loi, minh den tre mot chut	xin lỗi, mình đến trễ một chút
+hen gap lai ban sau nhe	hẹn gặp lại bạn sau nhé
+con dang lam bai tap	con đang làm bài tập
+me oi con doi bung qua	mẹ ơi con đói bụng quá
+tuan sau minh nghi phep	tuần sau mình nghỉ phép
+cai nay bao nhieu tien vay	cái này bao nhiêu tiền vậy
+de toi suy nghi them	để tôi suy nghĩ thêm
+nho uong thuoc dung gio nhe	nhớ uống thuốc đúng giờ nhé
+minh thich bai hat nay lam	mình thích bài hát này lắm
+dang tac duong, chac den muon	đang tắc đường, chắc đến muộn
+ban an com chua	bạn ăn cơm chưa
+gio moi doc tin nhan	giờ mới đọc tin nhắn
+nhan duoc tien chua em	nhận được tiền chưa em
+chuyen khoan cho minh nhe	chuyển khoản cho mình nhé
+vui qua di	vui quá đi
+buon ngu qua, di ngu day	buồn ngủ quá, đi ngủ đây
+chuc ca nha nam moi vui ve	chúc cả nhà năm mới vui vẻ
+sao gio nay moi tra loi	sao giờ này mới trả lời
+minh dang o ngoai duong	mình đang ở ngoài đường
+khong biet nua, de mai tinh	không biết nữa, để mai tính
+toi qua ngu som nen khong thay tin nhan	tối qua ngủ sớm nên không thấy tin nhắn
+mai may gio xuat phat	mai mấy giờ xuất phát
+ok, minh hieu roi	ok, mình hiểu rồi
+nho giu gin suc khoe nhe	nhớ giữ gìn sức khỏe nhé
+cho em xin so dien thoai cua chi	cho em xin số điện thoại của chị
+dao nay ban the nao	dạo này bạn thế nào
+lau qua khong gap	lâu quá không gặp

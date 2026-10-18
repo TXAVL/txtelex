@@ -1,0 +1,177 @@
+# swipe-vocab v1 — từ vựng vuốt theo công tắc lọc từ nhạy cảm (E bung dạng, P cả câu đường sạch). Sinh bởi android SwipeVocabTests (VT_WRITE_FIXTURE=1); iOS SwipeVocabTests khớp từng dòng. Cột cách TAB.
+E	1	dit	đít:1.0784,dít:0.0686
+E	1	lon	lớn:1.8235,lộn:1.2843,lợn:1.2549,lon:0.9608,lọn:0.6569,lởn:0.5784,lôn:0.5588,lốn:0.5294,lơn:0.5196,lỏn:0.3627,lờn:0.3039,lòn:0.2941,lổn:0.1863
+E	1	cac	các:2.1373,cạc:0.8039,cắc:0.6078,cấc:0.1765
+E	1	buoi	buổi:1.6667,bưởi:0.9510,buối:0.5196,buỗi:0.2549,buôi:0.2451,bươi:0.1667,buội:0.0098
+E	1	du	dù:1.7843,đủ:1.7647,dự:1.6961,du:1.6078,dữ:1.5196,dụ:1.5098,dư:1.3137,đu:1.0000,đù:0.7451,dũ:0.6275,đú:0.5000,dú:0.4902,đừ:0.4510,dử:0.3627,đứ:0.3333,dủ:0.3137,dừ:0.2941,đư:0.2647,dứ:0.1961,đự:0.0098
+E	1	di	đi:2.2451,di:1.5980,dĩ:1.4412,dị:1.4216,dì:1.3627,dí:0.8824,đì:0.4902,đị:0.3235
+E	1	cut	cút:1.2157,cụt:1.0784
+E	1	dam	đảm:1.5882,đám:1.5588,dám:1.5196,đam:1.3235,đâm:1.3235,dặm:1.2647,đấm:1.2549,đàm:1.2451,đậm:1.1961,đầm:1.1765,đắm:1.1569,đạm:1.0490,đẫm:0.9804,dẫm:0.9706,dầm:0.9020,dăm:0.7941,dấm:0.6863,dậm:0.6765,dam:0.6667,đăm:0.6373,đằm:0.6176,dằm:0.4020,dạm:0.3137,đẩm:0.1275,dảm:0.0686,dắm:0.0098
+E	1	diem	điểm:1.7941,điềm:1.3922,diêm:1.0490,diễm:0.8725,diệm:0.7157,diếm:0.7059,diềm:0.3039,điêm:0.2647,diểm:0.2549,điệm:0.1176
+E	1	vu	vụ:1.8431,vũ:1.6275,vú:1.1765,vu:1.1078,vù:0.6569,vừ:0.1667,vự:0.0882,vư:0.0098,vủ:0.0098
+E	1	dai	đại:1.8333,dài:1.6667,đài:1.4510,đãi:1.2745,đai:1.2157,dại:1.2059,dai:1.0784,dải:1.0686,đái:1.0588,dãi:0.9314,dái:0.7647
+E	1	cu	cứ:1.8824,cũ:1.5784,cụ:1.5784,cư:1.4902,cử:1.4902,cú:1.3529,củ:1.2843,cu:1.2353,cự:1.2157,cù:1.0000,cừ:0.9118,cữ:0.7549
+E	1	so	số:1.9412,sợ:1.7353,sở:1.7059,so:1.5588,sơ:1.5490,sổ:1.4706,sờ:1.1667,sô:1.1373,sọ:0.9902,sò:0.8627,sỡ:0.8529,sộ:0.7451,sớ:0.6667,sỏ:0.6373,sỗ:0.3627,sồ:0.3333,só:0.3039
+E	1	mo	mơ:1.7745,mở:1.7157,mô:1.4510,mộ:1.4118,mò:1.3137,mồ:1.2647,mờ:1.2549,mỡ:1.2549,mổ:1.2451,mỏ:1.2255,mớ:1.0882,mo:0.9706,mợ:0.9608,mỗ:0.7843,mó:0.7745,mọ:0.4608,mõ:0.4412,mố:0.1176
+E	1	bt	bt:1.0784
+E	1	cmt	cmt:0.8824
+E	1	dc	đc:1.3725,dc:1.1765
+E	1	haha	haha:1.1765
+E	1	hehe	hehe:0.9804
+E	1	hihi	hihi:1.0784
+E	1	huhu	huhu:0.8824
+E	1	ib	ib:0.8824
+E	1	kaka	kaka:0.5882
+E	1	kb	kb:0.6863
+E	1	ko	ko:1.4706
+E	1	mn	mn:1.0784
+E	1	ms	ms:1.0784
+E	1	nac	nắc:1.3725,nặc:0.9412,nấc:0.8431,nạc:0.6863,nác:0.5980
+E	1	nma	nma:0.9804
+E	1	ntn	ntn:1.0784
+E	1	nx	nx:0.9804
+E	1	ok	ok:1.4706
+E	1	oke	oke:0.9804
+E	1	okie	okie:0.7843
+E	1	stt	stt:0.6863
+E	1	uk	uk:0.8824
+E	1	vd	vd:0.7843
+E	1	vs	vs:1.0784
+P	1	F	địt con mẹ	Đít con mẹ
+P	1	F	vãi lồn	Vài lon
+P	1	F	vãi cả lồn	Vài cá lớn
+P	1	F	dkm	Dùm
+P	1	F	đcm	Đêm
+P	1	F	ngu vl	Như vợ
+P	1	F	buscu	Nhau
+P	1	F	ko	Ko
+P	1	F	bóp dái	Bóp dái
+P	1	F	sờ cu	Sờ cu
+P	1	F	mò cu	Mò cu
+P	1	F	bóp vú	Bóp vú
+P	1	F	móc lồn	Mốc lớn
+P	1	F	lồn	Lớn
+P	1	F	địt	Đít
+P	1	F	buồi	Buổi
+P	1	F	đụ	Dù
+P	1	F	đkm	Dùm
+P	1	F	đcm	Đêm
+P	1	F	cặc	Các
+P	1	F	vú	Vụ
+P	1	F	vcl	Có
+P	1	F	vkl	Vô
+P	1	F	dâm	Đảm
+P	1	F	ngu	Ngủ
+P	1	F	nắc	Nắc
+P	1	F	người lớn	Người lớn
+P	1	F	lớn lên	Lớn lên
+P	1	F	rất lớn	Rất lớn
+P	1	F	lớn nhất	Lớn nhất
+P	1	F	các bạn	Các bạn
+P	1	F	buổi sáng	Buổi sáng
+P	1	F	đi đâu	Đi đâu
+P	1	F	đủ rồi	Đủ rồi
+P	1	F	ko biết	Ko biết
+P	1	F	đc không	Đc không
+P	1	F	ok	Ok
+P	1	F	nma	Mà
+P	1	F	ntn	Ntn
+P	1	F	bt	Bt
+P	1	F	ms	Ms
+P	1	F	haha	Haha
+E	0	dit	địt:1.4706,đít:1.0784,dít:0.0686
+E	0	lon	lớn:1.8235,lồn:1.4706,lộn:1.2843,lợn:1.2549,lon:0.9608,lọn:0.6569,lởn:0.5784,lôn:0.5588,lốn:0.5294,lơn:0.5196,lỏn:0.3627,lờn:0.3039,lòn:0.2941,lổn:0.1863
+E	0	cac	các:2.1373,cặc:1.4706,cạc:0.8039,cắc:0.6078,cấc:0.1765
+E	0	buoi	buổi:1.6667,buồi:1.4706,bưởi:0.9510,buối:0.5196,buỗi:0.2549,buôi:0.2451,bươi:0.1667,buội:0.0098
+E	0	du	dù:1.7843,đủ:1.7647,dự:1.6961,du:1.6078,dữ:1.5196,dụ:1.5098,đụ:1.4706,dư:1.3137,đu:1.0000,đù:0.7451,dũ:0.6275,đú:0.5000,dú:0.4902,đừ:0.4510,dử:0.3627,đứ:0.3333,dủ:0.3137,dừ:0.2941,đư:0.2647,dứ:0.1961,đự:0.0098
+E	0	di	đi:2.2451,di:1.5980,dĩ:1.4412,dị:1.4216,dì:1.3627,đĩ:1.0686,dí:0.8824,đì:0.4902,đị:0.3235
+E	0	cut	cứt:1.2745,cút:1.2157,cụt:1.0784
+E	0	dam	đảm:1.5882,đám:1.5588,dám:1.5196,đam:1.3235,đâm:1.3235,dâm:1.2647,dặm:1.2647,đấm:1.2549,đàm:1.2451,đậm:1.1961,đầm:1.1765,đắm:1.1569,đạm:1.0490,đẫm:0.9804,dẫm:0.9706,dầm:0.9020,dăm:0.7941,dấm:0.6863,dậm:0.6765,dam:0.6667,đăm:0.6373,đằm:0.6176,dằm:0.4020,dạm:0.3137,đẩm:0.1275,dảm:0.0686,dắm:0.0098
+E	0	diem	điểm:1.7941,điềm:1.3922,điếm:1.3333,diêm:1.0490,diễm:0.8725,diệm:0.7157,diếm:0.7059,diềm:0.3039,điêm:0.2647,diểm:0.2549,điệm:0.1176
+E	0	vu	vụ:1.8431,vũ:1.6275,vú:1.1765,vu:1.1078,vù:0.6569,vừ:0.1667,vự:0.0882,vư:0.0098,vủ:0.0098
+E	0	dai	đại:1.8333,dài:1.6667,đài:1.4510,đãi:1.2745,đai:1.2157,dại:1.2059,dai:1.0784,dải:1.0686,đái:1.0588,dãi:0.9314,dái:0.7647
+E	0	cu	cứ:1.8824,cũ:1.5784,cụ:1.5784,cư:1.4902,cử:1.4902,cú:1.3529,củ:1.2843,cu:1.2353,cự:1.2157,cù:1.0000,cừ:0.9118,cữ:0.7549
+E	0	so	số:1.9412,sợ:1.7353,sở:1.7059,so:1.5588,sơ:1.5490,sổ:1.4706,sờ:1.1667,sô:1.1373,sọ:0.9902,sò:0.8627,sỡ:0.8529,sộ:0.7451,sớ:0.6667,sỏ:0.6373,sỗ:0.3627,sồ:0.3333,só:0.3039
+E	0	mo	mơ:1.7745,mở:1.7157,mô:1.4510,mộ:1.4118,mò:1.3137,mồ:1.2647,mờ:1.2549,mỡ:1.2549,mổ:1.2451,mỏ:1.2255,mớ:1.0882,mo:0.9706,mợ:0.9608,mỗ:0.7843,mó:0.7745,mọ:0.4608,mõ:0.4412,mố:0.1176
+E	0	bitch	bitch:1.4706
+E	0	bt	bt:1.0784
+E	0	buscu	buscu:1.4706
+E	0	cl	cl:1.4706
+E	0	clgt	clgt:1.4706
+E	0	cmnr	cmnr:1.4706
+E	0	cmt	cmt:0.8824
+E	0	dc	đc:1.3725,dc:1.1765
+E	0	dcm	đcm:1.4706,dcm:1.4706
+E	0	dkm	đkm:1.4706,dkm:1.4706
+E	0	dm	đm:1.4706,dm:1.4706
+E	0	fuck	fuck:1.4706
+E	0	haha	haha:1.1765
+E	0	hehe	hehe:0.9804
+E	0	hihi	hihi:1.0784
+E	0	huhu	huhu:0.8824
+E	0	ib	ib:0.8824
+E	0	kaka	kaka:0.5882
+E	0	kb	kb:0.6863
+E	0	ko	ko:1.4706
+E	0	mn	mn:1.0784
+E	0	ms	ms:1.0784
+E	0	nac	nắc:1.3725,nặc:0.9412,nấc:0.8431,nạc:0.6863,nác:0.5980
+E	0	nma	nma:0.9804
+E	0	ntn	ntn:1.0784
+E	0	nx	nx:0.9804
+E	0	ok	ok:1.4706
+E	0	oke	oke:0.9804
+E	0	okie	okie:0.7843
+E	0	shit	shit:1.4706
+E	0	sml	sml:1.4706
+E	0	stt	stt:0.6863
+E	0	tml	tml:1.4706
+E	0	uk	uk:0.8824
+E	0	vcl	vcl:1.4706
+E	0	vd	vd:0.7843
+E	0	vkl	vkl:1.4706
+E	0	vl	vl:1.4706
+E	0	vs	vs:1.0784
+E	0	wtf	wtf:1.4706
+P	0	F	địt con mẹ	Địt con mẹ
+P	0	F	vãi lồn	Vãi lồn
+P	0	F	vãi cả lồn	Vài cá lớn
+P	0	F	dkm	Đkm
+P	0	F	đcm	Đcm
+P	0	F	ngu vl	Ngu vl
+P	0	F	buscu	Buscu
+P	0	F	ko	Ko
+P	0	F	bóp dái	Bóp dái
+P	0	F	sờ cu	Sờ cu
+P	0	F	mò cu	Mò cu
+P	0	F	bóp vú	Bóp vú
+P	0	F	móc lồn	Mốc lớn
+P	0	F	lồn	Lớn
+P	0	F	địt	Địt
+P	0	F	buồi	Buổi
+P	0	F	đụ	Dù
+P	0	F	đkm	Đkm
+P	0	F	đcm	Đcm
+P	0	F	cặc	Các
+P	0	F	vú	Vụ
+P	0	F	vcl	Vcl
+P	0	F	vkl	Vkl
+P	0	F	dâm	Đảm
+P	0	F	ngu	Ngủ
+P	0	F	nắc	Nắc
+P	0	F	người lớn	Người lớn
+P	0	F	lớn lên	Lớn lên
+P	0	F	rất lớn	Rất lớn
+P	0	F	lớn nhất	Lớn nhất
+P	0	F	các bạn	Các bạn
+P	0	F	buổi sáng	Buổi sáng
+P	0	F	đi đâu	Đi đâu
+P	0	F	đủ rồi	Đủ rồi
+P	0	F	ko biết	Ko biết
+P	0	F	đc không	Đc không
+P	0	F	ok	Ok
+P	0	F	nma	Mà
+P	0	F	ntn	Ntn
+P	0	F	bt	Bt
+P	0	F	ms	Ms
+P	0	F	haha	Haha

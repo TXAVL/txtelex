@@ -1,0 +1,20 @@
+{
+  "format": "viettelex-backup",
+  "version": 2,
+  "minReaderVersion": 1,
+  "platform": "somefutureos",
+  "newTopLevelThing": {"a": [1, 2, 3], "b": null},
+  "settings": {
+    "simpleTelex": false,
+    "someFutureSetting": true,
+    "rowHeightAdjust": 99,
+    "quickTelex": "yes",
+    "teencode": 1
+  },
+  "shortcuts": {"hn": "Hà Nội", "": "rỗng", "x": 5},
+  "templates": [
+    {"label": "🙂", "text": "Cảm ơn", "color": "blue"},
+    {"label": "dup", "text": "Cảm ơn"},
+    {"label": "no text"}
+  ]
+}

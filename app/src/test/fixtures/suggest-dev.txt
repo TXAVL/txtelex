@@ -1,0 +1,1924 @@
+# suggest-dev v1 — câu Tatoeba (CC BY 2.0 FR, https://tatoeba.org) GIỮ LẠI khỏi dữ liệu dựng vnlm.bin, TẬP DEV (blake2b % 20 == 1 — chỉnh tham số thanh gợi ý; tập kiểm thử = bigram-heldout.txt). Sinh bởi Scripts/gen-syllable-lm.py chains. Mỗi dòng: chuỗi âm tiết liên tiếp trong vnlexicon.
+đó là một con thỏ hung ác
+từ xưa đến giờ đả luôn luôn như vậy rồi
+bạn muốn nói với tôi về sự tự do hả
+tôi không có gì tốt hơn để làm hết
+bạn nghĩ tôi đang làm gì
+sự trái ngược cũng luôn luôn có lý
+cái xe đã đụng vô tường
+chúng mình đi qua
+năm vừa rồi
+cô ấy không muốn nói về chuyện đấy
+là người hơi tự kỉ
+anh ấy thích tách biệt mình với các học sinh khác trong lớp
+chuyện của nó tào lao đến nỗi chẳng ai tin được
+bạn đã suy nghĩ về vấn đề này hết cả buổi sáng rồi
+họ đã có một cuộc sống hạnh phúc
+thật ra thì tôi thích ở nhà hơn là đi ra ngoài
+anh ấy ngủ say như một đứa bé
+em thích con gấu bông màu đen kia kìa
+con vịt kêu quác quác
+cậu bé ném đá con ếch
+tôi đã không đi học ngày hôm qua
+con tàu sẽ rời khỏi
+vào ngày mai
+bạn có cần gí nữa không
+cá không thể sống mà không có nước
+nhiều chuyện lạ đã xảy ra
+trận động đất đã mang đến thảm họa
+không thể tin chắc về sự giúp đỡ của anh ta
+cả lớp đã chờ giáo viên mới
+rốt cuộc
+họ đã bắt đầu hiểu sự thật
+tôi đã học tiếng pháp thay vì tiếng đức
+nếu không có sự giúp đỡ của chị ấy
+tôi sẽ không hoàn thành được nhiệm vụ của tôi
+anh ta bị thương trong tai nạn giao thông
+kế hoạch của tôi là học ở úc
+khách sạn này được một kiến trúc sư nhật bản thiết kế
+họ có lý trí và lương tâm
+và phải cư xử với nhau trên tinh thần anh em
+thiếu một con dao
+ông cho tôi xem ông đã mua gì
+tôi sẽ xuống ở chặng đỗ tới
+tôi không có nhiều tiền
+bạn có cho rằng anh ta giống bố anh ta không
+tôi sẽ trở về trước sáu giờ
+ông hãy để mũ và áo khoác ngoài của ông ở đại sảnh
+hành động có giá trị hơn từ ngữ
+tôi càng nhận tôi càng muốn
+chúng ta hãy nhanh lên
+tôi ngu thật
+anh phải lòng em
+anh ấy là một người bạn rất gần gũi
+tôi tình cờ gặp chị ấy trên tầu hỏa
+bạn phông thể biết chị ấy đau khổ đến thế nào
+anh ấy nhận tội lỗi của mình
+bố thường nói
+thời gian là tiền
+anh sinh viên này là người mỹ
+anh ta phủ nhận không biết gì cả về những kế hoạch của họ
+mặt đất bị tuyết bao phủ
+tôi đánh mất chiếc ô của tôi
+tôi không thích ăn xu si
+hắn bắt tôi phải chờ một tiếng đồng hồ
+họ bán cá và thịt
+anh ấy ở gần đây
+điều đó khó tin
+sống ở
+ba năm trước đây
+xin chúc một ngày tốt lành
+giá bao nhiêu một ngày
+đó là một thí dụ hoàn hảo về số phận ác nghiệt
+tia cực tím có hại đối với sức khỏe chúng ta
+giữa anh và tôi
+ý kiến của tom không hấp dẫn tôi lắm
+tôi ân hận đã đến đó
+mọi người đều hài lòng
+có một máy thu thanh ở trên bàn
+anh ấy chụp ảnh gia đình
+nhà tôi ở gần trường
+các cậu ơi
+chúng ta tới đó nhé
+chị ấy hát bằng một giọng tuyệt vời
+anh trông thấy người đàn bà đó ở đâu
+tôi bị bụi vào mắt
+mẹ hy vọng rằng phòng học của con có điều hòa không khí
+tôi yêu anh ấy
+vui chơi dễ hơn lao động
+con người là động vật duy nhất biết cười
+dịch là một nghệ thuật
+vì vậy các bản dịch bằng máy vi tính không đáng tin cậy nếu không được con người hiệu đính
+tôi có kính râm
+phương thuốc duy nhất chống lại tính kiêu căng là cái cười
+và lỗi duy nhất đáng cười
+đó là tính kiêu căng
+tôi lấy làm tiếc
+rốt cuộc anh ấy tới khách sạn
+sáng nay tôi ăn ngon miệng
+bạn là một sinh viên tốt
+tom không biết tên của họ
+không đời nào tôi sẽ làm điều đó
+bố tôi làm việc tại một nhà máy
+anh hãy mở tủ bên trái
+các chai ở đó
+tắc kè hoa có thể đổi màu theo môi trường xung quanh
+đừng mất hy vọng
+anh ấy không hoàn toàn bình thường
+điều này hơi kỳ lạ
+có phải không
+sau khi nghỉ hưu
+tôi muốn có một cuộc sống yên tĩnh tại nông thôn
+tuy nhiên môi trường nhân
+tương tác quan trọng với thiên nhiên
+mọi người đều có quyền sống
+tự do và an toàn cá nhân
+hôm đó thời tiết nóng
+có một chuyện cổ tích về con mèo ba tư
+những người sống ở đây là bạn của chúng tôi
+tôi có một người anh em họ là luật sư
+tôi ngủ quá lâu
+anh ấy đánh quả bóng bằng chiếc vợt của mình
+ánh sáng không kém cần thiết đối với cây cối hơn nước
+cái này trị giá một triệu
+tại sao sáng nay anh đến muộn
+tôi đã thuyết phục bố tôi ngừng hút thuốc
+ở đâu
+chúng ta hãy khẩn trương để kịp thời tới cuộc họp
+quả cấm quả ngọt
+những cây này sẽ che ngôi nhà mới của chúng tôi khỏi cái nhìn của thiên hạ
+tom cho rất nhiều đường vào trà của mình
+điều đó không thể
+trời cho chúng ta cuộc sống
+cũng cho chúng ta tự do
+trên bàn là của tôi
+trước tiên phải nghĩ
+sau hãy nói
+tôi gặp tom trên đường tới trường
+họ đã lấy nhau
+khi họ còn rất trẻ
+họ nhìn nhận anh ta như người lãnh đạo
+hôm nay nhiều và nhiều hơn những người đi tới các trường đại học
+chỉ đối tượng
+tôi đề nghị hoãn cuộc họp
+hôm qua là kỷ niệm ngày sinh của tôi
+tầu này mang cờ mỹ
+bây giờ con trai tôi có thể đếm đến một trăm
+tôi đã tới vườn thú
+hồ được bao quanh bởi cây
+cỗ máy mới sẽ chiếm nhiều chỗ
+tôi thích thử chứng minh điều đó
+chiếc bàn này không vững
+anh ấy đã tham gia buổi họp
+nói về y học tôi khuyên bạn giảm cân
+tôi ra ngoài mặc dù trời mưa
+lập phương của
+thành phố phủ đầy tuyết
+con mèo ở trong cái giếng
+hãy dùng sơn màu da cam
+cô ta luôn phàn nàn về công việc của mình
+tôi không sao nhớ nổi
+trông như thế nào
+nhưng tôi tin chắc là tôi sẽ nhận ra anh ấy ngay
+chúng ta hết sữa rồi
+hãy cút đi
+hãy cẩn thận khi bạn mua sắm
+bởi vì một số người bán hàng sẽ cố lợi dụng bạn và đưa ra giá đắt
+đúng ra là bạn nên viết nó ra
+ông là xấu hổ vì ở không
+không làm gì cả
+bây giờ khi tôi biết anh
+sự việc là hoàn toàn khác
+chúng ta càng học
+chúng ta càng tiến bộ
+đổ đầy nước vào chai
+tôi sẽ cần chỉ vài phút
+nói rằng
+anh ấy muốn cư ngụ ở
+vậy thì cũng đỡ
+ngành y tế có những tiến bộ vượt bậc
+ở nơi lạ nước lạ cái
+ăn nói phải giữ ý giữ tứ nghe con
+thật là một ý nghĩ kì quặc
+tôi muốn thực hiện ý nguyện cuối cùng của cha trước khi cha mất
+cậu bé rất có ý thức về vệ sinh bản thân
+anh ta đúng là có mệnh yểu
+vui lòng không viết vào sách của thư viện
+đã đưa một vệ tinh vào quỹ đạo
+cô ta từ chối mọi lời đề nghị
+tôi không thể ăn hay uống những thức ăn rất nóng
+chúng nó chẳng bao giờ nghe lời bố mẹ cả
+tôi sẽ đợi ở đây đến khi nào cô ấy tới
+hãy mang nước bằng xô
+nếu không có mặt trời thì tất cả động vật đều sẽ chết
+đó mắc đến nỗi tôi không thể mua nó
+tôi rất vui vì có thể giúp được bạn
+nó chưa bao giờ ngừng viết thư cho mẹ
+bạn phải luôn nhớ rằng cô ta nhỏ tuổi hơn bạn nhiều
+tôi dạy tiếng hoa
+bạn phải đánh răng mỗi ngày ít nhất
+tom đang theo đuổi một công việc thành đạt ở
+cô ta từ
+nhưng hiện tại đang sống ở
+rất vui vì bạn đã đến thăm chúng tôi
+bức tượng được chạm khắc từ gỗ cây anh đào
+tôi muốn đi áo để học âm nhạc
+chúng tôi đã rất mệt mõi
+chẳng nói được ngành khoa học sẽ phát triển đến mức nào khi hết thế kỉ
+không đủ tiền để mua xe một chiếc xe đạp mới
+khi bắt tay ai không được nắm chặt quá
+nước biển thì dễ làm vật nổi hơn so với nước ngọt
+anh ta né tránh mọi nhiệm vụ vất vả
+tôi là người chơi ten
+sáng nhau trời nhiều mây
+vẽ một đường từ a đến
+xin dừng giới hạn ý kiến của bạn ở
+tôi không biết nói tiếng việt
+bạn dạy tôi vài câu tiếng việt được không
+trời ơi
+tôi muốn cho bạn một lời khuyên
+tôi dành tặng cuốn sách này cho con gái tôi
+chúng tôi vội vàng vì sợ trễ giờ đi học
+tôi không thể nhận món quà này
+họ đồng ý xem xét nguyên nhân của vụ tai nạn
+cho mình xin địa chỉ đọc tiểu thuyết
+hồi sáu tuổi
+ông lấy một chiếc mền cột vào chiếc xe nhỏ sơn đỏ
+rồi cho gió thổi xe chạy trên đường phố như thuyền buồm chạy trên sông
+mẹ dẫn chúng tôi đi và mẹ đem đặt mỗi đứa vào một cái hang đất ở bờ ruộng phía bên kia
+anh đã cho điều tra an ninh về sáu người này
+người ta sẽ không bao giờ nghi ngờ một cô thư ký
+xin cô gọi tôi là
+giấm là một loại
+họ sẽ cho cô làm thư ký
+một giám đốc cấp cao
+mây đen kéo tới gần
+nên chúng tôi đi vào trong
+tom đã bị thương ở đầu gối khi nó té xuống
+tôi thật sự muốn biết
+tom nghĩ rằng nó bất tử
+số tiền lương mà ông
+nói ra đã làm cho
+sửng sốt lộ ra mặt
+mẹ tôi thì bị ám ảnh với việc truy tìm gia phả
+cô vẫn thường ghét thú nhận là mình nhát gan
+có ai đó không
+tôi đang ăn tối với chồng
+cô ấy quá yếu
+xe hơi thì nhanh hơn xe đạp
+giữ im lặng
+với hệ thống này
+mạch bảo vệ đã được thiết kế tích hợp bên trong
+bây giờ mày muốn cái gì
+hôm qua
+cô ấy đã sinh ra một bé gái
+tụi tao đang học tiếng ả rập
+vào phòng tôi rồi hẳn nói
+chúng mày có muốn thêm đường vào trà không
+ăn ít no dai
+ăn bát cơm dẻo
+nhớ nẻo đường đi
+bới bèo ra bọ
+bới lông tìm vết
+chẳng có ai làm việc này tốt hơn
+tôi phải sửa cái
+luật lệ khó nói
+bình hoa mà nó làm bể là của dì tôi
+những ý tưởng xanh không màu không bình yên
+sao mày xấu quá vậy
+nếu có chuyện gì
+xin anh gọi điện cho tôi
+tụi nó tuy nghèo nhưng rất vui sướng
+cuối cùng tôi có thời gian để trả lời thư mà tôi đã nhận trong
+tuần qua
+tôi chẳng có cái gì như vậy cả
+đôi giày đã sờn cũ
+chẳng có lý do gì mà cô ấy la mắng bạn
+nó đã rời khỏi
+vào ngày hôm kia
+khí hậu ở nhật ấm như ở trung quốc
+tôi ước gì tom không hát quá to lúc đêm khuya
+tôi đặt số lượng sau chất lượng
+độc giả khắp mọi nơi đã chú tâm thưởng thức
+chuyền tay cho bè bạn
+đạt được những thành công và hạnh phúc tràn đầy trong cuộc đời từ sự khởi đầu vô cùng khó khăn
+cô ấy đã từng sống với hắn
+cô ấy đã từng sống với anh ấy
+chỗ của tao ở đây
+không bự bằng
+tổng thống
+không muốn cấm vận thương mại kéo dài
+may mắn thay
+thời tiết rất tốt
+hằng năm
+bố đi
+để làm việc
+bắp là hạt giống quan trọng trong nước mỹ
+một số quốc gia có hệ thống luật pháp nghiêm khắc chống lại thuốc phiện
+đến thì tôi sẽ không phải đến
+những thông dịch viên không dịch lần lượt
+anh ta đã ra biển để bơi
+bài có khó không
+anh là người mỹ phải không
+hà vẽ con gì
+không đùa chứ
+bố dượng của cậu đến đón này
+chuyện đó không thể biện hộ cho hành vi của nó được
+là một cái tên mà họ của nó có nghĩa
+đi nhanh
+ông ấy chỉ là lão già không hề có mặt những lúc gia đình cần nhất
+dượng không nghĩ con sẽ quá bận với cái này đâu
+đó là hệ thống an ninh của tôi
+tao cứ tưởng đã mất mày
+anh sắp được ngạc nhiên tới nín thở rồi
+hàng triệu sinh vật thuộc linh hồn đi trên trái đất không được nhìn thấy
+cả khi chúng ta thức
+và khi chúng ta ngủ
+tất cả mọi người đều muốn tin rằng những giấc mơ có thể trở thành hiện thực
+con nhìn thấy những sinh vật rất kỳ lạ
+anh thấy tốt hơn là em nên giữ mấy cái ý tưởng đó trong đầu mình
+tôi sống ở số nhà hai trăm hai mươi
+chúc bạn thành công
+tôi muốn một cái mới
+ông lão đó đã qua đời tuần trước
+cô ta giới thiệu tôi với anh của cô
+tôi rất thích bơi
+ga tàu điện ngầm gần nhất ở đâu
+người dân hoảng loạn vì tin đồn sóng thần
+anh ta cực kỳ bận tuần này
+tôi sống ở nước ngoài được
+cô ấy đang trong kỳ nghỉ
+động cơ của vụ án mạng chưa được làm rõ
+lúc chiều mọi chuyện thế nào
+có tốt không
+con chó đâu rồi
+cái bàn này là cái tốt nhất trong tất cả bàn
+tôi không rành nơi này lắm
+chúng tôi đang bàn bạc việc nâng cao hình ảnh của công ty
+vào rừng phải cẩn thận coi chừng quỷ ăn thịt trẻ em
+mà này phòng này không có thiết bị làm lạnh nào cả
+có mỗi quạt giấy à
+tôi đi làm bằng xe tàu điện mỗi ngày
+tôi muốn trở thành vận động viên bơi lội
+hôm nay là sinh nhật của tôi
+tôi có hai bông hoa
+tôi sẽ đi
+nó không bao giờ nói xạo
+cô ấy không thể nhịn được cười
+tom đã bấm nhầm số điện thoại
+anh ta búng tàn thuốc xuống đất rồi làm điệu bộ lắc lắc đầu khó chịu
+tôi không phải là thông dịch viên nhưng tôi rất thích dịch ngôn ngữ
+con nít rất hiếu động
+bạn có thể mô tả cho tôi biết con ngáo ộp là con gì không
+có rất nhiều loại vải trong cửa hàng chúng tôi
+tôi đang học nói tiếng pháp
+tôi không cho đường vào cà phê của tôi
+vị giác là một trong những giác quan
+tất cả những gì bạn phải làm là theo tôi
+chiếc đầm của cô ta trông có vẻ rẻ
+tiếng việt thật sự rất khó học
+xe đạp của nó đã bị đứt dây sên
+thực phẩm nhanh hỏng trong thời tiết nóng
+chúng ta phải di chuyển rất nhanh
+tôi đã bị sa thải ngày hôm qua
+bạn có thể giúp tôi
+muỗi ở
+to như cò
+im lặng
+khi không cần nói là khôn ngoan
+chúng tôi nhìn thấy một cây phong lan tuyệt đẹp với những chiếc lá rụng hàng năm
+cơn đau đã biến mất
+liều được kê là bao nhiêu
+họ đang sống trong nghèo khổ
+họ luân phiên lái xe
+tom hỏi chúng tôi đã trả bao nhiêu
+tôi đã chờ gặp bạn lúc
+cô ta kiếm tiền bằng cách dắt sinh viên tới
+họ tìm thấy thi thể một đứa trẻ mới sinh trong tủ đông
+để tom ở lại
+khu vực này đã thay đổi hoàn toàn
+đó là cái
+của tôi phải không
+hội đồng châu âu muốn làm tăng sự chú ý về di sản đa ngôn ngữ của châu âu
+tăng cường phát triển sự đa dạng ngôn ngữ và khuyến khích các công dân học ngoại ngữ
+anh ta bị mẹ bắt gặp đang thủ dâm
+mấy con chó này chúng nó khôn lắm
+người ta sống trên đời không thuộc về giai cấp này thì thuộc giai cấp khác
+bà ta lại nói này nói nọ
+tôi không quen người ấy
+nói thế nào anh ấy cũng không chịu đi
+bạn tôi có mua gì đâu
+chúng ta hãy cùng đợi và xem
+ba của bạn sao rồi
+tom trông có vẻ bận rộn
+mày bị cái khỉ gì vậy
+phòng của bạn thật sạch sẽ
+tôi thấy tin đó nên báo cho mọi người biết
+nước sôi bốc thành hơi
+những quyển sách như vậy quá khó đối với anh ta
+đó là lý do tại sao tôi cần gặp tom
+chúng tôi bước vào lớp học
+sao bây giờ mới đến
+chúng tôi cố gắng học tập các đồng chí
+nó nhường chỗ cho người lớn tuổi
+lực lượng quân sự nước này rất hiện đại
+bạn có chắc là không muốn đi
+tôi sẽ không bao giờ đi chệch hướng
+nó mở rộng hai cánh tay như muốn ôm trọn cả thế giới này
+tôi không thể bắt nó ngừng hút thuốc
+bạn đã sắp xếp mọi thứ để chúng ta xuất phát chưa
+bạn nên mở rèm ra thì tốt hơn
+đó là một điều mâu thuẫn
+tôi có thể đi đến ga xe lửa bằng cách nào
+tom luôn luôn cực kỳ cẩn thận
+sao ba vừa phê bình con là mẹ liền đứng bên cổ vũ thế
+vì chuyện hôn sự của con gái mà rất đau đầu
+trước kỳ thi cậu căn bản chẳng ôn tập gì
+có thi tốt nổi không
+cô ấy cho con mèo uống sữa
+gần đây vẻ mặt của tom suốt ngày ủ rũ nên tôi thấy lo lắm
+vậy à
+trời đang mưa
+trẻ con không thể ra ngoài sân chơi
+tôi không muốn thử cái gì khác nữa
+tôi hy vọng mình đã làm điều đúng đắn
+trợ lý của tôi sẽ xử lý việc đó
+cậu thích màu nào hơn
+đi một ngày đàng học một sàng khôn
+tom xách va li hộ
+anh ta quá già đối với cô ta
+tôi quên mất hôm nay có buổi học
+bạn mà đổi kiểu tóc sẽ trông trẻ ra đến
+nếu có gì thắc mắc
+đừng ngại hỏi nhé
+anh ấy bảo trời sẽ mưa
+và anh ấy sẽ ở lại nhà
+đó là tất cả những gì mà tom muốn
+về món quà
+xin bạn đừng băn khoăn về giá trị tương đương
+không khí rất ẩm
+bạn có chắc chắn rằng điều đó cần thiết không
+tom rất yêu súc vật
+anh đừng uống nhiều bia đến thế
+tại sao tuyết có màu trắng
+cuộc nổi dậy không phải lúc nào cũng mang lại tự do
+bạn có biết rằng có những loài rùa ăn thịt không
+cá sấu là loài động vật bí hiểm
+trong nhà nóng quá
+xe gắn máy thải ra rất nhiều khí thải
+tôi trả tiền trước
+tôi không thể hiểu ý của nó
+tôi thích tự làm lấy
+tôi đã say rượu
+tôi sẽ gọi bạn ngay khi đến sân bay
+tom là nhà văn
+tiếng đức sẽ như thế nào nếu không có dấu phẩy
+tôi chắc là bạn sẽ hiểu
+hơi buồn khi thấy những người không dùng tiếng mẹ đẻ của mình cho chuẩn xác
+chúng tôi đi dạo một vòng quanh thành phố bằng xe hơi
+tôi thích bận rộn
+cô ấy sẽ thử lại lần nữa
+tom đã nói với tôi là bạn đang tìm người giữ trẻ
+tom không muốn chơi
+nhắm thẳng vào mục tiêu bằng khẩu súng này
+nếu cậu không trả đồ cho nó thì nó sẽ bực lắm đấy
+hôm bữa đi chơi chụp được bao nhiêu tấm hình vậy
+nó đã được cải thiện rồi
+hãy bắt đầu ở dòng kế cuối
+khẩu súng của tom bị cướp cò
+họ đã đến
+tại sao bạn không đi xem thử
+đó là một câu chuyện rất buồn
+dì đã gửi cho tôi một món quà sinh nhật
+anh ta đang làm bánh quy
+mày có tin nó đang nói sự thật không
+nó tăng cân rồi
+tất cả những câu này cần để dấu chấm hết
+anh ấy bảo tôi rằng cha của anh ấy là một bác sĩ
+bộ phim bắt đầu lúc
+hy vọng bạn không quên bất cứ thứ gì
+ô nhiễm môi trường đã gây ra thay đổi khí hậu khắp trái đất
+điểm khác biệt giữa tôn giáo và triết học là gì
+họ ở ngay sau cậu
+tom kiếm được bao nhiêu tiền trong một tháng
+bạn có thể giúp tôi đổi một chút tiền được không
+bạn muốn gặp lại tom
+có phải không
+hãy chờ đến khi anh ta đến
+tôi không rời khỏi thành phố nhiều lắm
+tom cầu xin
+cho anh ấy một cơ hội khác
+cô ấy đã cố tự sát rất nhiều lần
+họ uy hiếp và sỉ nhục lẫn nhau
+tom cố tránh di chuyển bằng đường hàng không
+xin lỗi
+phóng hỏa là một hành động phạm pháp
+giáo viên của chúng tôi yêu cầu chúng tôi giữ im lặng
+hút thuốc lá bị cấm ở phòng này
+tôi đã hy vọng bạn sẽ nói với tôi
+bạn có lá thư của tôi từ khi nào
+tôi muốn biết nơi tom đã đến
+nhà báo bị bắt cóc bởi khủng bố
+dan tiếp cận
+tom không chắc là anh ta nên làm gì
+tom chết ba ngày sau đó
+anh ấy được sinh ra ở hoa kỳ
+tôi đồng ý mua nó với giá
+mọi tù nhân đã trốn thoát
+nhập tên người dùng của bạn
+tiếp theo đó là mật khẩu
+cậu ta xuống ở nhà ga tiếp theo
+lúc đó tôi đang chờ xe buýt
+thông thường khi tom và
+ra ngoài ăn tối cùng nhau
+họ cùng trả tiền hóa đơn
+tôi bỏ qua quảng cáo trên
+bất cứ khi nào có thể
+mười người bị nhét vào một căn phòng nhỏ
+chúng tôi không phải là những người duy nhất tin rằng cậu ta không có tội
+lời hứa là để cho đi
+anh có muốn nói hết sự thực cho anh
+em không
+đây là danh sách tất cả những việc tom cần làm
+bưu điện có mở cửa vào chủ nhật không
+gần đây tôi tăng cân rồi
+tom sơn cửa màu trắng
+tom ôm và hôn
+những gì từ điển nói không phải lúc nào cũng đúng
+cảm ơn bạn vì đã mời tôi đến dự bữa tiệc này
+tôi buộc anh ấy mở cửa
+trả tiền cho nó là khó khăn
+nếu bạn nói chuyện với anh ta bằng chính ngôn ngữ của anh ta
+điều đó sẽ chạm tới trái tim anh ta
+mẹ tôi sẽ không cho chúng tôi nuôi thú cưng trong nhà
+tất cả học sinh
+sinh viên đã tham dự buổi tiệc
+bạn nghĩ điều gì đã gây ra mâu thuẫn trong hoạt động thương mại giữa nhật bản và hoa kỳ
+tôi làm cùng với bạn trai cô ấy
+chưa từng nói chuyện với người nước ngoài
+tôi ước rằng chúng tôi có thời gian
+tôi ước là chúng tôi có thời gian
+tom sẽ tham gia cùng mình sớm thôi
+hoàn thành bài tập trước khi đi ngủ nhé
+tôi chưa bao giờ thấy một con cầy măng
+cho nên không biết nó trông thế nào
+anh quyết định tiếp tục công việc
+dù bận thế nào thì tôi nghĩ bạn vẫn nên đọc một tờ báo
+cuộc gặp của chúng tôi chỉ là tình cờ
+trận lụt là thảm họa tồi tệ nhất mà họ từng trải qua
+cuộc tranh luận sẽ diễn ra tối nay
+đừng quên đến đón em sáng mai
+ở trường bọn cháu
+tiếng pháp là môn học không bắt buộc
+tôi tự mua cho mình một chiếc máy làm bỏng ngô siêu tốc coi như quà giáng sinh
+nhanh chóng chuyền bóng về cho người phía sau
+cháu nó còn nhỏ
+có khi quá nhỏ
+mình đang cố gắng mở rộng vốn từ
+không một sinh viên nào tới đúng giờ
+mình mới biết tom đang làm cái gì
+con chó cắn mất cái xì gà của thuyền trường khi ông ấy đi ngang qua mà ông ấy không biết
+mình sẽ quay lại trong vòng
+mình không hề biết là cậu cũng biết
+tom tới
+để học tiếng pháp
+da đầu tôi rất ngứa
+người đàn ông mù lần mò về phía lối ra
+tôi sẽ gọi
+tôi sẽ gọi
+tom không có ý tưởng nào khi
+đang lên kế hoạch để làm điều đó
+tom nói rằng anh ấy rất đau lòng
+cơm nước bữa có bữa không
+cậu có thích mưa không
+tom đi đến đó một mình
+tom đang học tiếng việt
+nhưng chưa nói giỏi được
+cả nam và nữ đều búi tóc đằng sau
+tại sao bạn không thể làm điều đó
+kỹ năng giao tiếp là một kỹ năng hết sức quan trọng trong cuộc sống
+lúc đó
+tôi không biết tom đã đến từ lúc nào
+lướt sóng rất vui
+tôi vui vì bạn đã đến
+chiếc xe hơi này là mẫu mới nhất
+tôi muốn uống đồ lạnh quá không chịu được
+vào những ngày trời quang mây tạnh
+bạn có thể nhìn thấy núi phú sĩ từ xa
+cho tôi xin ít nước
+mẹ tôi đang làm một cái bánh cho bố tôi
+tôi không cho rằng anh ta là một người ngay thẳng
+muộn nhất là
+giờ anh phải đến đây
+cô ấy ngồi xuống ghế và xem ti vi
+họ rất nổi tiếng
+thì ít hơn
+tại sao bạn chưa nói với tom
+tôi có mang theo
+cái bút
+có một người đọc sách để giết thời gian
+anh tom này
+anh trông cao to nhỉ
+năm trước
+ai cũng có thể mua khu đất này
+một số thành viên của chúng tôi không thể tham dự được cuộc họp
+bạn nên đội một cái mũ bảo hiểm khi đi xe máy
+khi đi xe máy bạn nên đội một cái mũ bảo hiểm
+tom đã dùng khăn tắm lau khô tóc
+cậu ta đi rồi sao
+theo những chú mèo
+mèo rất là quan trọng
+tôi thích nhịp điệu chậm của bài hát này
+đó là bởi vì tôi muốn cứu giúp những người bị ốm đau
+khi đã ngoài
+việc học một ngôn ngữ mới không đơn giản như vậy
+anh ta bị phạt tiền vì đỗ xe trái phép
+họ từng ăn sáng
+anh ấy đặt chuông đồng hồ báo thức trước khi đi ngủ
+cô ấy đi đón anh ấy ở nhà ga
+nếu bạn không có gì để làm
+hay là đọc sách đi
+tôi cần những người bạn
+bạn là người ăn chay nhỉ
+chúng tôi trao đổi với giám đốc về thời gian làm việc
+các nghị sĩ quốc hội đang đau đầu tìm cách giải quyết vấn đề này
+vì có quá nhiều quần áo
+cho nên tôi không biết mình nên mặc gì vào ngày mai
+vì có quá nhiều quần áo
+cho nên tôi không biết mình nên mặc gì vào ngày mai cả
+tôi sẽ luôn ở bên cạnh bạn
+chuyện hôm qua
+tôi có nghe tom kể rồi
+cô ấy chạy nhanh nhất lớp
+phút nữa là đến
+bức tranh đó giống như thật
+cái này có được miễn phí không
+anh ta khinh thường phụ nữ
+tom là một người mang tư tưởng cực đoan
+giáo viên bắt học sinh làm nhiều bài tập
+tôi thích
+tôi thích chơi
+tom đã kiểm soát được tình hình
+bạn khóa
+ở đây từng có một ngôi chùa cổ
+tom cuối cùng cũng tìm thấy nơi cất giấu kho báu
+chúng tôi chào đón tất cả mọi người muốn tham gia câu lạc bộ của chúng tôi
+người đứng đầu doanh nghiệp nhật bản thường thăng tiến từ trong nội bộ và xuất thân từ ngành kỹ thuật
+nổi tiếng hơn
+giáo dục là một yếu tố quyết định
+xin hãy cứ tự nhiên hái chúng
+tôi đãi
+đó là bởi vì ở đảo
+không có động vật ăn thịt lớn
+cô ấy rơi từ trên cây xuống
+tôi sẽ bắn nó
+chúng ta không được cười nhạo người nghèo
+bạn làm cái này thay tôi được không
+bạn luôn chê bai quần áo của tôi
+tôi sẽ cố gắng hết mình để đáp ứng yêu cầu của ngài
+ông ấy trông già hơn so với tuổi
+các khoản nợ của anh ta đang chồng chất
+phúc bất trùng lai
+họa vô đơn chí
+cô ấy thiếu tinh tế đến mức có thể cười trong một đám tang
+trèo cao ngã đau
+họ đã rất hào hứng
+cô công chúa đang đội một chiếc vương miện bằng vàng
+khi còn trẻ
+tôi từng bị tư tưởng cánh tả ảnh hưởng
+bạn thích đi du lịch không
+đúng vậy
+tôi thích đi du lịch
+anh ấy bước vào căn phòng
+cô ấy coi anh ta là một người ngu xuẩn
+thật là một bông hoa đẹp
+hãy giúp tom phơi quần áo
+tôi cuối cùng cũng đã tìm được ra cách giải quyết cho vấn đề đó
+tôi không thể tìm thấy lỗi sai trong lý thuyết của anh ta
+tôi thích tập thể hình
+tôi đã rất hào hứng
+tôi sẽ ở đó hai
+ba ngày
+con làm bài tập chưa
+tôi không phải lúc nào cũng ăn sáng
+anh ấy nói
+hãy đi cùng chúng tôi
+tôi mong là ngày mai sẽ tốt hơn
+thỉnh thoảng tôi xem
+chỉ còn một chai rượu vang đỏ
+bóng chày có gì thú vị
+người đàn ông đó không phải là bác sỹ
+nếu có chuyện gì xảy ra
+hãy gọi ngay cho tôi
+hãy đến gặp tôi lần nữa
+làm ơn đừng so sánh tôi với tom
+hãy cho tôi xem cái đó
+chúng ta không nên đánh giá người khác qua vẻ bề ngoài
+tôi hẹn hò với anh ấy được
+năm rồi
+cho dù bạn có thất bại thì cũng không phải chuyện của tôi
+không biết đánh
+anh ấy sơn trần nhà màu xanh
+không có ngôn ngữ nào đẹp hơn tiếng nhật
+không có ngôn ngữ nào đẹp như tiếng nhật
+cảm ơn vì một bữa ăn tuyệt vời
+thậm chí còn không biết viết tên mình
+cô ta đã đọc xong lá thư
+tôi rất đói
+ngược lại tớ còn thấy rất vui vì nhờ vậy
+cậu đã nói chuyện một cách thật lòng với tớ
+vậy hả
+bạn không nhớ chính mình đã nói gì sao
+tôi sẽ đi ngay
+tom có lẽ đang gặp rắc rối
+bạn có hồi hộp không
+cô ấy chờ mong được gặp lại anh ấy
+tom đã và đang làm việc tại một công ty thiết kế
+trong nhiều năm
+cô ấy muốn anh ấy nói rằng anh ấy yêu cô ấy
+tom không thích cạo râu
+nó rất cao
+cô ấy tái mét lại khi nghĩ về rắn
+họ đã mất đi người con trai duy nhất trong một vụ tai nạn
+tôi phải mua một cái
+nếu bạn gọi
+anh ấy sẽ tới
+tôi nghĩ là sẽ không thể có chuyện mẫu tiếp theo sẽ tốt hơn mẫu này
+ở gần đỉnh của tòa tháp có một cái đồng hồ lớn
+đừng từ bỏ tiếng anh dù chỉ một ngày
+hay là một vụ tự sát
+tom này
+đối với bạn thì cái gì quan trọng nhất
+cái gì cơ
+ông ấy được thăng hàm đại tá
+những loài động vật này đang đứng trên bờ vực tuyệt chủng
+khi vừa tìm thấy anh ta
+cô ấy đã bật khóc
+chưa có người nào đóng góp vào việc lý giải giấc mơ nhiều như
+chỉ là tôi không muốn chụp ảnh thôi
+vật giá đang tăng
+tôi xin bạn đừng nói vậy
+có lẽ bạn nên đợi thì tốt hơn đấy
+tom là một người sống theo chủ nghĩa độc thân
+tôi không để tâm đến chuyện tiền bạc
+các bạn chiều nay có rảnh không
+chúng ta vẫn thường nói là chúng ta đánh giá con người qua tâm hồn
+nhưng rốt cục thì chẳng phải là chúng ta chỉ có thể đánh giá họ qua vẻ bề ngoài thôi sao
+họ rất thích thú các môn thể thao ngoài trời
+phái đoàn của hai nước sẽ gặp nhau tại
+chúng tôi không nói về điều đó nữa
+bạn đã từng trốn học chưa
+chúng tôi đi
+để thăm bà ốm
+tôi nghe thấy tom ngáy trong giờ học
+mẹ tom qua đời vào năm hai nghìn mười ba
+anh ấy sợ bố mình
+hãy hoàn thành công việc này trước thứ hai
+không lẽ đến bây giờ mày vẫn sợ sao
+tom vẫn chưa cạo râu
+bài tập toán về nhà dễ hơn tôi nghĩ
+tỷ lệ thất nghiệp ở
+phần trăm vào tháng
+tôi muốn bạn làm việc cho tôi
+cô ấy nói với tôi rằng cô ấy không bị thương chỗ nào hết
+tôi không thật sự muốn đi chơi
+với tom
+mày lắm mồm vãi
+tên giang hồ đó nói
+chúng tôi sẽ không bao giờ dùng chúng
+chúng tôi sẽ không bao giờ sử dụng chúng
+tôi đi làm bằng ô tô
+và để tránh bị tắc đường thì tôi luôn cố gắng ra khỏi nhà sớm nhất có thể
+tôi nghĩ tất cả những người béo đều phải giảm cân
+bạn đang nói về tôi đấy à
+tom và
+đều là con nhà giàu
+tôi tự hỏi anh lấy cái này ở đâu ra
+nước đó có nhiều người dân tị nạn từ châu âu
+bạn nghĩ ngọn núi nào cao thứ hai nhật bản
+mặc dù
+trông giống hệt một người châu á
+nhưng tôi nghe nói anh ấy là con lai
+bạn bị trật khớp chỗ nào vậy
+nếu bạn muốn được yêu
+thì hãy yêu đi
+chúng tôi tận dụng thời tiết đẹp để chơi
+họ không còn dí dỏm như trước kia nữa
+nó không đủ to
+tôi tự hỏi là tom có thể đến được hay không
+tom nói là anh ta đã cố sửa cái điều hòa cả ngày
+tôi biết tom chơi sáo không giỏi lắm
+tôi phải về nhà mỗi khi trời tối
+bạn đã mua cuốn sách nào vậy
+kẻ thù không thể đến gần
+tom và
+đã cùng nhau bàn về kế hoạch tương lai của họ
+tôi cá là tom và
+đã ngạc nhiên
+tôi đã mua cái này cho bạn gái tôi
+tôi mua cái này cho bạn gái tôi
+tom không cười
+tom và
+nói là họ chưa từng dạy tiếng pháp bao giờ
+cái áo khoác mà tom muốn quá đắt
+tom ném quần áo bẩn của mình vào trong cái giỏ
+cô giáo đó đã không dời mắt khỏi tôi vì nghĩ tôi đang gian lận
+có một chiếc xe ô tô nhật
+tôi đang ăn bánh mì
+anh ấy đã tra chìa khóa vào ổ khóa
+tôi đã gõ sai
+xin lỗi
+anh ấy đã thành công
+bạn đã trông thấy người đàn ông trong bức ảnh này bao giờ chưa
+tom đã thái mỏng quả táo
+nó đã trở thành một kỷ niệm đẹp về chuyến du lịch nước mỹ của tôi
+tom không có ở trong bếp
+đừng nghịch điện thoại lúc ăn
+mày cho tao vay một đô có được không
+bạn đã bao giờ đi nước ngoài chưa
+bạn đã đi nước ngoài bao giờ chưa
+đọc cái này đi
+tên tôi là tom
+tôi không thích những đứa như tom
+có lẽ tôi phải học tiếng pháp rồi
+hãy mang theo xẻng
+chú mèo đó thích ngủ gần tôi
+tôi có ý định học tiếng đức
+anh thật sự thích tranh của em đấy
+tôi nghĩ là tôi phải làm việc đó hôm nay
+tôi không đủ tiền để mua một chiếc ô tô
+tôi không đủ tiền mua một chiếc xe hơi
+đứng yên ở đây đi
+chúng tôi rất thích đi dã ngoại
+đó là một ý kiến hay
+đáng lẽ ra bạn đã phải học từ vựng rồi mới phải
+tất cả quả bóng đều có màu vàng
+tôi bị phạt một đô
+cái khăn mùi soa này có giá là bao nhiêu tiền
+tôi nghĩ là cái đó hơi đắt
+lý thuyết của ông ấy đáng được xem xét
+chính mấy con bò
+mà bị mấy con bò
+khác ăn hiếp
+lại ăn hiếp mấy con bò
+đó là mục đích mà họ học tiếng anh
+chúng tôi đã vừa đi bộ vừa hát
+tôi nghĩ bà ấy đã ngoài
+rất nhiều người nói tom là cầu thủ giỏi nhất trong đội chúng tôi
+tôi sẽ đến đó
+mặc dù có lẽ là tôi sẽ đến muộn
+tôi không có thời gian giải thích
+tôi thích nghe nhạc
+tốt gỗ hơn tốt nước sơn
+trăm nghe không bằng một thấy
+tom đã làm việc đó vô cùng cẩn thận
+tôi không thể sống dưới nước
+tôi không thể sống dưới nước
+tom thực sự nghĩ về tôi như thế nào
+tạo sao vậy
+nếu nó không bị hỏng thì đừng có mà sửa
+tom đã ngay lập tức gọi điện thoại đến số
+truyện tranh dạo này có quá nhiều nóng bạo lực
+lần này tôi không đi
+có được không
+hai ngày nay tôi không bận
+năm sống trên đời là đau khổ
+hay bị đâm một nhát kiếm vào bụng trong giây lát là đau khổ
+không biết cái nào mới là đau khổ đây
+khi đo độ
+của một chất lỏng
+tính trung tính
+tính kiềm
+bằng giấy quỳ tím
+đừng nhúng toàn bộ tờ giấy vào trong chất lỏng đó
+mà hãy chỉ nhúng phần đầu của tờ giấy mà thôi
+cái va li đang mở
+cái thùng xe hơi đang mở
+hiện tại
+anh ấy đang ở trong bệnh viện
+tối nay bạn có rảnh không
+anh ấy biết là bạn biết
+tôi đã hứa với tom là tôi sẽ đợi
+chim thì bay lượn
+tôi đã ngạc nhiên khi biết được là tôi đã thắng
+cà phê này không đủ nóng
+quan tâm
+tom đã nhìn thấy bạn
+tôi chưa hoàn toàn tin là tom đang nói thật
+cậu bé nói
+răng tớ yếu đến mức còn không thể cắn nổi một quả táo
+cuốn sách đó là bùa may của tôi
+nên cứ mỗi năm tháng là tôi lại đem nó ra đọc một lần
+tom đã hơi ngạc nhiên về câu hỏi đó
+bệnh đau dạ dày thường hay bị nhầm với bệnh đau bụng
+đó là một vũ khí
+tôi đã nghe lỏm được cuộc trò chuyện của bạn
+anh ấy không muốn bạn biết
+bạn đừng nghĩ là lúc nào bạn cũng có thể mua chuộc tôi bằng đồ ăn nhé
+hãy gọi tôi vào
+giờ sáng mai
+họ định di cư sang mỹ
+họ đã nhìn tôi một cách kỳ lạ
+anh ấy đã quẹt diêm
+ảnh hưởng của sự cải tiến về kỹ thuật vào thời điểm cuối thế kỷ đã có khuynh hướng lan rộng ra đời sống bình thường
+bố tôi đã bị cho nghỉ việc
+anh ấy sẽ sớm hồi phục chứ
+tui phải tính xem tuần sau tui sẽ xài bao nhiêu tiền
+cảm ơn bạn vì đã tới đón tôi
+họ định sẽ làm gì tôi đây
+tôi chắc chắn là tom sẽ thắng
+tôi yêu cô ấy nhưng cô ấy lại yêu thằng khác
+bạn thường dùng trà cho bữa sáng à
+tom luôn là người than phiền đầu tiên
+tôi có thể mang đến một vài thiết bị phức tạp hơn nếu bạn nghĩ là chúng ta cần nó
+việc sống bằng số tiền lương hưu ít ỏi đối với ông ấy là một việc khó khăn
+chúng tôi chỉ đơn giản là quen biết xã giao mà thôi
+dì của tôi đã gửi cho tôi một cái máy quay
+anh ấy than phiền là món súp quá nóng
+đây là lượt của ta
+đại sứ quán pháp ở đâu
+hôm nay tôi sẽ không tới
+tôi sẽ không tới hôm nay
+đã ngoại tình với bác sĩ
+ai phụ trách khâu này
+anh ấy giúp đỡ một bà lão từ chỗ ngồi đứng dậy
+ai đang ngủ trên giường của tôi thế
+tom đã tự tử
+ai đã gọi anh ấy vậy
+tom đang ở trên mái nhà
+ngộ nhỡ cô ấy từ chối thì sao
+trên hành tinh khác có sinh vật có trí tuệ không
+tom là một người anh điển hình
+cá voi là một loài động vật có vú khổng lồ sống ở đại dương
+trước tiên bạn cần phải thanh lọc thân thể
+anh ấy đã thở dài vì thất vọng
+bà ấy có bốn đứa con
+tôi không có nổi một đôi vớ sạch sẽ
+khi về úc thì bạn muốn làm gì đầu tiên
+anh ấy đã không vui về điều đó
+tom và
+nói là họ thật sự muốn làm điều đó
+tôi đã mua một ngôi nhà bằng tiền thừa kế của ông nội tôi
+hai nước đang thù địch với nhau
+đừng làm tổn thương tôi
+bạn không được trộn nước với rượu nho
+vì sao dan lại tự tử
+vào năm
+đã được lựa chọn để trở thành đại sứ trẻ nhất của
+tại mỹ
+họ sẽ không biết là chúng ta ở đó
+đã đến lúc trả đũa rồi
+bà ấy có thể sẽ sống đến
+ý tôi không phải là bạn cần phải trở nên cuồn cuộn cơ bắp
+nhưng mà nếu bạn không rèn luyện cơ bắp ở một mức độ nào đó
+thì sớm muộn gì bạn cũng sẽ nằm liệt một chỗ mà thôi
+tạ ơn
+anh ta đã nhượng bộ
+đừng quên mang theo một chiếc máy ảnh
+cách anh ta nói chuyện khiến tôi cảm thấy khó chịu
+mai bạn có định tới trường không
+điều đó không khiến tôi ngạc nhiên
+họ đều yêu tôi
+tôi tò mò quá đi mất thôi
+tôi không biết gì đâu
+bằng mấy
+có phải tom đã kể cho bạn nghe về điều này không
+tôi đã tiếp tục chạy
+nhấp vào chế độ chỉnh sửa
+tom đã tin là
+vô tội
+bằng chứng duy nhất là dấu vết tinh trùng ở cái quần lót
+tôi đang định ra ngoài thì chuông điện thoại reo
+nếu không thì bạn sẽ không nhanh khỏi đâu
+tôi có thể bắt
+ở đây không
+cô ấy thường ngồi xem sách vài tiếng liền
+cô ấy đã hôn lên má anh ấy
+tôi đang trong một mối quan hệ trên tình bạn
+dưới tình yêu với tom
+mày có nghe thấy âm thanh đó không
+chúng tôi không nghĩ là họ sẽ mua một chiếc ô tô mới
+sao bạn vẫn còn thức vậy
+anh ấy là người tốt
+tất cả mọi người đều lắc đầu
+tôi không thể nhìn thẳng vào mắt cô ấy
+lúc đó tom không biết là
+có thai
+ban đầu tôi không có thích cô ấy
+tom đã từng nói dối chúng tôi
+tom là gia sư của
+đã mặc thử chiếc váy đó
+tôi đã thử
+nhưng tôi không thể làm được việc đó
+anh ta đã một mình ăn hết nửa cái bánh đó
+cô ấy thích động vật
+tom đã nhờ
+nói với
+là anh ta không định làm việc đó
+tôi đang đầu tư tiền vào phi vụ kinh doanh này
+tôi cứ tưởng bạn là người nhật
+thích những câu chuyện của
+cả tom cũng khóc
+tom không xấu
+hôm qua bạn muốn nói gì với tôi vậy
+tom đã có thể làm việc đó
+nhưng anh ấy không làm
+tôi hay hắt hơi
+bạn có thể đưa ra những kết luận của riêng mình
+bạn vẫn không tin là chúng tôi đang nói thật
+có đúng không
+tôi đã biết là tom bị thương vì làm việc đó
+tom không biết lái ô tô
+tôi không thích dưa chuột đâu
+hãy đi với chúng tôi
+tôi thích làm tom tức giận
+đây có phải là mỳ ý thật không vậy
+tôi không muốn cãi nhau với tom thêm nữa
+cả tom và
+đều mặc áo khoác
+chúng tôi sẽ tổ chức một buổi họp báo vào ngày thứ
+phút là tôi lại đi vệ sinh một lần
+trong câu lạc bộ này
+tom là ca sỹ xuất chúng nhất
+vì chú cún của tôi chết rồi cho nên tôi vô cùng đau buồn
+tom đang giữ liên lạc với
+tom bị buộc tội oan
+bạn có thật sự muốn mặc thứ đó không
+nó có thể đóng băng vào tuần tới
+đó không phải ý định của tôi
+tôi không biết phải làm gì nữa
+ông ấy đã tặng tôi một bó hoa làm quà
+bạn có phải là
+tao không lấy cái ô tô chết tiệt của mày
+trời ạ
+trời đất ơi
+tôi có lấy cái xe hơi chết tiệt của anh đâu
+chúng ta đã mất dấu nó rồi
+có lẽ chúng tôi nên hỏi tom
+tôi đoán là giáo viên của chúng ta đã ngoài
+tuổi rồi
+chuyến bay đó đã bị hủy vì sương mù dày đặc
+đây là một câu dài đến bất thường
+anh sẽ luôn bên cạnh em
+từ trước đến nay tôi không để tâm cho lắm
+nhưng bây giờ việc đọc trên một cái màn hình
+bình thường đã trở nên khó khăn đối với tôi
+từ trước đến nay tôi không để tâm cho lắm
+nhưng bây giờ việc đọc trên một cái màn hình
+bình thường đã trở nên khó khăn đối với tôi
+cô ấy cần anh ấy giúp
+anh ấy cần sự trợ giúp của cô ấy
+hôm kia bạn đã khiến mọi người ấn tượng
+nhưng tôi đã biết bạn từ trước rồi
+tôi vẫn chưa biết gì hết
+tòa nhà kia có bao nhiêu tầng vậy
+hai người họ đã hòa giải với nhau
+cha mẹ và em trai tôi đang sống ở vùng ngoại ô
+đã chết vì trận đại động đất đó
+ở một trang
+gọi là
+bạn có thể so sánh
+đối chiếu giá cả của mỗi sản phẩm điện máy được bày bán ở các cửa hàng khác nhau
+ở một trang
+gọi là
+bạn có thể so sánh và đối chiếu giá cả của mỗi sản phẩm điện máy được bày bán ở các cửa hàng khác nhau
+cô ấy đã đóng hết cửa sổ trong phòng
+tôi không chắc tom biết bưu điện ở đâu đâu
+anh ta chết vì làm việc quá sức
+lên cao rồi sẽ ngã
+vẫn như một lệ thường
+từ sáng tới giờ
+trời cứ mưa lại tạnh
+bạn nghĩ tôi muốn gì
+từ sau thế kỷ
+thế lực của người
+đã lan rộng tới các vùng như
+đừng nói với ai nhé
+cứ đi thẳng thì sẽ có một cửa hàng đấy
+tất cả mọi người đều đã đợi
+sao bạn lại uống đến say bí tỉ thế này cơ chứ
+cuộc chiến tranh đó xảy ra vào lúc nào và ở đâu
+anh ấy đã khoe cái ô tô mới của mình
+tom có nhiều bạn ở
+ông ấy bảo tôi ông ấy không biết bà ta
+mày nghĩ mày là cái chó gì
+khi đến sân bay
+thì ngay lập tức ông ấy đã gọi điện thoại cho công ty
+bạn nên tránh xa cái tôn giáo đó đi trước khi bạn biến thành một thằng ngu
+hôm nay tôi đến đây để nói về những rủi ro đến từ các phần mềm sở hữu độc quyền
+bây giờ chúng ta chưa cần làm việc đó đâu
+cuối cùng thì ông ấy cũng đã đến
+anh trai tôi học tiếng anh
+không có học sinh nào đến đúng giờ hết
+mẹ vợ tôi tốt bụng lắm đấy
+mỗi ngày bố tôi hút một bao thuốc lá
+chú tôi đã tặng cho bạn một món quà
+tôi không muốn tiêu nhiều hơn
+bạn cần được bảo vệ
+tất cả ai cũng biết là tom đang nói dối
+tom bóp chặt miếng bọt biển
+tom bóp chặt miếng bọt biển đó
+hãy bấm nút màu xanh lá cây
+cửa này bị khóa bên trong rồi
+đừng nhìn xuống
+tôi đã thề là sẽ không kể cho bất cứ ai
+thật không may
+tôi hầu như không nói được tiếng pháp
+anh ấy đã chuyển tôn giáo của mình từ phật giáo sang thiên chúa giáo
+hôm qua là lần đầu tiên tôi gặp ông ấy
+anh ấy nói tiếng pháp giỏi không thua ai
+cậu ta nói tiếng pháp không thua bất kỳ một ai
+một môi trường tốt sẽ tạo ra những con người tốt
+dù trời có mưa thì tôi vẫn sẽ đi đạp xe
+bọn họ đã tự tử vào năm
+cho đến lúc này
+chúng tôi đã thua ba trận
+đức là một quốc gia lớn
+gọi xe cứu thương đi
+tom không chắc là ông ta muốn làm cái điều này
+tôi thích củ cần tây
+bà ấy đã cảm thấy khá thoải mái với ông ấy
+những ý tưởng của bạn vừa lỗi thời lại không áp dụng được vào đời thực
+nói là cha mẹ cô cho phép cô làm bất kỳ điều gì mà cô muốn
+cái giường đó rất thoải mái
+mỗi ngày bà ấy cho chó ăn hai lần
+họ chắc chắn đã ngủ trên sàn nhà
+nói với tôi là cô ấy không thích làm việc đó
+ngay cả tom cũng không biết là nên làm gì
+tôi sẽ không tin tom thêm lần nào nữa đâu
+ai đó đang chơi đàn
+giá trong quảng cáo nào chỉ bao gồm phần khung
+bạn đang muốn giảm cân à
+bạn đang cố giảm cân có đúng không
+ông ấy nói là tôi không được lơ là chỉ vì lúc này tôi không có triệu chứng dị ứng
+đây không phải là tình yêu thật sự
+tôi lo sợ sẽ đánh mất bạn
+có nhiều công trình kiến trúc cổ đại
+mẫu điện thoại di động này đang được bán rất chạy
+tin tưởng không phải là chuyện dễ dàng
+đừng hy vọng rằng mọi chuyện sẽ đúng theo ý bạn
+cậu đi mạnh giỏi nhé
+cút ra
+kể cả một đứa trẻ con cũng hiểu điều đó
+hình như tôi có nghe qua cái đó ở đâu rồi thì phải
+chúng tôi đã ăn hoa quả tươi sau bữa tối
+chúng mình nên cố hiểu rõ về nhau hơn
+tối hôm qua
+tom đã đến được
+anh ấy chơi bóng chày mỗi ngày
+mình đang học ở ấn độ
+cổ chúc mừng ảnh được thăng chức
+chạy đi
+chúng tôi tới từ một hòn đảo rất xa
+tên tác giả là
+tom hẳn là đã uống rất nhiều vào tối qua
+tom đã ở trong một khách sạn tốt
+tom đã gọi cho cậu à
+bảo cô ấy không thích nói chuyện với tom
+tôi yêu bức tranh này ngay từ khoảnh khắc nhìn thấy nó
+là đất nước lớn thứ
+ở châu đại dương sau úc
+tom đã thừa nhận rằng anh ấy có tội
+nhân viên trong công ty đó đã cố che giấu sự thật
+nhưng cái kim trong bọc lâu ngày cũng lòi ra
+cô ấy muốn một chiếc mũ mới
+tôi phải làm xong công việc này trước
+tôi nghĩ chúng ta có thể có mọi thứ chúng ta cần
+anh ấy rất kiên quyết từ chối
+đây có phải màu phù hợp
+tôi biết tên thật của anh ấy không phải là tom
+điều gì thực sự đang xảy ra ở
+tôi có lẽ nên nói với tom rằng anh ấy nên làm điều đó càng sớm càng tốt
+tom luôn luôn là một quý ông
+tom và
+không cần tôi nói cho họ cách làm
+tôi sẽ đợi bạn ở phía trước của trường
+xin lỗi
+một nửa dân số thế giới sống ở các thành phố
+về nhà thôi
+tôi ghét chó
+bao giờ thì bạn có thể gửi báo cáo cho tôi
+tôi không có sức chịu đựng để làm điều đó
+chúng tôi chỉ cần nói chuyện với anh ấy
+tom thích xem
+tôi tưởng là bạn thích học điều mới
+tôi đọc được tiếng đức
+nhưng tôi không nói được
+ngày mai quán sẽ đóng cửa đấy
+cô ấy làm thứ đó kiểu gì thế
+tôi chưa bao giờ đến
+bằng xe
+tom đã xuất phát vào lúc
+giờ sáng
+tôi không nghĩ tôm quen biết bất cứ ai ở úc
+gần như ngày nào tôi cũng nhìn thấy con chó đó
+vãi cờ
+tôi cần một tờ giấy
+nhà của tôi không có sân
+tiếp tục cố gắng nhé
+chúc bạn may mắn
+tôi bị chóng mặt
+tên tôi là tom
+tên tôi là
+anh ấy đã mất một năm trước
+tôi đã không vẽ nó
+tom trẻ trung và tràn đầy năng lượng
+bạn có một bộ bài không
+bạn đang làm công việc gì
+bà ấy bị trộm mất chiếc điện thoại
+anh ta có nhắc đến vụ tai nạn không
+đi đứng cẩn thận
+cầu thủ yêu thích của bạn là ai
+tôi ghét các bộ phim câm
+cá voi xanh là loài động vật to nhất trên thế giới
+bạn đến từ
+cậu ta là tấm chiếu mới
+tôi đã đợi bạn trong hai giờ
+cảnh giới cuộc sống thứ
+kinh doanh
+lợi nhuận
+sự nghiệp
+đối đãi nhân mạch
+biết trước biết sau
+quảng bá hình ảnh của nhân mạch
+kết nối mối quan hệ xã hội chất lượng cho họ
+tầng bậc nhận thức nội tâm số
+tầng bậc
+là trạng thái trùm khắp của nội tâm
+tầng bậc nhận thức nội tâm số
+tầng bậc
+là trạng thái nhận thức nội tâm cội nguồn cuộc sống xuất phát từ bản thân
+nhân tiện anh muốn cho em xem cái này
+may cho cô ấy là chồng cô ấy đã đến nơi vào lúc đó
+bạn đã chờ xe buýt bao lâu rồi
+tại sao tom không ở trong nhà nhỉ
+bạn gửi nó cho tôi
+tom đã thay đổi rất nhiều
+đừng nói với ai
+đó có phải là túi của bạn
+bạn đã mua những cuốn sách nào
+tôi không nghĩ thế
+đã quá muộn
+tôi đã bắt đầu học tiếng pháp
+năm trước
+bạn đã kết hôn chưa
+tom đã ngăn
+làm điều đó
+tôi có một con mèo trắng
+tom chả ra dáng đàn ông gì hết
+đây là lỗi của cậu
+có lẽ tom sẽ về nhà sớm thôi
+mọi người phải làm chuyện này sao
+đã có ai liên lạc với tom không
+tôi ghét ăn tối một mình
+bám chặt vào tôi
+một người đang cầm một chiếc túi
+hãy cho tom vào ngay
+có ba cậu bé trong sân
+ngay bây giờ tôi sẽ không trả lời thêm bất kỳ câu hỏi nào nữa
+tôi đã chạy nhanh nhất mà mình có thể
+lần đầu tôi gặp
+anh ta là con nghiện nặng
+máy bay của tom đã rời đi một giờ trước
+tom nghĩ rằng
+đã phạm phải một sai lầm lớn
+bạn có muốn đợi trong quán
+mẹ tôi đã thường nổi giận với chúng tôi
+nói nhỏ thôi
+đồng hồ đeo tay của bạn đắt tiền hơn của tôi
+cửa hàng này có thể ngừng kinh doanh
+bạn vẫn còn là người độc thân sao
+tôi không biết nhiều về kỹ thuật
+thế nên tôi không thể sửa chiếc máy vi tính
+tom là một người rất thẳng thắn
+mũi tôi bị nghẹt
+bạn đã thu xếp hành lý cho chuyến đi đến úc của mình xong chưa
+tôi không thể tiếp tục làm điều này nữa
+cô ta đã tự sát bằng thuốc độc để tránh bị xử trảm
+tôi muốn uống một ít nước vì tôi khát
+có nhiều hoa vào mùa xuân
+em bé thông minh có thể nói và đếm
+chiếc quần tây này giá bao nhiêu
+những cái quần tây này giá bao nhiêu
+hãy kiểm tra các vị trí của họ
+hãy kiểm tra tổ của chúng
+chiếc áo len bao nhiêu tiền
+cô ấy làm việc cho một công ty lớn
+đây là lý do vì sao anh ấy nói đồng ý với bạn
+cô ấy từ chối làm bài tập về nhà của mình
+tôi hứa tôi sẽ không đến trễ vào ngày mai
+tôi đã lái xe chầm chậm trở về nhà
+bãi biển cát trắng rất đẹp
+họ sẽ cho chúng ta thời gian để thu thập thêm thông tin
+người nông dân đã xới đất ở cánh đồng phía dưới
+con tàu đã bị chìm sau khi va phải một tảng băng trôi
+không thứ gì thực sự an toàn được khi có một con mèo trong nhà
+tôi là một học sinh và tôi thích học
+tôi thích mặc áo len vào mùa thu
+bạn nghĩ gì về cuốn sách này
+đồ ăn ở nhà hàng đó ngon thật sự
+cô ấy làm việc trong một nhà máy sản xuất xe hơi
+tom bị sỏi thận
+bạn thân của tôi rất thông minh
+cô ấy luôn đạt điểm cao trong các kỳ thi của mình
+cô ấy đã có cảm giác vô cùng đau đớn khi cô ấy bị gãy chân
+cô ấy đã hỏi tôi một câu hỏi về toán học
+tôi sẽ mua một ít táo ở siêu thị
+sau khi ăn sáng
+cô ấy đã mặc áo khoác rồi đi ra ngoài
+cô ấy thường để tóc ngắn
+tập thể dục có thể làm giảm nguy cơ mắc bệnh mãn tính
+là giải đấu quần vợt rất lớn trên thế giới
+điều quan trọng là phải lịch sự
+tôi đã chạy rất nhanh và thắng cuộc đua
+tôi thức dậy lúc bảy giờ mỗi ngày
+con heo béo thật đấy
+tôi không thể thay đổi lịch trình của mình
+tôi đã cho phép con ngựa của tôi chạy
+làm thế nào bạn có thể đủ khả năng mua một chiếc xe hơi như thế này vậy
+máy tính có
+tôi không chắc liệu có an toàn khi lái xe trong những điều kiện thế này hay không
+tôi có nhiều bạn bè đã lập gia đình
+hầu hết mọi người không thích thua cuộc
+chúng tôi sẽ hoàn thành công việc ngay cả nếu chúng tôi mất cả ngày
+chắc chắn là trái đất đang nóng dần lên
+tôi không biết liệu anh ấy sẽ đi chơi hay chơi bóng rổ
+ngay cả khi trời mưa
+chúng tôi vẫn đến trường
+kể cả khi trời đang mưa
+cô ấy vẫn ra ngoài
+nhưng nếu trời mưa
+cô ấy sẽ không đi
+chúng tôi nhảy cẫng lên khi chiếc máy bay bay qua
+tôi đã đề nghị rằng anh ấy nên tập thể dục nhiều hơn
+điều đó sẽ chẳng vui tí nào đâu
+nó là một kỳ thi thật sự khó
+anh ấy có lẽ đã ngủ quên
+nếu tôi có đủ tiền
+thì tôi đã mua một chiếc xe hơi rồi
+bạn nên cẩn thận hơn với tiền bạc của mình
+khi mà bạn đọc được bức thư này
+thì tôi sẽ ở luân đôn rồi
+vào lúc mà tôi đến
+cửa hàng đã đóng cửa rồi
+tôi hiểu rằng đã có một sai lầm
+tôi không thích cái này
+nhà tôi ở kế bên nhà anh ấy
+những trải nghiệm như vậy là rất hiếm
+anh ấy đã phải ở lại vì anh ấy có quá nhiều việc phải làm
+tôi xin lỗi vì những gì tôi đã làm
+hãy nói với tom điều bạn vừa nói với tôi
+sam là ông chủ của công ty anh ấy
+tôi nghe nói rằng tom đã làm điều đó
+chỉ việc vào trong thôi
+bạn nên gọi cho tom trước
+tôi đã bị đuổi học cách đây ba tháng
+tôi có lẽ không phải là người duy nhất làm điều đó
+những con gà mái béo thì đẻ ít trứng
+bạn có thực sự muốn tôi nhảy cùng bạn không
+tom chưa nói gì công khai cả
+hãy liên lạc với tôi theo địa chỉ trên
+tôi thường không làm việc vào các ngày thứ hai
+nhưng tuần trước tôi đã làm
+chúng tôi đã không biết liệu tom có đến hay không
+tôi ước gì tom sẽ giúp chúng tôi
+nhà xưởng bị cháy rồi
+giấy phép bán rượu của bạn hết hạn rồi
+chúng tôi hy vọng là mình đã sai
+tôi đã muốn chơi cờ vua với bạn
+hãy nói cho tôi biết bạn đã lấy được cái này ở đâu
+tôi sẽ nói với tom rằng anh ấy không có gì phải lo lắng cả
+điều đó thậm chí càng làm tôi chán nản hơn
+chúng ta không biết chắc
+chúng tôi thích đi bơi
+đừng quên đánh thức tôi dậy vào lúc
+sáng mai
+tom và
+hè năm sau định tổ chức đám cưới
+bọn họ đi rồi
+cô ấy viết cho tôi một lá thư từ biệt
+không nhận ra người ngồi cạnh mình là ai
+tui không nghĩ
+sẽ đến trong khi không muốn đến
+giáo viên thể dục ghét tui mà
+trời ạ
+sai bét luôn
+tôi không nghĩ là cậu sẽ tới
+tom là kiểu người thế nào
+không còn làm việc ở đây nữa
+mua mấy cái công tắc đèn này để làm gì
+ở ngoài vừa lạnh vừa ướt
+vì sao phụ nữ đeo bông tai thì được nhưng đàn ông lại không
+vậy là được rồi
+lại đây
+trời ơi
+cậu đang nấu gì đấy
+tôi chỉ có một câu hỏi mà thôi
+hồi còn đi học
+tôi viết văn rất tệ
+cậu có nói gì với tớ về chuyện đó đâu
+mặt trời cho chúng ta ánh sáng và hơi nóng
+bạn có bận không
+đây là món quà hoàn hảo dành tặng những người cha trong ngày của cha
+anh ấy che giấu cảm xúc của mình và giả vờ nhiệt tình
+tối hôm qua bạn làm gì
+anh trả lới câu hỏi
+nhớ cho kỹ là đây không phải trò chơi
+hãy nhớ đây không phải là trò chơi đâu nhé
+trông bạn bận rộn hơn mọi khi
+ở đây
+tôi đã đọc báo cáo của bạn
+cô ấy đã sống ở đây cả đời
+tom và
+nói với
+rằng họ rất tiếc
+tôi không biết là tom sống ở úc
+có nhiều điểm yếu
+các bài kiểm tra luôn khiến tôi cảm thấy lo lắng
+mọi người đều đang tìm kiếm hạnh phúc
+cô ấy học đàn
+mỗi tuần
+đã nghỉ ngơi một chút
+chuyên ngành của tom là sinh học
+tôi luôn tắm vào buổi sáng
+anh ấy giới thiệu vợ sắp cưới của mình với gia đình
+tom rơi khỏi tấm bạt lò xo
+nó khá nóng
+tôi có một số sách tiếng anh
+có ba mươi ba chữ cái trong bảng chữ cái tiếng nga
+nó là
+mẹ sợ tôi bị bẩn
+tom đến từ một gia đình lớn
+tôi làm việc trong bệnh viện
+đừng đến muộn
+tôi nghĩ nó nghe rất lạ
+điều đó không vấn đề
+có tin đồn tom là một kẻ bị cắm sừng
+cô ấy cố gắng trong vô vọng để làm hài lòng hắn
+tôi không liên quan tới loại người như tom
+nó không phải là vấn đề
+đúng không
+tom đã làm gì khi ở
+tom mới vừa bị đột quỵ
+hoan hô
+đội của chúng ta lại thắng
+đã đóng
+tôi không định đi
+tôi ngồi xuống
+dựa lưng vào gốc cây
+đã viết một bài luận văn về môi trường
+đều rất thích máy tính
+tom nói anh ta luôn làm như vậy
+làm ơn vặn nhỏ nhạc xuống
+nó quá dài
+bây giờ vẫn chưa có này
+vợ anh làm việc ở văn phòng thành phố
+chúng tôi uống trà và chờ đợi
+anh ấy còn trẻ và ngu ngốc
+tôi hoàn toàn không biết cô ấy
+bạn cần ăn nhiều hơn
+đây là những năm tuyệt vời nhất trong cuộc đời bạn
+hôm qua tôi đã không ăn
+có thể cho mình lời khuyên không
+đặt nó vào phòng khách
+tên của bạn là gì khi bạn được tự do
+chậm lại
+nó là bức ảnh gần đây đúng không
+tôi sẽ gọi họ vào ngày mai khi tôi quay trở lại
+bạn có bao nhiêu những người bạn thân
+bạn chỉ đang chạy thoát khỏi các vấn đề của cuộc sống
+tôi có những lựa chọn nào khác
+lớp học sẽ bắt đầu vào lúc tám giờ ba mươi
+mọi người ơi
+có ai biết chỗ khám sức khỏe rẻ trong thành phố không ạ
+rạp chiếu phim chiếu phim chiếu rạp
+đấy là lỗi của tôi á
+thật ngạc nhiên
+không có gì mà đạt được mà không cần nỗ lực
+tôi sẽ đi
+nó có xa nơi đây không
+tôi muốn ở trong
+có quá nhiều thứ để làm
+tôi cần đấm
+vài người
+tôi mệt
+tại sao mọi người đi xem phim
+tôi đang cởi quần áo
+đó là
+ngày tuyệt vời nhất trong cuộc đời của tôi
+tôi đang đói
+tôi có thể đặt bàn tay xuống sàn mà không cong gối
+tôi không thể đợi để đi trong kì nghỉ
+mọi người xứng đáng có cơ hội thứ
+bạn có chắc cô ấy nói được tiếng bồ đào nha không
+tom đã rất đói
+nói chuyện là phải có chủ ngữ
+vị ngữ đàng hoàng
+tuyệt diệu
+tôi cần giảm cân
+bạn nên theo dõi ví dụ của tom
+nhật bản nhập khẩu cam từ
+bạn hãy nói rằng bạn đang đùa
+tôi rất nghi ngờ
+trung quốc phát triển nhanh chóng
+cậu có thể bị sa thải nếu cậu làm thế
+bạn có đồng ý không
+đã thành công
+cô ấy hét lên
+anh ấy có đến không
+tôi đang học thì có một con trâu chui vào phòng tôi
+bạn có nhớ bạn giấu nó ở đâu không
+phòng này không có đồ đạc
+bản đồ ở trên tường
+tôi muốn đi
+cô ấy ngáp
+là một quốc gia có chủ quyền
+tôi có thể nói tiếng hàn quốc
+tôi thích nghe nhạc
+tôi phát hiện ra tom là bạn trai cũ của
+ăn cái này kiểu gì
+ngon quá
+mẹ tôi là giáo viên
+bạn có thể thêm dấu chấm câu vào cuối mỗi câu được không
+anh ấy là sinh viên
+tôi chỉ biết mỗi tiếng pháp
+tôi quên mua tương cà
+bạn có xem phim truyền hình hàn quốc không
+tom thực sự đã thay đổi rất nhiều từ năm ngoái
+cảm ơn quý khách đã mua hàng
+xin lỗi
+chú ý đi
+tom từ chối
+ăn khỉ
+chúng ta đã tấn công vào cơ sở dữ liệu của chính phủ
+tôi không thể truy cập vào cơ sở dữ liệu
+vui lòng thay đổi cơ sở dữ liệu của bạn để cập nhật địa chỉ mới như sau
+cuối cùng thì tom cũng tìm ra cách cài đặt một ứng dụng cơ sở dữ liệu miễn phí vào máy tính của mình
+ai đã đến
+tôi quyết định đăng kí
+trả lời tôi đi
+vào trong đi
+tôi đã hiểu lầm
+cứ múa đi
+ghi nhớ cái này đi
+ai đó đã trả lời
+dừng lại ở đó đi
+tom đã trả tiền
+chúng tôi xin lỗi
+tai nạn xảy ra
+tom đã biến mất
+hút thuốc gây chết người
+tôi hiểu rồi
+cà phê được rồi
+tôi ghét tiếng anh
+quả bóng bay phát nổ
+tom đang khóc à
+tom là người cầu toàn
+tôi đã mua bánh mì
+tom ăn phở gà
+tom đang nói
+tom ghét tiếng pháp
+tom nhai thuốc lá
+bạn là người cao nhất
+tom bị mù
+tôi bị làm phiền
+chúng tôi là con trai
+con bướm đẹp
+gọi lại cho tôi đi
+ma có thật không
+đừng lãng phí tiền bạc nữa
+có gì đó thiếu thiếu
+ba công nhân đã chết
+tuổi chưa
+tom say rượu
+không ai tin bạn đâu
+mọi người ở đây hết rồi đúng không
+tom là người song ngữ à
+chấp nhận số phận đi
+tôi không biết lý do tại sao bạn không gửi thư cho tôi
+môi của bạn màu xanh dương
+đây là lần đầu bạn đi một mình đúng không
+trời ở đây không lạnh như tôi nghĩ
+gặp vấn đề
+đã mua mọi thứ
+bạn có thể gọi tôi bằng tên riêng của tôi
+tôi sẽ đến
+vào tuần đầu tiên của tháng mười
+tôi cảm thấy hơi đói
+chúng tôi là số một
+nước là chất lỏng
+không ai biết tôi là ai
+trời mưa cả chiều
+bây giờ trời đang mưa
+trời bắt đầu mưa to
+bão thường xuyên xuất hiện ở khu vực này
+cơn bão đã gây ra rất nhiều thiệt hại
+tôi thường ăn cơm bằng đũa
+đây là một ví dụ đơn giản
+thật sao
+tom ngủ ở đây
+tôi có bài tập về nhà
+làm bài tập về nhà đi đã
+tôi nghi là tom và
+không tự mình lam bài tập về nhà
+tom và
+không tin
+tự làm bài tập về nhà của mình
+đưa pháo hoa cho
+cần tiền
+tôi tìm thấy tiền này
+chúng tôi thích bia
+là thủ phủ của
+nay là chủ nhật
+đừng để những người khác xen vào việc của bạn
+hai mũ ba là tám
+cưới sớm
+em cần anh
+cưới hôm nay
+đừng vội cưới
+cô ấy yêu tom chứ không yêu tôi
+lan đạp xe đi học
+lập gia đình rồi
+có thể trở nên một nước giàu có được hay không
+người đó nói năng như một giáo viên
+đừng nghĩ là tôi giàu
+anh ấy đang cải thiện từng chút một
+nhà bạn có mấy người
+không có lối nào để đi vào cả
+những gì anh ấy nói hôm qua không nhất quán với những gì anh ấy nói tuần trước
+đứa trẻ sợ bóng tối
+điều quan trọng đối với an ninh quốc gia là chuỗi cung ứng không được phụ thuộc quá nhiều vào các công ty trung quốc
+phụ nữ tốt bụng thì luôn xinh đẹp
+nhưng phụ nữ xinh đẹp chưa chắc đã tốt bụng
+tôi cho họ hi vọng
+nghe vớ va vớ vẩn
+chúng tôi vẫn chưa tìm ra nghiệm
+tôi học toán cả ngày thứ bảy
+khi nào thì cậu thường đi mua đồ ở cửa hàng tạp hóa
+tôi đáng lẽ nên uống trà gừng để đỡ đau bụng
+chó biết bơi
+tôi sẽ làm gì nếu tôi phát điên
+cô ấy cứ trêu anh ấy suốt thôi
+các từ phổ biến là
+đường phố
+đất nước
+ô tô
+gia đình
+mặt trời và tạm biệt
+tôi muốn ăn
+hãy bảo vệ tôi
+vậy còn bạn thì sao
+tiếng pháp
+tiếng nhật và tiếng do thái
+chỉ cần xin lỗi thôi
+tôi nghĩ bây giờ bạn không nên nói chuyện với tom
+sản xuất điện thoại thông minh
+vũ trụ thật rộng lớn
+thật là lạ khi họ chẳng biết gì về việc này
+khả năng tập trung của anh ta chỉ tương đương với một con cá vàng
+chúng tôi cảm thấy vô cùng nhục nhã
+tom là thành viên mới của chúng ta
+tôi đã sống ở
+tôi thấy không khỏe cho lắm
+tôi không quan tâm đến ngôn ngữ nhân tạo
+đôi khi
+những hành động của riêng chúng ta có vẻ như quá bé nhỏ
+khó có thể tạo ra sự đổi thay
+tôi thích truyện cổ tích séc
+đấy là đèn giao thông
+rẽ trái ở đèn giao thông thứ hai
+không có đèn giao thông ở trên đường cao tốc
+đó là một quốc gia nghèo
+nó tự vỡ
+nó tự gãy
+hai người chúng ta còn không có nổi một bức ảnh chụp cùng nhau
+tôi đang tiết kiệm tiền để mua một ngôi nhà mới
+cái gì
+bạn bị điên à
+cái gì
+mày điên à
+các bạn đã mua bao nhiêu vé
+anh ấy biết tiếng
+của tôi đang chạy
+quốc tế ngữ là
+của các ngôn ngữ
+đã tạo ra một hệ điều hành
+họ đã thông báo một phiên bản hệ điều hành mới
+anh ấy không thấy cái hố vì trời tối nên đã rơi xuống
+anh ấy rất thích ô tô
+tình yêu là gì
+tôi đọc mọi thứ
+ướt thế
+tom bán cà phê
+chơi với tớ đi
+nó sẽ cháy
+bạn có đọc được không
+viết cho tôi đi
+tôi gặp ác mộng
+đang thay đổi
+tôi sẽ cẩn thận hơn nếu tôi là bạn
+tôi hi vọng chúng ta có thể giữ liên lạc
+gần mười hai giờ rồi
+là gì
+họ đang ăn táo của họ
+có những thứ không thể tránh khỏi
+tôi muốn có ô tô
+nhưng tôi không có tiền mua một chiếc
+tom đã trả nhiều tiền để mua chiếc ô tô đó
+cứ quay lại đây trưa nay
+và tôi sẽ tìm ra giải pháp
+khi nào bạn bước sang tuổi ba mươi
+ai đã tạo ra
+bạn đang hút bụi à
+chúng ta không còn táo nữa
+mỗi con đường tôi chọn đều chứa đầy những thử thách
+bảng chữ cái tiếng
+chữ cái
+hãy đảm bảo
+này tương thích ngược để các máy khách cũ cũng dùng được
+tầng hầm của tôi bị ngập
+nó chán
+ai đã thấy tôi
+kia là tom
+đám con gái cười
+tom thích hát
+cô ấy vui vẻ
+tôi béo phì
+tom không bao giờ nói dối
+bạn có can đảm không
+bữa trưa được chưa
+tom chăm chỉ học tập
+tom an ủi
+con người thường mắc sai lầm
+tôi ghét trẻ em
+cổ tôi đau
+đừng nhảy
+không là ngã đấy
+ai cũng biết là tôi vô tội
+bốn đô la là bao nhiêu yên
+anh ấy đang hẹn hò với người nổi tiếng
+tôi chỉ thêm những câu bằng tiếng mẹ đẻ của mình
+tôi chỉ đang nằm dài trên ghế
+nhiều chuyên gia nghi ngờ điều đấy
+tom đã uống
+tom run rẩy
+nó lỗi thời rồi
+cửa hàng gần nhất ở đâu
+anh ấy là một người có thể nói được nhiều thứ tiếng
+tôi thích chiếc ghế này
+đó là chỗ ngồi của tôi
+có hàng mi dài
+sao bạn lại dừng lại đột ngột thế
+là vợ tôi
+đó là một giấc mơ
+tôi muốn khóc
+bạn dùng hương thảo vào việc gì
+chúng ta là một đất nước yêu chuộng hòa bình
+thật à
+tom lúc đó đang vội nên không ăn sáng
+nó là thế đấy
+bia có chứa hoa bia
+tôi không nghĩ tiếng đức khó đến thế đâu
+tôi tin vào thiên thần
+khi chúng tôi đến
+bộ phim đang chiếu rồi
+tôi thích nước khoáng hơn
+bạn có thể bắt gà không
+đừng đưa nó cho tom
+gỗ này khô lắm
+nó sẽ bắt lửa nhanh thôi
+tôi đã mua trái cây và rượu vang
+đến một nhà hàng
+rất tốt
+tài khoản của tôi bị lấy mất rồi
+cuối bộ phim
+mọi người vỗ tay khen ngợi
+kẻ giàu là kẻ vẽ luật
+tôi có nhiều tiền
+hãy dậy sớm vào buổi sáng
+tôi có từ điển
+thì sao
+hãy làm gì đó đi
+tom ở úc
+bạn có chơi nhạc cụ nào không
+bạn đã lưu tệp vào thư mục nào rồi
+anh ấy đã lấy một cô gái cùng làng
+đề tài của bài văn của tôi là bảo vệ môi trường
+tom đang nói nhanh hơn mọi khi
+tôi là tôi
+tôi có thông điệp quan trọng muốn gửi đến những ai đang ở đây
+ngày mai
+trời lại nhiều gió
+cho tôi vào chung ô với cậu nhé
+bây giờ chúng ta không cần thêm đàn ông nữa
+là nơi nên đến nếu bạn mới trải nghiệm việc sống ở nước ngoài
+cậu thật sự ôm tom
+tôi cũng là con người giống như bạn mà thôi
+đã trở thành một nữ diễn viên tài ba dù phải trải qua tuổi thơ khó khăn
+tôi không mua nổi quyển sách đắt thế này đâu
+không phải ư
+sách vừa được cho lên kệ thì khách lao đến mua
+họ đã chuyển tới
+chuyến đi đó là kỉ niệm không thể nào quên
+bảo tôi đợi ở đây cho đén khi cô ấy quay lại
+tom đang bị xét xử vì tội giết người
+tôi đã quyết định sưu tầm tem
+khi mùa xuân đến
+ai cũng dậy sớm
+thấy tôi ra hiệu thì các bạn hãy chạy ngay đi
+có tiềm năng trở thành nhà vô địch thế giới
+kể cả khi phải đấu với
+nhưng có vẻ anh ấy đã đạt đến giới hạn về tâm lí
+tạo ra những sai lầm không đáng có ở đẳng cấp này
+quân mã có thể nhảy qua quân khác trong cờ vua
+học xong trường y ở tuổi
+được sinh ra trước
+anh ấy toát mồ hôi
+anh ấy không thích tôi ư
+ở đâu
+tom có trình độ giáo dục cao hơn tôi
+tôi sẽ thử lại sau
+cảm ơn
+ngày mai là sinh nhật anh ấy
+nên tôi sẽ mang bữa sáng đến giường anh
+chỉ có cán bộ công nhân viên của công ty là được sử dụng các cơ sở hạ tầng
+cái đấy vẫn cần xác nhận
+cô ấy sở hữu khối tài sản kếch xù
+cô ấy đang chờ câu trả lời
+một phút trôi qua nhanh
+tôi đến từ thung lũng
+tối nay chúng ta ăn ở đâu
+tôi chưa từng nói chuyện với anh ấy kể từ đó
+tôi không biết cô gái này
+cây cầu được hoàn thành đúng tiến độ
+tôi cần lấy lại tiền
+bố tôi rất kén chọn đồ ăn
+cô ấy đã trở thành trẻ mồ côi
+tôi thực sự quan tâm đến tình bạn của chúng ta
+cho rác vào thùng rác đi
+dọn nhà đi
+nếm quả sa kê đi
+người đó có bị đau bụng không
+ở nhà bạn làm những công việc gì
+tôi là bác sĩ
+ai là người chơi bóng chuyển giỏi nhất ngôi trường này
+xe máy của bạn ở đâu
+tom có ba chiếc xe máy
+sao kim có những đám mây
+đang điều khiển xe máy
+tôi khi đó đang lái xe máy
+tôi thích lái xe máy
+đấy là một chiếc xe máy ngầu đấy
+bạn đã mua chiếc xe máy của bạn ở đâu thế
+vì lí do thẩm mĩ
+nhiều người trẻ né tránh việc phải đội mũ bảo hiểm khi đi xe máy
+tôi không nghĩ bạn đã hiểu tôi
+đăng ký cược
+bài go
+bạn không nên nằm xuống ngay sau khi ăn
+suy giảm trí nhớ là do tuổi già hay do bệnh tật
+họ sẽ đi vào ngày mai
+ai đã viết lời tựa cho cuốn sách của anh ấy
+dự báo thời tiết nói rằng ngày mai trời sẽ mưa
+bổn phận của chúng ta la nuôi dưỡng hi vọng
+tôm bảo tôi rằng ba của anh ấy sinh ra ở
+chúng đều là
+chiết giang là một tỉnh ven biển phía đông trung quốc
+hôm nay là hết mùa đông
+tôi chờ ba tiếng rồi
+cửa sổ bị vỡ trong cơn bão
+đừng động vào con dao đấy
+tom và
+đổ lỗi cho nhau
+có những đứa trẻ thích cả chó lẫn mèo
+tôi là người duy nhất đến trường vào hôm qua
+trên đời này có ba loại người
+người biết đếm và người không biết đếm
+khi bạn bắt đầu trông giống như trong hộ chiếu thì bạn nên đi du lịch một bữa
+sao bạn lại meo
+tôi tự hỏi liệu họ có quay lại không
+nông dân sẽ rải hạt giống xuống đất
+ánh đèn đang nhấp nháy
+tôi nằm trên bãi biển hằng ngày
+tôi sẽ làm như bạn yêu cầu
+rất khó xóa sổ lũ gián trong nhà
+anh ấy quá béo
+tôi đi lào
+đã không nói gì với
+cần trợ giúp
+tôi cần chút không gian
+bóng bàn
+mọi nơi
+ăn cắp
+bây giờ
+dạo gần đây tôi rất là bận rộn
+có quá nhiều dụng cụ mới trong phòng
+lập trình viên thường bị đau cổ và đau lưng
+những con chuồn chuồn đang bay trên mặt nước
+anh ấy không phải là một người lính
+đúng là một buổi sáng đẹp trời
+xin chào
+bé yêu
+xin chào thế giới
+bạn của cô ấy rất thích con chó của anh ấy
+tại sao có ông già
+mà lại không có bà già
+những đứa trẻ thích động vật
+họ đã trở nên giàu có
+đừng nói to quá
+một con thiểu năng
+con còn lại cũng thế
+tom cũng chỉ thân thiện như tôi mà thôi
+cây anh đào đã nở
+hãy tôn trọng không gian của tôi
+chúng tôi muốn có không gian
+không gian thì rộng lớn
+con người sẽ thuộc địa hóa không gian chứ
+tranh sơn dầu này đã có từ đầu thế kỉ mười sáu
+họ đã hoàn thành năm học
+nước có thể tồn tại ở thể rắn
+lỏng hoặc khí
+tùy vào điều kiện nhiệt độ và áp suất
+là thành phố lớn nhất châu âu
+tôi muốn đi chợ cùng với bạn gái
+sáng nào tôi cũng bơi ở biển

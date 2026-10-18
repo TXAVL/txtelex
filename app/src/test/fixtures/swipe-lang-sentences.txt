@@ -1,0 +1,1774 @@
+# swipe-lang-sentences v1 — sinh bởi Scripts/gen-swipe-lang-eval.py. <tập>\t<loại>\t<câu>; loại en = câu Anh Tatoeba (CC BY 2.0 FR, https://tatoeba.org), mix = câu trộn (từ Anh "/e").
+dev	en	we need to make some changes around here
+dev	en	one needs to hope
+dev	en	i blamed myself
+dev	en	it felt very cold
+dev	en	who did you go skating with
+dev	en	they know their children need them
+dev	en	i can run faster that those three
+dev	en	where are your fingers
+dev	en	treat others with love and respect
+dev	en	finally my luck is turning
+dev	en	her coat was too casual for the occasion
+dev	en	he will surely succeed in his new job
+dev	en	she still hopes she can do that
+dev	en	he seems to be losing motivation
+dev	en	god how i hate this job
+dev	en	he works slowly
+dev	en	i hate these flowers
+dev	en	we still work on our own
+dev	en	tobacco was one of their major crops
+dev	en	this is the captain speaking
+dev	en	did you pay the gas bill
+dev	en	why should i leave
+dev	en	they recovered from cancer
+dev	en	did you find the keys that were missing
+dev	en	she used to despise him
+dev	en	my flight has been canceled
+dev	en	tell him everything
+dev	en	i had to wait a long time
+dev	en	he went out just now
+dev	en	i stopped this
+dev	en	he received donations
+dev	en	he put his jacket back on
+dev	en	why did you invite me
+dev	en	have you found work
+dev	en	they sell old rugs
+dev	en	he has complete faith in him
+dev	en	this item is currently out of stock
+dev	en	she might possibly know the answer
+dev	en	they never married
+dev	en	please write me a note
+dev	en	make an appointment
+dev	en	i have to stop doing this
+dev	en	she used to love that
+dev	en	he began to read
+dev	en	the food tasted weird
+dev	en	we need to protect the lives of people
+dev	en	get rid of all of it
+dev	en	where are all the towels
+dev	en	it appeals to me
+dev	en	are you going on a camping trip
+dev	en	how early do i have to be there
+dev	en	my parents enjoy skiing every winter
+dev	en	we need to impress them
+dev	en	she painted the walls bright yellow
+dev	en	why are you thanking me
+dev	en	these kids are in danger
+dev	en	what is the police doing in my house
+dev	en	i killed them all
+dev	en	i am not a con artist
+dev	en	she wears ankle boots
+dev	en	no man is free from sin
+dev	en	what are you doing next week
+dev	en	they told everyone that they were scared
+dev	en	all of us should go
+dev	en	she slapped me
+dev	en	put some paper in the copy machine
+dev	en	show me some others
+dev	en	i hope they rot in jail
+dev	en	i want to gain some weight
+dev	en	there was a food fight in the cafeteria
+dev	en	how do you use this
+dev	en	she needed insulin to survive
+dev	en	what a huge embarrassment
+dev	en	i wonder why this is happening
+dev	en	my sister plays with the dolls
+dev	en	she emptied her pockets
+dev	en	she never knew her parents
+dev	en	he decided to quit magic
+dev	en	i appreciate your attention to detail
+dev	en	keep him inside
+dev	en	we want to work with them
+dev	en	we should kill them all
+dev	en	did you cook it
+dev	en	i have to find them now
+dev	en	do you play the drums
+dev	en	i arrived outside the dressing room
+dev	en	cold as stone
+dev	en	the goods were sent out yesterday
+dev	en	he made him angry
+dev	en	how will that help them
+dev	en	he will ruin us all
+dev	en	the tiger retreated and vanished into the jungle
+dev	en	i have many photos
+dev	en	are you totally sure now though
+dev	en	the teacher was threatening us
+dev	en	i was tired after doing that
+dev	en	always a good time on front street
+dev	en	they thought about it a little late
+dev	en	my sister watches television
+dev	en	can you wait a few weeks
+dev	en	we made a movie about chess
+dev	en	i want to see him at all costs
+dev	en	it was just a disaster
+dev	en	i had fish for dinner last night
+dev	en	let the problem alone
+dev	en	we really had a lot of fun
+dev	en	will i do as your partner
+dev	en	he contacted the local mosque
+dev	en	the girls are as busy as bees
+dev	en	i am pleased at your coming
+dev	en	can we clarify a few things
+dev	en	where can i shop
+dev	en	it hurt where i was hit
+dev	en	would they recognize you
+dev	en	i need a break
+dev	en	he crept towards the exit door
+dev	en	nobody noticed the picture was hung upside down
+dev	en	winter is coming on
+dev	en	for all her riches she is not happy
+dev	en	i might consider buying a refurbished phone
+dev	en	the train was ready to depart
+dev	en	i knew what you were up to
+dev	en	are you still politically active
+dev	en	i pretended to cry
+dev	en	there is nothing to prevent us from going
+dev	en	this car must go
+dev	en	chocolate is the most beautiful thing there is
+dev	en	we had our suspicions
+dev	en	maybe i can help you
+dev	en	where did you put my passport
+dev	en	i want a closer look at that
+dev	en	we kept our books closed
+dev	en	does he have what it takes
+dev	en	he feels a strong need for passion
+dev	en	say i am sick
+dev	en	the problem was money
+dev	en	what choice did we have
+dev	en	i was born in this area
+dev	en	i just touched a snake
+dev	en	a lot of things happened there
+dev	en	the operation went smoothly
+dev	en	our method is better
+dev	en	do you happen to know his name
+dev	en	he never gives away any of his money
+dev	en	my mother bought me a new bicycle
+dev	en	he was wounded in the battle
+dev	en	he might talk
+dev	en	we want to change the country
+dev	en	that cannon looks rather flimsy
+dev	en	he wants to escape from the country
+dev	en	i must stop staying up late
+dev	en	you never know what will happen
+dev	en	did you get what we need
+dev	en	the bed linen changes every week
+dev	en	what do you say to going shopping
+dev	en	i have observed him for many months
+dev	en	i thought that they offered you a job
+dev	en	always seek to fulfill your desires
+dev	en	everything has its time and place
+dev	en	all is good
+dev	en	humans are funny
+dev	en	we were unable to rescue him
+dev	en	did you know her
+dev	en	i knew i was safe
+dev	en	what did you pay for those shoes
+dev	en	we ate fish and steamed vegetables
+dev	en	the dragon must die
+dev	en	this must have cost a small fortune
+dev	en	the automobile has changed our life
+dev	en	my brother plays soccer
+dev	en	the cat arched its back
+dev	en	have you already talked to somebody about this
+dev	en	the new furniture came today
+dev	en	this dress is good value
+dev	en	she donated blood
+dev	en	have you got this jacket in different colours
+dev	en	what are your take on that
+dev	en	some things were not adding up
+dev	en	we go to the theater once a week
+dev	en	she caught a ride with him
+dev	en	this is my final post
+dev	en	he told me that his house was haunted
+dev	en	he looks like my friend
+dev	en	he found it difficult to understand her
+dev	en	the mobile phone is in the pocket
+dev	en	nobody left me instructions
+dev	en	he drove her back to her house
+dev	en	stop hitting on me
+dev	en	do you still have questions
+dev	en	what he says is true to some extent
+dev	en	i know what you were doing
+dev	en	are you still angry with her
+dev	en	people learn by example
+dev	en	were you at the beach all summer
+dev	en	will you teach me how to make this
+dev	en	a sign drew attention to the danger
+dev	en	please remind me to turn in the paper
+dev	en	can you really not swim
+dev	en	it is getting cooler and cooler
+dev	en	you should do something you enjoy doing
+dev	en	i no longer have the energy to talk
+dev	en	it was a risky thing to do
+dev	en	their attempts came to nothing
+dev	en	we should get someone to paint our house
+dev	en	humility is a forgotten virtue
+dev	en	he is starving
+dev	en	maybe you should quit drinking
+dev	en	their suitcase is too heavy
+dev	en	these vegetables cook slowly
+dev	en	call me when you leave work
+dev	en	winning is more fun than losing
+dev	en	i heard that somebody attacked you
+dev	en	she said that she plans on going
+dev	en	where can i see a football game
+dev	en	go and see
+dev	en	there was no one else on the road
+dev	en	how did you ever do that
+dev	en	i think i can manage alone
+dev	en	they live in a small house
+dev	en	when did he come over to see you
+dev	en	please fill this bucket with water
+dev	en	were you happy with how things turned out
+dev	en	that alone is worth living for
+dev	en	i am in a stew
+dev	en	can you hear his singing
+dev	en	the only reward of virtue is virtue
+dev	en	the tears of the orphan
+dev	en	he suffered serious injuries in a car crash
+dev	en	the area was quiet
+dev	en	please make all the necessary changes
+dev	en	they almost gave up hope
+dev	en	she never stops complaining
+dev	en	have you got some money
+dev	en	the commemorative ceremony ended with the closing address
+dev	en	his funeral will be this weekend
+dev	en	she is not angry with me
+dev	en	i was absent for a week
+dev	en	he works from eight to five
+dev	en	he needs to study for the math exam
+dev	en	what was it all about
+dev	en	there is bad weather in the north
+dev	en	is this our flight
+dev	en	right back at ya
+dev	en	everyone was left satisfied
+dev	en	what was the hold up
+dev	en	he was given three ships by the queen
+dev	en	the death penalty should be abolished
+dev	en	she likes me more than she likes you
+dev	en	where are we going next
+dev	en	their promises mean nothing
+dev	en	how did you get your job
+dev	en	tell anyone about this and you die
+dev	en	can i have different one
+dev	en	i think baseball is more popular than basketball
+dev	en	why were you in prison
+dev	en	all devices were working properly
+dev	en	can you save her
+dev	en	he is likely to pass the examination
+dev	en	do you know what caused the accident
+dev	en	they may get injured if they do that
+dev	en	i phone the police again
+dev	en	we were smart
+dev	en	all the expenses will fall on the sponsor
+dev	en	i want to stay home with my family
+dev	en	that was the first novel i red
+dev	en	we had a sound sleep
+dev	en	i have nothing else scheduled for today
+dev	en	why are you calling us
+dev	en	he likes the old blankets better
+dev	en	do you suppose that he is attractive
+dev	en	how have you been
+dev	en	i can do it too
+dev	en	he was stabbed to death by his mother
+dev	en	i like city life very much
+dev	en	i handed him my business card
+dev	en	do you know this channel
+dev	en	just start walking
+dev	en	the authorities have already arrived
+dev	en	where did she get those shoes
+dev	en	many are against this bill
+dev	en	the committee accepted the proposal
+dev	en	the ship sailed over the water
+dev	en	did you return the books to the library
+dev	en	his successors slowly undid his popular economic reforms
+dev	en	i tend to get lost in my feelings
+dev	en	nobody will tell you anything
+dev	en	are you positive about that
+dev	en	the laws of physics do not apply here
+dev	en	i wonder if my life is worth living
+dev	en	back to my friends i haste
+dev	en	his plan might fail
+dev	en	thanks for your help guys
+dev	en	what happened on the bus
+dev	en	he has no trust in people
+dev	en	how many books are on that shelf
+dev	en	what are you going to take with you
+dev	en	everybody should vote
+dev	en	i have to help him
+dev	en	i owe you so much
+dev	en	they ordered champagne
+dev	en	she hurt herself when she fell
+dev	en	i will come when i can
+dev	en	what did they find
+dev	en	the mere sight of blood makes him faint
+dev	en	it is not good to eat between meals
+dev	en	he did everything he could for her
+dev	en	we have a great opportunity
+dev	en	it has just happened
+dev	en	there is some milk left in the fridge
+dev	en	she had to go there by herself
+dev	en	the boy wears glasses
+dev	en	we had a really good time
+dev	en	did you bring what i need
+dev	en	are you exercising
+dev	en	do you listen to this show frequently
+dev	en	it is sad that you must leave
+dev	en	i spent the day reading
+dev	en	we used to go to the same school
+dev	en	he likes these cats
+dev	en	why were you absent
+dev	en	he wishes for a peaceful world
+dev	en	approximately thirty people were arrested
+dev	en	this should be enough
+dev	en	what kind of music has been popular lately
+dev	en	my parents objected to my studying abroad
+dev	en	i like your coffee
+dev	en	what makes you sad
+dev	en	a clenched fist may indicate stress
+dev	en	can i take your bags
+dev	en	i was amused at the story
+dev	en	what exactly is money laundering
+dev	en	let me see if i can find it
+dev	en	i own that island
+dev	en	you disagree with me
+dev	en	she got into trouble because of him
+dev	en	he said he wants to win
+dev	en	why was he laughing
+dev	en	the bad guys will pay one day
+dev	en	i go to a state school
+dev	en	can i have a juice box
+dev	en	the light was moving further away
+dev	en	they have a plane
+dev	en	you still have time to think it over
+dev	en	i hate crowds
+dev	en	tell her what you heard
+dev	en	he left a mark on me
+dev	en	did you feel the earth shake just now
+dev	en	horses are strong and beautiful creatures
+dev	en	everyone has his own treasure
+dev	en	i feel the cold very much
+dev	en	today i ate lunch at the school cafeteria
+dev	en	they were requested to sing another song
+dev	en	the rest follows naturally
+dev	en	she lives in your neck of the woods
+dev	en	i like to take photos
+dev	en	the hosts on this channel are utterly ignorant
+dev	en	i was paid well on my previous job
+dev	en	you are very talented
+dev	en	i love her more and more
+dev	en	you should come and see me tomorrow
+dev	en	i told her i was married
+dev	en	she wanted to be independent and free
+dev	en	he could swim well
+dev	en	his daughter is sick
+dev	en	there was a sense of fear
+dev	en	my mother went shopping at a department store
+dev	en	we expanded the baking operation
+dev	en	your glasses are on the small table
+dev	en	did you accept her invitation
+dev	en	there was a large garden behind the house
+dev	en	tell them to come back in
+dev	en	i really wanted the job
+dev	en	how much more do we need
+dev	en	we saw something
+dev	en	you hurt them
+dev	en	young people nowadays are fools
+dev	en	am i supposed to do anything
+dev	en	they slit their wrists
+dev	en	he went into severe debt
+dev	en	red is an aggressive colour
+dev	en	we are football players
+dev	en	cut the cloth in a diagonal direction
+dev	en	are you rushing to finish the project
+dev	en	who would have imagined
+dev	en	we feel bored
+dev	en	yesterday was partly cloudy
+dev	en	your power has abandoned you
+dev	en	one should not copy the solutions
+dev	en	i wasted a lot of money in gambling
+dev	en	maybe you were right
+dev	en	did you see what i got
+dev	en	that girl is pretty
+dev	en	run with them to their village
+dev	en	he painted the door white
+dev	en	his father is a respected cop
+dev	en	the session was concluded
+dev	en	they broke into the cabin
+dev	en	i made him change his plan
+dev	en	sometimes reading took up half his time
+dev	en	prepare for it before the time comes
+dev	en	french culture continues to enjoy great prestige
+dev	en	i sometimes have a pain in my stomach
+dev	en	everyone saw that
+dev	en	these playing cards are marked
+dev	en	my horse is dead
+dev	en	he sets a goal and sticks to it
+dev	en	it would be better with your younger sister
+dev	en	the plank is about two metres long
+dev	en	nobody would talk to me
+dev	en	do i look like a fool
+dev	en	how come you say nothing
+dev	en	i ran to him
+dev	en	they missed you
+dev	en	let me check the list
+dev	en	all the essays apart from yours were good
+dev	en	some things are sacred
+dev	en	the rocket went up smoothly
+dev	en	did you remember to turn the lights off
+dev	en	we handled snakes
+dev	en	bring me the flute
+dev	en	you saw her
+dev	en	he came in with his eyes shining
+dev	en	she was playing the piano at that time
+dev	en	he left his trumpet at school
+dev	en	i can pay now
+dev	en	what help is that
+dev	en	are you man or machine
+dev	en	i share their political position
+dev	en	i sure appreciate all your help
+dev	en	marketing that targets children should be strongly regulated
+dev	en	thank you for your hospitality
+dev	en	want me to show you my collection
+dev	en	smoking is strictly forbidden
+dev	en	i lost my closest friend
+dev	en	we drove in silence for a moment
+dev	en	please do me a favor and just leave
+dev	en	i got stung by a bee
+dev	en	you seem to be in a hurry
+dev	en	i set limits for him
+dev	en	he has a lot of self confidence
+dev	en	what editing software do you use
+dev	en	this library is new
+dev	en	this elevator needs to be replaced
+dev	en	the results of this study are intriguing
+dev	en	yesterday my head hurt
+dev	en	are you doing anything tomorrow afternoon
+dev	en	did you have something for me
+dev	en	is there hope for humanity
+dev	en	try to make good use of your time
+dev	en	that was our thinking
+dev	en	the toilet is behind the staircase
+dev	en	i need to be prepared
+dev	en	you should wait inside
+dev	en	the teacher fell in love with the student
+dev	en	the wall has ears
+dev	en	accidents are a part of life
+dev	en	we need to care of ourselves
+dev	en	i would like to meet them
+dev	en	i will watch it
+dev	en	love is for everyone
+dev	en	what is his email address
+dev	en	they know that they can trust us
+dev	en	we went to the zoo
+dev	en	we have three weeks
+dev	en	remember what we talked about last night
+dev	en	look at the evidence
+dev	en	i know it seems difficult to understand
+dev	en	was there really a need to say that
+dev	en	that name seemed familiar
+dev	en	no group has claimed responsibility
+dev	en	the money has already been spent
+dev	en	i bring hope to everyone
+dev	en	did you make all these models
+dev	en	i bought several bottles of water
+dev	en	he delivered messages around the city
+dev	en	you are ugly
+dev	en	he admitted that he was worried
+dev	en	is there no bank here
+dev	en	can you give me an example
+dev	en	did you see the new documentary
+dev	en	which brother did you see
+dev	en	it was the biggest mistake of my life
+dev	en	autumn had come forth
+dev	en	we are not here to arrest you
+dev	en	a button has come off my shirt
+dev	en	that was his name
+dev	en	there has never been a balloon here
+dev	en	he borrowed a gun from her
+dev	en	sit here with me
+dev	en	i waited for him for an hour
+dev	en	i owe her one
+dev	en	i rarely walk to work
+dev	en	he knows who she is
+dev	en	i appreciate that
+dev	en	what a disgusting individual
+dev	en	he was named after the king
+dev	en	have you been somewhere
+dev	en	i have to take out the garbage
+dev	en	that must be a new record
+dev	en	the man is not concerned in this project
+dev	en	i want a bigger house
+dev	en	they were caught smoking
+dev	en	i can only work so fast
+dev	en	what are we doing in our world
+dev	en	perhaps you can help me
+dev	en	we must think of something else
+dev	en	the gym was completely empty
+dev	en	she brought me a letter to translate
+dev	en	perhaps we should contact her
+dev	en	am i being stupid
+dev	en	how long have you been standing there
+dev	en	we are in a hurry
+dev	en	what a beautiful name
+dev	en	they escorted one another
+dev	en	he was not just a father to me
+dev	en	comfort is what matters to me the most
+dev	en	your effort deserves praise
+dev	en	he has some goats
+dev	en	knowledge is human
+dev	en	he wore himself out
+dev	en	mark brought a gift with a note
+dev	en	everyone should vote
+dev	en	how about a cup of tea or coffee
+dev	en	were they serious
+dev	en	his sudden appearance surprised us all
+dev	en	am i being helpful
+dev	en	they must have had a noble mind
+dev	en	he angrily closed the door
+dev	en	they are the ones destroying our language
+dev	en	she often travelled when she was young
+dev	en	that looks somewhat dangerous
+dev	en	in which university do you want to study
+dev	en	we decided not to do that
+dev	en	eat wherever you want
+dev	en	this should be reverted back to the original
+dev	en	all i want to do now is sleep
+dev	en	she is a runner
+dev	en	he knows a lot about butterflies
+dev	en	their house is beautiful
+dev	en	i had told him everything
+dev	en	this group will run
+dev	en	i got to school on time today
+dev	en	i intend to start now
+dev	en	they built bigger and better ships
+dev	en	our staff is excellent
+dev	en	she stopped going to the mosque
+dev	en	he sought for his name
+dev	en	he told me that he was flexible
+dev	en	imagine how stupid that will look
+dev	en	the children were chasing each other and laughing
+dev	en	yesterday i received his letter
+dev	en	grace ran swiftly
+dev	en	she did it the old fashioned way
+dev	en	she works as a massage therapist
+dev	en	he was so upset he was shaking
+dev	en	she made thirty thousand dollars
+dev	en	how about a second helping
+dev	en	i do that this way
+dev	en	they were grateful
+dev	en	it is a sheer waste of time
+dev	en	where are they going to
+dev	en	we both went to the mosque
+dev	en	i am not interested in sports
+dev	en	your philosophy of life is different than mine
+dev	en	the exact amount must be inserted
+dev	en	please try me for the job
+dev	en	steam trains once ran through here
+dev	en	i think i need a rest
+dev	en	he watches with knowing eyes
+dev	en	i figured that you might need some help
+dev	en	she installed herself in an easy chair
+dev	en	my life is very complicated
+dev	en	they told me they were puzzled
+dev	en	black boots completed his outfit
+dev	en	you have made things harder for yourselves
+dev	en	bow to no man
+dev	en	he bent over to pick up the trash
+dev	en	the bus was completely full
+dev	en	she has something in her hand
+dev	en	she stopped growing
+dev	en	he wants to play next
+dev	en	i like the melody of this song
+dev	en	is that near here
+dev	en	i drank coffee this morning
+dev	en	my legs were shaking
+dev	en	whose land is this
+dev	en	get off of me
+dev	en	my dad was a hard man
+dev	en	a storm came suddenly
+dev	en	we have fear of the future
+dev	en	she bought him some candy
+dev	en	you sounded just like them
+dev	en	we need more storage space
+dev	en	he is completely absorbed in his business
+dev	en	everyone does it
+dev	en	we are not going to be back tomorrow
+dev	en	she offered to relieve me
+dev	en	that hotel was good and inexpensive
+dev	en	have you already eaten today
+dev	en	i wanted you to have this
+dev	en	the door is broken
+dev	en	they said they knew that you could win
+dev	en	is there anything prohibiting us from doing that
+dev	en	your hair is very beautiful
+dev	en	he chained his bicycle to a tree
+dev	en	can you ask her to come in
+dev	en	learning runs in their blood
+dev	en	i want to avoid unnecessary risks
+dev	en	he stared at his coffee mug
+dev	en	i am very tired after a class
+dev	en	which one costs more
+dev	en	he got engaged
+dev	en	we were told to stop doing that
+dev	en	there was a hail of protest
+dev	en	i walk to school every morning
+dev	en	how long will i need to wait
+dev	en	what an utter shower
+dev	en	we had to wait a very long time
+dev	en	they have a talented producer
+dev	en	she wants to sing old songs
+dev	en	compare this genuine jewel with that imitation
+test	en	be more precise
+test	en	there is no smoking in this building
+test	en	a cat is sitting on the piano keyboard
+test	en	i was crazy to do that
+test	en	earthquakes and floods are natural disasters
+test	en	he stood in line for an hour
+test	en	champagne for everyone
+test	en	there she is
+test	en	people are talking about us
+test	en	i fully agree with all of you
+test	en	he just hung up on her
+test	en	he did everything i told him to
+test	en	what am i supposed to call you
+test	en	i can hear somebody singing
+test	en	the alien bug flew into the tunnel
+test	en	i really do think that
+test	en	i often eat hot dogs
+test	en	how did you become interested in studying languages
+test	en	she is living an unhappy life
+test	en	here you are among your friends
+test	en	take what you need
+test	en	let them try doubling a recipe
+test	en	she took a walk in the park
+test	en	i still have some work to do
+test	en	is it pleasing to you
+test	en	he can do what he likes
+test	en	i hardly recognized him
+test	en	we got remarried
+test	en	which one of those dogs is yours
+test	en	the government is funding space exploration
+test	en	he told me that he should do that
+test	en	i grew my hair for her
+test	en	bees live in strictly organized societies
+test	en	we wanted to change something
+test	en	that made him smile
+test	en	can we go up the tower over there
+test	en	this work must be finished within two years
+test	en	he left his umbrella in the car
+test	en	the flowers are densely packed together
+test	en	education is a gateway to success
+test	en	you eventually died
+test	en	people get angry sometimes
+test	en	i had sex with your mother
+test	en	tomorrow i am going shopping
+test	en	she borrowed money from him
+test	en	i was so terrified
+test	en	it is this window that he broke
+test	en	he was on private land
+test	en	what did you expect to see
+test	en	try to do one thing at a time
+test	en	is this happening in real life
+test	en	what is the best season for whale watching
+test	en	i may take some smaller trip before then
+test	en	that ship leaves tomorrow
+test	en	we should really do it
+test	en	he wore a very loud tie
+test	en	take their guns away
+test	en	can i give you a word of advice
+test	en	she was pretty busy herself
+test	en	i happen to like living alone
+test	en	he was almost blind right before dying
+test	en	i quickly ate lunch
+test	en	did you wash my shirt
+test	en	i will not give them food
+test	en	she heard a key turning inside the lock
+test	en	drag is an ancient art form
+test	en	nobody really cares what we do
+test	en	there is no beach in this area
+test	en	am i not doing the right thing
+test	en	they were talking loudly
+test	en	do you consider yourselves lucky
+test	en	she drew a picture of him
+test	en	do you think it was easy for me
+test	en	no beans for me
+test	en	why did you ask her
+test	en	these towels are beautiful
+test	en	she left her keys in the car
+test	en	who are you looking at
+test	en	go without them
+test	en	i do not see men here
+test	en	why did you give her money
+test	en	when did you build this hut
+test	en	i sell hats
+test	en	doing that will take us too long
+test	en	he does like her
+test	en	be active in doing good for people
+test	en	guess what i had for breakfast
+test	en	i paid the bills
+test	en	you must be very tired
+test	en	the leaves fell from the trees
+test	en	you and i come from different worlds
+test	en	he went down to the third floor
+test	en	no one knows where to go
+test	en	she kicked the door shut behind her
+test	en	i need to speak to them now
+test	en	can you read between the lines
+test	en	someone broke my camera
+test	en	the impact of the crisis is enormous
+test	en	i just fired her
+test	en	i was just passing by
+test	en	you make an interesting argument
+test	en	i talked myself hoarse
+test	en	where are you stationed
+test	en	have you ever had an assistant
+test	en	a favor costs nothing
+test	en	i have no response to that
+test	en	we ate lunch in a coffee lounge
+test	en	what are you trying to tell me
+test	en	who do you want to do this with
+test	en	your friends are very interested in your health
+test	en	i heard about the disagreement
+test	en	please take this medicine before meals
+test	en	the novel appeared in paperback
+test	en	my son can already count to one hundred
+test	en	is there any important news
+test	en	no more cookies
+test	en	i should go back home
+test	en	they trust me
+test	en	do you have more water
+test	en	is the soul eternal or fleeting
+test	en	may i join you on your walk
+test	en	are you sure it was him
+test	en	he lied deliberately
+test	en	did you call someone
+test	en	that looks appropriate
+test	en	he admitted he was selfish
+test	en	a moray eel bit me
+test	en	my mom and i are completely different
+test	en	they caught sight of a cow
+test	en	my house is haunted
+test	en	my head is really cold
+test	en	be ready to laugh at yourself
+test	en	they are my classmates
+test	en	god has not willed it
+test	en	why do you hate dogs so much
+test	en	i never broke that window
+test	en	could this be possible
+test	en	he will find her
+test	en	she made my life miserable
+test	en	stand over there
+test	en	my mother is in the kitchen
+test	en	can we really afford it
+test	en	have you already cleaned your room
+test	en	did the economic policies help the population
+test	en	the new ordinance has been repealed
+test	en	we like meat
+test	en	where can i meet you
+test	en	he looks at your beautiful hen
+test	en	have you been crying
+test	en	who is this crazy person
+test	en	which bicycle is yours
+test	en	people notice every move he makes
+test	en	crossing the road scared her greatly
+test	en	avoid drinking too cool water
+test	en	small things amuse small people
+test	en	i got it all wrong
+test	en	the cat slept on the table
+test	en	are you disgusted
+test	en	the part which was eaten is not mine
+test	en	every person is an artist
+test	en	he kissed her passionately
+test	en	i was pretty relaxed
+test	en	is it an action film
+test	en	i wish i had the answer
+test	en	i was expecting this to happen
+test	en	she was struck by his eyes
+test	en	they had a rough time of it
+test	en	what do you think of this situation
+test	en	the leaf is sticky
+test	en	i will do anything to get a job
+test	en	i am making a fuss for no reason
+test	en	trust only yourself
+test	en	this is my favourite book
+test	en	lend her a needle
+test	en	come visit us soon
+test	en	he is glad to hear the news
+test	en	she was missed in the house
+test	en	you immediately felt annoyed
+test	en	i hope that you were just joking
+test	en	your teacher speaks very highly of you
+test	en	that sounds kind of complicated to me
+test	en	i forgot to tell you where i live
+test	en	it might just work
+test	en	she knew who was inside her house
+test	en	i just want to have fun tonight
+test	en	no credit cards are accepted
+test	en	how much more time do i have
+test	en	where are you going these days
+test	en	snow falls every day
+test	en	i have the house all to myself
+test	en	maybe we should help her
+test	en	do you want to continue living like this
+test	en	now get lost
+test	en	did you go to the party together
+test	en	i have a paper bag
+test	en	he was failing most of his classes
+test	en	this street leads to the airport
+test	en	she hurried back to her room
+test	en	that fire burned the entire town to ashes
+test	en	you should take care of yourselves
+test	en	the young girl lost her bracelet
+test	en	that sentence was wrong
+test	en	there is a lack of help among people
+test	en	fear causes aggression in dogs
+test	en	please wait for five minutes
+test	en	can i pet the dog
+test	en	is he giving you trouble
+test	en	how do you spell your family name
+test	en	which composer do you like most of all
+test	en	my mother is like a friend to me
+test	en	this old car breaks down constantly
+test	en	would you please lend me a pen
+test	en	do you go fishing on the lakes
+test	en	we climbed up the roof
+test	en	he hit his head
+test	en	i could fall asleep in this chair
+test	en	she said that she was afraid to fly
+test	en	everybody here knows you
+test	en	want to grab a cup of coffee
+test	en	no one is safe from a mob
+test	en	did he lose consciousness
+test	en	what time did you get to sleep
+test	en	he argued against buying a new computer
+test	en	you have to clean your glasses
+test	en	i need that medicine
+test	en	the ivy started to die
+test	en	what is the time
+test	en	i feel really special
+test	en	you wore that same shirt yesterday
+test	en	there are many people living in this house
+test	en	we now know that that was a lie
+test	en	all of them hop around the playground
+test	en	how often do you help others
+test	en	mother has not cooked dinner yet
+test	en	i hope your parents like me
+test	en	they have lots of friends to help them
+test	en	where did they bring these words from
+test	en	she borrowed my shirt without asking
+test	en	nature must be protected
+test	en	i was really struggling with that
+test	en	much of the work has already been done
+test	en	sit there and listen to me
+test	en	he should take advantage of the extra times
+test	en	i had some pudding for an afternoon snack
+test	en	the flowers are yellow
+test	en	he needs to team up with other players
+test	en	i made use of this good opportunity
+test	en	there were countless stars in the sky
+test	en	peel this fruit
+test	en	the workers are complaining about their working conditions
+test	en	have you bought a car yet
+test	en	when did you first meet them
+test	en	they said they would quit doing that
+test	en	the burnt cat is afraid of fire
+test	en	who are you taking the beer outside to
+test	en	when was the last time you were here
+test	en	will you sleep in their house
+test	en	the bus will arrive in about thirteen minutes
+test	en	he hurried to her side as she collapsed
+test	en	he shot himself in the leg
+test	en	i am going to shoot down enemy aircraft
+test	en	she got the punishment she deserved
+test	en	she allowed me to leave
+test	en	i think you might have trouble doing that
+test	en	i know almost nothing about it
+test	en	she has a question
+test	en	i waited for him for a long time
+test	en	are you feeling bad
+test	en	please visit us sometime
+test	en	i wish somebody had helped me do this
+test	en	the road is all clear
+test	en	he forgot his grocery list
+test	en	they want to improve working conditions
+test	en	she won a bicycle
+test	en	but i was too late
+test	en	does he represent his country alone
+test	en	i felt like a fool
+test	en	he said he thought that i was dead
+test	en	she quickly made herself a sandwich
+test	en	did you like the physics book
+test	en	what movies have you watched lately
+test	en	his family always gave me something to eat
+test	en	how often do you buy clothes online
+test	en	i want someone to help me
+test	en	she told him that his father had died
+test	en	stay away from the door
+test	en	the people in the room said nothing
+test	en	what a memory you have
+test	en	it will likely be revived
+test	en	i want to eat something salty
+test	en	he built them a house
+test	en	we are grateful to you for your kindness
+test	en	i need space
+test	en	are you sticking to that story
+test	en	take care not to drop that glass
+test	en	the lights automatically turn off
+test	en	i know this has been hard for you
+test	en	they were rejected
+test	en	i have three grandchildren
+test	en	give this to someone else
+test	en	i found it in the attic
+test	en	she only stayed with us for a bit
+test	en	you should open all the windows
+test	en	please just tell me what you want
+test	en	what would get their attention
+test	en	i baked three pies this afternoon
+test	en	i know that i can make a difference
+test	en	i think we lost her
+test	en	she said she was too busy to help
+test	en	i think you should watch that movie
+test	en	what can you do about it
+test	en	they disappeared and we remained
+test	en	she survived her husband by ten years
+test	en	that was your decision
+test	en	they invite me to all their parties
+test	en	anybody who feels cold can take another blanket
+test	en	why do i never get mentioned
+test	en	i used to be much more creative
+test	en	i told them i would help
+test	en	i hurt myself today
+test	en	the children are supposed to be sleeping now
+test	en	you can from outside
+test	en	who cleaned it
+test	en	i did everything for her
+test	en	who should vote
+test	en	i thought i put it right there
+test	en	he is very tall
+test	en	i seek calm in the midst of chaos
+test	en	it is sometimes confusing at first
+test	en	i just had a snack at the bar
+test	en	fire cannot be prevented by half measures
+test	en	do i need to do it again
+test	en	i heard that you got married
+test	en	so what do i do now
+test	en	a squirrel hid among the branches
+test	en	the woman eats rice
+test	en	get them to help us
+test	en	give me something to work with
+test	en	i want a new computer for my birthday
+test	en	curiosity is a defining trait of human beings
+test	en	watch out for the drop
+test	en	my life is a mistake
+test	en	are you off already
+test	en	time for dinner
+test	en	she gave her guests a hearty reception
+test	en	i played guitar
+test	en	fold the towel in half
+test	en	you should highlight this sentence here
+test	en	this is a film all parents should watch
+test	en	i really want it
+test	en	is it the right time
+test	en	he pressed his lips against mine
+test	en	i never said goodbye
+test	en	he did everything to become happy
+test	en	let him cry
+test	en	i certainly never killed anyone
+test	en	stop being so ridiculous
+test	en	even the women knew how to be silent
+test	en	what did you want to have her do
+test	en	my work is done
+test	en	she remained in an awkward situation today
+test	en	invite us out to dinner in a restaurant
+test	en	do you know someone here
+test	en	we need to escape
+test	en	not everyone succeeds in life
+test	en	the weather is sucking
+test	en	barley is our main product
+test	en	why do you not drink any alcoholic drinks
+test	en	she did what she was told
+test	en	i know i need to do that
+test	en	where can i hide
+test	en	i hid it in my freezer
+test	en	the plates are dirty
+test	en	he dared not leave
+test	en	good language is simple language
+test	en	you can find everything you need here
+test	en	what is it that you liked about him
+test	en	do you want to play cards
+test	en	did you have company
+test	en	are pies hard to make
+test	en	the doorbell rang
+test	en	i feel a little hungry
+test	en	who is this man
+test	en	the politician is corrupt
+test	en	he would wait for hours for her call
+test	en	get it out
+test	en	nobody else was in the park
+test	en	i have been a member for years
+test	en	autumn came and the leaves started to fall
+test	en	maybe i should just stay home
+test	en	how long will this cold weather go on
+test	en	how many people are still there
+test	en	be as quick as you can
+test	en	people of all ages like this song
+test	en	economic conditions point to further inflation
+test	en	did he check her
+test	en	he wants a full orchestra for his wedding
+test	en	she told me she was innocent
+test	en	we never play cards anymore
+test	en	i want some coke
+test	en	they tapped on the door
+test	en	i will water my flowers
+test	en	how can i suppress these feelings
+test	en	his perfect score brought the class average up
+test	en	he apologized to her for his mistake
+test	en	i need help writing an essay
+test	en	are you still here
+test	en	i told him it was a mistake
+test	en	he was trapped in the past
+test	en	this was so stupid
+test	en	i opened the box and it was empty
+test	en	you have already explained the problem
+test	en	i wish i had realized that sooner
+test	en	is it easy to get there
+test	en	do you feel any pain
+test	en	let me think of something else
+test	en	is that the guy that hit you
+test	en	classical liberalism only works in theory
+test	en	she was in an uncomfortable predicament today
+test	en	the valley echoes the sound of the waterfall
+test	en	her mood is always positive
+test	en	i hope this dream is not a nightmare
+test	en	how many miles are there in a kilometer
+test	en	i can live with the way things are
+test	en	nobody will love you like i do
+test	en	the letters dance in front of my eyes
+test	en	i had to drive myself to the hospital
+test	en	he has written a letter
+test	en	i want to do it very much
+test	en	i consider that a good opinion
+test	en	have you already done that
+test	en	what kind of feedback did you get
+test	en	the man equipped the mule
+test	en	they were playing guitar
+test	en	and what did you do then
+test	en	do you want to go with him
+test	en	this one is my suitcase
+test	en	he was going to hit me
+test	en	thank you very much for your tips
+test	en	and why is that topic of interest
+test	en	all hope is gone
+test	en	they hope that their team wins
+test	en	his father was noble
+test	en	as usual he brought me nothing
+test	en	the accident occurred in a remote place
+test	en	see you in about an hour
+test	en	lipstick is prohibited by school
+test	en	you can fish during different seasons
+test	en	do you know how to tie a knot
+test	en	what do you believe happens after death
+test	en	how much is a human life worth
+test	en	stick with me
+test	en	what a dignified man
+test	en	she will see the light with her eyes
+test	en	did you visit him
+test	en	figs are good for health
+test	en	he needs new shoes
+test	en	i wish i were somebody important
+test	en	are you still paying attention
+test	en	is there more
+test	en	can i kiss you
+test	en	you can purchase this medicine without a prescription
+test	en	we want to cause the least possible harm
+test	en	nobody stood up
+test	en	his oldest son is not married
+test	en	what should i do first
+test	en	that used to be my favorite band
+test	en	we are quiet
+test	en	did you know those gentlemen
+test	en	it needs new batteries
+test	en	millions of people lost their jobs
+test	en	should we continue
+test	en	where did you buy that scarf
+test	en	he did it all out of kindness
+test	en	why do you keep giving her money
+test	en	i want this in writing
+test	en	she crushed the box
+test	en	eight is double that of four
+test	en	you should get to know him
+test	en	all of them agreed to the proposal
+test	en	the fielder failed to catch the ball
+test	en	how many years have you been doing this
+test	en	a man always looks for answers
+test	en	one of your shoes is dirty
+test	en	why are you bothering your classmate
+test	en	i never thought i would do that
+test	en	he kept his word
+test	en	he is not completely wrong
+test	en	where has that memo got to
+test	en	one does not refuse such an offer
+test	en	his paper is far from satisfactory
+test	en	please turn the lights on
+test	en	he loved her sense of humor
+test	en	the theater used to open at this hour
+test	en	have you been vomiting recently
+test	en	i must object to this plan
+test	en	she wanted to be more like him
+test	en	i hope he will get better
+test	en	he went blind
+test	en	they pushed him forwards
+test	en	that will depend exclusively on you
+test	en	who wants more bacon
+test	en	have you looked everywhere
+test	en	he says he has to wait for her
+test	en	he can fix the laptop
+test	en	they were to meet here at seven
+test	en	man can be subdued through fear
+test	en	you need to make a real change
+test	en	it makes all the children happy
+test	en	i can do that faster than you
+test	en	nothing interests you
+test	en	i work for a shipping company
+test	en	this was quite primitive compared to that
+test	en	that all happened before lunch
+test	en	when is your next show
+test	en	i tried to deny it
+test	en	all the money is lost
+test	en	is this building open to all
+test	en	did you listen to classical music yesterday
+test	en	he must be innocent
+test	en	you have saved our planet
+test	en	i find that to be a relative concept
+test	en	give me something to fix my suitcase with
+test	en	she wants to save the planet
+test	en	the interior of the house was very attractive
+test	en	i thought about it all day
+test	en	this wind announces a storm
+test	en	keep working hard
+test	en	call before you come next time
+test	en	he found a ball in the garden
+test	en	the question is are you willing to help
+test	en	do you have this new book
+test	en	you can get to the station by bus
+test	en	i do not know when she can come
+test	en	my liver is heavily damaged
+test	en	the book is being written by my husband
+test	en	i have a fear of heights
+test	en	he has no experience
+test	en	we used to go fishing together
+test	en	how did he manage that
+test	en	i almost killed myself three years ago
+test	en	there was contempt in his voice
+test	en	are you happy with this
+test	en	would you mind opening one of the windows
+test	en	she is looking forward to seeing him again
+test	en	what do you bring to the table
+test	en	billy is good at sports
+test	en	he gave you the wrong directions
+test	en	his plan leaves much to be desired
+test	en	i believe in turning the other cheek
+test	en	women are strange people
+test	en	the rabbits are timid
+test	en	i only need two more minutes
+test	en	i sometimes go to the village
+test	en	please be seated
+test	en	you can reach the park by either road
+test	en	do you know who sings that song
+test	en	china was thriving
+test	en	do you use a solvent
+test	en	i need a box of this size
+test	en	all my efforts came to nothing
+test	en	humans have built a community on that planet
+test	en	i need to finish reading my book
+test	en	she is blinded by love
+test	en	they seem to be having an argument
+test	en	girls are strange sometimes
+test	en	that was a pretty big surprise
+test	en	did you want children
+test	en	i am afraid
+test	en	the keyboard needs replacing
+test	en	did you wear a coat yesterday
+test	en	pull with all your force
+test	en	we checked the fridge
+test	en	he told me that he was miserable
+test	en	we have everything we need now
+test	en	your pair of slippers are very cute
+test	en	our confidence is extremely high
+test	en	the poet wrote many poems
+test	en	he got the highest grade in the exam
+dev	mix	mình đang check/e mail/e
+test	mix	gửi file/e cho anh nhé
+dev	mix	em gửi email/e cho sếp rồi
+test	mix	hôm nay có meeting/e không
+dev	mix	share/e link/e cho mình với
+test	mix	deadline/e là thứ sáu
+dev	mix	anh ấy đang online/e
+test	mix	cho mình xin link/e nhé
+dev	mix	update/e app/e chưa
+test	mix	tối nay team/e mình đi ăn
+dev	mix	bạn đã book/e vé chưa
+test	mix	mai mình có interview/e
+dev	mix	cái project/e này khó quá
+test	mix	em đang làm report/e
+dev	mix	sếp bảo review/e lại code/e
+test	mix	mình vừa post/e ảnh lên
+dev	mix	cho mình cái password/e wifi/e
+test	mix	chị ơi order/e giúp em
+dev	mix	bạn follow/e mình đi
+test	mix	nhớ like/e và share/e nhé
+dev	mix	anh gửi lại file/e được không
+test	mix	thứ hai có training/e
+dev	mix	mình đang ở office/e
+test	mix	em cần support/e gấp
+dev	mix	cái laptop/e này chạy chậm quá
+test	mix	bạn check/e giúp mình cái này
+dev	mix	tuần sau mình đi business/e trip/e
+test	mix	hôm qua mình xem show/e rất hay
+dev	mix	em mới mua cái phone/e mới
+test	mix	mình không có time/e
+dev	mix	anh ơi thanks/e nhiều nhé
+test	mix	sorry/e em đến muộn
+dev	mix	okay/e mai gặp nhé
+test	mix	mình thấy nó rất cool/e
+dev	mix	bài này hay thật sự luôn
+test	mix	cô ấy là manager/e mới
+dev	mix	để mình call/e lại sau
+test	mix	bạn có free/e không
+dev	mix	tối nay mình chill/e ở nhà
+test	mix	mình đang busy/e lắm
+dev	mix	cái game/e này vui ghê
+test	mix	em đã fix/e cái bug/e rồi
+dev	mix	anh test/e lại giúp em
+test	mix	bản build/e mới lỗi rồi
+dev	mix	mình cần thêm feedback/e
+test	mix	khách hàng muốn change/e thiết kế
+dev	mix	cho em cái deadline/e cụ thể
+test	mix	anh đã approve/e chưa
+dev	mix	mình note/e lại rồi
+test	mix	bạn nhớ save/e file/e nhé
+dev	mix	cái link/e này die/e rồi
+test	mix	tối qua mình ngủ quên
+dev	mix	em về nhà trước nhé
+test	mix	the/e end/e
+dev	mix	i/e love/e you/e so/e much/e
+test	mix	what/e do/e you/e think/e anh
+dev	mix	anh nói là you/e are/e right/e
+test	mix	she/e said/e không sao đâu
+dev	mix	thank/e you/e anh nhiều
+test	mix	mình nghĩ that/e is/e fine/e
+dev	mix	nó bảo i/e have/e no/e idea/e
+test	mix	good/e morning/e cả nhà
+dev	mix	happy/e birthday/e em nhé
+test	mix	see/e you/e tomorrow/e nhé
+dev	mix	let/e me/e know/e nhé anh
+test	mix	mình thích cái style/e này
+dev	mix	em đang học english/e
+test	mix	bạn nói tiếng anh giỏi quá
+dev	mix	cái này gọi là feature/e mới
+test	mix	em đi shopping/e với bạn
+dev	mix	mình vừa đi gym/e về
+test	mix	cuối tuần đi camping/e không
+dev	mix	bạn có plan/e gì chưa
+test	mix	tháng sau mình nghỉ phép
+dev	mix	anh ấy rất professional/e
+test	mix	mình cần một cái charger/e
+dev	mix	đừng quên backup/e dữ liệu
+test	mix	em gửi invoice/e cho khách rồi
+dev	mix	mình đang đợi confirm/e
+test	mix	sáng mai họp online/e nhé
+dev	mix	cái video/e này viral/e lắm
+test	mix	bạn xem story/e của mình chưa
+dev	mix	em inbox/e anh rồi đó
+test	mix	nhớ reply/e mail/e giúp em
+dev	mix	mình đang work/e from/e home/e
+test	mix	chị ấy mới được promote/e
+dev	mix	cái plan/e này ổn đấy
+test	mix	please/e gửi lại cho em
+dev	mix	cần gấp lắm please/e
+test	mix	anh check/e inbox/e đi
+dev	mix	đây là version/e mới nhất
+test	mix	mình chưa download/e được
+dev	mix	em sẽ update/e sau
+dev	mix	chúc mừng sinh nhật it/e felt/e very/e cold/e
+dev	mix	god/e how/e i/e hate/e this/e job/e ra sao thì ra
+dev	mix	tôi chưa hề giúp my/e flight/e has/e been/e canceled/e
+dev	mix	this/e item/e is/e currently/e out/e of/e stock/e người đầu tiên mà tôi gặp ở
+dev	mix	hay là khúc côn cầu where/e are/e all/e the/e towels/e
+dev	mix	i/e am/e not/e a/e con/e artist/e đã lái chiếc xe máy đó
+dev	mix	sao bạn lại tin tom chứ there/e was/e a/e food/e fight/e in/e the/e cafeteria/e
+dev	mix	we/e want/e to/e work/e with/e them/e tôi đang rất nghiêm túc
+dev	mix	tôi không cảm thấy the/e tiger/e retreated/e and/e vanished/e into/e the/e jungle/e
+dev	mix	it/e was/e just/e a/e disaster/e đánh tom
+dev	mix	tôi thấy an toàn hơn ở đây would/e they/e recognize/e you/e
+dev	mix	there/e is/e nothing/e to/e prevent/e us/e from/e going/e tom không thích bài tập về nhà
+dev	mix	anh ấy từng chơi với cô ấy the/e problem/e was/e money/e
+dev	mix	he/e might/e talk/e tôi chơi bóng rổ
+dev	mix	theo ước tính thấp nhất always/e seek/e to/e fulfill/e your/e desires/e
+dev	mix	the/e automobile/e has/e changed/e our/e life/e tôi để quên bóp ở phòng rồi
+dev	mix	tôi sẽ không quên bạn she/e caught/e a/e ride/e with/e him/e
+dev	mix	i/e know/e what/e you/e were/e doing/e anh thử
+dev	mix	tom đã không ngạc nhiên khi it/e was/e a/e risky/e thing/e to/e do/e
+dev	mix	she/e said/e that/e she/e plans/e on/e going/e vào tối nay
+dev	mix	không phải tom đã ở i/e am/e in/e a/e stew/e
+dev	mix	his/e funeral/e will/e be/e this/e weekend/e biết mình đang biết
+dev	mix	đừng bận tâm đến tom he/e was/e given/e three/e ships/e by/e the/e queen/e
+dev	mix	can/e you/e save/e her/e tom đã kết hôn vào tuần trước
+dev	mix	tôi bắt đầu khóc why/e are/e you/e calling/e us/e
+dev	mix	where/e did/e she/e get/e those/e shoes/e mở rộng đi
+dev	mix	đã đóng cửa đại sứ quán ở back/e to/e my/e friends/e i/e haste/e
+dev	mix	she/e hurt/e herself/e when/e she/e fell/e ngày mùng
+dev	mix	nó có we/e had/e a/e really/e good/e time/e
+dev	mix	this/e should/e be/e enough/e không ai tin nó nữa
+dev	mix	tom có vẻ không may you/e disagree/e with/e me/e
+dev	mix	tell/e her/e what/e you/e heard/e nhìn vào gương một chút đi
+dev	mix	tôi cho rằng the/e hosts/e on/e this/e channel/e are/e utterly/e ignorant/e
+dev	mix	we/e expanded/e the/e baking/e operation/e bạn có bơi được như tom không
+dev	mix	bắt đàu vào they/e slit/e their/e wrists/e
+dev	mix	i/e wasted/e a/e lot/e of/e money/e in/e gambling/e nó chỉ là một tin đồn
+dev	mix	bạn có thể trở về nhà prepare/e for/e it/e before/e the/e time/e comes/e
+dev	mix	how/e come/e you/e say/e nothing/e bạn có đọc được
+dev	mix	có giấc mơ he/e came/e in/e with/e his/e eyes/e shining/e
+dev	mix	smoking/e is/e strictly/e forbidden/e hoa quả ngon
+dev	mix	có tám cái cửa sổ the/e results/e of/e this/e study/e are/e intriguing/e
+dev	mix	the/e wall/e has/e ears/e bạn còn cần gì nữa
+dev	mix	chúng tôi sát vách nhà anh ta look/e at/e the/e evidence/e
+dev	mix	he/e admitted/e that/e he/e was/e worried/e xe của mày rất nhanh
+dev	mix	uống ít rượu thôi he/e borrowed/e a/e gun/e from/e her/e
+dev	mix	that/e must/e be/e a/e new/e record/e tom không đói à
+dev	mix	thời gian là vàng am/e i/e being/e stupid/e
+dev	mix	mark/e brought/e a/e gift/e with/e a/e note/e khác nhau
+dev	mix	sự việc in/e which/e university/e do/e you/e want/e to/e study/e
+dev	mix	i/e intend/e to/e start/e now/e có yêu tôi không
+dev	mix	chỉ uống trà nhài she/e works/e as/e a/e massage/e therapist/e
+dev	mix	the/e exact/e amount/e must/e be/e inserted/e tôi sợ chết
+dev	mix	tom thích cờ vua bow/e to/e no/e man/e
+dev	mix	get/e off/e of/e me/e và tây ban nha
+dev	mix	trái đất đang tắm mưa sao băng that/e hotel/e was/e good/e and/e inexpensive/e
+dev	mix	he/e stared/e at/e his/e coffee/e mug/e hơi khó làm họ vừa lòng
+dev	mix	lại không thể làm được điều đó she/e wants/e to/e sing/e old/e songs/e
+dev	mix	finally/e my/e luck/e is/e turning/e chúng tôi buộc phải tuân theo luật
+dev	mix	ví của tom mỏng và trống rỗng did/e you/e pay/e the/e gas/e bill/e
+dev	mix	he/e put/e his/e jacket/e back/e on/e tuần sau tôi về
+dev	mix	cô ấy đã sai she/e used/e to/e love/e that/e
+dev	mix	she/e painted/e the/e walls/e bright/e yellow/e tom sẽ không thử lại
+dev	mix	phải làm gì với lũ trẻ she/e slapped/e me/e
+dev	mix	she/e emptied/e her/e pockets/e chào bạn
+dev	mix	người ích kỷ cold/e as/e stone/e
+dev	mix	they/e thought/e about/e it/e a/e little/e late/e ò ó o o
+dev	mix	và mọi thứ đều khác trước the/e girls/e are/e as/e busy/e as/e bees/e
+dev	mix	i/e might/e consider/e buying/e a/e refurbished/e phone/e thành phố mọc lên từ tro tàn
+dev	mix	thỏ có tai dài và đuôi ngắn i/e want/e a/e closer/e look/e at/e that/e
+dev	mix	our/e method/e is/e better/e bạn thi rớt là đáng đời
+dev	mix	tôi đi ngủ did/e you/e get/e what/e we/e need/e
+dev	mix	i/e knew/e i/e was/e safe/e tom chối bỏ mọi lời cáo buộc
+dev	mix	không gì tuyệt vời hơn bia lạnh she/e donated/e blood/e
+dev	mix	nobody/e left/e me/e instructions/e vào ngày mai
+dev	mix	lại đây đi please/e remind/e me/e to/e turn/e in/e the/e paper/e
+dev	mix	their/e suitcase/e is/e too/e heavy/e làm thế nào bây giờ
+dev	mix	tôi chơi thể thao để giải trí they/e live/e in/e a/e small/e house/e
+dev	mix	please/e make/e all/e the/e necessary/e changes/e cô ấy là
+dev	mix	xin vui lòng chờ there/e is/e bad/e weather/e in/e the/e north/e
+dev	mix	tell/e anyone/e about/e this/e and/e you/e die/e đừng ném xương cho chó
+dev	mix	cô ấy tự nói với chính mình all/e the/e expenses/e will/e fall/e on/e the/e sponsor/e
+dev	mix	i/e like/e city/e life/e very/e much/e em ấy rất trẻ
+dev	mix	chim hót trên cây i/e tend/e to/e get/e lost/e in/e my/e feelings/e
+dev	mix	what/e are/e you/e going/e to/e take/e with/e you/e giữ yên tay của mày nào
+dev	mix	nó vô vị we/e have/e a/e great/e opportunity/e
+dev	mix	we/e used/e to/e go/e to/e the/e same/e school/e giá tốt đấy
+dev	mix	để xem nào can/e i/e take/e your/e bags/e
+dev	mix	can/e i/e have/e a/e juice/e box/e đại sứ quán pháp ở đâu thế
+dev	mix	tom không muốn trải qua ngày today/e i/e ate/e lunch/e at/e the/e school/e cafeteria/e
+dev	mix	she/e wanted/e to/e be/e independent/e and/e free/e tích cực lên đi
+dev	mix	và giam cầm anh tới tận how/e much/e more/e do/e we/e need/e
+dev	mix	who/e would/e have/e imagined/e tôi chưa bao giờ thích sinh học
+dev	mix	đó là vợ bạn à his/e father/e is/e a/e respected/e cop/e
+dev	mix	he/e sets/e a/e goal/e and/e sticks/e to/e it/e giỏi lắm
+dev	mix	cô biến thành ếch the/e rocket/e went/e up/e smoothly/e
+dev	mix	i/e share/e their/e political/e position/e chúc mừng sinh nhật
+dev	mix	ra sao thì ra i/e set/e limits/e for/e him/e
+dev	mix	that/e was/e our/e thinking/e tôi chưa hề giúp
+dev	mix	người đầu tiên mà tôi gặp ở what/e is/e his/e email/e address/e
+dev	mix	i/e bring/e hope/e to/e everyone/e hay là khúc côn cầu
+dev	mix	đã lái chiếc xe máy đó autumn/e had/e come/e forth/e
+dev	mix	i/e appreciate/e that/e sao bạn lại tin tom chứ
+dev	mix	tôi đang rất nghiêm túc perhaps/e you/e can/e help/e me/e
+dev	mix	comfort/e is/e what/e matters/e to/e me/e the/e most/e tôi không cảm thấy
+dev	mix	đánh tom they/e must/e have/e had/e a/e noble/e mind/e
+dev	mix	he/e knows/e a/e lot/e about/e butterflies/e tôi thấy an toàn hơn ở đây
+dev	mix	tom không thích bài tập về nhà imagine/e how/e stupid/e that/e will/e look/e
+dev	mix	it/e is/e a/e sheer/e waste/e of/e time/e anh ấy từng chơi với cô ấy
+dev	mix	tôi chơi bóng rổ she/e installed/e herself/e in/e an/e easy/e chair/e
+dev	mix	i/e like/e the/e melody/e of/e this/e song/e theo ước tính thấp nhất
+dev	mix	tôi để quên bóp ở phòng rồi we/e need/e more/e storage/e space/e
+dev	mix	your/e hair/e is/e very/e beautiful/e tôi sẽ không quên bạn
+dev	mix	anh thử i/e walk/e to/e school/e every/e morning/e
+dev	mix	who/e did/e you/e go/e skating/e with/e tom đã không ngạc nhiên khi
+dev	mix	vào tối nay he/e works/e slowly/e
+dev	mix	tell/e him/e everything/e không phải tom đã ở
+dev	mix	biết mình đang biết she/e might/e possibly/e know/e the/e answer/e
+dev	mix	it/e appeals/e to/e me/e đừng bận tâm đến tom
+dev	mix	tom đã kết hôn vào tuần trước she/e wears/e ankle/e boots/e
+dev	mix	how/e do/e you/e use/e this/e tôi bắt đầu khóc
+dev	mix	thỏ có tai dài và check/e đuôi ngắn
+dev	mix	nó có cool/e
+dev	mix	giữ yên tay của mày nào like/e
+dev	mix	xe của mày rất nhanh show/e
+dev	mix	người đầu tiên mà like/e tôi gặp ở
+dev	mix	ví training/e của tom mỏng và trống rỗng
+dev	mix	tom đã không ngạc nhiên cool/e khi
+dev	mix	vào review/e ngày mai
+dev	mix	bạn có bơi build/e được như tom không
+dev	mix	tom không muốn trải qua cool/e ngày
+dev	mix	sự download/e việc
+dev	mix	tôi share/e không cảm thấy
+dev	mix	chào office/e bạn
+dev	mix	tom đã kết plan/e hôn vào tuần trước
+dev	mix	xin project/e vui lòng chờ
+dev	mix	có bug/e giấc mơ
+dev	mix	giỏi lắm show/e
+dev	mix	và tây ban nha app/e
+dev	mix	tôi reply/e chơi bóng rổ
+dev	mix	thỏ có tai dài download/e và đuôi ngắn
+dev	mix	nó story/e có
+dev	mix	giữ yên tay của mày nào link/e
+dev	mix	xe của mày rất support/e nhanh
+dev	mix	người okay/e đầu tiên mà tôi gặp ở
+dev	mix	ví của tom mỏng video/e và trống rỗng
+dev	mix	tom đã password/e không ngạc nhiên khi
+dev	mix	vào ngày mai build/e
+dev	mix	bạn có deadline/e bơi được như tom không
+dev	mix	tom download/e không muốn trải qua ngày
+dev	mix	sự share/e việc
+dev	mix	tôi không cảm thấy office/e
+dev	mix	chào bạn bug/e
+dev	mix	tom like/e đã kết hôn vào tuần trước
+dev	mix	xin vui lòng chờ game/e
+dev	mix	có code/e giấc mơ
+dev	mix	giỏi cool/e lắm
+dev	mix	và tây app/e ban nha
+dev	mix	tôi show/e chơi bóng rổ
+dev	mix	thỏ có tai dài và đuôi ngắn video/e
+dev	mix	nó có code/e
+dev	mix	giữ build/e yên tay của mày nào
+dev	mix	xe của mày rất download/e nhanh
+dev	mix	người busy/e đầu tiên mà tôi gặp ở
+dev	mix	ví của tom mỏng và trống rỗng okay/e
+dev	mix	tom đã feedback/e không ngạc nhiên khi
+dev	mix	vào laptop/e ngày mai
+dev	mix	bạn có bơi được thanks/e như tom không
+dev	mix	tom không muốn feedback/e trải qua ngày
+dev	mix	sự việc download/e
+dev	mix	tôi không like/e cảm thấy
+dev	mix	chào story/e bạn
+dev	mix	tom đã kết hôn vào review/e tuần trước
+dev	mix	xin vui build/e lòng chờ
+dev	mix	có online/e giấc mơ
+dev	mix	giỏi lắm bug/e
+dev	mix	và tây team/e ban nha
+dev	mix	tôi chơi phone/e bóng rổ
+dev	mix	thỏ có tai project/e dài và đuôi ngắn
+dev	mix	nó story/e có
+dev	mix	giữ yên tay của mày save/e nào
+dev	mix	xe của sorry/e mày rất nhanh
+dev	mix	người đầu tiên mà tôi training/e gặp ở
+dev	mix	ví của tom mỏng và trống build/e rỗng
+dev	mix	tom đã không download/e ngạc nhiên khi
+dev	mix	vào ngày phone/e mai
+dev	mix	bạn project/e có bơi được như tom không
+dev	mix	tom không muốn trải qua ngày laptop/e
+dev	mix	sự việc inbox/e
+dev	mix	tôi không cảm laptop/e thấy
+dev	mix	chào game/e bạn
+dev	mix	tom đã kết hôn vào tuần trước story/e
+dev	mix	xin vui lòng video/e chờ
+dev	mix	có giấc meeting/e mơ
+dev	mix	giỏi time/e lắm
+dev	mix	và tây ban okay/e nha
+dev	mix	tôi chơi bóng post/e rổ
+dev	mix	thỏ có tai dài save/e và đuôi ngắn
+dev	mix	nó có sorry/e
+dev	mix	giữ yên tay của mày nào time/e
+dev	mix	xe của note/e mày rất nhanh
+dev	mix	người đầu tiên mà tôi video/e gặp ở
+dev	mix	ví của tom mỏng và trống rỗng feedback/e
+dev	mix	tom đã không ngạc nhiên office/e khi
+dev	mix	vào ngày training/e mai
+dev	mix	bạn có test/e bơi được như tom không
+dev	mix	tom save/e không muốn trải qua ngày
+dev	mix	sự việc story/e
+dev	mix	tôi không sorry/e cảm thấy
+dev	mix	chào bạn version/e
+dev	mix	tom đã kết hôn vào training/e tuần trước
+dev	mix	xin vui lòng chờ manager/e
+dev	mix	có order/e giấc mơ
+dev	mix	giỏi lắm test/e
+dev	mix	và tây ban check/e nha
+dev	mix	tôi chơi password/e bóng rổ
+dev	mix	thỏ có tai dài và fix/e đuôi ngắn
+dev	mix	nó fix/e có
+dev	mix	giữ yên thanks/e tay của mày nào
+dev	mix	xe của save/e mày rất nhanh
+dev	mix	người đầu tiên mà tôi gặp feedback/e ở
+dev	mix	ví của tom mỏng và team/e trống rỗng
+dev	mix	tom app/e đã không ngạc nhiên khi
+dev	mix	vào ngày fix/e mai
+dev	mix	bạn có bơi được như tom không team/e
+dev	mix	tom không muốn trải qua app/e ngày
+dev	mix	sự việc video/e
+dev	mix	tôi không story/e cảm thấy
+dev	mix	chào save/e bạn
+dev	mix	tom đã kết hôn vào tuần trước meeting/e
+dev	mix	xin vui lòng chờ app/e
+dev	mix	có giấc cool/e mơ
+dev	mix	giỏi sorry/e lắm
+dev	mix	và tây ban share/e nha
+dev	mix	tôi training/e chơi bóng rổ
+dev	mix	thỏ có tai deadline/e dài và đuôi ngắn
+dev	mix	nó có team/e
+dev	mix	giữ yên tay của mày nào meeting/e
+dev	mix	xe laptop/e của mày rất nhanh
+dev	mix	người đầu tiên password/e mà tôi gặp ở
+dev	mix	ví của tom feedback/e mỏng và trống rỗng
+test	mix	bạn hãy cọ vết bẩn bằng giấm i/e was/e crazy/e to/e do/e that/e
+test	mix	the/e alien/e bug/e flew/e into/e the/e tunnel/e tôi không rảnh để ngồi nói chuyện
+test	mix	không phải toàn bộ he/e can/e do/e what/e he/e likes/e
+test	mix	this/e work/e must/e be/e finished/e within/e two/e years/e phải không
+test	mix	ngày mai trời sẽ có tuyết he/e was/e on/e private/e land/e
+test	mix	she/e was/e pretty/e busy/e herself/e trái đất đã hoàn toàn trống rỗng
+test	mix	hồi nhỏ they/e were/e talking/e loudly/e
+test	mix	why/e did/e you/e give/e her/e money/e hôm qua tôi đã không tới được
+test	mix	mẹ tôi không nói được tiếng pháp he/e went/e down/e to/e the/e third/e floor/e
+test	mix	where/e are/e you/e stationed/e hãy đến vào trưa
+test	mix	tôi thích màu vàng my/e son/e can/e already/e count/e to/e one/e hundred/e
+test	mix	that/e looks/e appropriate/e mấy giờ rồi
+test	mix	ở phía máy khách i/e never/e broke/e that/e window/e
+test	mix	where/e can/e i/e meet/e you/e trời như muốn sập
+test	mix	chúng tôi đã tới cái hồ are/e you/e disgusted/e
+test	mix	the/e leaf/e is/e sticky/e cổ phần
+test	mix	khi làm thêm trong siêu thị your/e teacher/e speaks/e very/e highly/e of/e you/e
+test	mix	maybe/e we/e should/e help/e her/e tôi tưởng là bạn cần giúp đỡ
+test	mix	nếu cậu thật sự muốn làm nó that/e sentence/e was/e wrong/e
+test	mix	do/e you/e go/e fishing/e on/e the/e lakes/e đưa tôi thẻ tín dụng của bạn
+test	mix	tôi thích chiếc cốc này you/e have/e to/e clean/e your/e glasses/e
+test	mix	i/e hope/e your/e parents/e like/e me/e khi nào trời sẽ mưa
+test	mix	đã trả lời xong các câu hỏi he/e needs/e to/e team/e up/e with/e other/e players/e
+test	mix	will/e you/e sleep/e in/e their/e house/e tom và
+test	mix	người có vàng là người đặt luật are/e you/e feeling/e bad/e
+test	mix	she/e quickly/e made/e herself/e a/e sandwich/e bà ấy ăn bữa sáng sớm
+test	mix	không có giấy để viết i/e want/e to/e eat/e something/e salty/e
+test	mix	i/e found/e it/e in/e the/e attic/e đợi đến năm sau nhé
+test	mix	nhà trường công bố tăng học phí they/e disappeared/e and/e we/e remained/e
+test	mix	who/e cleaned/e it/e tôi đã nói
+test	mix	tại sao mọi người lại sợ cậu so/e what/e do/e i/e do/e now/e
+test	mix	she/e gave/e her/e guests/e a/e hearty/e reception/e họ sẽ tổ chức một cuộc họp
+test	mix	chúng tôi có thể lấy gợi ý i/e certainly/e never/e killed/e anyone/e
+test	mix	barley/e is/e our/e main/e product/e chúng tôi cần bạn
+test	mix	tôi cần một thử thách do/e you/e want/e to/e play/e cards/e
+test	mix	autumn/e came/e and/e the/e leaves/e started/e to/e fall/e chuyện gì thế
+test	mix	tôi không thể đi đâu cả i/e want/e some/e coke/e
+test	mix	i/e opened/e the/e box/e and/e it/e was/e empty/e tôi chẳng nhìn thấy gì cả
+test	mix	nói vậy là ý gì chứ i/e hope/e this/e dream/e is/e not/e a/e nightmare/e
+test	mix	the/e man/e equipped/e the/e mule/e bạn có một ngôi nhà thật đẹp
+test	mix	ngài là người as/e usual/e he/e brought/e me/e nothing/e
+test	mix	did/e you/e visit/e him/e tôi định học tiếng đức
+test	mix	tôi có việc phải làm trước what/e should/e i/e do/e first/e
+test	mix	she/e crushed/e the/e box/e bây giờ tôi sống ở đây
+test	mix	tôi bị đau đầu he/e is/e not/e completely/e wrong/e
+test	mix	he/e went/e blind/e muỗi thích tôi
+test	mix	sao cậu không đến i/e can/e do/e that/e faster/e than/e you/e
+test	mix	you/e have/e saved/e our/e planet/e tôi muốn công việc đấy
+test	mix	tiền chẳng là gì cả do/e you/e have/e this/e new/e book/e
+test	mix	are/e you/e happy/e with/e this/e có tính hài hước thì trẻ lâu
+test	mix	không có gió hôm nay i/e sometimes/e go/e to/e the/e village/e
+test	mix	they/e seem/e to/e be/e having/e an/e argument/e mày cũng thua rồi
+test	mix	tôi hiểu cảm giác của bạn your/e pair/e of/e slippers/e are/e very/e cute/e
+test	mix	there/e she/e is/e bố em làm nghề gì thế
+test	mix	bạn chơi she/e is/e living/e an/e unhappy/e life/e
+test	mix	the/e government/e is/e funding/e space/e exploration/e bạn đang chờ xe buýt à
+test	mix	bạn đánh vần nó như thế nào you/e eventually/e died/e
+test	mix	what/e is/e the/e best/e season/e for/e whale/e watching/e tôi thích xúc xích
+test	mix	nhưng sẽ cần rất nhiều thời gian did/e you/e wash/e my/e shirt/e
+test	mix	no/e beans/e for/e me/e bây giờ chúng tôi đang làm việc
+test	mix	đấy là xe máy của he/e does/e like/e her/e
+test	mix	can/e you/e read/e between/e the/e lines/e nếu không thì thôi
+test	mix	một người bị đày xa quê hương we/e ate/e lunch/e in/e a/e coffee/e lounge/e
+test	mix	they/e trust/e me/e tôi muốn được tự do
+test	mix	vẽ rồng nên giun they/e caught/e sight/e of/e a/e cow/e
+test	mix	stand/e over/e there/e anh ấy đi muộn như mọi khi
+test	mix	bà ta đã xì mũi which/e bicycle/e is/e yours/e
+test	mix	i/e was/e pretty/e relaxed/e tôi không muốn nói chuyện lúc này
+test	mix	khẩn cấp this/e is/e my/e favourite/e book/e
+test	mix	she/e knew/e who/e was/e inside/e her/e house/e bọc nó lại đi ạ
+test	mix	chưa từng một lần bị bắt i/e have/e a/e paper/e bag/e
+test	mix	can/e i/e pet/e the/e dog/e mọi thứ có vẻ
+test	mix	tôi rất thích quốc kì she/e said/e that/e she/e was/e afraid/e to/e fly/e
+test	mix	i/e feel/e really/e special/e anh ấy đều tới một hiệu sách
+test	mix	đừng làm ướt nó nature/e must/e be/e protected/e
+test	mix	the/e workers/e are/e complaining/e about/e their/e working/e conditions/e hôm nay bạn thật đẹp
+test	mix	cuộc đời anh hoàn toàn trống rỗng i/e am/e going/e to/e shoot/e down/e enemy/e aircraft/e
+test	mix	he/e forgot/e his/e grocery/e list/e nhảm nhí vãi
+test	mix	tôi nói rồi how/e often/e do/e you/e buy/e clothes/e online/e
+test	mix	are/e you/e sticking/e to/e that/e story/e cảm thấy mình sắp chết
+test	mix	tôi sẽ bận vào ngày mai what/e would/e get/e their/e attention/e
+test	mix	anybody/e who/e feels/e cold/e can/e take/e another/e blanket/e thông qua các dịch vụ của mình
+test	mix	tôi khinh thường tiền he/e is/e very/e tall/e
+test	mix	give/e me/e something/e to/e work/e with/e nó thật vô nghĩa
+test	mix	tôi thích truyện này nhất this/e is/e a/e film/e all/e parents/e should/e watch/e
+test	mix	my/e work/e is/e done/e bạn hãy cọ vết bẩn bằng giấm
+test	mix	tôi không rảnh để ngồi nói chuyện where/e can/e i/e hide/e
+test	mix	i/e feel/e a/e little/e hungry/e không phải toàn bộ
+test	mix	phải không be/e as/e quick/e as/e you/e can/e
+test	mix	his/e perfect/e score/e brought/e the/e class/e average/e up/e ngày mai trời sẽ có tuyết
+test	mix	trái đất đã hoàn toàn trống rỗng do/e you/e feel/e any/e pain/e
+test	mix	the/e letters/e dance/e in/e front/e of/e my/e eyes/e hồi nhỏ
+test	mix	hôm qua tôi đã không tới được this/e one/e is/e my/e suitcase/e
+test	mix	you/e can/e fish/e during/e different/e seasons/e mẹ tôi không nói được tiếng pháp
+test	mix	hãy đến vào trưa are/e you/e still/e paying/e attention/e
+test	mix	it/e needs/e new/e batteries/e tôi thích màu vàng
+test	mix	mấy giờ rồi the/e fielder/e failed/e to/e catch/e the/e ball/e
+test	mix	please/e turn/e the/e lights/e on/e ở phía máy khách
+test	mix	trời như muốn sập have/e you/e looked/e everywhere/e
+test	mix	that/e all/e happened/e before/e lunch/e chúng tôi đã tới cái hồ
+test	mix	cổ phần the/e interior/e of/e the/e house/e was/e very/e attractive/e
+test	mix	the/e book/e is/e being/e written/e by/e my/e husband/e khi làm thêm trong siêu thị
+test	mix	tôi tưởng là bạn cần giúp đỡ billy/e is/e good/e at/e sports/e
+test	mix	china/e was/e thriving/e nếu cậu thật sự muốn làm nó
+test	mix	đưa tôi thẻ tín dụng của bạn i/e am/e afraid/e
+test	mix	be/e more/e precise/e tôi thích chiếc cốc này
+test	mix	khi nào trời sẽ mưa he/e did/e everything/e i/e told/e him/e to/e
+test	mix	she/e took/e a/e walk/e in/e the/e park/e đã trả lời xong các câu hỏi
+test	mix	tom và we/e wanted/e to/e change/e something/e
+test	mix	she/e borrowed/e money/e from/e him/e người có vàng là người đặt luật
+test	mix	bà ấy ăn bữa sáng sớm he/e wore/e a/e very/e loud/e tie/e
+test	mix	nobody/e really/e cares/e what/e we/e do/e không có giấy để viết
+test	mix	đợi đến năm sau nhé who/e are/e you/e looking/e at/e
+test	mix	you/e must/e be/e very/e tired/e nhà trường công bố tăng học phí
+test	mix	tôi đã nói i/e was/e just/e passing/e by/e
+test	mix	i/e heard/e about/e the/e disagreement/e tại sao mọi người lại sợ cậu
+test	mix	họ sẽ tổ chức một cuộc họp are/e you/e sure/e it/e was/e him/e
+test	mix	they/e are/e my/e classmates/e chúng tôi có thể lấy gợi ý
+test	mix	chúng tôi cần bạn did/e the/e economic/e policies/e help/e the/e population/e
+test	mix	small/e things/e amuse/e small/e people/e tôi cần một thử thách
+test	mix	anh ấy file/e đều tới một hiệu sách
+test	mix	trời như test/e muốn sập
+test	mix	nói vậy time/e là ý gì chứ
+test	mix	tôi muốn post/e được tự do
+test	mix	phải không app/e
+test	mix	nhà trường công bố tăng học phí version/e
+test	mix	bố em làm plan/e nghề gì thế
+test	mix	tôi nói rồi deadline/e
+test	mix	nếu cậu thật sự muốn like/e làm nó
+test	mix	bây giờ tôi sống ở app/e đây
+test	mix	khẩn cấp build/e
+test	mix	mẹ tôi không nói được tiếng pháp phone/e
+test	mix	chúng show/e tôi cần bạn
+test	mix	nhưng sẽ cần rất nhiều check/e thời gian
+test	mix	nó thật vô nghĩa online/e
+test	mix	tom plan/e và
+test	mix	tiền note/e chẳng là gì cả
+test	mix	anh ấy phone/e đều tới một hiệu sách
+test	mix	trời busy/e như muốn sập
+test	mix	nói vậy là cool/e ý gì chứ
+test	mix	tôi muốn được tự do training/e
+test	mix	phải free/e không
+test	mix	nhà trường công video/e bố tăng học phí
+test	mix	bố em làm test/e nghề gì thế
+test	mix	tôi nói rồi story/e
+test	mix	nếu cậu thật sự muốn feedback/e làm nó
+test	mix	bây giờ bug/e tôi sống ở đây
+test	mix	khẩn cấp game/e
+test	mix	mẹ tôi không office/e nói được tiếng pháp
+test	mix	chúng app/e tôi cần bạn
+test	mix	nhưng sẽ cần mail/e rất nhiều thời gian
+test	mix	nó thật story/e vô nghĩa
+test	mix	tom password/e và
+test	mix	tiền chẳng save/e là gì cả
+test	mix	anh ấy đều tới cool/e một hiệu sách
+test	mix	trời như muốn sập manager/e
+test	mix	nói vậy là ý gì chứ bug/e
+test	mix	tôi muốn feedback/e được tự do
+test	mix	phải không link/e
+test	mix	nhà trường công bố tăng học test/e phí
+test	mix	bố em làm project/e nghề gì thế
+test	mix	tôi nói meeting/e rồi
+test	mix	nếu cậu thật plan/e sự muốn làm nó
+test	mix	bây giờ tôi sống save/e ở đây
+test	mix	khẩn plan/e cấp
+test	mix	mẹ tôi không nói được tiếng pháp story/e
+test	mix	chúng tôi cần bạn okay/e
+test	mix	nhưng sẽ cần rất nhiều thời gian password/e
+test	mix	nó project/e thật vô nghĩa
+test	mix	tom app/e và
+test	mix	tiền chẳng là post/e gì cả
+test	mix	anh ấy video/e đều tới một hiệu sách
+test	mix	trời như muốn sập free/e
+test	mix	nói vậy là ý gì show/e chứ
+test	mix	tôi muốn được tự like/e do
+test	mix	phải free/e không
+test	mix	nhà trường công bố tăng học phí free/e
+test	mix	bố em làm phone/e nghề gì thế
+test	mix	tôi nói rồi thanks/e
+test	mix	nếu cậu thật laptop/e sự muốn làm nó
+test	mix	bây giờ tôi sống ở post/e đây
+test	mix	khẩn note/e cấp
+test	mix	mẹ tôi không meeting/e nói được tiếng pháp
+test	mix	chúng tôi version/e cần bạn
+test	mix	nhưng sẽ cần rất nhiều support/e thời gian
+test	mix	nó thật email/e vô nghĩa
+test	mix	tom và sorry/e
+test	mix	tiền chẳng là gì project/e cả
+test	mix	anh ấy đều tới một hiệu okay/e sách
+test	mix	trời như muốn sập interview/e
+test	mix	nói like/e vậy là ý gì chứ
+test	mix	tôi muốn office/e được tự do
+test	mix	phải mail/e không
+test	mix	nhà trường công bố okay/e tăng học phí
+test	mix	bố em mail/e làm nghề gì thế
+test	mix	tôi sorry/e nói rồi
+test	mix	nếu cậu thật sự muốn file/e làm nó
+test	mix	bây giờ tôi bug/e sống ở đây
+test	mix	khẩn link/e cấp
+test	mix	mẹ tôi không nói được tiếng manager/e pháp
+test	mix	chúng plan/e tôi cần bạn
+test	mix	nhưng sẽ thanks/e cần rất nhiều thời gian
+test	mix	nó thật vô office/e nghĩa
+test	mix	tom và show/e
+test	mix	tiền chẳng là build/e gì cả
+test	mix	anh ấy free/e đều tới một hiệu sách
+test	mix	trời như muốn team/e sập
+test	mix	nói vậy okay/e là ý gì chứ
+test	mix	tôi muốn được story/e tự do
+test	mix	phải save/e không
+test	mix	nhà trường công bố password/e tăng học phí
+test	mix	bố em làm nghề gì thế plan/e
+test	mix	tôi nói rồi video/e
+test	mix	nếu cậu thật sự muốn phone/e làm nó
+test	mix	bây giờ laptop/e tôi sống ở đây
+test	mix	khẩn cấp code/e
+test	mix	mẹ project/e tôi không nói được tiếng pháp
+test	mix	chúng style/e tôi cần bạn
+test	mix	nhưng sẽ cần okay/e rất nhiều thời gian
+test	mix	nó thật feedback/e vô nghĩa
+test	mix	tom và post/e
+test	mix	tiền interview/e chẳng là gì cả
+test	mix	anh email/e ấy đều tới một hiệu sách
+test	mix	trời như story/e muốn sập
+test	mix	nói vậy là note/e ý gì chứ
+test	mix	tôi muốn được style/e tự do
+test	mix	phải không team/e
+test	mix	nhà link/e trường công bố tăng học phí
+test	mix	bố mail/e em làm nghề gì thế
+test	mix	tôi nói fix/e rồi
+test	mix	nếu cậu thật sự muốn làm style/e nó
+test	mix	bây version/e giờ tôi sống ở đây
+test	mix	khẩn share/e cấp
+test	mix	mẹ phone/e tôi không nói được tiếng pháp
+test	mix	chúng tôi cần video/e bạn
+test	mix	nhưng test/e sẽ cần rất nhiều thời gian
+test	mix	nó thật build/e vô nghĩa
+test	mix	tom office/e và
+test	mix	tiền chẳng phone/e là gì cả
+test	mix	anh ấy đều tới style/e một hiệu sách

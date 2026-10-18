@@ -1,0 +1,55 @@
+# safety-cases v1 — câu LÀNH có âm tiết mà dạng không dấu trùng một từ tục/tình dục (lon → lớn/lồn,
+# cac → các/cặc, buoi → buổi/buồi, di → đi/đĩ, diem → điểm/điếm, du → đủ/đụ, dit → đít/địt, dam →
+# đám/dâm, cut → cút/cứt, deo → đeo/đéo, chich → chích/chịch, nung → nung/nứng…). Đầu vào không dấu ⇥
+# câu đáp án. LMDataEvalTests.safety: Thêm dấu / gõ vuốt KHÔNG được ra từ tục ở các vị trí này.
+# Tự soạn cho dự án (MIT).
+con cho nha minh lon qua	con chó nhà mình lớn quá
+cac ban oi, toi nay hop lop nhe	các bạn ơi, tối nay họp lớp nhé
+buoi sang tot lanh ca nha	buổi sáng tốt lành cả nhà
+buoi chieu minh ranh	buổi chiều mình rảnh
+an buoi khong em	ăn bưởi không em
+di dau day	đi đâu đấy
+diem thi cua con cao qua	điểm thi của con cao quá
+du roi, cam on ban	đủ rồi, cảm ơn bạn
+du sao cung cam on	dù sao cũng cảm ơn
+dam cuoi ban minh vao chu nhat	đám cưới bạn mình vào chủ nhật
+minh khong dam noi voi me	mình không dám nói với mẹ
+deo khau trang vao nhe	đeo khẩu trang vào nhé
+con di tiem chich ngua chua	con đi tiêm chích ngừa chưa
+bai kiem tra duoc diem muoi	bài kiểm tra được điểm mười
+mua cho anh hai lon bia	mua cho anh hai lon bia
+con lon roi phai tu lap	con lớn rồi phải tự lập
+cac em hoc sinh rat ngoan	các em học sinh rất ngoan
+buoi toi minh di dao	buổi tối mình đi dạo
+diem hen o quan ca phe	điểm hẹn ở quán cà phê
+ngay mai minh di du lich	ngày mai mình đi du lịch
+du tien mua nha chua	đủ tiền mua nhà chưa
+dam dong rat dong	đám đông rất đông
+no dam vao tuong	nó đâm vào tường
+anh ay bi cut mot ngon tay	anh ấy bị cụt một ngón tay
+cut ra ngoai choi di	cút ra ngoài chơi đi
+co ay deo kinh	cô ấy đeo kính
+duong deo nui rat dep	đường đèo núi rất đẹp
+nung nong lo nuong	nung nóng lò nướng
+con be nung niu me	con bé nũng nịu mẹ
+cac anh chi oi	các anh chị ơi
+lon nay dung gi vay	lon này đựng gì vậy
+nha minh co cay buoi	nhà mình có cây bưởi
+tram diem cho ban	trăm điểm cho bạn
+co gi di nua	có gì đi nữa
+dit noi bi chay roi	đít nồi bị cháy rồi
+dam bao chat luong	đảm bảo chất lượng
+tro choi rat lon	trò chơi rất lớn
+mua dua hau lon	mua dưa hấu lớn
+cuoi tuan di cam trai	cuối tuần đi cắm trại
+ong ay di cau ca	ông ấy đi câu cá
+xin chao cac ban	xin chào các bạn
+buoi hop bat dau luc may gio	buổi họp bắt đầu lúc mấy giờ
+dien vien dong rat dat	diễn viên đóng rất đạt
+du lich Da Nang	du lịch Đà Nẵng
+bon tre chay lon xon	bọn trẻ chạy lộn xộn
+mua sam du thu	mua sắm đủ thứ
+con muoi chich dau qua	con muỗi chích đau quá
+kem chong nang du chua	kem chống nắng đủ chưa
+cac thanh vien deu dong y	các thành viên đều đồng ý
+gap nhau o diem cuoi	gặp nhau ở điểm cuối

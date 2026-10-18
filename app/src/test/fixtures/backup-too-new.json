@@ -1,0 +1,6 @@
+{
+  "format": "viettelex-backup",
+  "version": 7,
+  "minReaderVersion": 5,
+  "settings": {"simpleTelex": false}
+}

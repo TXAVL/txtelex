@@ -1,0 +1,72 @@
+# add-tones v3 — parity Swift ⇔ Kotlin ⇔ C++ (Windows) cho AddTones.restore (chỉ dữ liệu tĩnh, không cá nhân; v2 = Viterbi bậc 2 dùng trigram vnlm.bin, v3 = + cặp chọn tay CuratedPairs, 18/10/2026).
+# Mỗi dòng: đầu vào<TAB>kết quả. Sinh bởi android AddTonesTests.sharedFixture (ADDTONES_GEN=1);
+# cả ba bản phải cho ĐÚNG kết quả này.
+toi di hoc hom nay	tôi đi học hôm nay
+khong co gi	không có gì
+cam on ban rat nhieu	cảm ơn bạn rất nhiều
+Toi di hoc, hom nay troi dep!	Tôi đi học, hôm nay trời đẹp!
+TOI DI HOC	TÔI ĐI HỌC
+  (toi)  di  hoc...  	  (tôi)  đi  học...  
+toi mua iPhone 15 o shopee.vn	tôi mua iPhone 15 ở shopee.vn
+gui mail cho abc@gmail.com nhe	gửi mail cho abc@gmail.com nhé
+h2o 123 toi	h2o 123 tôi
+xem movie tren netflix	xem movie trên netflix
+toi thich the weekend	tôi thích the weekend
+anh yeu em	anh yêu em
+em an com chua	em ăn cơm chưa
+chuc mung sinh nhat	chúc mừng sinh nhật
+toi khong biet y cua ban la gi	tôi không biết ý của bạn là gì
+cai nay rat la hap dan	cái này rất là hấp dẫn
+ngay mai minh di choi nhe	ngày mai mình đi chơi nhé
+hom qua troi mua to qua	hôm qua trời mưa to quá
+ban co the giup toi duoc khong	bạn có thể giúp tôi được không
+me oi con doi bung	mẹ ơi con đói bụng
+bao gio thi xong viec	bao giờ thì xong việc
+nguoi viet nam rat hieu khach	người việt nam rất hiếu khách
+chung ta se gap lai sau	chúng ta sẽ gặp lại sau
+dien thoai cua toi bi hong roi	điện thoại của tôi bị hỏng rồi
+toi dang lam viec o ha noi	tôi đang làm việc ở hà nội
+Ha Noi mua thu dep lam	Hà Nội mùa thứ đẹp lắm
+ong ay la bac si	ông ấy là bác sĩ
+co ay hat rat hay	cô ấy hát rất hay
+xin loi toi den muon	xin lỗi tôi đến muộn
+tui minh di an pho di	tụi mình đi ăn phở đi
+mot hai ba bon nam sau bay tam chin muoi	một hai ba bốn năm sau bảy tám chín muồi
+nuoc Viet Nam doc lap tu do hanh phuc	nước Việt Nam độc lập tự do hạnh phúc
+con meo dang ngu tren ghe	con mèo đang ngủ trên ghế
+toi can mua mot cai ao moi	tôi cần mua một cái áo mới
+dat nuoc ta dang phat trien	đất nước ta đang phát triển
+hoc sinh phai chiu kho hoc bai	học sinh phải chịu khó học bài
+anh ay noi tieng Anh rat gioi	anh ấy nói tiếng Anh rất giỏi
+cho toi mot ly ca phe sua da	cho tôi một ly cà phê sữa đã
+may gio roi ban	mấy giờ rồi bạn
+thoi tiet hom nay the nao	thời tiết hôm nay thế nào
+toi nghi la duoc	tôi nghĩ là được
+bien Nha Trang rat dep	biển Nha Trang rất đẹp
+dung lo, moi viec se on thoi	đừng lo, mọi việc sẽ ổn thôi
+di dau vay?	đi đâu vậy?
+ok de toi xem	ok để tôi xem
+lam on gui cho toi file pdf	làm ơn gửi cho tôi file pdf
+tao ghet mon toan	tao ghét môn toán
+ca nha deu khoe	cả nhà đều khỏe
+Minh dang go tieng Viet khong dau.	Mình đang gõ tiếng Việt không dấu.
+Thu go tieng Viet khong dau xem sao.	Thử gõ tiếng Việt không dấu xem sao.
+Ngay mai minh se den truong hop lop cap 3.	Ngày mai mình sẽ đến trường hợp lớp cấp 3.
+chuc mung sinh nhat phan nhieu nguoi ta viet ve chuyen cuoc doi hang ngay toi khong biet y cua ban la gi cai nay rat la hap dan cuoc	chúc mừng sinh nhật phần nhiều người ta viết về chuyện cuộc đời hằng ngày tôi không biết ý của bạn là gì cái này rất là hấp dẫn cuộc
+tieng Viet co dau	tiếng Việt có dấu
+van ban khong dau nhe	văn bản không dấu nhé
+Thu go dau xem	Thử gõ dấu xem
+go vuot tren ban phim	gõ vuốt trên bàn phím
+bop vu	bóp vú
+bop dai	bóp dái
+lam gi co dau	làm gì có đâu
+co dau	cô dâu
+co dau chu re	cô dâu chú rể
+leu bao	lều báo
+xiu ngang luon	xỉu ngang luôn
+chuyen khoan cho minh nhe	chuyển khoản cho mình nhé
+so cu khong dung nua	sở cũ không dùng nữa
+xin so dien thoai	xin số điện thoại
+di qua dinh nui	đi qua đỉnh núi
+co hoi viec lam	cơ hội việc làm
+them dau tu	thêm đầu tư

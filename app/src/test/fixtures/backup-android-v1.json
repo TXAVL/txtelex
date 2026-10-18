@@ -1,0 +1,44 @@
+{
+  "createdAt": "2026-09-27T09:30:00Z",
+  "format": "viettelex-backup",
+  "minReaderVersion": 1,
+  "platform": "android",
+  "settings": {
+    "autoFixAdjacent": false,
+    "autoRestore": true,
+    "contextualEnglish": true,
+    "filterSensitive": false,
+    "freeMarking": true,
+    "hapticFeedback": false,
+    "hardwareTelex": false,
+    "liveSpellCheck": true,
+    "modernTone": false,
+    "numberRow": false,
+    "quickTelex": true,
+    "reEditWords": true,
+    "rowHeightAdjust": 4,
+    "shortcutsEnabled": false,
+    "showSpaceLogo": true,
+    "showSuggestions": true,
+    "simpleTelex": false,
+    "swipeEnglish": true,
+    "swipeTyping": false,
+    "teencode": true,
+    "templatesEnabled": true
+  },
+  "shortcuts": {
+    "mn": "mọi người",
+    "vn": "Việt Nam"
+  },
+  "templates": [
+    {
+      "label": "📍",
+      "text": "Mình đang trên đường tới"
+    },
+    {
+      "label": "IP❓",
+      "text": "https://api.ipify.org"
+    }
+  ],
+  "version": 1
+}

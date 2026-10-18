@@ -1,0 +1,28 @@
+# Giữ phím chữ ra ký tự phụ (issue #98) — bảng chung iOS KeyAlternates.swift / Android KeyAlternates.kt.
+# nhóm<TAB>phím<TAB>ký tự phụ. numbers: chỉ khi hàng phím số tắt; symbols: công tắc riêng.
+numbers	q	1
+numbers	w	2
+numbers	e	3
+numbers	r	4
+numbers	t	5
+numbers	y	6
+numbers	u	7
+numbers	i	8
+numbers	o	9
+numbers	p	0
+symbols	a	@
+symbols	s	#
+symbols	d	$
+symbols	f	_
+symbols	g	&
+symbols	h	-
+symbols	j	+
+symbols	k	(
+symbols	l	)
+symbols	z	*
+symbols	x	"
+symbols	c	%
+symbols	v	:
+symbols	b	/
+symbols	n	!
+symbols	m	?

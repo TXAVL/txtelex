@@ -1,0 +1,8 @@
+* text=auto eol=lf
+*.bat text eol=crlf
+*.bin binary
+*.gz binary
+*.jar binary
+*.png binary
+app/src/main/assets/** -text
+app/src/test/fixtures/** -text
