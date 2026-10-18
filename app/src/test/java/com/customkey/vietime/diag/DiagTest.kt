@@ -17,7 +17,7 @@ class TxaCrashTest {
 
     private fun crash(stack: String = stackA, title: String = "java.lang.IllegalStateException: hỏng rồi") = TxaCrash(
         TxaCrashKind.JAVA, 1_760_000_000_000, "main#2", title, "msg", stack,
-        listOf("+0.120s  Mở MainActivity", "+3.002s  Gõ vào com.zing.zalo · ô TEXT"), "main", "AB12CD", "0.4.0-alpha (5)", 3002,
+        listOf("+0.120s  Mở MainActivity", "+3.002s  Gõ vào com.zing.zalo · ô TEXT"), "main", "AB12CD", "0.5.0-alpha (6)", 3002,
         listOf("2026-10-18 | I | main#2 | IME | dòng log\n  tiếp dòng"),
     )
 

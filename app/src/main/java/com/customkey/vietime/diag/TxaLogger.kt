@@ -13,7 +13,7 @@ import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.TimeUnit
 
 /**
- * TxaLogger — "hộp đen" của TxTelex.
+ * TxaLogger — Hệ thống ghi nhật ký an toàn của TxTelex.
  *
  * - Ghi log chi tiết ra file (filesDir/txa_logs/), xoay vòng 3 × 512 KB, bằng MỘT luồng nền:
  *   gọi log trên luồng bàn phím chỉ là đẩy vào hàng đợi (vài µs) — không chặn phím.
@@ -58,7 +58,7 @@ object TxaLogger {
     fun w(tag: String, msg: String, t: Throwable? = null) = log(Level.W, tag, msg, t)
     fun e(tag: String, msg: String, t: Throwable? = null) = log(Level.E, tag, msg, t)
 
-    /** Dấu chân sự kiện (mở app, bật bàn phím, đổi theme…) — hiện trong "hộp đen" của màn lỗi. */
+    /** Dấu chân sự kiện (mở app, bật bàn phím, đổi theme…) — hiện trong nhật ký thao tác của màn lỗi. */
     fun crumb(event: String) {
         val line = "${clock()}  $event"
         synchronized(crumbs) { if (crumbs.size >= CRUMB_SIZE) crumbs.removeFirst(); crumbs.addLast(line) }

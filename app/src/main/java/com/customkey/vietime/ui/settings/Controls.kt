@@ -118,3 +118,30 @@ fun ChoiceRow(title: String, subtitle: String?, selected: Boolean, trailing: (@C
         trailing?.invoke()
     }
 }
+
+/** Hộp nhập text giao diện Glassmorphism / Cyberpunk chuẩn. */
+@Composable
+fun TxField(
+    value: String,
+    onChange: (String) -> Unit,
+    label: String,
+    modifier: Modifier = Modifier.fillMaxWidth(),
+) {
+    androidx.compose.material3.OutlinedTextField(
+        value = value,
+        onValueChange = onChange,
+        modifier = modifier,
+        label = { Text(label) },
+        shape = RoundedCornerShape(14.dp),
+        colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = Tx.Cyan,
+            unfocusedBorderColor = Tx.Stroke,
+            focusedLabelColor = Tx.Cyan,
+            unfocusedLabelColor = Tx.TextDim,
+            cursorColor = Tx.Cyan,
+            focusedContainerColor = Tx.Glass,
+            unfocusedContainerColor = Tx.Glass,
+        ),
+    )
+}
+

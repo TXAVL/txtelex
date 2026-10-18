@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import android.view.ViewGroup
 import com.customkey.vietime.customization.KeyboardCustomizer
 import com.customkey.vietime.engine.EngineSettings
 import com.customkey.vietime.engine.TextProxy
@@ -31,6 +33,7 @@ import com.customkey.vietime.ime.ImePrefs
 import com.customkey.vietime.ime.InputBridge
 import com.customkey.vietime.ime.Suggestion
 import com.customkey.vietime.ime.TypingSession
+import com.customkey.vietime.ui.keyboard.EmojiPaneView
 import com.customkey.vietime.ui.keyboard.KeyboardPanel
 import com.customkey.vietime.ui.keyboard.KeyboardPlane
 import com.customkey.vietime.ui.keyboard.KeyboardView
@@ -96,9 +99,14 @@ fun KeyboardPreview(modifier: Modifier = Modifier, hint: String = "Gõ thử tr�
             else Text(text.takeLast(80) + "▏", color = Tx.Text, fontSize = 16.sp, fontWeight = FontWeight.Medium)
         }
         AndroidView(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
             factory = { c ->
-                KeyboardPanel(c).also { panel ->
+                KeyboardPanel(c).apply {
+                    layoutParams = ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                    )
+                }.also { panel ->
                     holder[0] = panel
                     fun sync() {
                         text = mem.sb.toString()
@@ -114,6 +122,7 @@ fun KeyboardPreview(modifier: Modifier = Modifier, hint: String = "Gõ thử tr�
                         override fun onBackspace() { session.backspace(mem); sync() }
                         override fun onEnter() { session.commitBeforeEnter(mem); mem.sb.setLength(0); sync() }
                         override fun onGlobe(longPress: Boolean) {}
+                        override fun onEmoji() { panel.showEmoji(true) }
                         override fun onFeedback(kind: KeyboardView.FeedbackKind) = custom.feedback(kind)
                         override fun onLanguageFlick() {
                             val en = session.toggleLanguage(mem)
@@ -123,6 +132,21 @@ fun KeyboardPreview(modifier: Modifier = Modifier, hint: String = "Gõ thử tr�
                         override fun onDeleteWords(words: Int) { session.deleteWords(mem, words); panel.strip.showMessage(null); sync() }
                         override fun onDeleteWordsPreview(words: Int) {
                             panel.strip.showMessage(if (words > 0) "Xoá: " + session.wordsBefore(mem, words).trimEnd() else null)
+                        }
+                    }
+                    panel.emoji.listener = object : EmojiPaneView.Listener {
+                        override fun onEmojiPicked(emoji: String) {
+                            session.text(emoji, mem)
+                            sync()
+                            custom.feedback(KeyboardView.FeedbackKind.KEY)
+                        }
+                        override fun onBackspace() {
+                            session.backspace(mem)
+                            sync()
+                            custom.feedback(KeyboardView.FeedbackKind.DELETE)
+                        }
+                        override fun onClose() {
+                            panel.showEmoji(false)
                         }
                     }
                     panel.strip.listener = object : SuggestionStripView.Listener {

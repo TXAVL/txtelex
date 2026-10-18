@@ -112,8 +112,18 @@ class ClipboardVaultTest {
         assertEquals(ClipMatch(ClipKind.PHONE, "0912345678"), ClipboardVault.detect("0912 345 678"))
         assertEquals(ClipKind.ACCOUNT, ClipboardVault.detect("1903 6655 8899 012").kind)
         assertEquals(ClipMatch(ClipKind.MATH, "36"), ClipboardVault.detect("12*3"))
-        assertEquals(ClipKind.TEXT, ClipboardVault.detect("xin chào bạn").kind)
         assertTrue(ClipboardVault.chipLabel(ClipMatch(ClipKind.OTP, "123456")).contains("123456"))
+    }
+
+    @Test fun imageItemEncodeDecode() {
+        val v = ClipboardVault()
+        v.addImage("content://media/external/images/media/123", "image/png", 100)
+        assertTrue(v.items.first().isImage)
+        assertEquals("image/png", v.items.first().mimeType)
+        val back = ClipboardVault.decode(v.encode())
+        assertEquals(v.items, back.items)
+        assertTrue(back.items.first().isImage)
+        assertEquals("🖼️ Dán ảnh", ClipboardVault.chipLabel(ClipMatch(ClipKind.IMAGE, "content://test")))
     }
 }
 

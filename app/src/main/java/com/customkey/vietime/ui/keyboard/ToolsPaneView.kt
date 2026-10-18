@@ -24,9 +24,11 @@ import com.customkey.vietime.tools.Snippet
 class ToolsPaneView(context: Context) : LinearLayout(context) {
     interface Listener {
         fun onPasteText(text: String)
+        fun onPasteImage(uri: String, mimeType: String) {}
         fun onPin(item: ClipItem, pinned: Boolean)
         fun onDeleteClip(item: ClipItem)
         fun onClearUnpinned()
+        fun onClearAll() {}
         fun onAddTones()
         fun onTranslate()
         fun onClose()
@@ -45,6 +47,7 @@ class ToolsPaneView(context: Context) : LinearLayout(context) {
     private var snippets: List<Snippet> = emptyList()
     private var historyEnabled = true
     private var translateAvailable = false
+    private var filterQuery = ""
 
     private val bar = LinearLayout(context).apply { orientation = HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
     private val barScroll = HorizontalScrollView(context).apply { isHorizontalScrollBarEnabled = false; addView(bar) }
@@ -64,7 +67,7 @@ class ToolsPaneView(context: Context) : LinearLayout(context) {
         render()
     }
 
-    fun select(t: Tab) { tab = t; render() }
+    fun select(t: Tab) { tab = t; filterQuery = ""; render() }
 
     private fun render() {
         bar.removeAllViews()
@@ -77,10 +80,67 @@ class ToolsPaneView(context: Context) : LinearLayout(context) {
         body.removeAllViews()
         when (tab) {
             Tab.CLIPBOARD -> {
-                if (!historyEnabled) body.addView(hint("Lịch sử clipboard đang tắt — bật trong app TxTelex › Công cụ."))
-                else if (clips.isEmpty()) body.addView(hint("Chưa có gì. Copy chữ ở bất kỳ đâu, nó sẽ hiện ở đây."))
-                for (c in clips) body.addView(clipRow(c))
-                if (clips.any { !it.pinned }) body.addView(link("Xoá các mục chưa ghim") { listener?.onClearUnpinned() })
+                if (!historyEnabled) {
+                    body.addView(hint("Lịch sử clipboard đang tắt — bật trong app TxTelex › Công cụ."))
+                    return
+                }
+                if (clips.isEmpty()) {
+                    body.addView(hint("Chưa có gì. Copy văn bản hoặc ảnh ở bất kỳ đâu, nó sẽ hiện ở đây."))
+                    return
+                }
+
+                // Thanh tìm kiếm nhanh nội dung clipboard
+                val searchBox = android.widget.EditText(context).apply {
+                    hint = "🔍 Tìm kiếm trong clipboard..."
+                    setHintTextColor(withAlpha(style.label, 0.45f))
+                    setTextColor(style.label)
+                    setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
+                    background = rounded(withAlpha(style.keyFill, 0.4f), 8f)
+                    setPadding((12 * d).toInt(), (8 * d).toInt(), (12 * d).toInt(), (8 * d).toInt())
+                    maxLines = 1
+                    isSingleLine = true
+                    if (filterQuery.isNotEmpty()) {
+                        setText(filterQuery)
+                        setSelection(filterQuery.length)
+                    }
+                    addTextChangedListener(object : android.text.TextWatcher {
+                        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                            val q = s?.toString() ?: ""
+                            if (filterQuery != q) {
+                                filterQuery = q
+                                updateClipList()
+                            }
+                        }
+                        override fun afterTextChanged(s: android.text.Editable?) {}
+                    })
+                }
+                body.addView(searchBox, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT).apply {
+                    bottomMargin = (8 * d).toInt()
+                })
+
+                val listContainer = LinearLayout(context).apply {
+                    tag = "clip_list_container"
+                    orientation = VERTICAL
+                }
+                body.addView(listContainer)
+                populateClips(listContainer)
+
+                // Hàng nút thao tác xoá
+                val actionsRow = LinearLayout(context).apply {
+                    orientation = HORIZONTAL
+                    gravity = Gravity.CENTER
+                    setPadding(0, (6 * d).toInt(), 0, (6 * d).toInt())
+                }
+                if (clips.any { !it.pinned }) {
+                    actionsRow.addView(link("Xoá mục chưa ghim") { listener?.onClearUnpinned() })
+                }
+                actionsRow.addView(TextView(context).apply {
+                    text = "  •  "
+                    setTextColor(withAlpha(style.label, 0.3f))
+                })
+                actionsRow.addView(link("Xoá tất cả") { listener?.onClearAll() })
+                body.addView(actionsRow)
             }
             Tab.SNIPPETS -> {
                 if (snippets.isEmpty()) body.addView(hint("Chưa có mẫu câu. Thêm trong app TxTelex › Công cụ."))
@@ -89,7 +149,32 @@ class ToolsPaneView(context: Context) : LinearLayout(context) {
         }
     }
 
+    private fun updateClipList() {
+        val listContainer = body.findViewWithTag<LinearLayout>("clip_list_container") ?: return
+        listContainer.removeAllViews()
+        populateClips(listContainer)
+    }
+
+    private fun populateClips(container: LinearLayout) {
+        val filtered = if (filterQuery.isBlank()) clips else clips.filter {
+            it.text.contains(filterQuery, ignoreCase = true)
+        }
+        if (filtered.isEmpty()) {
+            container.addView(hint("Không tìm thấy kết quả phù hợp."))
+            return
+        }
+        for (c in filtered) container.addView(clipRow(c))
+    }
+
     private fun clipRow(c: ClipItem): View {
+        if (c.isImage) {
+            val label = "🖼️ [Hình ảnh] • Chạm để dán ảnh"
+            return row(label, if (c.pinned) "📌" else "📍", "✕",
+                onAux = { listener?.onPin(c, !c.pinned) },
+                onAux2 = { listener?.onDeleteClip(c) }) {
+                c.imageUri?.let { uri -> listener?.onPasteImage(uri, c.mimeType ?: "image/png") }
+            }
+        }
         val m = ClipboardVault.detect(c.text)
         val tag = if (m.kind != com.customkey.vietime.tools.ClipKind.TEXT) m.kind.icon + " " else ""
         return row(tag + c.text.replace('\n', ' '), if (c.pinned) "📌" else "📍", "✕",
@@ -139,8 +224,8 @@ class ToolsPaneView(context: Context) : LinearLayout(context) {
     }
 
     private fun link(t: String, onClick: () -> Unit) = TextView(context).apply {
-        text = t; setTextColor(style.accent); setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f); gravity = Gravity.CENTER
-        setPadding(0, (10 * d).toInt(), 0, (10 * d).toInt()); setOnClickListener { onClick() }
+        text = t; setTextColor(style.accent); setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f); gravity = Gravity.CENTER
+        setPadding((8 * d).toInt(), (6 * d).toInt(), (8 * d).toInt(), (6 * d).toInt()); setOnClickListener { onClick() }
     }
 
     private fun rounded(color: Int, radiusDp: Float) = GradientDrawable().apply { setColor(color); cornerRadius = radiusDp * d }

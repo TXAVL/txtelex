@@ -69,6 +69,8 @@ import com.customkey.vietime.ui.settings.PlusCard
 import com.customkey.vietime.ui.settings.ToolsScreen
 import com.customkey.vietime.ui.settings.SoundHapticsScreen
 import com.customkey.vietime.ui.settings.ThemeStudioScreen
+import com.customkey.vietime.ui.settings.UserDictScreen
+import com.customkey.vietime.ui.theme.GhostButton
 import com.customkey.vietime.ui.theme.GlassCard
 import com.customkey.vietime.ui.theme.SectionLabel
 import com.customkey.vietime.ui.theme.Tx
@@ -112,7 +114,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private enum class Screen { HOME, PRACTICE, ABOUT, THEME, SOUND, LAYOUT, TOOLS, LOGS }
+private enum class Screen { HOME, PRACTICE, ABOUT, THEME, SOUND, LAYOUT, TOOLS, DICT, LOGS }
 
 @Composable
 private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPickIme: () -> Unit) {
@@ -135,6 +137,7 @@ private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPick
                 CustomizeTile("📐", "Bố cục", "Hàng số, chiều cao, tách đôi, thời gian giữ phím") { screen = Screen.LAYOUT }
                 SectionLabel("Tính năng")
                 CustomizeTile("🧰", "Công cụ", "Thêm dấu cả câu, máy tính, clipboard thông minh, mẫu câu") { screen = Screen.TOOLS }
+                CustomizeTile("📖", "Từ điển cá nhân", "Quản lý từ đã học, thêm tên riêng & thuật ngữ để gợi ý ngay") { screen = Screen.DICT }
                 FeatureTile(R.drawable.img_swipe_practice, "Luyện gõ vuốt",
                     "Vuốt qua các chữ để gõ cả từ — chấm điểm từng nét.", "Bắt đầu") { screen = Screen.PRACTICE }
                 FeatureTile(R.drawable.img_privacy_safe, "Riêng tư tuyệt đối",
@@ -150,6 +153,7 @@ private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPick
             Screen.SOUND -> SoundHapticsScreen(onBack = { screen = Screen.HOME })
             Screen.LAYOUT -> LayoutScreen(onBack = { screen = Screen.HOME })
             Screen.TOOLS -> ToolsScreen(onBack = { screen = Screen.HOME })
+            Screen.DICT -> UserDictScreen(onBack = { screen = Screen.HOME })
             Screen.ABOUT -> Column(Modifier.verticalScroll(rememberScrollState())) { AboutScreen(onBack = { screen = Screen.HOME }, onLogs = { screen = Screen.LOGS }) }
             Screen.LOGS -> Column(Modifier.verticalScroll(rememberScrollState())) { TxaLogCenter(onBack = { screen = Screen.ABOUT }) }
         }
@@ -216,6 +220,18 @@ private fun TypingModeCard() {
         Toggle("Sửa dấu từ đã gõ", null, Keys.RE_EDIT_WORDS, true)
         Toggle("Gõ vuốt", null, ImePrefs.SWIPE_TYPING, true)
         Toggle("Vuốt phím Cách đổi VI/EN", null, ImePrefs.SPACE_FLICK_LANGUAGE, true)
+        Toggle("Âm bàn phím", "Phát âm thanh phản hồi khi bấm", Keys.KEY_SOUND, true)
+        Toggle("Rung khi bấm phím", "Rung nhẹ phản hồi xúc giác khi chạm", Keys.HAPTIC_FEEDBACK, true)
+        Toggle("Gõ tắt (Shortcuts)", "Bung từ viết tắt (vd: ko → không, dc → được)", Keys.SHORTCUTS_ENABLED, true)
+        Toggle("Gõ nhanh (Quick Telex)", "cc→ch, nn→ng, tt→th, gg→gh...", Keys.QUICK_TELEX, false)
+        Toggle("Bỏ dấu kiểu mới", "hoà, thuý thay vì hòa, thúy", Keys.MODERN_TONE, false)
+        Toggle("Chính tả Teencode", "wá, zui zẻ, kó, bíe, thík...", Keys.TEENCODE, false)
+        Spacer(Modifier.height(8.dp))
+        GhostButton("Xoá dữ liệu từ đã học", Modifier.fillMaxWidth()) {
+            val f = java.io.File(ctx.filesDir, Keys.USERLM_FILE)
+            if (f.exists()) f.delete()
+            android.widget.Toast.makeText(ctx, "Đã xoá bộ nhớ từ đã học", android.widget.Toast.LENGTH_SHORT).show()
+        }
     }
 }
 

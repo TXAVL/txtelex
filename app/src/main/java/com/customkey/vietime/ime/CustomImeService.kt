@@ -22,6 +22,7 @@ import com.customkey.vietime.engine.SyllableLM
 import com.customkey.vietime.engine.UserLangModel
 import com.customkey.vietime.customization.KeyboardCustomizer
 import com.customkey.vietime.diag.TxaLogger
+import com.customkey.vietime.ui.keyboard.EmojiPaneView
 import com.customkey.vietime.ui.keyboard.KeyboardPanel
 import com.customkey.vietime.ui.keyboard.KeyboardPlane
 import com.customkey.vietime.ui.keyboard.KeyboardView
@@ -71,11 +72,29 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
         worker.post { session.seedLanguageModel() }
         custom = KeyboardCustomizer(this) { applyCustomization() }
         custom.reloadAll()
-        tools = ToolsController(this, proxy, session, { panel }, handler, worker, { b -> edit(b) }, { refreshBar() })
+        tools = ToolsController(this, proxy, session, { panel }, handler, worker, { b -> edit(b) }, { refreshBar() }) { uri, mime ->
+            pasteImage(uri, mime)
+        }
         tools.start()
         prefs.registerOnSharedPreferenceChangeListener(this)
         readPrefs()
         TxaLogger.crumb("Bàn phím khởi động ${SystemClock.elapsedRealtime() - t0} ms")
+    }
+
+    private fun pasteImage(uri: android.net.Uri, mimeType: String): Boolean {
+        val ic = currentInputConnection ?: return false
+        val ei = currentInputEditorInfo ?: return false
+        return try {
+            val contentInfo = androidx.core.view.inputmethod.InputContentInfoCompat(
+                uri,
+                android.content.ClipDescription("Image", arrayOf(mimeType)),
+                null
+            )
+            val flags = androidx.core.view.inputmethod.InputConnectionCompat.INPUT_CONTENT_GRANT_READ_URI_PERMISSION
+            androidx.core.view.inputmethod.InputConnectionCompat.commitContent(ic, ei, contentInfo, flags, null)
+        } catch (e: Exception) {
+            false
+        }
     }
 
     override fun onDestroy() {
@@ -93,6 +112,11 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
 
     override fun onSharedPreferenceChanged(p: SharedPreferences?, key: String?) {
         if (!custom.onPrefChanged(key)) readPrefs()
+        if (key in Keys.ENGINE_KEYS) {
+            val s = EngineSettings.load { prefs.all[it] }
+            session.applySettings(s)
+            refreshBar()
+        }
     }
 
     private fun applyCustomization() { panel?.let { custom.applyTo(it, custom.isWide(this)) } }
@@ -109,6 +133,20 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
         p.keyboard.listener = this
         p.strip.listener = this
         p.tools.listener = tools
+        p.emoji.listener = object : EmojiPaneView.Listener {
+            override fun onEmojiPicked(emoji: String) {
+                edit { session.commitBeforeEnter(proxy) }
+                proxy.insertText(emoji)
+                custom.feedback(KeyboardView.FeedbackKind.KEY)
+            }
+            override fun onBackspace() {
+                edit { session.backspace(proxy) }
+                custom.feedback(KeyboardView.FeedbackKind.DELETE)
+            }
+            override fun onClose() {
+                panel?.showEmoji(false)
+            }
+        }
         panel = p
         applyCustomization()
         return p
@@ -229,6 +267,10 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
     override fun onGlobe(longPress: Boolean) {
         val imm = getSystemService(InputMethodManager::class.java)
         if (longPress) imm.showInputMethodPicker() else switchToNextInputMethod(false)
+    }
+
+    override fun onEmoji() {
+        panel?.showEmoji(true)
     }
 
     override fun onFeedback(kind: KeyboardView.FeedbackKind) = custom.feedback(kind)

@@ -30,6 +30,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.customkey.vietime.engine.Keys
+import com.customkey.vietime.engine.ShortcutFile
 import com.customkey.vietime.ime.ImePrefs
 import com.customkey.vietime.tools.BillingRepository
 import com.customkey.vietime.tools.ClipboardVault
@@ -82,6 +84,9 @@ fun ToolsScreen(onBack: () -> Unit) {
 
         SectionLabel("Mẫu câu")
         SnippetEditor(tick)
+
+        SectionLabel("Gõ tắt (Shortcuts)")
+        ShortcutEditorCard()
     }
 }
 
@@ -134,8 +139,9 @@ private fun ClipboardList(tick: Int) {
         for (c in items) {
             val m = ClipboardVault.detect(c.text)
             Row(Modifier.fillMaxWidth().padding(vertical = 6.dp), verticalAlignment = Alignment.CenterVertically) {
-                Text(m.kind.icon, Modifier.width(28.dp))
-                Text(c.text.replace('\n', ' '), Modifier.weight(1f), color = Tx.Text, maxLines = 2, overflow = TextOverflow.Ellipsis, fontSize = 14.sp)
+                Text(if (c.isImage) "🖼️" else m.kind.icon, Modifier.width(28.dp))
+                val label = if (c.isImage) "[Hình ảnh] • ${c.mimeType ?: "image"}" else c.text.replace('\n', ' ')
+                Text(label, Modifier.weight(1f), color = if (c.isImage) Tx.CyanSoft else Tx.Text, maxLines = 2, overflow = TextOverflow.Ellipsis, fontSize = 14.sp)
                 Text(if (c.pinned) "📌" else "📍", Modifier.clickable { ToolsRepo.editClipboard(ctx) { it.setPinned(c.id, !c.pinned) } }.padding(8.dp))
                 Text("✕", Modifier.clickable { ToolsRepo.editClipboard(ctx) { it.delete(c.id) } }.padding(8.dp), color = Tx.TextDim)
             }
@@ -174,17 +180,6 @@ private fun SnippetEditor(tick: Int) {
     }
 }
 
-@Composable
-private fun TxField(value: String, onChange: (String) -> Unit, label: String, modifier: Modifier = Modifier.fillMaxWidth()) {
-    OutlinedTextField(
-        value, onChange, modifier, label = { Text(label) }, shape = RoundedCornerShape(14.dp),
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = Tx.Cyan, unfocusedBorderColor = Tx.Stroke, focusedLabelColor = Tx.Cyan,
-            unfocusedLabelColor = Tx.TextDim, cursorColor = Tx.Cyan, focusedContainerColor = Tx.Glass, unfocusedContainerColor = Tx.Glass,
-        ),
-    )
-}
-
 /** Thẻ TxTelex Plus trên màn chính. */
 @Composable
 fun PlusCard() {
@@ -205,6 +200,74 @@ fun PlusCard() {
         if (PlusGate.PAYWALL_ENABLED && !owned) {
             Spacer(Modifier.height(10.dp))
             GradientButton("Mở khoá Plus", Modifier.fillMaxWidth()) { (ctx as? Activity)?.let { billing.purchase(it) } }
+        }
+    }
+}
+
+@Composable
+private fun ShortcutEditorCard() {
+    val ctx = LocalContext.current
+    val prefs = remember { ImePrefs.of(ctx) }
+    var enabled by remember { mutableStateOf(prefs.getBoolean(Keys.SHORTCUTS_ENABLED, true)) }
+    var shortcutsMap by remember {
+        mutableStateOf(ShortcutFile.parse(prefs.getString(Keys.SHORTCUTS, null)))
+    }
+    var keyDraft by remember { mutableStateOf("") }
+    var valDraft by remember { mutableStateOf("") }
+
+    fun save(m: Map<String, String>) {
+        shortcutsMap = m
+        prefs.edit().putString(Keys.SHORTCUTS, ShortcutFile.exportYAML(m)).apply()
+    }
+
+    GlassCard {
+        TxSwitchRow("Bật gõ tắt", "Tự động thay thế từ viết tắt (vd: ko → không, dc → được, stk → số tài khoản)", enabled) {
+            enabled = it
+            prefs.edit().putBoolean(Keys.SHORTCUTS_ENABLED, it).apply()
+        }
+        if (enabled) {
+            Spacer(Modifier.height(10.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                TxField(keyDraft, { keyDraft = it }, "Phím tắt (vd: ko)", Modifier.weight(1f))
+                TxField(valDraft, { valDraft = it }, "Từ mở rộng (vd: không)", Modifier.weight(1.5f))
+                GradientButton("Thêm", enabled = keyDraft.isNotBlank() && valDraft.isNotBlank()) {
+                    val m = LinkedHashMap(shortcutsMap)
+                    m[keyDraft.trim()] = valDraft.trim()
+                    save(m)
+                    keyDraft = ""; valDraft = ""
+                }
+            }
+            if (shortcutsMap.isEmpty()) {
+                Spacer(Modifier.height(10.dp))
+                GhostButton("+ Nạp 10 gõ tắt tiếng Việt thông dụng", Modifier.fillMaxWidth()) {
+                    save(ShortcutFile.SUGGESTED)
+                }
+            }
+            Spacer(Modifier.height(10.dp))
+            for ((k, v) in shortcutsMap) {
+                Row(Modifier.fillMaxWidth().padding(vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Text(k, color = Tx.Cyan, fontWeight = FontWeight.Bold, fontSize = 15.sp, modifier = Modifier.width(60.dp))
+                    Text("→", color = Tx.TextDim, modifier = Modifier.padding(horizontal = 6.dp))
+                    Text(v, color = Tx.Text, fontSize = 14.sp, modifier = Modifier.weight(1f), maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Text("✕", Modifier.clickable {
+                        val m = LinkedHashMap(shortcutsMap)
+                        m.remove(k)
+                        save(m)
+                    }.padding(8.dp), color = Tx.TextDim)
+                }
+            }
+            if (shortcutsMap.isNotEmpty()) {
+                Spacer(Modifier.height(10.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    GhostButton("+ Nạp thêm gợi ý", Modifier.weight(1f)) {
+                        val (merged, _, _) = ShortcutFile.merge(shortcutsMap, ShortcutFile.SUGGESTED)
+                        save(merged)
+                    }
+                    GhostButton("Xoá tất cả", Modifier.weight(1f)) {
+                        save(emptyMap())
+                    }
+                }
+            }
         }
     }
 }

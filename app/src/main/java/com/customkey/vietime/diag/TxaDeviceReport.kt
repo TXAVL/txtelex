@@ -38,10 +38,15 @@ import java.util.TimeZone
  */
 object TxaDeviceReport {
     private const val BANNER = """
-╔══════════════════════════════════════════════════════╗
-║   ▀█▀ ▀▄▀ ▀█▀ █▀▀ █   █▀▀ ▀▄▀   B L A C K B O X       ║
-║    █  █ █  █  ██▄ █▄▄ ██▄ █ █   báo cáo sự cố · TXA   ║
-╚══════════════════════════════════════════════════════╝"""
+╔═══════════════════════════════════════════════════════════╗
+║    _____  __  __  _____   _____   _       _____  __  __   ║
+║   |_   _| \ \/ / |_   _| | ____| | |     | ____| \ \/ /   ║
+║     | |    \  /    | |   |  _|   | |     |  _|    \  /    ║
+║     | |    /  \    | |   | |___  | |___  | |___   /  \    ║
+║     |_|   /_/\_\   |_|   |_____| |_____| |_____| /_/\_\   ║
+║                                                           ║
+║          TXTELEX · BÁO CÁO HỆ THỐNG · TXA STUDIO          ║
+╚═══════════════════════════════════════════════════════════╝"""
 
     fun build(ctx: Context): String = buildString {
         appendLine(BANNER.trimStart('\n'))
@@ -210,7 +215,7 @@ object TxaDeviceReport {
 
     // MARK: xuất
 
-    /** Báo cáo đầy đủ để gửi: thông tin máy + sự cố + hộp đen + log + logcat của chính app. */
+    /** Báo cáo đầy đủ để gửi: thông tin máy + sự cố + sự kiện gần nhất + log + logcat của chính app. */
     fun fullReport(ctx: Context, crash: TxaCrash?, crashText: String?): String = buildString {
         append(build(ctx))
         appendLine()

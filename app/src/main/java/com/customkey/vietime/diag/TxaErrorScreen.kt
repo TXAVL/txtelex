@@ -69,7 +69,7 @@ import kotlin.random.Random
 
 /**
  * Màn báo lỗi của TxTelex — chạy ở tiến trình riêng `:txa_crash` nên vẫn mở được khi tiến trình
- * chính vừa chết. Giao diện chỉ hiện: loại lỗi, vân tay, chẩn đoán, hộp đen, stack. Thông tin
+ * chính vừa chết. Giao diện chỉ hiện: loại lỗi, vân tay, chẩn đoán, nhật ký sự kiện, stack. Thông tin
  * thiết bị CHỈ được ghép vào khi bấm Sao chép / Chia sẻ ([TxaDeviceReport.fullReport]).
  */
 class TxaErrorScreen : ComponentActivity() {
@@ -175,7 +175,7 @@ private fun ErrorContent(c: TxaCrash, raw: String, viewOnly: Boolean, onRestart:
         }
 
         if (c.breadcrumbs.isNotEmpty()) {
-            SectionLabel("Hộp đen — những gì xảy ra trước đó")
+            SectionLabel("Nhật ký thao tác trước đó")
             GlassCard {
                 val crumbs = c.breadcrumbs.takeLast(10)
                 for ((i, line) in crumbs.withIndex()) Row(verticalAlignment = Alignment.Top) {

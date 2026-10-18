@@ -1,5 +1,5 @@
 /*
- * txa_guard.c — TxaNativeGuard: "hộp đen" tầng native của TxTelex.
+ * txa_guard.c — TxaNativeGuard: Bộ bảo vệ và bắt sự cố tầng native của TxTelex.
  *
  * Bắt tín hiệu chết (SIGSEGV, SIGABRT, SIGBUS, SIGFPE, SIGILL, SIGTRAP, SIGSYS) trên MỌI luồng
  * của tiến trình (cả luồng của thư viện hệ thống / đồ hoạ / ML Kit), ghi một file dump văn bản:

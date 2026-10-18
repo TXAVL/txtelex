@@ -40,6 +40,7 @@ class KeyboardView(context: Context) : View(context) {
         fun onBackspace()
         fun onEnter()
         fun onGlobe(longPress: Boolean)
+        fun onEmoji() {}
         /** Phản hồi chạm (âm thanh + rung) — [kind] phân biệt phím thường / ⌫ / cách / trackpad. */
         fun onFeedback(kind: FeedbackKind) {}
         fun onTrackpadStart() {}
@@ -407,6 +408,7 @@ class KeyboardView(context: Context) : View(context) {
             is KeyAction.Enter -> listener?.onEnter()
             is KeyAction.Plane -> plane = a.target
             is KeyAction.Globe -> if (!t.longFired) listener?.onGlobe(false)
+            is KeyAction.Emoji -> listener?.onEmoji()
         }
         invalidate()
     }

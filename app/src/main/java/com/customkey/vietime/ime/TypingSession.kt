@@ -17,16 +17,18 @@ import com.customkey.vietime.engine.VNSuggest
 
 /** Một ô trên thanh gợi ý. [payload] = chữ chèn khi khác chữ hiển thị (chip dán, thêm dấu…). */
 data class Suggestion(val text: String, val kind: Kind, val payload: String? = null) {
-    /** Chip đặc biệt (phép tính / thêm dấu / dán nhanh) — tô nổi, IME tự xử lý khi chạm. */
-    val special: Boolean get() = kind == Kind.MATH || kind == Kind.TONES || kind == Kind.PASTE
+    /** Chip đặc biệt (phép tính / thêm dấu / dán nhanh text & ảnh) — tô nổi, IME tự xử lý khi chạm. */
+    val special: Boolean get() = kind == Kind.MATH || kind == Kind.TONES || kind == Kind.PASTE || kind == Kind.PASTE_IMAGE
 
     enum class Kind {
         /** Kết quả phép tính sau "=". */
         MATH,
         /** Thêm dấu cho câu không dấu trước con trỏ. */
         TONES,
-        /** Dán nhanh nội dung vừa copy (OTP, link…). */
+        /** Dán nhanh nội dung text vừa copy (OTP, link, STK…). */
         PASTE,
+        /** Dán nhanh hình ảnh vừa copy từ clipboard/ảnh chụp màn hình. */
+        PASTE_IMAGE,
         /** Đúng chữ đang gõ (giữ nguyên). */
         LITERAL,
         /** Hoàn tất từ đang gõ. */
@@ -94,6 +96,13 @@ class TypingSession(
         lastWord = null; lastWord2 = null
         clearSwipe(); deletedForUndo = null
         lastInsertWasSpace = false
+        generation++
+    }
+
+    /** Cập nhật cài đặt bộ gõ tức thời khi người dùng đổi trong Cài đặt mà bàn phím đang mở. */
+    fun applySettings(s: EngineSettings) {
+        settings = s
+        bridge.applySettings(s)
         generation++
     }
 
@@ -219,9 +228,28 @@ class TypingSession(
             val ranked = SuggestRank.rankInline(pool, pmi, typed.codePointCount(0, typed.length), lm::count, ctx)
             val predicted = bridge.predictedCommit.ifEmpty { typed }
             val words = (lm.manualCompletions(typed, 1) + ranked)
-                .map { matchCase(it, typed) }.filter { it != predicted }.distinct()
-            return (listOf(Suggestion(predicted, Suggestion.Kind.LITERAL)) +
-                words.take(max - 1).map { Suggestion(it, Suggestion.Kind.COMPLETION) })
+                .map { matchCase(it, typed) }.filter { it != predicted }.distinct().toMutableList()
+
+            // 1. Phím tắt gõ tắt (e.g. ko -> không, dc -> được)
+            val preview = bridge.shortcutPreview
+            if (preview != null && !preview.contains('\n') && preview != predicted) {
+                words.add(0, preview)
+            }
+
+            // 2. Gợi ý emoji thông minh theo nghĩa từ
+            var emojis: List<String> = emptyList()
+            val cLow = typed.lowercase()
+            lastWord?.let { emojis = runCatching { com.customkey.vietime.engine.EmojiSuggest.emojis(it.lowercase() + " " + cLow) }.getOrDefault(emptyList()) }
+            if (emojis.isEmpty()) emojis = runCatching { com.customkey.vietime.engine.EmojiSuggest.emojis(predicted) }.getOrDefault(emptyList())
+            if (emojis.isEmpty()) emojis = runCatching { com.customkey.vietime.engine.EmojiSuggest.emojis(typed) }.getOrDefault(emptyList())
+
+            val result = mutableListOf(Suggestion(predicted, Suggestion.Kind.LITERAL))
+            val wordSlots = if (emojis.isNotEmpty() && max >= 3) max - 2 else max - 1
+            result.addAll(words.take(wordSlots).map { Suggestion(it, Suggestion.Kind.COMPLETION) })
+            if (emojis.isNotEmpty() && max >= 3) {
+                result.add(Suggestion(emojis.first(), Suggestion.Kind.COMPLETION))
+            }
+            return result
         }
         val prev = lastWord ?: return emptyList()
         if (bridge.englishMode) return emptyList()
@@ -231,10 +259,16 @@ class TypingSession(
         val next = SuggestRank.nextFill(prev, lastWord2, personal,
             { w -> lastWord2?.let { lm.trigramCount(it, prev, w) } ?: 0 }, need = max)
         val padded = SuggestionFill.pad(next, emptyList(), max)
+        val emojis = runCatching { com.customkey.vietime.engine.EmojiSuggest.emojis(prev) }.getOrDefault(emptyList())
+        if (emojis.isNotEmpty() && max >= 3) {
+            val res = padded.take(max - 1).map { Suggestion(it, Suggestion.Kind.NEXT) }.toMutableList()
+            res.add(Suggestion(emojis.first(), Suggestion.Kind.NEXT))
+            return res
+        }
         return padded.take(max).map { Suggestion(it, Suggestion.Kind.NEXT) }
     }
 
-    /** Chạm một ô gợi ý: thay từ đang soạn / từ vừa vuốt bằng [s], thêm dấu cách. */
+    /** Chạm một ô gợi ý: thay từ đang soạn / từ vừa vuốt bằng [s], thêm dấu cách nếu là từ. */
     fun accept(s: Suggestion, p: TextProxy) {
         deletedForUndo = null
         when {
@@ -252,15 +286,21 @@ class TypingSession(
                     // Chốt như dấu cách (engine tự khôi phục tiếng Anh nếu cần).
                     commitAndLearn(bridge.boundary(" ", p, expand = false), accepted = true)
                 } else {
+                    val isWord = s.text.isNotEmpty() && Character.isLetter(s.text.codePointAt(0))
                     if (p.confirmTail(typed)) { p.deleteCodePoints(cp(typed)); p.insertText(s.text) }
                     bridge.reset()
-                    commitAndLearn(s.text, accepted = true)
-                    p.insertText(" ")
+                    if (isWord) {
+                        commitAndLearn(s.text, accepted = true)
+                        p.insertText(" ")
+                    } else {
+                        lastWord = null; lastWord2 = null
+                    }
                 }
             }
             else -> {
-                p.insertText(s.text + " ")
-                commitAndLearn(s.text, accepted = true)
+                val isWord = s.text.isNotEmpty() && Character.isLetter(s.text.codePointAt(0))
+                p.insertText(if (isWord) s.text + " " else s.text)
+                if (isWord) commitAndLearn(s.text, accepted = true) else { lastWord = null; lastWord2 = null }
             }
         }
         lastInsertWasSpace = true

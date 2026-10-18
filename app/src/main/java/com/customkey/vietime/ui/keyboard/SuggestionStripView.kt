@@ -56,7 +56,21 @@ class SuggestionStripView(context: Context) : View(context) {
         items = list; message = null; invalidate()
     }
 
-    fun showMessage(text: String?) { message = text; invalidate() }
+    fun showMessage(text: String?) {
+        if (text != null && TxaToast.isLong(text)) {
+            val panel = (parent as? android.view.View)?.let { p ->
+                (p as? KeyboardPanel) ?: (p.parent as? KeyboardPanel)
+            }
+            if (panel != null) {
+                message = null
+                panel.showToast(text)
+                invalidate()
+                return
+            }
+        }
+        message = text
+        invalidate()
+    }
 
     fun showUndo(on: Boolean) { if (undo != on) { undo = on; invalidate() } }
 

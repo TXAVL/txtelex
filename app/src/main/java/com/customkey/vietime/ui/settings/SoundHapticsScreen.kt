@@ -33,10 +33,13 @@ import com.customkey.vietime.ui.theme.GhostButton
 import com.customkey.vietime.ui.theme.GlassCard
 import com.customkey.vietime.ui.theme.SectionLabel
 import com.customkey.vietime.ui.theme.Tx
+import com.customkey.vietime.ui.theme.TxSwitchRow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.math.roundToInt
+
+import com.customkey.vietime.engine.Keys
 
 /**
  * Âm thanh & Rung: kiểu âm phím (phím cơ Blue/Brown/Red, máy đánh chữ, giọt nước, âm riêng),
@@ -48,8 +51,10 @@ fun SoundHapticsScreen(onBack: () -> Unit) {
     val prefs = remember { ImePrefs.of(ctx) }
     val scope = rememberCoroutineScope()
     var profile by remember { mutableStateOf(SoundProfile.of(prefs.getString(SoundEffectPool.KEY_PROFILE, null))) }
+    var soundEnabled by remember { mutableStateOf(prefs.getBoolean(Keys.KEY_SOUND, profile != SoundProfile.OFF)) }
     var volume by remember { mutableIntStateOf(prefs.getInt(SoundEffectPool.KEY_VOLUME, 60)) }
     var haptic by remember { mutableStateOf(HapticConfig.load { prefs.all[it] }) }
+    var hapticEnabled by remember { mutableStateOf(prefs.getBoolean(Keys.HAPTIC_FEEDBACK, true)) }
     var hasCustom by remember { mutableStateOf(SoundEffectPool.customFile(ctx).exists()) }
 
     // Bộ phát nghe thử riêng của màn này.
@@ -58,6 +63,7 @@ fun SoundHapticsScreen(onBack: () -> Unit) {
     DisposableEffect(Unit) { onDispose { tester.release() } }
 
     fun audition(p: SoundProfile, kind: SoundKind = SoundKind.KEY) {
+        if (!soundEnabled && p != SoundProfile.OFF) return
         tester.volume = volume / 100f
         scope.launch {
             withContext(Dispatchers.Default) { tester.setProfile(p, force = p == SoundProfile.CUSTOM) }
@@ -91,45 +97,84 @@ fun SoundHapticsScreen(onBack: () -> Unit) {
     }
 
     CustomizeScaffold("Âm thanh & Rung", onBack) {
-        SectionLabel("Âm phím")
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            for (p in SoundProfile.entries) {
-                if (p == SoundProfile.CUSTOM && !hasCustom) continue
-                ChoiceRow(p.title, p.subtitle, selected = p == profile,
-                    trailing = if (p.synthesized || p == SoundProfile.CUSTOM) ({
-                        Text("▶", Modifier.padding(start = 8.dp), color = Tx.Cyan, fontSize = 16.sp)
-                    }) else null) { choose(p) }
-            }
-            GhostButton(if (hasCustom) "Đổi file âm thanh của bạn…" else "+ Nạp âm thanh riêng (.wav / .mp3)", Modifier.fillMaxWidth()) {
-                importer.launch(arrayOf("audio/*"))
-            }
-        }
+        SectionLabel("Âm bàn phím")
         GlassCard {
-            TxSlider("Âm lượng", volume.toFloat(), 0f..100f, { "${it.roundToInt()}%" },
-                onDone = { prefs.edit().putInt(SoundEffectPool.KEY_VOLUME, volume).apply(); audition(profile) }) {
-                volume = it.roundToInt()
-            }
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                for ((label, k) in listOf("Phím" to SoundKind.KEY, "Cách" to SoundKind.SPACE, "Xoá" to SoundKind.DELETE, "Enter" to SoundKind.ENTER))
-                    GhostButton(label, Modifier.weight(1f)) { audition(profile, k) }
+            TxSwitchRow("Bật âm bàn phím", "Phát âm thanh phản hồi khi gõ phím", soundEnabled) { on ->
+                soundEnabled = on
+                prefs.edit().putBoolean(Keys.KEY_SOUND, on).apply()
+                if (on) {
+                    val p = if (profile == SoundProfile.OFF) SoundProfile.BLUE else profile
+                    choose(p)
+                }
             }
         }
 
-        SectionLabel("Rung")
-        GlassCard {
-            fun save(h: HapticConfig) {
-                haptic = h
-                prefs.edit().putInt(HapticConfig.KEY_KEY, h.key).putInt(HapticConfig.KEY_DELETE, h.delete)
-                    .putInt(HapticConfig.KEY_CURSOR, h.cursor).apply()
+        if (soundEnabled) {
+            GlassCard {
+                TxSlider("Âm lượng bàn phím", volume.toFloat(), 0f..100f, { "${it.roundToInt()}%" },
+                    onDone = { prefs.edit().putInt(SoundEffectPool.KEY_VOLUME, volume).apply(); audition(profile) }) {
+                    volume = it.roundToInt()
+                }
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    for ((label, k) in listOf("Phím" to SoundKind.KEY, "Cách" to SoundKind.SPACE, "Xoá" to SoundKind.DELETE, "Enter" to SoundKind.ENTER))
+                        GhostButton(label, Modifier.weight(1f)) { audition(profile, k) }
+                }
             }
-            fun pct(v: Float) = if (v.roundToInt() == 0) "Tắt" else "${v.roundToInt()}%"
-            TxSlider("Phím thường", haptic.key.toFloat(), 0f..100f, ::pct,
-                onDone = { save(haptic); vib.config = haptic; vib.perform(HapticKind.KEY) }) { haptic = haptic.copy(key = it.roundToInt()) }
-            TxSlider("Phím xoá", haptic.delete.toFloat(), 0f..100f, ::pct,
-                onDone = { save(haptic); vib.config = haptic; vib.perform(HapticKind.DELETE) }) { haptic = haptic.copy(delete = it.roundToInt()) }
-            TxSlider("Trượt con trỏ", haptic.cursor.toFloat(), 0f..100f, ::pct,
-                onDone = { save(haptic); vib.config = haptic; vib.perform(HapticKind.CURSOR) }) { haptic = haptic.copy(cursor = it.roundToInt()) }
-            Text("Giữ phím Cách rồi kéo trên bàn phím mẫu để thử rung con trỏ.", color = Tx.TextDim, fontSize = 12.sp)
+
+            SectionLabel("Kiểu âm thanh")
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                for (p in SoundProfile.entries) {
+                    if (p == SoundProfile.OFF) continue
+                    if (p == SoundProfile.CUSTOM && !hasCustom) continue
+                    ChoiceRow(p.title, p.subtitle, selected = p == profile,
+                        trailing = if (p.synthesized || p == SoundProfile.CUSTOM) ({
+                            Text("▶", Modifier.padding(start = 8.dp), color = Tx.Cyan, fontSize = 16.sp)
+                        }) else null) { choose(p) }
+                }
+                GhostButton(if (hasCustom) "Đổi file âm thanh của bạn…" else "+ Nạp âm thanh riêng (.wav / .mp3)", Modifier.fillMaxWidth()) {
+                    importer.launch(arrayOf("audio/*"))
+                }
+            }
+        }
+
+        SectionLabel("Rung phản hồi")
+        GlassCard {
+            TxSwitchRow("Bật rung khi chạm phím", "Phản hồi xúc giác khi gõ hoặc chạm phím", hapticEnabled) { on ->
+                hapticEnabled = on
+                prefs.edit().putBoolean(Keys.HAPTIC_FEEDBACK, on).apply()
+                if (on) {
+                    vib.config = haptic
+                    vib.perform(HapticKind.KEY)
+                }
+            }
+        }
+
+        if (hapticEnabled) {
+            GlassCard {
+                fun save(h: HapticConfig) {
+                    haptic = h
+                    prefs.edit().putInt(HapticConfig.KEY_KEY, h.key).putInt(HapticConfig.KEY_DELETE, h.delete)
+                        .putInt(HapticConfig.KEY_CURSOR, h.cursor).apply()
+                }
+                fun pct(v: Float) = if (v.roundToInt() == 0) "Tắt" else "${v.roundToInt()}%"
+                TxSlider("Phím thường", haptic.key.toFloat(), 0f..100f, ::pct,
+                    onDone = { save(haptic); vib.config = haptic; vib.perform(HapticKind.KEY) }) { haptic = haptic.copy(key = it.roundToInt()) }
+                TxSlider("Phím xoá", haptic.delete.toFloat(), 0f..100f, ::pct,
+                    onDone = { save(haptic); vib.config = haptic; vib.perform(HapticKind.DELETE) }) { haptic = haptic.copy(delete = it.roundToInt()) }
+                TxSlider("Trượt con trỏ", haptic.cursor.toFloat(), 0f..100f, ::pct,
+                    onDone = { save(haptic); vib.config = haptic; vib.perform(HapticKind.CURSOR) }) { haptic = haptic.copy(cursor = it.roundToInt()) }
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(top = 4.dp)) {
+                    GhostButton("Thử rung phím", Modifier.weight(1f)) {
+                        vib.config = haptic
+                        vib.perform(HapticKind.KEY)
+                    }
+                    GhostButton("Thử rung xoá", Modifier.weight(1f)) {
+                        vib.config = haptic
+                        vib.perform(HapticKind.DELETE)
+                    }
+                }
+                Text("Giữ phím Cách rồi kéo trên bàn phím mẫu để thử rung con trỏ.", color = Tx.TextDim, fontSize = 12.sp)
+            }
         }
     }
 }

@@ -15,6 +15,8 @@ sealed class KeyAction {
     data class Plane(val target: KeyboardPlane) : KeyAction()
     /** Đổi bàn phím hệ thống (giữ) / đổi VI-EN (chạm). */
     object Globe : KeyAction()
+    /** Mở bảng Emoji / Kaomoji. */
+    object Emoji : KeyAction()
 }
 
 enum class KeyboardPlane { LETTERS, SYMBOLS, SYMBOLS2, NUMBER, PHONE }
@@ -120,8 +122,9 @@ object KeyboardLayout {
                 KeyDef(KeyAction.Text("."), ".", alternates = listOf("?", "!", "…", "\"", "'"))
         }
         val globe = if (opts.showGlobe) listOf(KeyDef(KeyAction.Globe, "🌐", modifier = true)) else emptyList()
-        val space = KeyDef(KeyAction.Space, "", if (opts.showGlobe) 4f else 5f)
-        return listOf(planeKey) + globe + left + space + right + enter
+        val emojiKey = listOf(KeyDef(KeyAction.Emoji, "😊", 1.0f, modifier = true))
+        val space = KeyDef(KeyAction.Space, "", if (opts.showGlobe) 3.0f else 4.0f)
+        return listOf(planeKey) + globe + emojiKey + left + space + right + enter
     }
 
     fun enterLabel(a: EnterAction) = when (a) {

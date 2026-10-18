@@ -36,12 +36,29 @@ class SnippetStore(items: List<Snippet> = DEFAULTS) {
 
     companion object {
         val DEFAULTS = listOf(
-            "Cảm ơn bạn nhiều nhé!",
-            "Mình đang bận, lát mình gọi lại nhé.",
+            "👋 Chào buổi sáng",
+            "😴 Chúc ngủ ngon",
+            "🙏 Cảm ơn bạn nhiều nhé!",
+            "🎂 Chúc mừng sinh nhật! 🎉",
+            "⏳ Đợi mình một lát nhé",
+            "📞 Gọi lại cho mình nhé",
+            "🚗 Đang trên đường tới đây",
+            "🕐 Mình trễ một chút, sorry nha",
+            "💪 Cố lên nha!",
+            "🤝 Rất vui được gặp bạn",
+            "🏠 Mình về tới nhà rồi",
+            "☕ Đi cà phê không?",
+            "🍚 Bạn ăn cơm chưa?",
+            "👍 Ok chốt vậy nhé",
+            "✅ Xong rồi nhé",
+            "📍 Bạn đang ở đâu vậy?",
+            "💭 Đang làm gì vậy?",
+            "📅 Khi nào gặp được nhỉ?",
+            "🥰 Yêu bạn nhiều",
+            "😂 Haha hay quá",
             "Ok, để mình xem rồi báo lại bạn.",
             "Đã nhận, cảm ơn bạn!",
             "Bạn gửi giúp mình địa chỉ nhé.",
-            "Chúc mừng sinh nhật! 🎂",
         ).mapIndexed { i, t -> Snippet(i + 1L, t) }
 
         fun decode(s: String?): SnippetStore {

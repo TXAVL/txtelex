@@ -14,22 +14,40 @@ import android.widget.LinearLayout
  * phủ liền cả hai. Dùng cho IME và bản xem trước trong app (Theme Studio, Luyện vuốt).
  */
 @SuppressLint("ViewConstructor")
-class KeyboardPanel(context: Context) : LinearLayout(context) {
+class KeyboardPanel(context: Context) : FrameLayout(context) {
     val strip = SuggestionStripView(context).also { it.drawsBackground = false }
     val keyboard = KeyboardView(context).also { it.drawsBackground = false }
     /** Bảng công cụ (Clipboard / Mẫu câu…) — đè lên vùng phím, giữ nguyên chiều cao. */
     val tools = ToolsPaneView(context).also { it.visibility = GONE }
+    /** Bảng emoji / kaomoji đầy đủ theo ref VietTelex. */
+    val emoji = EmojiPaneView(context).also { it.visibility = GONE }
+    val toast = TxaToastView(context)
+
+    private val mainContainer = LinearLayout(context).apply {
+        orientation = LinearLayout.VERTICAL
+    }
     private val body = FrameLayout(context)
 
     var style: KeyboardStyle = KeyboardStyle.neon
-        set(v) { field = v; strip.style = v; keyboard.style = v; tools.style = v; invalidate() }
+        set(v) {
+            field = v
+            strip.style = v
+            keyboard.style = v
+            tools.style = v
+            emoji.style = v
+            toast.applyStyle(v)
+            invalidate()
+        }
 
     val toolsShown: Boolean get() = tools.visibility == VISIBLE
+    val emojiShown: Boolean get() = emoji.visibility == VISIBLE
 
     fun showTools(show: Boolean) {
-        // Chiều cao cố định = vùng phím: danh sách dài không được kéo cao bàn phím.
-        if (show) tools.layoutParams = (tools.layoutParams as FrameLayout.LayoutParams).apply {
-            height = keyboard.height.takeIf { it > 0 } ?: keyboard.desiredHeight()
+        if (show) {
+            emoji.visibility = GONE
+            tools.layoutParams = (tools.layoutParams as FrameLayout.LayoutParams).apply {
+                height = keyboard.height.takeIf { it > 0 } ?: keyboard.desiredHeight()
+            }
         }
         tools.visibility = if (show) VISIBLE else GONE
         keyboard.visibility = if (show) INVISIBLE else VISIBLE
@@ -37,17 +55,99 @@ class KeyboardPanel(context: Context) : LinearLayout(context) {
         if (show) keyboard.cancelAllTouches()
     }
 
+    fun showEmoji(show: Boolean) {
+        if (show) {
+            tools.visibility = GONE
+            strip.toolsOpen = false
+            emoji.layoutParams = (emoji.layoutParams as FrameLayout.LayoutParams).apply {
+                height = keyboard.height.takeIf { it > 0 } ?: keyboard.desiredHeight()
+            }
+            emoji.open()
+        }
+        emoji.visibility = if (show) VISIBLE else GONE
+        keyboard.visibility = if (show) INVISIBLE else VISIBLE
+        if (show) keyboard.cancelAllTouches()
+    }
+
+    /**
+     * Hiển thị thông báo:
+     * - Thông báo ngắn (<= 28 ký tự): giữ nguyên vị trí trên thanh gợi ý (strip).
+     * - Thông báo dài (> 28 ký tự, ví dụ thông báo tính năng dịch Play): tự động chuyển thành TxaToast nổi dạng card kính trên bàn phím.
+     */
+    fun showMessage(msg: String?, icon: String? = null) {
+        if (msg == null) {
+            strip.showMessage(null)
+            return
+        }
+        if (TxaToast.isLong(msg)) {
+            strip.showMessage(null)
+            showToast(msg, icon)
+        } else {
+            strip.showMessage(msg)
+        }
+    }
+
+    fun showToast(msg: String, icon: String? = null, durationMs: Long = 3500L) {
+        toast.show(msg, icon, durationMs)
+    }
+
+    fun hideToast() {
+        toast.hide()
+    }
+
     private val src = Rect()
     private val dst = RectF()
     private val paint = Paint(Paint.FILTER_BITMAP_FLAG)
 
     init {
-        orientation = VERTICAL
+        layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         setWillNotDraw(false)
-        addView(strip, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
+        mainContainer.addView(strip, LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
         body.addView(keyboard, FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
         body.addView(tools, FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
-        addView(body, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
+        body.addView(emoji, FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
+        mainContainer.addView(body, LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
+        addView(mainContainer, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
+
+        val d = resources.displayMetrics.density
+        val toastLp = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, android.view.Gravity.TOP or android.view.Gravity.CENTER_HORIZONTAL).apply {
+            leftMargin = (12 * d).toInt()
+            rightMargin = (12 * d).toInt()
+            topMargin = (6 * d).toInt()
+        }
+        addView(toast, toastLp)
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val stripH = if (strip.visibility != GONE) (42 * resources.displayMetrics.density).toInt() else 0
+        val kbH = if (toolsShown) {
+            tools.layoutParams = (tools.layoutParams as FrameLayout.LayoutParams).apply {
+                height = keyboard.desiredHeight()
+            }
+            keyboard.desiredHeight()
+        } else if (emojiShown) {
+            emoji.layoutParams = (emoji.layoutParams as FrameLayout.LayoutParams).apply {
+                height = keyboard.desiredHeight()
+            }
+            keyboard.desiredHeight()
+        } else {
+            keyboard.desiredHeight()
+        }
+        val targetH = stripH + kbH
+        val width = MeasureSpec.getSize(widthMeasureSpec)
+        mainContainer.measure(
+            MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
+            MeasureSpec.makeMeasureSpec(targetH, MeasureSpec.EXACTLY)
+        )
+        if (toast.visibility != GONE) {
+            val d = resources.displayMetrics.density
+            val availW = (width - 24 * d).toInt().coerceAtLeast(0)
+            toast.measure(
+                MeasureSpec.makeMeasureSpec(availW, MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(targetH, MeasureSpec.AT_MOST)
+            )
+        }
+        setMeasuredDimension(width, targetH)
     }
 
     /** Ẩn/hiện thanh gợi ý (bản xem trước luyện vuốt không cần). */

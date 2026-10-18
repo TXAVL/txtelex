@@ -37,12 +37,16 @@ class KeyboardCustomizer(context: Context, private val onChanged: () -> Unit) {
     fun reloadAll() {
         theme = ThemeStore.load(ctx)
         layout = LayoutConfig.load { prefs.all[it] }
-        haptic.config = HapticConfig.load { prefs.all[it] }
+        val hapticEnabled = prefs.getBoolean(Keys.HAPTIC_FEEDBACK, true)
+        val loadedHaptic = HapticConfig.load { prefs.all[it] }
+        haptic.config = if (hapticEnabled) loadedHaptic else HapticConfig(0, 0, 0)
         sound.volume = prefs.getInt(SoundEffectPool.KEY_VOLUME, 60) / 100f
         val wantWall = theme.wallpaper
         bg {
             wallpaper = if (wantWall) ThemeStore.loadWallpaper(ctx) else null
-            sound.setProfile(SoundProfile.of(prefs.getString(SoundEffectPool.KEY_PROFILE, null)))
+            val soundEnabled = prefs.getBoolean(Keys.KEY_SOUND, true)
+            val p = if (soundEnabled) SoundProfile.of(prefs.getString(SoundEffectPool.KEY_PROFILE, null)) else SoundProfile.OFF
+            sound.setProfile(p)
             main.post(onChanged)
         }
         onChanged()
@@ -63,15 +67,19 @@ class KeyboardCustomizer(context: Context, private val onChanged: () -> Unit) {
                 wallpaper = if (theme.wallpaper) ThemeStore.loadWallpaper(ctx) else null
                 main.post(onChanged)
             }
-            SoundEffectPool.KEY_PROFILE, SoundEffectPool.KEY_CUSTOM_VERSION -> {
-                val p = SoundProfile.of(prefs.getString(SoundEffectPool.KEY_PROFILE, null))
+            Keys.KEY_SOUND, SoundEffectPool.KEY_PROFILE, SoundEffectPool.KEY_CUSTOM_VERSION -> {
+                val soundEnabled = prefs.getBoolean(Keys.KEY_SOUND, true)
+                val p = if (soundEnabled) SoundProfile.of(prefs.getString(SoundEffectPool.KEY_PROFILE, null)) else SoundProfile.OFF
                 val force = key == SoundEffectPool.KEY_CUSTOM_VERSION
                 bg { sound.setProfile(p, force) }
                 return true
             }
             SoundEffectPool.KEY_VOLUME -> { sound.volume = prefs.getInt(key, 60) / 100f; return true }
-            HapticConfig.KEY_KEY, HapticConfig.KEY_DELETE, HapticConfig.KEY_CURSOR -> {
-                haptic.config = HapticConfig.load { prefs.all[it] }; return true
+            Keys.HAPTIC_FEEDBACK, HapticConfig.KEY_KEY, HapticConfig.KEY_DELETE, HapticConfig.KEY_CURSOR -> {
+                val hapticEnabled = prefs.getBoolean(Keys.HAPTIC_FEEDBACK, true)
+                val cfg = HapticConfig.load { prefs.all[it] }
+                haptic.config = if (hapticEnabled) cfg else HapticConfig(0, 0, 0)
+                return true
             }
             Keys.NUMBER_ROW, LayoutConfig.KEY_HEIGHT, LayoutConfig.KEY_WIDTH, LayoutConfig.KEY_SPLIT, LayoutConfig.KEY_LONG_PRESS ->
                 layout = LayoutConfig.load { prefs.all[it] }
