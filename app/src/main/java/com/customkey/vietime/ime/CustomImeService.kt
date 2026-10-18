@@ -3,17 +3,14 @@ package com.customkey.vietime.ime
 import android.content.Context
 import android.content.SharedPreferences
 import android.inputmethodservice.InputMethodService
-import android.media.AudioManager
 import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
 import android.os.SystemClock
 import android.util.Log
-import android.view.HapticFeedbackConstants
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.LinearLayout
 import com.customkey.vietime.engine.Cancellable
 import com.customkey.vietime.engine.EngineSettings
 import com.customkey.vietime.engine.Keys
@@ -24,10 +21,10 @@ import com.customkey.vietime.engine.SwipePath
 import com.customkey.vietime.engine.SwipeSuggest
 import com.customkey.vietime.engine.SyllableLM
 import com.customkey.vietime.engine.UserLangModel
+import com.customkey.vietime.customization.KeyboardCustomizer
+import com.customkey.vietime.ui.keyboard.KeyboardPanel
 import com.customkey.vietime.ui.keyboard.KeyboardPlane
-import com.customkey.vietime.ui.keyboard.KeyboardStyle
 import com.customkey.vietime.ui.keyboard.KeyboardView
-import com.customkey.vietime.ui.keyboard.LayoutOptions
 import com.customkey.vietime.ui.keyboard.SuggestionStripView
 import java.io.File
 
@@ -51,15 +48,15 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
     private lateinit var session: TypingSession
     private val proxy = InputBridge { currentInputConnection?.let { InputConnectionPort(it) } }
 
-    private var keyboard: KeyboardView? = null
-    private var strip: SuggestionStripView? = null
+    private var panel: KeyboardPanel? = null
+    private val keyboard: KeyboardView? get() = panel?.keyboard
+    private val strip: SuggestionStripView? get() = panel?.strip
+    private lateinit var custom: KeyboardCustomizer
 
     private var swipeDecoder: SwipeDecoder? = null
     private val swipeLock = Any()
     @Volatile private var swipeReady = false
 
-    private var soundOn = true
-    private var hapticOn = true
     private var flickLanguage = true
 
     override fun onCreate() {
@@ -71,6 +68,8 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
         session = TypingSession(lm)
         lm.onReady = { refreshBar() }
         worker.post { session.seedLanguageModel() }
+        custom = KeyboardCustomizer(this) { applyCustomization() }
+        custom.reloadAll()
         prefs.registerOnSharedPreferenceChangeListener(this)
         readPrefs()
         Log.d(TAG, "onCreate ${SystemClock.elapsedRealtime() - t0} ms")
@@ -79,35 +78,35 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
     override fun onDestroy() {
         prefs.unregisterOnSharedPreferenceChangeListener(this)
         runCatching { session.lm.close() }
+        custom.release()
         worker.looper.quitSafely()
         super.onDestroy()
     }
 
     private fun readPrefs() {
-        soundOn = prefs.getBoolean(ImePrefs.KEY_SOUND, true)
-        hapticOn = prefs.getBoolean(ImePrefs.HAPTIC, true)
         flickLanguage = prefs.getBoolean(ImePrefs.SPACE_FLICK_LANGUAGE, true)
-        keyboard?.longPressDelayMs = prefs.getInt(ImePrefs.LONG_PRESS_MS, 300).toLong()
     }
 
-    override fun onSharedPreferenceChanged(p: SharedPreferences?, key: String?) { readPrefs() }
+    override fun onSharedPreferenceChanged(p: SharedPreferences?, key: String?) {
+        if (!custom.onPrefChanged(key)) readPrefs()
+    }
+
+    private fun applyCustomization() { panel?.let { custom.applyTo(it, custom.isWide(this)) } }
+
+    override fun onConfigurationChanged(newConfig: android.content.res.Configuration) {
+        super.onConfigurationChanged(newConfig)
+        applyCustomization()
+    }
 
     override fun onEvaluateFullscreenMode(): Boolean = false
 
     override fun onCreateInputView(): View {
-        val style = KeyboardStyle.neon
-        val s = SuggestionStripView(this).also { it.listener = this; it.style = style }
-        val k = KeyboardView(this).also {
-            it.listener = this; it.style = style
-            it.longPressDelayMs = prefs.getInt(ImePrefs.LONG_PRESS_MS, 300).toLong()
-        }
-        strip = s; keyboard = k
-        return LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setBackgroundColor(style.background)
-            addView(s, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
-            addView(k, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
-        }
+        val p = KeyboardPanel(this)
+        p.keyboard.listener = this
+        p.strip.listener = this
+        panel = p
+        applyCustomization()
+        return p
     }
 
     override fun onStartInputView(info: EditorInfo?, restarting: Boolean) {
@@ -127,10 +126,10 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
                 FieldKind.PHONE -> KeyboardPlane.PHONE
                 else -> KeyboardPlane.LETTERS
             }
-            options = LayoutOptions(numberRow = prefs.getBoolean(Keys.NUMBER_ROW, false))
             spaceLabel = spaceLabelFor()
             swipeTyping = prefs.getBoolean(ImePrefs.SWIPE_TYPING, true) && !cfg.passthrough && !cfg.isSecure
         }
+        applyCustomization()
         strip?.showUndo(false)
         strip?.showMessage(null)
         applyAutoShift()
@@ -219,26 +218,7 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
         if (longPress) imm.showInputMethodPicker() else switchToNextInputMethod(false)
     }
 
-    override fun onFeedback(kind: KeyboardView.FeedbackKind) {
-        val v = keyboard ?: return
-        if (hapticOn) {
-            val c = when (kind) {
-                KeyboardView.FeedbackKind.TRACKPAD_TICK -> HapticFeedbackConstants.CLOCK_TICK
-                else -> HapticFeedbackConstants.KEYBOARD_TAP
-            }
-            v.performHapticFeedback(c)
-        }
-        if (soundOn && kind != KeyboardView.FeedbackKind.TRACKPAD_TICK) {
-            val am = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-            val fx = when (kind) {
-                KeyboardView.FeedbackKind.DELETE -> AudioManager.FX_KEYPRESS_DELETE
-                KeyboardView.FeedbackKind.SPACE -> AudioManager.FX_KEYPRESS_SPACEBAR
-                KeyboardView.FeedbackKind.MODIFIER -> AudioManager.FX_KEYPRESS_RETURN
-                else -> AudioManager.FX_KEYPRESS_STANDARD
-            }
-            am.playSoundEffect(fx, -1f)
-        }
-    }
+    override fun onFeedback(kind: KeyboardView.FeedbackKind) = custom.feedback(kind)
 
     override fun onTrackpadStart() {
         edit { session.commitBeforeEnter(proxy) }

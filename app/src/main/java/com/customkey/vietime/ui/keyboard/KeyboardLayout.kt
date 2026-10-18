@@ -48,6 +48,8 @@ data class LayoutOptions(
     /** Tách đôi bàn phím (màn ngang / tablet): khoảng trống giữa, tính theo đơn vị phím. */
     val splitGap: Float = 0f,
     val showGlobe: Boolean = false,
+    /** Phần chiều ngang dùng cho phím (0.75…1), căn giữa. */
+    val widthFraction: Float = 1f,
 )
 
 object KeyboardLayout {
@@ -139,7 +141,8 @@ object KeyboardLayout {
     fun place(rows: List<List<KeyDef>>, width: Float, rowHeight: Float, top: Float = 0f, opts: LayoutOptions = LayoutOptions()): List<LaidKey> {
         if (rows.isEmpty() || width <= 0f) return emptyList()
         val unitsMax = rows.maxOf { r -> r.sumOf { it.width.toDouble() }.toFloat() }.coerceAtLeast(1f) + opts.splitGap
-        val unit = width / unitsMax
+        val inner = width * opts.widthFraction.coerceIn(0.5f, 1f)
+        val unit = inner / unitsMax
         val out = ArrayList<LaidKey>()
         for ((ri, row) in rows.withIndex()) {
             val total = row.sumOf { it.width.toDouble() }.toFloat()

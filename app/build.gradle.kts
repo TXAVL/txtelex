@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId = "nm.txa.telex"
         minSdk = 26; targetSdk = 35
-        versionCode = 1; versionName = "0.1.0"
+        versionCode = 2; versionName = "0.2.0-alpha"
     }
     buildTypes { release {
         isMinifyEnabled = true; isShrinkResources = true

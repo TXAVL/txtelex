@@ -127,7 +127,7 @@ fun SwipePracticeScreen(onBack: () -> Unit) {
             modifier = Modifier.fillMaxWidth(),
             factory = { ctx ->
                 KeyboardView(ctx).apply {
-                    style = KeyboardStyle.neon
+                    style = com.customkey.vietime.customization.ThemeStore.load(ctx).toStyle(null)
                     spaceLabel = "Luyện vuốt"
                     listener = object : KeyboardView.Listener {
                         override fun onLetter(ch: Char) {}

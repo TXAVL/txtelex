@@ -62,6 +62,9 @@ import com.customkey.vietime.ui.onboarding.SetupCard
 import com.customkey.vietime.ui.onboarding.SwipePracticeScreen
 import com.customkey.vietime.ui.onboarding.TypingSandbox
 import com.customkey.vietime.ui.onboarding.rememberImeStatus
+import com.customkey.vietime.ui.settings.LayoutScreen
+import com.customkey.vietime.ui.settings.SoundHapticsScreen
+import com.customkey.vietime.ui.settings.ThemeStudioScreen
 import com.customkey.vietime.ui.theme.GlassCard
 import com.customkey.vietime.ui.theme.SectionLabel
 import com.customkey.vietime.ui.theme.Tx
@@ -99,7 +102,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private enum class Screen { HOME, PRACTICE, ABOUT }
+private enum class Screen { HOME, PRACTICE, ABOUT, THEME, SOUND, LAYOUT }
 
 @Composable
 private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPickIme: () -> Unit) {
@@ -116,6 +119,10 @@ private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPick
                 Hero()
                 SetupCard(status, onOpenImeSettings, onPickIme)
                 if (status.selected) TypingSandbox()
+                SectionLabel("Tuỳ biến")
+                CustomizeTile("🎨", "Theme Studio", "Ảnh nền, màu, độ trong suốt, bo góc, viền phím") { screen = Screen.THEME }
+                CustomizeTile("🔊", "Âm thanh & Rung", "Phím cơ Blue/Brown/Red, máy đánh chữ, giọt nước, âm riêng") { screen = Screen.SOUND }
+                CustomizeTile("📐", "Bố cục", "Hàng số, chiều cao, tách đôi, thời gian giữ phím") { screen = Screen.LAYOUT }
                 SectionLabel("Tính năng")
                 FeatureTile(R.drawable.img_swipe_practice, "Luyện gõ vuốt",
                     "Vuốt qua các chữ để gõ cả từ — chấm điểm từng nét.", "Bắt đầu") { screen = Screen.PRACTICE }
@@ -127,6 +134,9 @@ private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPick
             }
             // Luyện vuốt KHÔNG nằm trong verticalScroll: nét vuốt dọc sẽ bị cuộn trang nuốt mất.
             Screen.PRACTICE -> SwipePracticeScreen(onBack = { screen = Screen.HOME })
+            Screen.THEME -> ThemeStudioScreen(onBack = { screen = Screen.HOME })
+            Screen.SOUND -> SoundHapticsScreen(onBack = { screen = Screen.HOME })
+            Screen.LAYOUT -> LayoutScreen(onBack = { screen = Screen.HOME })
             Screen.ABOUT -> Column(Modifier.verticalScroll(rememberScrollState())) { AboutScreen(onBack = { screen = Screen.HOME }) }
         }
     }
@@ -192,9 +202,22 @@ private fun TypingModeCard() {
         Toggle("Sửa dấu từ đã gõ", null, Keys.RE_EDIT_WORDS, true)
         Toggle("Gõ vuốt", null, ImePrefs.SWIPE_TYPING, true)
         Toggle("Vuốt phím Cách đổi VI/EN", null, ImePrefs.SPACE_FLICK_LANGUAGE, true)
-        Toggle("Âm thanh phím", null, ImePrefs.KEY_SOUND, true)
-        Toggle("Rung khi gõ", null, ImePrefs.HAPTIC, true)
-        Toggle("Hàng phím số", null, Keys.NUMBER_ROW, false)
+    }
+}
+
+@Composable
+private fun CustomizeTile(icon: String, title: String, body: String, onClick: () -> Unit) {
+    GlassCard(padding = androidx.compose.foundation.layout.PaddingValues(16.dp), onClick = onClick) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Box(Modifier.size(46.dp).background(Tx.accentSoft, RoundedCornerShape(14.dp)).border(1.dp, Tx.Stroke, RoundedCornerShape(14.dp)),
+                contentAlignment = Alignment.Center) { Text(icon, fontSize = 22.sp) }
+            Spacer(Modifier.width(14.dp))
+            Column(Modifier.weight(1f)) {
+                Text(title, style = MaterialTheme.typography.titleMedium, color = Tx.Text)
+                Text(body, style = MaterialTheme.typography.bodySmall, color = Tx.TextDim)
+            }
+            Text("›", color = Tx.Cyan, fontSize = 26.sp)
+        }
     }
 }
 

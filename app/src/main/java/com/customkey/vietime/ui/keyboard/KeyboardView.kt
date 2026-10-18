@@ -159,13 +159,12 @@ class KeyboardView(context: Context) : View(context) {
         listener?.onSwipeLayout(l)
     }
 
+    /** false = nền do [KeyboardPanel] vẽ (màu + ảnh nền phủ cả thanh gợi ý). */
+    var drawsBackground = true
+
     override fun onDraw(canvas: Canvas) {
         val s = style
-        canvas.drawColor(s.background)
-        s.wallpaper?.let { bmp ->
-            rect.set(0f, 0f, width.toFloat(), height.toFloat())
-            canvas.drawBitmap(bmp, null, rect, null)
-        }
+        if (drawsBackground) canvas.drawColor(s.background)
         val gx = s.keyGapDp * d / 2f
         val gy = s.rowGapDp * d / 2f
         val r = s.cornerRadiusDp * d

@@ -41,6 +41,15 @@ class KeyboardLayoutTest {
         assertTrue(y.left - t.right > 100f)
     }
 
+    @Test fun widthFractionCentersKeys() {
+        val keys = laid(LayoutOptions(widthFraction = 0.8f))
+        val q = keys.first { (it.def.action as? KeyAction.Letter)?.ch == 'q' }
+        val p = keys.first { (it.def.action as? KeyAction.Letter)?.ch == 'p' }
+        assertEquals(100f, q.left, 0.01f)
+        assertEquals(900f, p.right, 0.01f)
+        assertTrue(q.contains(1f, 50f))   // vùng chạm vẫn tới mép
+    }
+
     @Test fun swipeCentersCoverAlphabet() {
         assertEquals(26, KeyboardLayout.letterCenters(laid()).size)
     }

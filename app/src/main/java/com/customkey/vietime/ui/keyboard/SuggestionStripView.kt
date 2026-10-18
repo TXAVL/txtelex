@@ -56,9 +56,12 @@ class SuggestionStripView(context: Context) : View(context) {
 
     private val undoWidth get() = if (undo) 104 * d else 0f
 
+    /** false = nền do [KeyboardPanel] vẽ. */
+    var drawsBackground = true
+
     override fun onDraw(canvas: Canvas) {
         val s = style
-        canvas.drawColor(s.stripBackground)
+        if (drawsBackground) canvas.drawColor(s.stripBackground)
         textPaint.color = s.stripText; boldPaint.color = s.stripText
         linePaint.color = s.divider
         val cy = height / 2f - (textPaint.descent() + textPaint.ascent()) / 2f
