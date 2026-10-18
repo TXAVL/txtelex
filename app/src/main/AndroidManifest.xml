@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- Hộp thoại chọn bàn phím / phát hiện IME khác dưới package visibility. -->
     <queries>
@@ -26,6 +27,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- ML Kit chỉ nằm trong module on-demand :translate, nhưng manifest của module luôn gộp vào
+             base ⇒ provider khởi tạo ML Kit sẽ chạy lúc mở app khi class CHƯA có (ClassNotFoundException,
+             crash ngay khởi động). Gỡ provider; MlKitTranslator tự gọi MlKitContext.initializeIfNeeded. -->
+        <provider
+            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
+            android:authorities="${applicationId}.mlkitinitprovider"
+            tools:node="remove" />
         <service
             android:name=".ime.CustomImeService"
             android:label="@string/ime_name"
