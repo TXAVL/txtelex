@@ -1,14 +1,14 @@
 package com.customkey.vietime.ui.onboarding
 
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,7 +19,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,6 +29,9 @@ import com.customkey.vietime.engine.SwipePath
 import com.customkey.vietime.engine.SwipeSuggest
 import com.customkey.vietime.ui.keyboard.KeyboardStyle
 import com.customkey.vietime.ui.keyboard.KeyboardView
+import com.customkey.vietime.ui.theme.GhostButton
+import com.customkey.vietime.ui.theme.GlassCard
+import com.customkey.vietime.ui.theme.Tx
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -72,7 +74,6 @@ fun SwipePracticeScreen(onBack: () -> Unit) {
     var result by remember { mutableStateOf<Pair<Boolean, String>?>(null) }
     var ready by remember { mutableStateOf(false) }
     val decoder = remember { SwipeDecoder() }
-    val dark = isSystemInDarkTheme()
 
     fun onSwipe(path: SwipePath) {
         // Đọc index hiện tại (listener của View được tạo một lần — không giữ `target` cũ).
@@ -93,33 +94,40 @@ fun SwipePracticeScreen(onBack: () -> Unit) {
         }
     }
 
-    Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            OutlinedButton(onClick = onBack) { Text("‹ Quay lại") }
-            Text("  Luyện gõ vuốt", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
-        }
-        Card(Modifier.fillMaxWidth()) {
-            Column(Modifier.padding(18.dp).fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text("Vuốt từ:", style = MaterialTheme.typography.bodyMedium)
-                Text(target, fontSize = 34.sp, fontWeight = FontWeight.Bold)
-                Text("Đường đi: " + SwipeSuggest.fold(target).toCharArray().joinToString(" → "),
-                    style = MaterialTheme.typography.bodySmall)
-                result?.let { (ok, got) ->
-                    Text(if (ok) "✓ Chính xác: $got" else "✗ Ra “$got” — thử lại",
-                        color = if (ok) Color(0xFF2EB85C) else Color(0xFFE5484D), fontWeight = FontWeight.SemiBold)
+    Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        Column(Modifier.padding(horizontal = 18.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("‹", Modifier.clickable(onClick = onBack).padding(end = 12.dp), color = Tx.CyanSoft, fontSize = 30.sp)
+                Text("Luyện gõ vuốt", style = MaterialTheme.typography.titleLarge, color = Tx.Text)
+            }
+            GlassCard(glow = true) {
+                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text("VUỐT TỪ", color = Tx.TextFaint, fontSize = 12.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.5.sp)
+                    Text(target, fontSize = 40.sp, fontWeight = FontWeight.ExtraBold, color = Tx.Text)
+                    Text(SwipeSuggest.fold(target).toCharArray().joinToString("  ›  "), color = Tx.CyanSoft, fontSize = 13.sp)
+                    result?.let { (ok, got) ->
+                        Text(if (ok) "✓ Chính xác: $got" else "✗ Ra “$got” — thử lại",
+                            color = if (ok) Tx.Green else Tx.Red, fontWeight = FontWeight.SemiBold)
+                    }
                 }
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 val pct = if (tries == 0) 0 else hits * 100 / tries
-                Text("Phiên này: $hits/$tries đúng ($pct%)", style = MaterialTheme.typography.bodySmall)
-                if (!ready) Text("Đang chuẩn bị từ điển vuốt…", style = MaterialTheme.typography.bodySmall)
-                OutlinedButton(onClick = { index++; result = null }) { Text("Bỏ qua từ này") }
+                Column(Modifier.weight(1f)) {
+                    Text("$hits/$tries đúng · $pct%", color = Tx.Text, style = MaterialTheme.typography.titleSmall)
+                    Text(if (ready) "Sẵn sàng — vuốt trên bàn phím bên dưới" else "Đang chuẩn bị từ điển vuốt…",
+                        color = Tx.TextDim, style = MaterialTheme.typography.bodySmall)
+                }
+                GhostButton("Bỏ qua") { index++; result = null }
             }
         }
+        Spacer(Modifier.weight(1f))
         AndroidView(
             modifier = Modifier.fillMaxWidth(),
             factory = { ctx ->
                 KeyboardView(ctx).apply {
-                    style = if (dark) KeyboardStyle.dark else KeyboardStyle.light
+                    style = KeyboardStyle.neon
                     spaceLabel = "Luyện vuốt"
                     listener = object : KeyboardView.Listener {
                         override fun onLetter(ch: Char) {}

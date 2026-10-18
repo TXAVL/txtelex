@@ -32,6 +32,14 @@ data class KeyboardStyle(
     val wallpaper: Bitmap? = null,
 ) {
     companion object {
+        /** Mặc định TxTelex: nền navy, phím kính tối viền cyan mờ, nhấn cyan neon (như banner). */
+        val neon = KeyboardStyle(
+            background = 0xFF0A1024.toInt(), keyFill = 0xFF1A2448.toInt(), modifierFill = 0xFF111936.toInt(),
+            pressedFill = 0xFF27407A.toInt(), label = 0xFFEFF4FF.toInt(), modifierLabel = 0xFF9FD8FF.toInt(),
+            accent = 0xFF00E5FF.toInt(), stripBackground = 0xFF0A1024.toInt(), stripText = 0xFFEFF4FF.toInt(),
+            divider = 0x3338E1FF, keyShadow = 0x66000000,
+            cornerRadiusDp = 9f, borderWidthDp = 1f, borderColor = 0x3338E1FF,
+        )
         val light = KeyboardStyle(
             background = 0xFFD3D6DD.toInt(), keyFill = 0xFFFFFFFF.toInt(), modifierFill = 0xFFADB3BC.toInt(),
             pressedFill = 0xFFB8BEC8.toInt(), label = 0xFF111111.toInt(), modifierLabel = 0xFF111111.toInt(),

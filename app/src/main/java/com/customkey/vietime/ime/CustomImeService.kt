@@ -2,7 +2,6 @@ package com.customkey.vietime.ime
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.content.res.Configuration
 import android.inputmethodservice.InputMethodService
 import android.media.AudioManager
 import android.os.Handler
@@ -96,7 +95,7 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
     override fun onEvaluateFullscreenMode(): Boolean = false
 
     override fun onCreateInputView(): View {
-        val style = if (isNight()) KeyboardStyle.dark else KeyboardStyle.light
+        val style = KeyboardStyle.neon
         val s = SuggestionStripView(this).also { it.listener = this; it.style = style }
         val k = KeyboardView(this).also {
             it.listener = this; it.style = style
@@ -110,8 +109,6 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
             addView(k, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
         }
     }
-
-    private fun isNight() = (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 
     override fun onStartInputView(info: EditorInfo?, restarting: Boolean) {
         super.onStartInputView(info, restarting)

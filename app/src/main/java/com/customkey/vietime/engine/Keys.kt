@@ -37,8 +37,6 @@ object Keys {
     /** Gõ vuốt (thử nghiệm, mặc định tắt). */
     const val SWIPE_TYPING = "swipeTyping"
     const val SWIPE_ENGLISH = "swipeEnglish"
-    /** Giải mã vuốt bằng mô hình FUTO Swipe (thử nghiệm, mặc định TẮT — FutoSwipe). */
-    const val SWIPE_FUTO = "swipeFuto"
     /** Luyện vuốt (app): đồng ý LƯU nét vuốt trên máy để xuất (mặc định TẮT, không gửi mạng). */
     const val SWIPE_PRACTICE_SAVE = "swipePracticeSave"
     /** Chọn phím theo ngữ cảnh lúc chạm (thử nghiệm, mặc định BẬT) — TouchTarget. */
@@ -201,8 +199,6 @@ object Keys {
     const val ASSET_LEXICON = "vnlexicon.bin"
     const val ASSET_EN_LEXICON = "enlexicon.bin"
     const val ASSET_LM = "vnlm.bin"
-    /** Encoder FUTO Swipe fp16 (FUTO Model Weights License 1.0 — chỉ đọc khi bật SWIPE_FUTO). */
-    const val ASSET_FUTO = "futoswipe.bin"
     const val ASSET_EMOJI_SUGGEST = "emojisuggest.bin"
     const val ASSET_SEED = "seed.tsv"
     /** Emoji + khoá tìm tiếng Việt + kaomoji (Scripts/gen-emoji-data.py, chung iOS). */

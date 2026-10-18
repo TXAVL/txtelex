@@ -1,34 +1,40 @@
 package com.customkey.vietime.ui
 
 import android.content.Intent
+import android.graphics.Color as AndroidColor
 import android.os.Bundle
 import android.provider.Settings
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -37,11 +43,18 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.customkey.vietime.BuildConfig
+import com.customkey.vietime.R
 import com.customkey.vietime.engine.Keys
 import com.customkey.vietime.ime.AssetBlobs
 import com.customkey.vietime.ime.ImePrefs
@@ -49,19 +62,27 @@ import com.customkey.vietime.ui.onboarding.SetupCard
 import com.customkey.vietime.ui.onboarding.SwipePracticeScreen
 import com.customkey.vietime.ui.onboarding.TypingSandbox
 import com.customkey.vietime.ui.onboarding.rememberImeStatus
+import com.customkey.vietime.ui.theme.GlassCard
+import com.customkey.vietime.ui.theme.SectionLabel
+import com.customkey.vietime.ui.theme.Tx
+import com.customkey.vietime.ui.theme.TxBackground
+import com.customkey.vietime.ui.theme.TxSwitchRow
+import com.customkey.vietime.ui.theme.TxTheme
 
 class MainActivity : ComponentActivity() {
     /** Tăng mỗi lần cửa sổ lấy lại focus (sau hộp thoại chọn bàn phím). */
     private val focusTick = mutableIntStateOf(0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(AndroidColor.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(AndroidColor.TRANSPARENT),
+        )
         super.onCreate(savedInstanceState)
         AssetBlobs.ensureInstalled(this)
         setContent {
-            val dark = isSystemInDarkTheme()
-            MaterialTheme(colorScheme = if (dark) darkColorScheme() else lightColorScheme()) {
-                Surface(Modifier.fillMaxSize()) {
+            TxTheme {
+                TxBackground {
                     AppRoot(
                         focusTick = focusTick,
                         onOpenImeSettings = { runCatching { startActivity(Intent(Settings.ACTION_INPUT_METHOD_SETTINGS)) } },
@@ -78,33 +99,78 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private enum class Screen { HOME, PRACTICE, LICENSES }
+private enum class Screen { HOME, PRACTICE, ABOUT }
 
 @Composable
-private fun AppRoot(focusTick: androidx.compose.runtime.State<Int>, onOpenImeSettings: () -> Unit, onPickIme: () -> Unit) {
+private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPickIme: () -> Unit) {
     var screen by rememberSaveable { mutableStateOf(Screen.HOME) }
     BackHandler(enabled = screen != Screen.HOME) { screen = Screen.HOME }
     val status by rememberImeStatus(focusTick)
     Column(Modifier.fillMaxSize().safeDrawingPadding().imePadding()) {
         when (screen) {
-            Screen.HOME -> Column(Modifier.verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                Text("TxTelex", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+            Screen.HOME -> Column(
+                Modifier.verticalScroll(rememberScrollState()).padding(horizontal = 18.dp, vertical = 12.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                Header()
+                Hero()
                 SetupCard(status, onOpenImeSettings, onPickIme)
                 if (status.selected) TypingSandbox()
+                SectionLabel("Tính năng")
+                FeatureTile(R.drawable.img_swipe_practice, "Luyện gõ vuốt",
+                    "Vuốt qua các chữ để gõ cả từ — chấm điểm từng nét.", "Bắt đầu") { screen = Screen.PRACTICE }
+                FeatureTile(R.drawable.img_privacy_safe, "Riêng tư tuyệt đối",
+                    "Chạy 100% trên máy. Không thu thập phím gõ, không gửi gì lên mạng.", null) {}
+                SectionLabel("Kiểu gõ")
                 TypingModeCard()
-                Card(Modifier.fillMaxWidth()) {
-                    Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text("Luyện gõ vuốt", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                        Text("Vuốt qua các chữ để gõ cả từ — luyện trên bàn phím mẫu, chấm điểm từng từ.",
-                            style = MaterialTheme.typography.bodyMedium)
-                        Button(onClick = { screen = Screen.PRACTICE }) { Text("Bắt đầu luyện") }
-                    }
-                }
-                TextButton(onClick = { screen = Screen.LICENSES }) { Text("Giấy phép mã nguồn mở") }
+                Footer { screen = Screen.ABOUT }
             }
-            Screen.PRACTICE -> SwipePracticeScreen(onBack = { screen = Screen.HOME })
             // Luyện vuốt KHÔNG nằm trong verticalScroll: nét vuốt dọc sẽ bị cuộn trang nuốt mất.
-            Screen.LICENSES -> Column(Modifier.verticalScroll(rememberScrollState())) { LicensesScreen(onBack = { screen = Screen.HOME }) }
+            Screen.PRACTICE -> SwipePracticeScreen(onBack = { screen = Screen.HOME })
+            Screen.ABOUT -> Column(Modifier.verticalScroll(rememberScrollState())) { AboutScreen(onBack = { screen = Screen.HOME }) }
+        }
+    }
+}
+
+@Composable
+private fun Header() {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Image(painterResource(R.drawable.ic_txtelex_logo), "TxTelex", Modifier.size(46.dp).clip(RoundedCornerShape(13.dp)))
+        Spacer(Modifier.width(12.dp))
+        Column(Modifier.weight(1f)) {
+            Text("TxTelex", style = MaterialTheme.typography.titleLarge, color = Tx.Text)
+            Text("Vietnamese Smart Keyboard", style = MaterialTheme.typography.bodySmall, color = Tx.CyanSoft)
+        }
+        Text("v${BuildConfig.VERSION_NAME}", Modifier.background(Tx.Glass, RoundedCornerShape(50)).padding(horizontal = 10.dp, vertical = 4.dp),
+            color = Tx.TextDim, fontSize = 12.sp)
+    }
+}
+
+/** Banner thương hiệu + slogan. */
+@Composable
+private fun Hero() {
+    val shape = RoundedCornerShape(24.dp)
+    Box(Modifier.fillMaxWidth().aspectRatio(1024f / 500f).clip(shape).border(1.dp, Tx.border, shape)) {
+        Image(painterResource(R.drawable.img_feature_banner), null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+        Box(Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Color.Transparent, Color.Transparent, Tx.Night.copy(alpha = 0.85f)))))
+        Text("Gõ tiếng Việt đỉnh cao — nhanh, đẹp, riêng tư.",
+            Modifier.align(Alignment.BottomStart).padding(16.dp), color = Tx.Text,
+            style = MaterialTheme.typography.titleSmall)
+    }
+}
+
+@Composable
+private fun FeatureTile(image: Int, title: String, body: String, action: String?, onClick: () -> Unit) {
+    GlassCard(padding = androidx.compose.foundation.layout.PaddingValues(14.dp), onClick = if (action != null) onClick else null) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Image(painterResource(image), null, Modifier.size(76.dp).clip(RoundedCornerShape(16.dp)), contentScale = ContentScale.Crop)
+            Spacer(Modifier.width(14.dp))
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(title, style = MaterialTheme.typography.titleMedium, color = Tx.Text)
+                Text(body, style = MaterialTheme.typography.bodySmall, color = Tx.TextDim)
+                if (action != null) Text("$action  →", color = Tx.Cyan, fontWeight = FontWeight.Bold, fontSize = 14.sp,
+                    modifier = Modifier.padding(top = 4.dp))
+            }
         }
     }
 }
@@ -115,49 +181,66 @@ private fun TypingModeCard() {
     val ctx = LocalContext.current
     val prefs = remember { ImePrefs.of(ctx) }
     @Composable
-    fun Toggle(title: String, key: String, def: Boolean) {
+    fun Toggle(title: String, sub: String?, key: String, def: Boolean) {
         var v by remember { mutableStateOf(prefs.getBoolean(key, def)) }
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Text(title, Modifier.weight(1f), style = MaterialTheme.typography.bodyLarge)
-            Switch(v, { v = it; prefs.edit().putBoolean(key, it).apply() })
-        }
+        TxSwitchRow(title, sub, v) { v = it; prefs.edit().putBoolean(key, it).apply() }
     }
-    Card(Modifier.fillMaxWidth()) {
-        Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            Text("Kiểu gõ", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-            Toggle("Gõ VNI (tắt = Telex)", Keys.VNI_MODE, false)
-            Toggle("Bỏ dấu tự do", Keys.FREE_MARKING, true)
-            Toggle("Tự khôi phục từ tiếng Anh", Keys.AUTO_RESTORE, true)
-            Toggle("Sửa dấu từ đã gõ", Keys.RE_EDIT_WORDS, true)
-            Toggle("Gõ vuốt", ImePrefs.SWIPE_TYPING, true)
-            Toggle("Vuốt phím cách đổi VI/EN", ImePrefs.SPACE_FLICK_LANGUAGE, true)
-            Toggle("Âm thanh phím", ImePrefs.KEY_SOUND, true)
-            Toggle("Rung khi gõ", ImePrefs.HAPTIC, true)
-            Toggle("Hàng phím số", Keys.NUMBER_ROW, false)
-        }
+    GlassCard(padding = androidx.compose.foundation.layout.PaddingValues(horizontal = 18.dp, vertical = 8.dp)) {
+        Toggle("Gõ VNI", "Tắt = Telex", Keys.VNI_MODE, false)
+        Toggle("Bỏ dấu tự do", "Gõ dấu ở cuối hay giữa từ đều được", Keys.FREE_MARKING, true)
+        Toggle("Tự khôi phục tiếng Anh", "google, github, he is… giữ nguyên", Keys.AUTO_RESTORE, true)
+        Toggle("Sửa dấu từ đã gõ", null, Keys.RE_EDIT_WORDS, true)
+        Toggle("Gõ vuốt", null, ImePrefs.SWIPE_TYPING, true)
+        Toggle("Vuốt phím Cách đổi VI/EN", null, ImePrefs.SPACE_FLICK_LANGUAGE, true)
+        Toggle("Âm thanh phím", null, ImePrefs.KEY_SOUND, true)
+        Toggle("Rung khi gõ", null, ImePrefs.HAPTIC, true)
+        Toggle("Hàng phím số", null, Keys.NUMBER_ROW, false)
     }
 }
 
-/** Giấy phép: MIT của viettelex (lõi bộ gõ) + FUTO Swipe (mô hình gõ vuốt). */
 @Composable
-private fun LicensesScreen(onBack: () -> Unit) {
-    val ctx = LocalContext.current
-    val texts = remember {
-        listOf("viettelex-LICENSE.txt" to "Lõi bộ gõ — ptrinh/viettelex (MIT)", "futoswipe-LICENSE.md" to "Powered by FUTO Swipe")
-            .map { (f, title) -> title to runCatching { ctx.assets.open("licenses/$f").bufferedReader().readText() }.getOrDefault("") }
+private fun Footer(onAbout: () -> Unit) {
+    Column(Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 24.dp), horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        Text("© 2026 TXA · TxTelex", color = Tx.TextFaint, fontSize = 12.sp)
+        Text("Giới thiệu", Modifier.clickable(onClick = onAbout).padding(8.dp), color = Tx.CyanSoft, fontSize = 13.sp,
+            fontWeight = FontWeight.SemiBold)
     }
-    Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            TextButton(onClick = onBack) { Text("‹ Quay lại") }
-            Text("Giấy phép mã nguồn mở", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
+}
+
+/**
+ * Giới thiệu: bản quyền TxTelex thuộc TXA. Mục "Thành phần mã nguồn mở" ở cuối là BẮT BUỘC theo
+ * giấy phép MIT của lõi bộ gõ (phải kèm thông báo bản quyền gốc trong mọi bản phân phối).
+ */
+@Composable
+private fun AboutScreen(onBack: () -> Unit) {
+    val ctx = LocalContext.current
+    var showOss by remember { mutableStateOf(false) }
+    val mit = remember { runCatching { ctx.assets.open("licenses/viettelex-LICENSE.txt").bufferedReader().readText() }.getOrDefault("") }
+    Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Text("‹ Quay lại", Modifier.clickable(onClick = onBack).padding(vertical = 6.dp), color = Tx.CyanSoft, fontWeight = FontWeight.SemiBold)
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Image(painterResource(R.drawable.ic_txtelex_logo), "TxTelex", Modifier.size(96.dp).clip(RoundedCornerShape(26.dp)))
+            Text("TxTelex", style = MaterialTheme.typography.headlineMedium, color = Tx.Text)
+            Text("Phiên bản ${BuildConfig.VERSION_NAME}", color = Tx.TextDim, fontSize = 13.sp)
         }
-        Text("Lõi bộ gõ tiếng Việt (Telex/VNI, kiểm tra chính tả, khôi phục tiếng Anh, gợi ý, gõ vuốt) trích từ " +
-            "dự án mã nguồn mở viettelex — Copyright (c) 2026 Phil Trinh, giấy phép MIT. Gõ vuốt: Powered by FUTO Swipe.",
-            style = MaterialTheme.typography.bodyMedium)
-        for ((title, body) in texts) Card(Modifier.fillMaxWidth()) {
-            Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
-                Text(body, fontFamily = FontFamily.Monospace, fontSize = 11.sp, lineHeight = 15.sp)
+        GlassCard {
+            Text("© 2026 TXA. Bảo lưu mọi quyền.", style = MaterialTheme.typography.titleSmall, color = Tx.Text)
+            Spacer(Modifier.height(6.dp))
+            Text("Tên, logo, giao diện và hệ thống tuỳ biến TxTelex thuộc về TXA.",
+                style = MaterialTheme.typography.bodySmall, color = Tx.TextDim)
+        }
+        GlassCard(onClick = { showOss = !showOss }) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("Thành phần mã nguồn mở", Modifier.weight(1f), style = MaterialTheme.typography.titleSmall, color = Tx.Text)
+                Text(if (showOss) "▲" else "▼", color = Tx.TextDim)
+            }
+            if (showOss) {
+                Spacer(Modifier.height(10.dp))
+                Text("Bộ xử lý Telex/VNI dùng mã nguồn viettelex theo giấy phép MIT:",
+                    style = MaterialTheme.typography.bodySmall, color = Tx.TextDim)
+                Spacer(Modifier.height(8.dp))
+                Text(mit, fontFamily = FontFamily.Monospace, fontSize = 10.5.sp, lineHeight = 14.sp, color = Tx.TextFaint)
             }
         }
     }
