@@ -101,6 +101,9 @@ class KeyboardPanel(context: Context) : FrameLayout(context) {
 
     init {
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        isFocusable = false
+        isFocusableInTouchMode = false
+        descendantFocusability = android.view.ViewGroup.FOCUS_BLOCK_DESCENDANTS
         setWillNotDraw(false)
         mainContainer.addView(strip, LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
         body.addView(keyboard, FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
@@ -134,7 +137,8 @@ class KeyboardPanel(context: Context) : FrameLayout(context) {
             keyboard.desiredHeight()
         }
         val targetH = stripH + kbH
-        val width = MeasureSpec.getSize(widthMeasureSpec)
+        val rawWidth = MeasureSpec.getSize(widthMeasureSpec)
+        val width = if (rawWidth > 0) rawWidth else resources.displayMetrics.widthPixels
         mainContainer.measure(
             MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
             MeasureSpec.makeMeasureSpec(targetH, MeasureSpec.EXACTLY)

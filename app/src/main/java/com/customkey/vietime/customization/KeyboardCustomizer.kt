@@ -101,7 +101,7 @@ class KeyboardCustomizer(context: Context, private val onChanged: () -> Unit) {
         kb.rowHeightDp = layout.rowHeightDp()
         kb.options = layout.options(wide)
         kb.longPressDelayMs = layout.longPressMs.toLong()
-        panel.requestLayout()
+        panel.invalidate()
     }
 
     /** Âm thanh + rung cho một chạm. */

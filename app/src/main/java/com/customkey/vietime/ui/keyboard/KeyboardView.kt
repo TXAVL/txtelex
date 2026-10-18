@@ -65,16 +65,16 @@ class KeyboardView(context: Context) : View(context) {
         set(v) { field = v; applyStyle(); invalidate() }
 
     var plane = KeyboardPlane.LETTERS
-        set(v) { if (field != v) { field = v; relayout() } }
+        set(v) { if (field != v) { field = v; relayout(); requestLayout() } }
 
     var fieldKind = FieldKind.TEXT
-        set(v) { if (field != v) { field = v; relayout() } }
+        set(v) { if (field != v) { field = v; relayout(); requestLayout() } }
 
     var enterAction = EnterAction.NEWLINE
-        set(v) { if (field != v) { field = v; relayout() } }
+        set(v) { if (field != v) { field = v; relayout(); requestLayout() } }
 
     var options = LayoutOptions()
-        set(v) { if (field != v) { field = v; relayout() } }
+        set(v) { if (field != v) { field = v; relayout(); requestLayout() } }
 
     /** Nhãn phím cách ("Tiếng Việt" / "English"). */
     var spaceLabel = ""
@@ -88,7 +88,7 @@ class KeyboardView(context: Context) : View(context) {
 
     var longPressDelayMs = 300L
     var rowHeightDp = 54f
-        set(v) { field = v; requestLayout() }
+        set(v) { if (field != v) { field = v; relayout(); requestLayout() } }
 
     private val d = resources.displayMetrics.density
     private val sp = resources.displayMetrics.scaledDensity
@@ -126,7 +126,8 @@ class KeyboardView(context: Context) : View(context) {
     init { applyStyle(); isHapticFeedbackEnabled = false }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val w = MeasureSpec.getSize(widthMeasureSpec)
+        val rawW = MeasureSpec.getSize(widthMeasureSpec)
+        val w = if (rawW > 0) rawW else resources.displayMetrics.widthPixels
         val rows = KeyboardLayout.rows(plane, fieldKind, enterAction, options).size
         val h = (rows * rowHeightDp * d + 4 * d).toInt()
         setMeasuredDimension(w, h)
@@ -136,13 +137,12 @@ class KeyboardView(context: Context) : View(context) {
 
     private fun relayout() {
         val w = width.toFloat()
-        if (w <= 0f) { requestLayout(); return }
+        if (w <= 0f) return
         val rows = KeyboardLayout.rows(plane, fieldKind, enterAction, options)
         val rh = rowHeightDp * d
         keys = KeyboardLayout.place(rows, w, rh, 2 * d, options)
         cancelAllTouches()
         publishSwipeLayout()
-        requestLayout()
         invalidate()
     }
 

@@ -53,6 +53,13 @@ class EmojiPaneView(context: Context) : LinearLayout(context) {
         setSingleLine(true)
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
         setPadding((12 * d).toInt(), (6 * d).toInt(), (12 * d).toInt(), (6 * d).toInt())
+        isFocusable = false
+        isFocusableInTouchMode = false
+        setOnClickListener {
+            isFocusable = true
+            isFocusableInTouchMode = true
+            requestFocus()
+        }
     }
 
     private val contentScroll = ScrollView(context).apply { isVerticalScrollBarEnabled = false }

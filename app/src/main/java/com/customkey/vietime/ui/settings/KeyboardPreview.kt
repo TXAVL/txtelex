@@ -85,7 +85,11 @@ fun KeyboardPreview(modifier: Modifier = Modifier, hint: String = "Gõ thử tr�
             if (!custom.onPrefChanged(key)) session.startInput(EngineSettings.load { k -> prefs.all[k] }, FieldConfig.DEFAULT.toTraits())
         }
         prefs.registerOnSharedPreferenceChangeListener(l)
-        onDispose { prefs.unregisterOnSharedPreferenceChangeListener(l); custom.release() }
+        onDispose {
+            prefs.unregisterOnSharedPreferenceChangeListener(l)
+            holder[0] = null
+            custom.release()
+        }
     }
 
     Column(modifier.fillMaxWidth()) {
@@ -155,6 +159,9 @@ fun KeyboardPreview(modifier: Modifier = Modifier, hint: String = "Gõ thử tr�
                     }
                     custom.reloadAll()
                 }
+            },
+            update = { panel ->
+                holder[0] = panel
             },
         )
     }
