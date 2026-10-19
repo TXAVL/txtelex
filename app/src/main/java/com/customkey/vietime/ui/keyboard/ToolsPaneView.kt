@@ -15,6 +15,7 @@ import android.widget.TextView
 import com.customkey.vietime.tools.ClipItem
 import com.customkey.vietime.tools.ClipboardVault
 import com.customkey.vietime.tools.Snippet
+import com.customkey.vietime.tools.TextTransform
 
 /**
  * Bảng công cụ thay chỗ vùng phím: tab Clipboard (lịch sử, ghim, xoá) / Mẫu câu, cùng các nút
@@ -32,9 +33,20 @@ class ToolsPaneView(context: Context) : LinearLayout(context) {
         fun onAddTones()
         fun onTranslate()
         fun onClose()
+        /** Bảng sửa văn bản: điều hướng / chọn / copy / cắt / dán. */
+        fun onEdit(action: EditAction) {}
+        /** Đổi kiểu chữ / bỏ dấu cho vùng chọn (hoặc câu vừa gõ). */
+        fun onTransform(t: TextTransform) {}
     }
 
-    enum class Tab { CLIPBOARD, SNIPPETS }
+    enum class Tab { CLIPBOARD, SNIPPETS, EDIT }
+
+    /** Nút của bảng sửa văn bản. */
+    enum class EditAction { LEFT, RIGHT, UP, DOWN, HOME, END, SELECT_ALL, COPY, CUT, PASTE, UNDO, DELETE_WORD }
+
+    /** Chế độ chọn: mũi tên mở rộng vùng chọn (giữ Shift). */
+    var selecting = false
+        private set
 
     var listener: Listener? = null
     var style: KeyboardStyle = KeyboardStyle.neon
@@ -73,6 +85,7 @@ class ToolsPaneView(context: Context) : LinearLayout(context) {
         bar.removeAllViews()
         bar.addView(pill("📋 Clipboard", tab == Tab.CLIPBOARD) { select(Tab.CLIPBOARD) })
         bar.addView(pill("💬 Mẫu câu", tab == Tab.SNIPPETS) { select(Tab.SNIPPETS) })
+        bar.addView(pill("✂ Sửa", tab == Tab.EDIT) { select(Tab.EDIT) })
         bar.addView(pill("✨ Thêm dấu", false) { listener?.onAddTones() })
         bar.addView(pill(if (translateAvailable) "🌐 Dịch" else "🌐 Dịch (Play)", false) { listener?.onTranslate() })
         bar.addView(pill("⌨", false) { listener?.onClose() })
@@ -142,6 +155,7 @@ class ToolsPaneView(context: Context) : LinearLayout(context) {
                 actionsRow.addView(link("Xoá tất cả") { listener?.onClearAll() })
                 body.addView(actionsRow)
             }
+            Tab.EDIT -> renderEdit()
             Tab.SNIPPETS -> {
                 if (snippets.isEmpty()) body.addView(hint("Chưa có mẫu câu. Thêm trong app TxTelex › Công cụ."))
                 for (s in snippets) body.addView(row(s.text, null, null) { listener?.onPasteText(s.text) })
@@ -204,6 +218,43 @@ class ToolsPaneView(context: Context) : LinearLayout(context) {
         text = t; gravity = Gravity.CENTER; setTextColor(style.modifierLabel); setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)
         setPadding((10 * d).toInt(), (4 * d).toInt(), (10 * d).toInt(), (4 * d).toInt())
         setOnClickListener { onClick() }
+    }
+
+    /** Lưới nút sửa văn bản: điều hướng (trái) + thao tác (phải) + hàng đổi kiểu chữ. */
+    private fun renderEdit() {
+        fun e(a: EditAction) = { listener?.onEdit(a); Unit }
+        grid(listOf(
+            listOf("⇤" to e(EditAction.HOME), "▲" to e(EditAction.UP), "⇥" to e(EditAction.END), "Chọn tất cả" to e(EditAction.SELECT_ALL)),
+            listOf("◀" to e(EditAction.LEFT), (if (selecting) "◉ Đang chọn" else "◎ Chọn") to { selecting = !selecting; render() },
+                "▶" to e(EditAction.RIGHT), "⧉ Copy" to e(EditAction.COPY)),
+            listOf("⌫ từ" to e(EditAction.DELETE_WORD), "▼" to e(EditAction.DOWN), "↶ Hoàn tác" to e(EditAction.UNDO), "✂ Cắt" to e(EditAction.CUT)),
+        ), accentIndex = if (selecting) 5 else -1)
+        body.addView(grid(listOf(listOf("📋 Dán" to e(EditAction.PASTE)) +
+            TextTransform.entries.map { t -> t.label to { listener?.onTransform(t); Unit } }), small = true, attach = false))
+        body.addView(hint("Đổi kiểu chữ áp cho vùng đang chọn — chưa chọn thì cho câu vừa gõ."))
+    }
+
+    private fun grid(rows: List<List<Pair<String, () -> Unit>>>, accentIndex: Int = -1, small: Boolean = false, attach: Boolean = true): View {
+        val wrap = LinearLayout(context).apply { orientation = VERTICAL }
+        var idx = 0
+        for (row in rows) {
+            val r = LinearLayout(context).apply { orientation = HORIZONTAL }
+            for ((label, action) in row) {
+                val on = idx == accentIndex
+                r.addView(TextView(context).apply {
+                    text = label; gravity = Gravity.CENTER; maxLines = 1
+                    setTextColor(if (on) 0xFF0A1024.toInt() else style.label)
+                    setTextSize(TypedValue.COMPLEX_UNIT_SP, if (small) 12.5f else 15f)
+                    background = rounded(if (on) style.accent else withAlpha(style.keyFill, style.keyOpacity.coerceAtLeast(0.7f)), 10f)
+                    setPadding((4 * d).toInt(), ((if (small) 9 else 12) * d).toInt(), (4 * d).toInt(), ((if (small) 9 else 12) * d).toInt())
+                    setOnClickListener { action() }
+                }, LayoutParams(0, LayoutParams.WRAP_CONTENT, 1f).apply { setMargins((3 * d).toInt(), (3 * d).toInt(), (3 * d).toInt(), (3 * d).toInt()) })
+                idx++
+            }
+            wrap.addView(r, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
+        }
+        if (attach) body.addView(wrap)
+        return wrap
     }
 
     private fun pill(t: String, selected: Boolean, onClick: () -> Unit) = TextView(context).apply {

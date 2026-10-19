@@ -26,6 +26,10 @@ interface EditorPort {
     fun performEditorAction(actionId: Int): Boolean
     /** DOWN+UP của một keycode (KEYCODE_DEL / DPAD_* / ENTER). */
     fun sendKey(keyCode: Int)
+    /** DOWN+UP kèm phím bổ trợ (Shift ⇒ mở rộng vùng chọn, Ctrl ⇒ tắt). */
+    fun sendKeyMeta(keyCode: Int, meta: Int) = sendKey(keyCode)
+    /** InputConnection.performContextMenuAction (android.R.id.selectAll / copy / cut / paste / undo). */
+    fun contextMenu(id: Int): Boolean = false
 }
 
 /** [EditorPort] thật trên InputConnection của hệ thống. */
@@ -46,6 +50,12 @@ class InputConnectionPort(private val ic: InputConnection) : EditorPort {
         ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, keyCode))
         ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_UP, keyCode))
     }
+    override fun sendKeyMeta(keyCode: Int, meta: Int) {
+        val t = android.os.SystemClock.uptimeMillis()
+        ic.sendKeyEvent(KeyEvent(t, t, KeyEvent.ACTION_DOWN, keyCode, 0, meta))
+        ic.sendKeyEvent(KeyEvent(t, t, KeyEvent.ACTION_UP, keyCode, 0, meta))
+    }
+    override fun contextMenu(id: Int) = ic.performContextMenuAction(id)
 }
 
 /**
@@ -244,6 +254,27 @@ class InputBridge(private val portOf: () -> EditorPort?) : TextProxy {
             repeat(kotlin.math.abs(dy)) { c.sendKey(if (dy < 0) KeyEvent.KEYCODE_DPAD_UP else KeyEvent.KEYCODE_DPAD_DOWN) }
             tracker.reset(-1, -1)
         }
+    }
+
+    /** Bảng sửa văn bản: phím điều hướng, [select] = giữ Shift (mở rộng vùng chọn). */
+    fun navKey(keyCode: Int, select: Boolean) {
+        val c = conn() ?: return
+        if (select) c.sendKeyMeta(keyCode, KeyEvent.META_SHIFT_ON or KeyEvent.META_SHIFT_LEFT_ON) else c.sendKey(keyCode)
+        tracker.reset(-1, -1)
+    }
+
+    /** Chọn tất cả / copy / cắt / dán / hoàn tác (id của android.R.id). */
+    fun contextAction(id: Int): Boolean {
+        val c = conn() ?: return false
+        val ok = c.contextMenu(id)
+        tracker.reset(-1, -1)
+        return ok
+    }
+
+    /** Thay vùng chọn (hoặc chèn tại con trỏ) bằng [text]. */
+    fun replaceSelection(text: String) {
+        val c = conn() ?: return
+        if (c.commitText(text)) tracker.reset(-1, -1) else failed = true
     }
 
     /** Xoá đúng [text] ngay trước con trỏ nếu đuôi khớp (vuốt ⌫ xoá theo từ). */

@@ -23,7 +23,8 @@ import com.customkey.vietime.engine.VNSuggest
 /** Một ô trên thanh gợi ý. [payload] = chữ chèn khi khác chữ hiển thị (chip dán, thêm dấu…). */
 data class Suggestion(val text: String, val kind: Kind, val payload: String? = null) {
     /** Chip đặc biệt (phép tính / thêm dấu / dán nhanh text & ảnh) — tô nổi, IME tự xử lý khi chạm. */
-    val special: Boolean get() = kind == Kind.MATH || kind == Kind.TONES || kind == Kind.PASTE || kind == Kind.PASTE_IMAGE
+    val special: Boolean get() = kind == Kind.MATH || kind == Kind.TONES || kind == Kind.PASTE || kind == Kind.PASTE_IMAGE ||
+        kind == Kind.NUMBER || kind == Kind.DOMAIN
 
     enum class Kind {
         /** Kết quả phép tính sau "=". */
@@ -34,6 +35,10 @@ data class Suggestion(val text: String, val kind: Kind, val payload: String? = n
         PASTE,
         /** Dán nhanh hình ảnh vừa copy từ clipboard/ảnh chụp màn hình. */
         PASTE_IMAGE,
+        /** Chip số: đọc số thành chữ / định dạng tiền (150k → 150.000₫). payload = "thay\u0000chèn". */
+        NUMBER,
+        /** Đuôi email trong ô email (@gmail.com…). payload = phần còn thiếu. */
+        DOMAIN,
         /** "↩ chữ gốc" — hoàn tác lần tự sửa vừa rồi. */
         UNDO_CORRECTION,
         /** Đúng chữ đang gõ (giữ nguyên). */

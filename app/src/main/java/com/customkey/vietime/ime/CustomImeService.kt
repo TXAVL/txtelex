@@ -182,6 +182,8 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
         applyCustomization()
         panel?.showTools(false)
         strip?.showToolsButton = !cfg.isSecure && !cfg.rawKeys
+        strip?.toolbarEnabled = !cfg.isSecure && !cfg.rawKeys
+        strip?.collapsed = prefs.getBoolean(Keys.SUGGESTION_BAR_COLLAPSED, false)
         strip?.showUndo(false)
         strip?.showMessage(null)
         applyAutoShift()
@@ -237,9 +239,13 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
 
     private fun refreshBar() {
         val s = strip ?: return
-        val list = TxaLogger.guard(TAG, "gợi ý", emptyList()) { session.suggestions(proxy) }
-        val special = TxaLogger.guard(TAG, "chip công cụ", null) { tools.specialChip() }
-        s.show(if (special != null) (listOf(special) + list).take(3) else list)
+        val max = prefs.getInt(Keys.SUGGESTION_COUNT, 3).coerceIn(3, 5)
+        val filter = prefs.getBoolean(Keys.FILTER_SENSITIVE, true)
+        val list = TxaLogger.guard(TAG, "gợi ý", emptyList()) { session.suggestions(proxy, max) }
+            .filterNot { filter && (it.kind == Suggestion.Kind.COMPLETION || it.kind == Suggestion.Kind.NEXT) &&
+                it.text.lowercase() in com.customkey.vietime.engine.SensitiveWords.set }
+        val special = TxaLogger.guard(TAG, "chip công cụ", emptyList()) { tools.specialChips() }
+        s.show((special + list).distinctBy { it.text }.take(max))
     }
 
     // MARK: KeyboardView.Listener
@@ -361,6 +367,38 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
     // MARK: SuggestionStripView.Listener
 
     override fun onToolsButton() = tools.toggle()
+
+    override fun onCollapseChanged(collapsed: Boolean) {
+        prefs.edit().putBoolean(Keys.SUGGESTION_BAR_COLLAPSED, collapsed).apply()
+    }
+
+    /** Hàng biểu tượng của thanh gợi ý (khi thu gọn / chưa có gợi ý). */
+    override fun onToolbar(tool: SuggestionStripView.Tool) {
+        custom.feedback(KeyboardView.FeedbackKind.MODIFIER)
+        when (tool) {
+            SuggestionStripView.Tool.EMOJI -> panel?.showEmoji(true)
+            SuggestionStripView.Tool.CLIPBOARD -> tools.open(com.customkey.vietime.ui.keyboard.ToolsPaneView.Tab.CLIPBOARD)
+            SuggestionStripView.Tool.EDIT -> tools.open(com.customkey.vietime.ui.keyboard.ToolsPaneView.Tab.EDIT)
+            SuggestionStripView.Tool.TONES -> tools.onAddTones()
+            SuggestionStripView.Tool.ONE_HAND -> cycleOneHand()
+            SuggestionStripView.Tool.SETTINGS -> runCatching {
+                startActivity(android.content.Intent(this, com.customkey.vietime.ui.MainActivity::class.java)
+                    .addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK))
+            }
+        }
+    }
+
+    /** Tắt → tay phải → tay trái → tắt. */
+    private fun cycleOneHand() {
+        val cur = com.customkey.vietime.customization.OneHandMode.of(prefs.getString(com.customkey.vietime.customization.LayoutConfig.KEY_ONE_HAND, null))
+        val next = when (cur) {
+            com.customkey.vietime.customization.OneHandMode.OFF -> com.customkey.vietime.customization.OneHandMode.RIGHT
+            com.customkey.vietime.customization.OneHandMode.RIGHT -> com.customkey.vietime.customization.OneHandMode.LEFT
+            com.customkey.vietime.customization.OneHandMode.LEFT -> com.customkey.vietime.customization.OneHandMode.OFF
+        }
+        prefs.edit().putString(com.customkey.vietime.customization.LayoutConfig.KEY_ONE_HAND, next.id).apply()
+        panel?.showMessage("✋ Một tay: ${next.title}")
+    }
 
     override fun onSuggestion(s: Suggestion) {
         if (s.special) { tools.accept(s); onFeedback(KeyboardView.FeedbackKind.KEY); afterKey(); return }

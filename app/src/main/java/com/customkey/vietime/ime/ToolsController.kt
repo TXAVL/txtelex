@@ -9,7 +9,11 @@ import android.os.Handler
 import android.os.SystemClock
 import com.customkey.vietime.tools.ClipItem
 import com.customkey.vietime.tools.ClipboardVault
+import com.customkey.vietime.engine.Keys
+import com.customkey.vietime.engine.NumberChips
+import android.view.KeyEvent
 import com.customkey.vietime.tools.MathEvaluator
+import com.customkey.vietime.tools.TextTransform
 import com.customkey.vietime.tools.ToneRestorer
 import com.customkey.vietime.tools.ToolsRepo
 import com.customkey.vietime.tools.Translator
@@ -114,11 +118,37 @@ class ToolsController(
     // MARK: chip đặc biệt
 
     /** Chip đặc biệt (nếu có) đứng trước gợi ý thường. */
-    fun specialChip(): Suggestion? {
+    /**
+     * Mọi chip đặc biệt cho trạng thái hiện tại, ưu tiên trước gợi ý thường: phép tính / thêm dấu /
+     * dán nhanh (loại trừ nhau), chip số và đuôi email (có thể đi kèm).
+     */
+    fun specialChips(): List<Suggestion> {
         val f = proxy.config
-        if (f.isSecure || f.rawKeys) return null
-        if (session.isComposing) return null
-        val before = proxy.contextBeforeInput() ?: return null
+        if (f.isSecure || f.rawKeys) return emptyList()
+        val before = proxy.contextBeforeInput() ?: return emptyList()
+        val out = ArrayList<Suggestion>(3)
+        if (!session.isComposing) specialChip(before)?.let { out += it }
+        if (f.kind == FieldKind.EMAIL) out += domainChips(before)
+        if (prefs.getBoolean(Keys.NUMBER_CHIPS, true) && out.none { it.kind == Suggestion.Kind.MATH }) {
+            runCatching { NumberChips.chip(before) }.getOrNull()?.let {
+                out += Suggestion(it.display, Suggestion.Kind.NUMBER, it.replace + "\u0000" + it.insert)
+            }
+        }
+        return out
+    }
+
+    /** Ô email: gõ "…@" ⇒ gợi ý đuôi phổ biến khớp phần đã gõ sau @. */
+    private fun domainChips(before: String): List<Suggestion> {
+        val token = before.takeLastWhile { !it.isWhitespace() }
+        val at = token.lastIndexOf('@')
+        if (at <= 0) return emptyList()
+        val typed = token.substring(at + 1).lowercase()
+        if ('.' in typed && EMAIL_DOMAINS.any { it == typed }) return emptyList()
+        return EMAIL_DOMAINS.filter { it.startsWith(typed) && it != typed }.take(3)
+            .map { Suggestion("@$it", Suggestion.Kind.DOMAIN, it.substring(typed.length)) }
+    }
+
+    private fun specialChip(before: String): Suggestion? {
         if (on(ToolsRepo.KEY_MATH_CHIP) && before.endsWith("=")) {
             MathEvaluator.chip(before)?.let { return Suggestion("= $it", Suggestion.Kind.MATH, it) }
         }
@@ -175,6 +205,16 @@ class ToolsController(
         val payload = s.payload ?: return false
         when (s.kind) {
             Suggestion.Kind.MATH -> edit { proxy.insertText(payload) }
+            Suggestion.Kind.DOMAIN -> edit { proxy.insertText(payload) }
+            Suggestion.Kind.NUMBER -> {
+                val (replace, insert) = payload.split('\u0000', limit = 2).let { it[0] to it.getOrElse(1) { "" } }
+                edit {
+                    if (replace.isEmpty() || proxy.confirmTail(replace)) {
+                        proxy.deleteCodePoints(replace.codePointCount(0, replace.length))
+                        proxy.insertText(insert)
+                    }
+                }
+            }
             Suggestion.Kind.PASTE -> { pasteUsed = true; edit { proxy.insertText(payload) } }
             Suggestion.Kind.PASTE_IMAGE -> {
                 pasteUsed = true
@@ -212,6 +252,14 @@ class ToolsController(
 
     fun close() { panel()?.showTools(false) }
 
+    /** Mở thẳng một tab của bảng công cụ (từ hàng biểu tượng trên thanh gợi ý). */
+    fun open(tab: ToolsPaneView.Tab) {
+        val p = panel() ?: return
+        fillPane()
+        p.tools.select(tab)
+        if (!p.toolsShown) p.showTools(true)
+    }
+
     private fun fillPane() {
         val p = panel() ?: return
         p.tools.listener = this
@@ -239,6 +287,46 @@ class ToolsController(
     override fun onClearUnpinned() { ToolsRepo.editClipboard(ctx) { it.clearUnpinned() } }
     override fun onClearAll() { ToolsRepo.wipeClipboard(ctx); fillPane() }
     override fun onClose() { close() }
+
+    // MARK: bảng sửa văn bản
+
+    override fun onEdit(action: ToolsPaneView.EditAction) {
+        val select = panel()?.tools?.selecting == true
+        session.externalSelectionChange()
+        when (action) {
+            ToolsPaneView.EditAction.LEFT -> edit { proxy.navKey(KeyEvent.KEYCODE_DPAD_LEFT, select) }
+            ToolsPaneView.EditAction.RIGHT -> edit { proxy.navKey(KeyEvent.KEYCODE_DPAD_RIGHT, select) }
+            ToolsPaneView.EditAction.UP -> edit { proxy.navKey(KeyEvent.KEYCODE_DPAD_UP, select) }
+            ToolsPaneView.EditAction.DOWN -> edit { proxy.navKey(KeyEvent.KEYCODE_DPAD_DOWN, select) }
+            ToolsPaneView.EditAction.HOME -> edit { proxy.navKey(KeyEvent.KEYCODE_MOVE_HOME, select) }
+            ToolsPaneView.EditAction.END -> edit { proxy.navKey(KeyEvent.KEYCODE_MOVE_END, select) }
+            ToolsPaneView.EditAction.SELECT_ALL -> edit { proxy.contextAction(android.R.id.selectAll) }
+            ToolsPaneView.EditAction.COPY -> { edit { proxy.contextAction(android.R.id.copy) }; panel()?.showMessage("Đã copy") }
+            ToolsPaneView.EditAction.CUT -> edit { proxy.contextAction(android.R.id.cut) }
+            ToolsPaneView.EditAction.PASTE -> edit { proxy.contextAction(android.R.id.paste) }
+            ToolsPaneView.EditAction.UNDO -> edit { if (!proxy.contextAction(android.R.id.undo)) proxy.navKey(KeyEvent.KEYCODE_Z, false) }
+            ToolsPaneView.EditAction.DELETE_WORD -> edit { session.deleteWords(proxy, 1) }
+        }
+        refresh()
+    }
+
+    /** Đổi kiểu chữ / bỏ dấu: vùng chọn, không có thì câu ngay trước con trỏ. */
+    override fun onTransform(t: TextTransform) {
+        val sel = proxy.selectedText()
+        if (sel != null) {
+            edit { proxy.replaceSelection(t.apply(sel)) }
+        } else {
+            val src = proxy.contextBeforeInput()?.let { ToneRestorerSentence.last(it) }
+            if (src.isNullOrBlank()) { panel()?.showMessage("Chọn đoạn chữ cần đổi"); return }
+            // Các phép đổi không đụng khoảng trắng ⇒ thay nguyên câu (kể cả dấu cách cuối).
+            val out = t.apply(src)
+            if (out != src) edit {
+                if (proxy.confirmTail(src)) { proxy.deleteCodePoints(src.codePointCount(0, src.length)); proxy.insertText(out) }
+            }
+        }
+        session.externalSelectionChange()
+        refresh()
+    }
 
     /** Thêm dấu: vùng chọn ⇒ thay vùng chọn; không thì câu trước con trỏ; không thì nội dung clipboard. */
     override fun onAddTones() {
@@ -293,7 +381,11 @@ class ToolsController(
         }
     }
 
-    private companion object { const val PASTE_WINDOW_MS = 3 * 60 * 1000L }
+    private companion object {
+        const val PASTE_WINDOW_MS = 3 * 60 * 1000L
+        val EMAIL_DOMAINS = listOf("gmail.com", "yahoo.com", "outlook.com", "icloud.com", "hotmail.com",
+            "fpt.com.vn", "vnpt.vn", "viettel.com.vn", "yahoo.com.vn", "proton.me")
+    }
 }
 
 /** Câu cuối trước con trỏ (đến dấu kết câu / xuống dòng trước đó). */

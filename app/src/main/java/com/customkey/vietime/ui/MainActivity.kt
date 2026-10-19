@@ -58,6 +58,10 @@ import com.customkey.vietime.R
 import com.customkey.vietime.diag.TxaLogCenter
 import com.customkey.vietime.diag.showPendingCrash
 import com.customkey.vietime.engine.Keys
+import com.customkey.vietime.tools.BackupManager
+import com.customkey.vietime.ui.settings.DefaultShortcuts
+import com.customkey.vietime.ui.settings.ShortcutsScreen
+import androidx.activity.compose.rememberLauncherForActivityResult
 import com.customkey.vietime.ime.AssetBlobs
 import com.customkey.vietime.ime.ImePrefs
 import com.customkey.vietime.ui.onboarding.SetupCard
@@ -89,6 +93,7 @@ class MainActivity : ComponentActivity() {
         )
         super.onCreate(savedInstanceState)
         AssetBlobs.ensureInstalled(this)
+        DefaultShortcuts.seedIfAbsent(this)
         setContent {
             TxTheme {
                 TxBackground {
@@ -114,7 +119,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private enum class Screen { HOME, PRACTICE, ABOUT, THEME, SOUND, LAYOUT, TOOLS, DICT, LOGS }
+private enum class Screen { HOME, PRACTICE, ABOUT, THEME, SOUND, LAYOUT, TOOLS, DICT, LOGS, SHORTCUTS }
 
 @Composable
 private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPickIme: () -> Unit) {
@@ -137,6 +142,7 @@ private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPick
                 CustomizeTile("📐", "Bố cục", "Hàng số, chiều cao, tách đôi, thời gian giữ phím") { screen = Screen.LAYOUT }
                 SectionLabel("Tính năng")
                 CustomizeTile("🧰", "Công cụ", "Thêm dấu cả câu, máy tính, clipboard thông minh, mẫu câu") { screen = Screen.TOOLS }
+                CustomizeTile("⚡", "Gõ tắt", "ko → không, dc → được… thêm, sửa, nhập / xuất file") { screen = Screen.SHORTCUTS }
                 CustomizeTile("📖", "Từ điển cá nhân", "Quản lý từ đã học, thêm tên riêng & thuật ngữ để gợi ý ngay") { screen = Screen.DICT }
                 FeatureTile(R.drawable.img_swipe_practice, "Luyện gõ vuốt",
                     "Vuốt qua các chữ để gõ cả từ — chấm điểm từng nét.", "Bắt đầu") { screen = Screen.PRACTICE }
@@ -145,6 +151,7 @@ private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPick
                 PlusCard()
                 SectionLabel("Kiểu gõ")
                 TypingModeCard()
+                BackupCard()
                 Footer { screen = Screen.ABOUT }
             }
             // Luyện vuốt KHÔNG nằm trong verticalScroll: nét vuốt dọc sẽ bị cuộn trang nuốt mất.
@@ -154,6 +161,7 @@ private fun AppRoot(focusTick: State<Int>, onOpenImeSettings: () -> Unit, onPick
             Screen.LAYOUT -> LayoutScreen(onBack = { screen = Screen.HOME })
             Screen.TOOLS -> ToolsScreen(onBack = { screen = Screen.HOME })
             Screen.DICT -> UserDictScreen(onBack = { screen = Screen.HOME })
+            Screen.SHORTCUTS -> ShortcutsScreen(onBack = { screen = Screen.HOME })
             Screen.ABOUT -> Column(Modifier.verticalScroll(rememberScrollState())) { AboutScreen(onBack = { screen = Screen.HOME }, onLogs = { screen = Screen.LOGS }) }
             Screen.LOGS -> Column(Modifier.verticalScroll(rememberScrollState())) { TxaLogCenter(onBack = { screen = Screen.ABOUT }) }
         }
@@ -223,6 +231,15 @@ private fun TypingModeCard() {
         Toggle("Âm bàn phím", "Phát âm thanh phản hồi khi bấm", Keys.KEY_SOUND, true)
         Toggle("Rung khi bấm phím", "Rung nhẹ phản hồi xúc giác khi chạm", Keys.HAPTIC_FEEDBACK, true)
         Toggle("Gõ tắt (Shortcuts)", "Bung từ viết tắt (vd: ko → không, dc → được)", Keys.SHORTCUTS_ENABLED, true)
+        Toggle("Tự sửa lỗi chính tả", "Chạm trượt phím (tpoi → tôi) tự sửa khi gõ dấu cách; ⌫ để hoàn tác", Keys.AUTO_CORRECT, true)
+        Toggle("Kiểm tra chính tả khi gõ", "Chỉ bỏ dấu khi thành âm tiết tiếng Việt hợp lệ (mp3, h2o giữ nguyên)", Keys.LIVE_SPELL_CHECK, true)
+        Toggle("Hiểu ngữ cảnh tiếng Anh", "\"he is\" giữ tiếng Anh, \"hè í\" thì không", Keys.CONTEXTUAL_ENGLISH, true)
+        Toggle("Chạm thông minh", "Chạm giữa hai phím ⇒ chọn phím hợp với từ đang gõ", Keys.SMART_TOUCH, true)
+        Toggle("Tự thêm dấu cách sau dấu câu", "Gõ , . ? ! tự cách — gõ cách nữa không bị đôi", Keys.AUTO_SPACE_AFTER_PUNCT, false)
+        Toggle("Vuốt ra từ tiếng Anh", "Gõ vuốt hiểu cả từ tiếng Anh theo ngữ cảnh", Keys.SWIPE_ENGLISH, true)
+        Toggle("Simple Telex", "w đứng riêng không thành ư; [ ] không thành ơ ư", Keys.SIMPLE_TELEX, true)
+        Toggle("Lọc từ nhạy cảm", "Không gợi ý từ tục (vẫn gõ được bình thường)", Keys.FILTER_SENSITIVE, true)
+        SuggestionCountRow(prefs)
         Toggle("Gõ nhanh (Quick Telex)", "cc→ch, nn→ng, tt→th, gg→gh...", Keys.QUICK_TELEX, false)
         Toggle("Bỏ dấu kiểu mới", "hoà, thuý thay vì hòa, thúy", Keys.MODERN_TONE, false)
         Toggle("Chính tả Teencode", "wá, zui zẻ, kó, bíe, thík...", Keys.TEENCODE, false)
@@ -231,6 +248,53 @@ private fun TypingModeCard() {
             val f = java.io.File(ctx.filesDir, Keys.USERLM_FILE)
             if (f.exists()) f.delete()
             android.widget.Toast.makeText(ctx, "Đã xoá bộ nhớ từ đã học", android.widget.Toast.LENGTH_SHORT).show()
+        }
+    }
+}
+
+@Composable
+private fun SuggestionCountRow(prefs: android.content.SharedPreferences) {
+    var n by remember { mutableStateOf(prefs.getInt(Keys.SUGGESTION_COUNT, 3).coerceIn(3, 5)) }
+    Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(1f)) {
+            Text("Số ô gợi ý", color = Tx.Text, style = MaterialTheme.typography.bodyLarge)
+            Text("Trên thanh gợi ý của bàn phím", color = Tx.TextDim, style = MaterialTheme.typography.bodySmall)
+        }
+        for (k in 3..5) Text("$k", Modifier.padding(start = 6.dp)
+            .background(if (k == n) Tx.Cyan else Tx.Glass, RoundedCornerShape(10.dp))
+            .clickable { n = k; prefs.edit().putInt(Keys.SUGGESTION_COUNT, k).apply() }
+            .padding(horizontal = 14.dp, vertical = 7.dp),
+            color = if (k == n) Tx.Night else Tx.Text, fontWeight = FontWeight.Bold)
+    }
+}
+
+/** Sao lưu toàn bộ cài đặt + gõ tắt + mẫu câu ra file JSON, hoặc khôi phục từ file. */
+@Composable
+private fun BackupCard() {
+    val ctx = LocalContext.current
+    val exporter = rememberLauncherForActivityResult(androidx.activity.result.contract.ActivityResultContracts.CreateDocument("application/json")) { uri ->
+        if (uri == null) return@rememberLauncherForActivityResult
+        runCatching { ctx.contentResolver.openOutputStream(uri)?.use { it.write(BackupManager.export(ctx).toByteArray()) } }
+            .onSuccess { android.widget.Toast.makeText(ctx, "Đã sao lưu", android.widget.Toast.LENGTH_SHORT).show() }
+            .onFailure { android.widget.Toast.makeText(ctx, "Không ghi được file", android.widget.Toast.LENGTH_SHORT).show() }
+    }
+    val importer = rememberLauncherForActivityResult(androidx.activity.result.contract.ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri == null) return@rememberLauncherForActivityResult
+        val msg = runCatching {
+            val text = ctx.contentResolver.openInputStream(uri)?.use { it.readBytes().decodeToString() } ?: error("Không đọc được file")
+            val r = BackupManager.import(ctx, text)
+            "Đã khôi phục ${r.settings} cài đặt, ${r.snippets} mẫu câu, ${r.pinned} mục ghim"
+        }.getOrElse { it.message ?: "File không hợp lệ" }
+        android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
+    }
+    GlassCard {
+        Text("Sao lưu & khôi phục", style = MaterialTheme.typography.titleMedium, color = Tx.Text)
+        Text("Cài đặt, theme, âm thanh, gõ tắt, mẫu câu và mục clipboard đã ghim — chuyển sang máy mới chỉ một file.",
+            style = MaterialTheme.typography.bodySmall, color = Tx.TextDim)
+        Spacer(Modifier.height(10.dp))
+        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            GhostButton("⬆ Sao lưu", Modifier.weight(1f)) { exporter.launch("txtelex-saoluu.json") }
+            GhostButton("⬇ Khôi phục", Modifier.weight(1f)) { importer.launch(arrayOf("application/json", "*/*")) }
         }
     }
 }
