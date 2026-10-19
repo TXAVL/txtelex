@@ -12,6 +12,20 @@ Package: `nm.txa.telex`.
 .\gradlew.bat assembleDebug       # APK: app\build\outputs\apk\debug\app-debug.apk
 ```
 
+Hoặc dùng script build nhanh (tự sửa PATH/JAVA_HOME, chép kết quả vào `dist\`):
+
+```powershell
+.\build.cmd              # APK debug
+.\build.cmd release      # APK release đã ký
+.\build.cmd aab          # AAB nộp Google Play
+.\build.cmd all          # test + debug + release + aab
+.\build.cmd run          # build, cài lên máy qua USB, mở app
+.\build.cmd install release
+.\build.cmd test
+```
+
+Bản release cần `keystore.properties` (không nằm trong repo).
+
 Yêu cầu: JDK 17, Android SDK (platform 35, build-tools 35.0.0), `local.properties` trỏ `sdk.dir`.
 
 ## Bản quyền
