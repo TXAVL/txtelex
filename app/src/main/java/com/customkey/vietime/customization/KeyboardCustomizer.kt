@@ -81,7 +81,7 @@ class KeyboardCustomizer(context: Context, private val onChanged: () -> Unit) {
                 haptic.config = if (hapticEnabled) cfg else HapticConfig(0, 0, 0)
                 return true
             }
-            Keys.NUMBER_ROW, LayoutConfig.KEY_HEIGHT, LayoutConfig.KEY_WIDTH, LayoutConfig.KEY_SPLIT, LayoutConfig.KEY_LONG_PRESS ->
+            in LayoutConfig.KEYS ->
                 layout = LayoutConfig.load { prefs.all[it] }
             else -> return false
         }
@@ -101,6 +101,8 @@ class KeyboardCustomizer(context: Context, private val onChanged: () -> Unit) {
         kb.rowHeightDp = layout.rowHeightDp()
         kb.options = layout.options(wide)
         kb.longPressDelayMs = layout.longPressMs.toLong()
+        kb.keyPreview = layout.keyPreview
+        kb.labelScale = layout.labelScale
         panel.invalidate()
     }
 

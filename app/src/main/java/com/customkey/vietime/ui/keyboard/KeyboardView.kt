@@ -89,6 +89,34 @@ class KeyboardView(context: Context) : View(context) {
         set(v) { field = v; publishSwipeLayout() }
 
     var longPressDelayMs = 300L
+
+    /** Bong bóng phóng to chữ khi bấm (KeyboardPanel vẽ, để hàng trên cùng lấn được lên thanh gợi ý). */
+    var keyPreview = true
+    /** Hệ số cỡ chữ trên phím (0.8…1.3). */
+    var labelScale = 1f
+        set(v) { if (field != v) { field = v; applyStyle(); invalidate() } }
+    /** KeyboardPanel lắng nghe để vẽ lại bong bóng. */
+    var onPreviewChanged: (() -> Unit)? = null
+    private var previewKey: LaidKey? = null
+
+    /** Phím đang hiện bong bóng + nhãn (null = không có). */
+    fun currentPreview(): Pair<LaidKey, String>? {
+        val k = previewKey ?: return null
+        if (!keyPreview || altPopup != null || swiping) return null
+        val a = k.def.action
+        val label = when (a) {
+            is KeyAction.Letter -> if (shift != Shift.OFF) k.def.label.uppercase() else k.def.label
+            is KeyAction.Text -> k.def.label
+            else -> return null
+        }
+        return k to label
+    }
+
+    private fun setPreview(k: LaidKey?) {
+        if (previewKey === k) return
+        previewKey = k
+        onPreviewChanged?.invoke()
+    }
     var rowHeightDp = 54f
         set(v) { if (field != v) { field = v; relayout(); requestLayout() } }
 
@@ -114,8 +142,8 @@ class KeyboardView(context: Context) : View(context) {
 
     private fun applyStyle() {
         val s = style
-        labelPaint.textSize = s.labelSizeSp * sp
-        smallPaint.textSize = 14f * sp
+        labelPaint.textSize = s.labelSizeSp * sp * labelScale
+        smallPaint.textSize = 14f * sp * labelScale
         hintPaint.textSize = 10f * sp
         borderPaint.strokeWidth = s.borderWidthDp * d
         borderPaint.color = s.borderColor
@@ -273,6 +301,25 @@ class KeyboardView(context: Context) : View(context) {
 
     private var lastShiftTap = 0L
 
+    /**
+     * Chạm thông minh: chạm ở VIỀN giữa hai phím chữ ⇒ chọn phím hợp với từ đang gõ hơn (prior
+     * Telex từ keyprior.bin, [letterPrior]). Chạm trong lõi phím ⇒ giữ nguyên, không tốn gì.
+     */
+    var letterPrior: (() -> ((Char) -> Float?)?)? = null
+
+    private fun refineLetter(hit: LaidKey, x: Float, y: Float): LaidKey {
+        if (hit.def.action !is KeyAction.Letter || plane != KeyboardPlane.LETTERS) return hit
+        val p = com.customkey.vietime.engine.KPoint(x, y)
+        if (com.customkey.vietime.engine.TouchTarget.inCore(p, com.customkey.vietime.engine.KRect(hit.left, hit.top, hit.right, hit.bottom))) return hit
+        val prior = letterPrior?.invoke() ?: return hit
+        val letters = keys.filter { it.def.action is KeyAction.Letter }
+        val idx = letters.indexOf(hit)
+        if (idx < 0) return hit
+        val rects = letters.map { com.customkey.vietime.engine.KRect(it.left, it.top, it.right, it.bottom) }
+        val chars = CharArray(letters.size) { (letters[it].def.action as KeyAction.Letter).ch }
+        return letters[com.customkey.vietime.engine.TouchTarget.choose(p, rects, chars, idx, prior)]
+    }
+
     private fun keyAt(x: Float, y: Float): LaidKey? {
         keys.firstOrNull { it.contains(x, y) }?.let { return it }
         // ngoài mọi phím (lề trên/dưới): phím gần nhất theo khoảng cách tâm
@@ -301,10 +348,11 @@ class KeyboardView(context: Context) : View(context) {
         for ((opid, ot) in touches) if (opid != spacePid && opid != backPid) flushLetter(ot)
         if (swipePid >= 0 && !swiping) stopSwipeTracking()
         if (swiping) return   // đang gõ vuốt: bỏ qua ngón thứ hai
-        val k = keyAt(x, y) ?: return
+        val k = refineLetter(keyAt(x, y) ?: return, x, y)
         val touch = Touch(k, x, y, t)
         touches[pid] = touch
         pressedKeys.add(k)
+        if (k.def.action is KeyAction.Letter || (k.def.action is KeyAction.Text && plane != KeyboardPlane.NUMBER && plane != KeyboardPlane.PHONE)) setPreview(k)
         when (val a = k.def.action) {
             is KeyAction.Space -> {
                 spacePid = pid
@@ -378,6 +426,7 @@ class KeyboardView(context: Context) : View(context) {
         val t = touches.remove(pid) ?: return
         cancelSchedule(pid)
         pressedKeys.remove(t.key)
+        if (previewKey === t.key) setPreview(null)
         val k = t.key
         when (val a = k.def.action) {
             is KeyAction.Space -> {
@@ -497,6 +546,7 @@ class KeyboardView(context: Context) : View(context) {
         // Hàng trên cùng không có chỗ phía trên trong cửa sổ IME ⇒ popup đè lên chính hàng đó.
         val top = if (k.row == 0) k.top else k.top - h
         altPopup = AltPopup(k, items, left, top, cell, h, 0)
+        setPreview(null)
         listener?.onFeedback(FeedbackKind.MODIFIER)
         invalidate()
     }
@@ -531,6 +581,7 @@ class KeyboardView(context: Context) : View(context) {
     fun cancelAllTouches() {
         for (pid in longPressRuns.keys.toList()) cancelSchedule(pid)
         touches.clear(); pressedKeys.clear(); altPopup = null
+        setPreview(null)
         if (spacePid >= 0) { if (spaceGesture.state == SpaceGesture.State.TRACKPAD) listener?.onTrackpadEnd(); spaceGesture.cancel() }
         if (backSwipe.swiping) listener?.onDeleteWordsPreview(0)
         spacePid = -1; backPid = -1; backSwipe.reset(); stopBackRepeat()
@@ -581,6 +632,7 @@ class KeyboardView(context: Context) : View(context) {
         if (listener?.onSwipeTypingStart() != true) { stopSwipeTracking(); return }
         swiping = true
         touches[swipePid]?.let { it.consumed = true; cancelSchedule(swipePid); pressedKeys.remove(it.key) }
+        setPreview(null)
         altPopup = null
         trailActive = true
         trail.lineTo(x, y)

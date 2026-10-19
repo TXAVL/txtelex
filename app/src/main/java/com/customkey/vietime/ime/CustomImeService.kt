@@ -110,6 +110,8 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
 
     private fun readPrefs() {
         flickLanguage = prefs.getBoolean(ImePrefs.SPACE_FLICK_LANGUAGE, true)
+        session.autoSpaceAfterPunct = prefs.getBoolean(Keys.AUTO_SPACE_AFTER_PUNCT, false)
+        session.swipeEnglishEnabled = prefs.getBoolean(Keys.SWIPE_ENGLISH, true)
     }
 
     override fun onSharedPreferenceChanged(p: SharedPreferences?, key: String?) {
@@ -133,6 +135,7 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
     override fun onCreateInputView(): View {
         val p = KeyboardPanel(this)
         p.keyboard.listener = this
+        p.keyboard.letterPrior = ::smartTouchPrior
         p.strip.listener = this
         p.tools.listener = tools
         p.emoji.listener = object : EmojiPaneView.Listener {
@@ -243,6 +246,16 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
 
     override fun onLetterTouch(dx: Float, dy: Float) = session.noteLetterTouch(dx, dy)
 
+    /** Prior chạm thông minh: chỉ ô chữ thường, Telex, khi trie đã nạp nền (không chặn phím). */
+    private fun smartTouchPrior(): ((Char) -> Float?)? {
+        if (!prefs.getBoolean(Keys.SMART_TOUCH, true) || session.englishMode) return null
+        val f = proxy.config
+        if (f.isSecure || f.passthrough || f.kind == FieldKind.URL) return null
+        val kp = com.customkey.vietime.engine.TelexKeyPrior.sharedIfReady
+            ?: run { worker.post { runCatching { com.customkey.vietime.engine.TelexKeyPrior.warmUp() } }; return null }
+        return kp.forTyping(session.rawWord, session.vniMode)
+    }
+
     override fun onLetter(ch: Char) { edit { session.letter(ch, proxy) }; strip?.showUndo(false); afterKey() }
 
     override fun onText(text: String) {
@@ -324,6 +337,7 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
         worker.post {
             synchronized(swipeLock) { dec.setLayout(layout); dec.prepare() }
             SyllableLM.shared
+            if (session.swipeEnglishEnabled) runCatching { com.customkey.vietime.engine.SwipeEnglish.lexicon }
             swipeReady = true
         }
     }
@@ -335,7 +349,7 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
         val dec = swipeDecoder ?: return
         val ctx = session.swipeContext()
         val cands = TxaLogger.guard(TAG, "giải mã nét vuốt (${path.count} điểm)", emptyList()) {
-            synchronized(swipeLock) { dec.decode(path, SwipeSuggest.TOP_K, ctx.folded, ctx.english, null) }
+            synchronized(swipeLock) { dec.decode(path, SwipeSuggest.TOP_K, ctx.folded, ctx.english, if (ctx.english != null) ctx.englishWord else null) }
         }
         val choice = session.resolveSwipe(cands, ctx, case)
         if (choice != null) edit { session.commitSwipe(choice, proxy) }

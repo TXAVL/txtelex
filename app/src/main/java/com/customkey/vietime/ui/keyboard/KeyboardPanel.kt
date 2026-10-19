@@ -95,6 +95,43 @@ class KeyboardPanel(context: Context) : FrameLayout(context) {
         toast.hide()
     }
 
+    // MARK: bong bóng phím
+
+    private val balloonPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val balloonShadow = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val balloonText = Paint(Paint.ANTI_ALIAS_FLAG).apply { textAlign = Paint.Align.CENTER; isFakeBoldText = true }
+    private val balloonRect = RectF()
+
+    override fun dispatchDraw(canvas: Canvas) {
+        super.dispatchDraw(canvas)
+        val (k, label) = keyboard.currentPreview() ?: return
+        if (keyboard.visibility != VISIBLE) return
+        val d = resources.displayMetrics.density
+        // toạ độ phím → toạ độ panel
+        val ox = (mainContainer.left + body.left + keyboard.left).toFloat()
+        val oy = (mainContainer.top + body.top + keyboard.top).toFloat()
+        val kh = k.bottom - k.top
+        val w = maxOf(k.width * 1.18f, 46 * d)
+        val h = kh * 1.3f
+        var l = ox + k.centerX - w / 2f
+        l = l.coerceIn(2 * d, width - w - 2 * d)
+        val bottom = oy + k.top + kh * 0.2f
+        val top = (bottom - h).coerceAtLeast(0f)
+        balloonRect.set(l, top, l + w, bottom)
+        val r = style.cornerRadiusDp * d * 1.4f
+        balloonShadow.color = 0x66000000
+        balloonRect.offset(0f, 2 * d); canvas.drawRoundRect(balloonRect, r, r, balloonShadow); balloonRect.offset(0f, -2 * d)
+        balloonPaint.color = style.keyFill or (0xFF shl 24)
+        canvas.drawRoundRect(balloonRect, r, r, balloonPaint)
+        balloonPaint.color = style.accent and 0x00FFFFFF or (0x55 shl 24)
+        balloonPaint.style = Paint.Style.STROKE; balloonPaint.strokeWidth = 1.2f * d
+        canvas.drawRoundRect(balloonRect, r, r, balloonPaint)
+        balloonPaint.style = Paint.Style.FILL
+        balloonText.color = style.label or (0xFF shl 24)
+        balloonText.textSize = (if (label.length > 1) 20f else 30f) * resources.displayMetrics.scaledDensity * keyboard.labelScale
+        canvas.drawText(label, balloonRect.centerX(), balloonRect.centerY() - (balloonText.descent() + balloonText.ascent()) / 2f, balloonText)
+    }
+
     private val src = Rect()
     private val dst = RectF()
     private val paint = Paint(Paint.FILTER_BITMAP_FLAG)
@@ -105,6 +142,7 @@ class KeyboardPanel(context: Context) : FrameLayout(context) {
         isFocusableInTouchMode = false
         descendantFocusability = android.view.ViewGroup.FOCUS_BLOCK_DESCENDANTS
         setWillNotDraw(false)
+        keyboard.onPreviewChanged = { invalidate() }
         val d = resources.displayMetrics.density
         val stripH = (42 * d).toInt()
         mainContainer.addView(strip, LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, stripH))

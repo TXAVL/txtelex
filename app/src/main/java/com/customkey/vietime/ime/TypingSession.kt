@@ -2,6 +2,8 @@ package com.customkey.vietime.ime
 
 import com.customkey.vietime.engine.AdjacentKeyFixer
 import com.customkey.vietime.engine.AutoCorrect
+import com.customkey.vietime.engine.AutoSpace
+import com.customkey.vietime.engine.SwipeLangContext
 import com.customkey.vietime.engine.EngineBridge
 import com.customkey.vietime.engine.EngineSettings
 import com.customkey.vietime.engine.FieldTraits
@@ -86,6 +88,9 @@ class TypingSession(
     fun seedLanguageModel() = runCatching { lm.seedIfEmpty(SeedData::load) }
 
     val englishMode: Boolean get() = bridge.englishMode
+    /** Chuỗi phím thô của từ đang gõ (prior chạm thông minh). */
+    val rawWord: String get() = bridge.rawWord
+    val vniMode: Boolean get() = bridge.vniMode
     val isComposing: Boolean get() = bridge.isComposing
     val composingWord: String get() = bridge.composedWord
 
@@ -177,6 +182,7 @@ class TypingSession(
     fun letter(ch: Char, p: TextProxy) {
         settleSwipeIfEnglish(p)
         clearSwipe(); deletedForUndo = null
+        autoSpaced = false
         val fresh = !bridge.isComposing
         bridge.letter(ch, p)
         noteTouch(fresh)
@@ -185,8 +191,36 @@ class TypingSession(
     }
 
     /** Số / ký hiệu / dấu câu. VNI: số trong lúc soạn từ mang dấu. */
+    // MARK: tự thêm dấu cách sau dấu câu
+
+    /** Bật/tắt bởi IME (Keys.AUTO_SPACE_AFTER_PUNCT). */
+    var autoSpaceAfterPunct = false
+    /** Vừa tự thêm một dấu cách sau dấu câu — phím kế quyết định số phận của nó. */
+    private var autoSpaced = false
+
+    private val autoSpaceAllowed get() = autoSpaceAfterPunct && !traits.passthrough && !traits.urlField && !traits.isSecure
+
+    /** Phím ký hiệu ngay sau dấu cách tự thêm: dấu câu khác ⇒ bỏ dấu cách; ngoặc/nháy đóng ⇒ chen vào trước nó. */
+    private fun resolveAutoSpaceBefore(s: String, p: TextProxy): Boolean {
+        if (!autoSpaced) return false
+        autoSpaced = false
+        if (!p.confirmTail(" ")) return false
+        return when (AutoSpace.reaction(s)) {
+            AutoSpace.Reaction.REMOVE -> { p.deleteCodePoints(1); false }
+            AutoSpace.Reaction.CARRY -> { p.deleteCodePoints(1); true }
+            AutoSpace.Reaction.KEEP -> false
+        }
+    }
+
+    private fun maybeAutoSpace(s: String, p: TextProxy) {
+        if (!autoSpaceAllowed || s.singleOrNull()?.let { it in AutoSpace.TRIGGERS } != true) return
+        val before = p.contextBeforeInput() ?: return
+        if (AutoSpace.shouldAdd(s, before, p.contextAfterInput())) { p.insertText(" "); autoSpaced = true }
+    }
+
     fun text(s: String, p: TextProxy) {
         deletedForUndo = null
+        val carry = resolveAutoSpaceBefore(s, p)
         val d = s.singleOrNull()
         if (swipeWord == null && d != null && d in '0'..'9' && bridge.vniDigit(d, p)) {
             generation++; return
@@ -196,12 +230,15 @@ class TypingSession(
         commitAndLearn(bridge.boundary(s, p))
         // Hết câu ⇒ không nối ngữ cảnh bigram qua dấu câu.
         if (s.any { it in ".!?\n" }) { lastWord = null; lastWord2 = null }
+        if (carry) { p.insertText(" "); autoSpaced = true } else maybeAutoSpace(s, p)
         lastInsertWasSpace = false
         generation++
     }
 
     fun space(p: TextProxy) {
         deletedForUndo = null
+        // Dấu cách đã được tự thêm sau dấu câu ⇒ nuốt, không thành hai dấu cách.
+        if (autoSpaced) { autoSpaced = false; lastInsertWasSpace = true; lastSpaceAt = clock(); generation++; return }
         val now = clock()
         val ctx = p.contextBeforeInput()
         val quick = lastInsertWasSpace && now - lastSpaceAt < (TypingTimings.DOUBLE_SPACE_S * 1000).toLong()
@@ -224,6 +261,7 @@ class TypingSession(
 
     /** Enter: chốt từ (không chèn gì) — IME tự gửi action / "\n" sau đó. */
     fun commitBeforeEnter(p: TextProxy) {
+        if (autoSpaced) { autoSpaced = false; if (p.confirmTail(" ")) p.deleteCodePoints(1) }
         settleSwipeIfEnglish(p)
         clearSwipe()
         commitAndLearn(bridge.boundary("", p, expand = true))
@@ -234,6 +272,8 @@ class TypingSession(
 
     fun backspace(p: TextProxy) {
         deletedForUndo = null
+        // ⌫ ngay sau dấu cách tự thêm ⇒ chỉ xoá dấu cách đó.
+        if (autoSpaced) { autoSpaced = false; if (p.confirmTail(" ")) { p.deleteCodePoints(1); generation++; return } }
         clearSwipe()
         // EngineBridge tự xử lý cả hai trường hợp: đang soạn (diff) và không soạn (deleteBackward,
         // hoặc mở lại từ vừa chốt để sửa dấu).
@@ -427,8 +467,20 @@ class TypingSession(
         val pending = if (composing) bridge.predictedCommit.takeIf { UserLangModel.learnable(it) } else null
         val p1 = if (composing) pending else lastWord
         val p2 = if (composing) (if (pending != null) lastWord else null) else lastWord2
-        return SwipeSuggest.context(lm, p1, p2, null, properNouns = !traits.lowercaseSuggestions)
+        // Ngôn ngữ theo ≤ 3 từ trước: từ Anh vừa vuốt chắc nhất, rồi từ điển. Tắt ⇒ chỉ tiếng Việt.
+        val english = when {
+            bridge.englishMode -> SwipeLangContext.ONLY_ENGLISH
+            !swipeEnglishEnabled -> null
+            else -> SwipeLangContext.prior(SwipeLangContext.kinds(composing, pending, isRecentEnglish(pending), langRecent, ::isRecentEnglish))
+        }
+        return SwipeSuggest.context(lm, p1, p2, english, properNouns = !traits.lowercaseSuggestions)
     }
+
+    /** Vuốt ra cả từ tiếng Anh (Keys.SWIPE_ENGLISH, IME đặt). */
+    var swipeEnglishEnabled = true
+    private val langRecent = ArrayDeque<String>()
+    private val recentEnglish = ArrayDeque<String>()
+    private fun isRecentEnglish(w: String?) = w != null && w.lowercase() in recentEnglish
 
     /** Chọn từ từ ứng viên decoder (chế độ EN chỉ giữ từ tiếng Anh). */
     fun resolveSwipe(cands: List<SwipeCandidate>, ctx: SwipeSuggest.Context, case: SwipeSuggest.Case): SwipeChoice? {
@@ -467,7 +519,10 @@ class TypingSession(
     /** Từ vuốt nguyên văn (EN) đang mở: phím kế chốt + học nó. */
     private fun settleSwipeIfEnglish(p: TextProxy) {
         val w = swipeWord ?: return
-        if (swipeEnglish) { settleSwipe(w); bridge.reset() }
+        if (swipeEnglish) {
+            recentEnglish.addLast(w.lowercase()); while (recentEnglish.size > 4) recentEnglish.removeFirst()
+            settleSwipe(w); bridge.reset()
+        }
     }
 
     private fun clearSwipe() { swipeWord = null; swipeAlts = emptyList(); swipeEnglish = false }
@@ -513,7 +568,10 @@ class TypingSession(
         if (parts.size > 1) { parts.forEach { commitAndLearn(it, accepted) }; return }
         val learn = !traits.noLearning && !traits.isSecure && traits.suggestionsAllowed && !traits.passthrough
         if (learn) lm.record(word, lastWord, lastWord2, if (accepted) 2 else 1)
-        if (UserLangModel.learnable(word)) { lastWord2 = lastWord; lastWord = word }
+        if (UserLangModel.learnable(word)) {
+            lastWord2 = lastWord; lastWord = word
+            langRecent.addLast(word); while (langRecent.size > SwipeLangContext.WINDOW) langRecent.removeFirst()
+        }
         else { lastWord = null; lastWord2 = null }
     }
 

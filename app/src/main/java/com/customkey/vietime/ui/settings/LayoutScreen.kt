@@ -12,6 +12,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.customkey.vietime.customization.LayoutConfig
+import com.customkey.vietime.customization.OneHandMode
 import com.customkey.vietime.customization.SplitMode
 import com.customkey.vietime.engine.Keys
 import com.customkey.vietime.ime.ImePrefs
@@ -31,7 +32,8 @@ fun LayoutScreen(onBack: () -> Unit) {
         cfg = c
         prefs.edit().putBoolean(Keys.NUMBER_ROW, c.numberRow).putInt(LayoutConfig.KEY_HEIGHT, c.heightPercent)
             .putInt(LayoutConfig.KEY_WIDTH, c.widthPercent).putString(LayoutConfig.KEY_SPLIT, c.split.id)
-            .putInt(LayoutConfig.KEY_LONG_PRESS, c.longPressMs).apply()
+            .putInt(LayoutConfig.KEY_LONG_PRESS, c.longPressMs).putString(LayoutConfig.KEY_ONE_HAND, c.oneHand.id)
+            .putInt(LayoutConfig.KEY_LABEL_SCALE, c.labelScalePercent).putBoolean(Keys.KEY_PREVIEW, c.keyPreview).apply()
     }
 
     CustomizeScaffold("Bố cục bàn phím", onBack) {
@@ -42,6 +44,20 @@ fun LayoutScreen(onBack: () -> Unit) {
                 { "${it.roundToInt()}%" }, onDone = { save(cfg) }) { cfg = cfg.copy(heightPercent = (it / 5).roundToInt() * 5) }
             TxSlider("Độ rộng", cfg.widthPercent.toFloat(), LayoutConfig.MIN_WIDTH.toFloat()..100f,
                 { "${it.roundToInt()}%" }, onDone = { save(cfg) }) { cfg = cfg.copy(widthPercent = it.roundToInt()) }
+        }
+
+        SectionLabel("Phím")
+        GlassCard {
+            TxSwitchRow("Bong bóng khi bấm", "Phóng to chữ phía trên phím đang bấm", cfg.keyPreview) { save(cfg.copy(keyPreview = it)) }
+            TxSlider("Cỡ chữ trên phím", cfg.labelScalePercent.toFloat(), 80f..130f, { "${it.roundToInt()}%" },
+                onDone = { save(cfg) }) { cfg = cfg.copy(labelScalePercent = (it / 5).roundToInt() * 5) }
+        }
+
+        SectionLabel("Gõ một tay")
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            for (m in OneHandMode.entries) ChoiceRow(m.title, null, cfg.oneHand == m) { save(cfg.copy(oneHand = m)) }
+            Text("Dồn bàn phím về phía ngón cái khi cầm máy bằng một tay (màn dọc). Cũng đổi nhanh được ở ✦ › ✋ trên bàn phím.",
+                color = Tx.TextDim, fontSize = 12.sp)
         }
 
         SectionLabel("Tách đôi bàn phím")

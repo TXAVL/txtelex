@@ -50,8 +50,10 @@ data class LayoutOptions(
     /** Tách đôi bàn phím (màn ngang / tablet): khoảng trống giữa, tính theo đơn vị phím. */
     val splitGap: Float = 0f,
     val showGlobe: Boolean = false,
-    /** Phần chiều ngang dùng cho phím (0.75…1), căn giữa. */
+    /** Phần chiều ngang dùng cho phím (0.5…1). */
     val widthFraction: Float = 1f,
+    /** Căn khối phím: -1 = dồn trái (một tay trái), 0 = giữa, 1 = dồn phải. */
+    val align: Int = 0,
 )
 
 object KeyboardLayout {
@@ -171,12 +173,13 @@ object KeyboardLayout {
         if (rows.isEmpty() || width <= 0f) return emptyList()
         val unitsMax = rows.maxOf { r -> r.sumOf { it.width.toDouble() }.toFloat() }.coerceAtLeast(1f) + opts.splitGap
         val inner = width * opts.widthFraction.coerceIn(0.5f, 1f)
+        val innerLeft = when { opts.align < 0 -> 0f; opts.align > 0 -> width - inner; else -> (width - inner) / 2f }
         val unit = inner / unitsMax
         val out = ArrayList<LaidKey>()
         for ((ri, row) in rows.withIndex()) {
             val total = row.sumOf { it.width.toDouble() }.toFloat()
             val gapUnits = if (opts.splitGap > 0f && row.size > 1) opts.splitGap else 0f
-            var x = (width - (total + gapUnits) * unit) / 2f
+            var x = innerLeft + (inner - (total + gapUnits) * unit) / 2f
             val y = top + ri * rowHeight
             var acc = 0f
             var gapDone = false
