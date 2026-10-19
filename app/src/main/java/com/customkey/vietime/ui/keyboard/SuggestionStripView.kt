@@ -51,6 +51,13 @@ class SuggestionStripView(context: Context) : View(context) {
     private var undo = false
     private var pressed = NONE
 
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val rawW = MeasureSpec.getSize(widthMeasureSpec)
+        val w = if (rawW > 0) rawW else resources.displayMetrics.widthPixels
+        val h = (42 * d).toInt()
+        setMeasuredDimension(w, h)
+    }
+
     fun show(list: List<Suggestion>) {
         if (list == items && message == null) return
         items = list; message = null; invalidate()
@@ -73,10 +80,6 @@ class SuggestionStripView(context: Context) : View(context) {
     }
 
     fun showUndo(on: Boolean) { if (undo != on) { undo = on; invalidate() } }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), (42 * d).toInt())
-    }
 
     private val toolsWidth get() = if (showToolsButton) 46 * d else 0f
     private val undoWidth get() = if (undo) 104 * d else 0f

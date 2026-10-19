@@ -38,16 +38,16 @@ import com.customkey.vietime.ui.theme.Tx
 @Composable
 fun CustomizeScaffold(title: String, onBack: () -> Unit, preview: Boolean = true, content: @Composable ColumnScope.() -> Unit) {
     Column(Modifier.fillMaxSize()) {
-        Row(Modifier.padding(horizontal = 18.dp, vertical = 10.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(Modifier.fillMaxWidth().padding(horizontal = 18.dp, vertical = 10.dp), verticalAlignment = Alignment.CenterVertically) {
             Text("‹", Modifier.clickable(onClick = onBack).padding(end = 12.dp), color = Tx.CyanSoft, fontSize = 30.sp)
             Text(title, style = MaterialTheme.typography.titleLarge, color = Tx.Text)
         }
         Column(
-            Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 18.dp),
+            Modifier.fillMaxWidth().weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 18.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
             content()
-            Spacer(Modifier.size(12.dp))
+            Spacer(Modifier.size(16.dp))
         }
         if (preview) KeyboardPreview()
     }

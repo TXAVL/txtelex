@@ -6,6 +6,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -26,7 +27,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import android.view.ViewGroup
 import com.customkey.vietime.customization.KeyboardCustomizer
+import com.customkey.vietime.customization.LayoutConfig
 import com.customkey.vietime.engine.EngineSettings
+import com.customkey.vietime.engine.Keys
 import com.customkey.vietime.engine.TextProxy
 import com.customkey.vietime.ime.FieldConfig
 import com.customkey.vietime.ime.ImePrefs
@@ -64,6 +67,8 @@ private class MemoryText : TextProxy {
 @Composable
 fun KeyboardPreview(modifier: Modifier = Modifier, hint: String = "Gõ thử trên bàn phím mẫu…") {
     val ctx = LocalContext.current
+    val prefs = remember { ImePrefs.of(ctx) }
+    var layoutCfg by remember { mutableStateOf(LayoutConfig.load { prefs.all[it] }) }
     var text by remember { mutableStateOf("") }
     val holder = remember { arrayOfNulls<KeyboardPanel>(1) }
     val custom = remember {
@@ -74,14 +79,16 @@ fun KeyboardPreview(modifier: Modifier = Modifier, hint: String = "Gõ thử tr�
     val mem = remember { MemoryText() }
     val session = remember {
         TypingSession().also {
-            it.startInput(EngineSettings.load { k -> ImePrefs.of(ctx).all[k] }, FieldConfig.DEFAULT.toTraits())
+            it.startInput(EngineSettings.load { k -> prefs.all[k] }, FieldConfig.DEFAULT.toTraits())
             it.seedLanguageModel()
         }
     }
 
     DisposableEffect(Unit) {
-        val prefs = ImePrefs.of(ctx)
         val l = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
+            if (key == Keys.NUMBER_ROW || key == LayoutConfig.KEY_HEIGHT || key == LayoutConfig.KEY_WIDTH) {
+                layoutCfg = LayoutConfig.load { prefs.all[it] }
+            }
             if (!custom.onPrefChanged(key)) session.startInput(EngineSettings.load { k -> prefs.all[k] }, FieldConfig.DEFAULT.toTraits())
         }
         prefs.registerOnSharedPreferenceChangeListener(l)
@@ -92,23 +99,26 @@ fun KeyboardPreview(modifier: Modifier = Modifier, hint: String = "Gõ thử tr�
         }
     }
 
-    Column(modifier.fillMaxWidth()) {
+    val rows = if (layoutCfg.numberRow) 5 else 4
+    val panelHeightDp = (42 + rows * layoutCfg.rowHeightDp() + 4).dp
+
+    Column(modifier.fillMaxWidth().wrapContentHeight()) {
         Row(
-            Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp).heightIn(min = 44.dp)
+            Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 6.dp).heightIn(min = 42.dp)
                 .background(Tx.Glass, RoundedCornerShape(14.dp)).border(1.dp, Tx.Stroke, RoundedCornerShape(14.dp))
-                .padding(horizontal = 14.dp, vertical = 10.dp),
+                .padding(horizontal = 14.dp, vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             if (text.isEmpty()) Text(hint, color = Tx.TextFaint, fontSize = 15.sp)
             else Text(text.takeLast(80) + "▏", color = Tx.Text, fontSize = 16.sp, fontWeight = FontWeight.Medium)
         }
         AndroidView(
-            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+            modifier = Modifier.fillMaxWidth().height(panelHeightDp),
             factory = { c ->
                 KeyboardPanel(c).apply {
                     layoutParams = ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT,
                     )
                 }.also { panel ->
                     holder[0] = panel

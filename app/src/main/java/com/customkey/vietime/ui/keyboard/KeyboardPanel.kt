@@ -105,14 +105,15 @@ class KeyboardPanel(context: Context) : FrameLayout(context) {
         isFocusableInTouchMode = false
         descendantFocusability = android.view.ViewGroup.FOCUS_BLOCK_DESCENDANTS
         setWillNotDraw(false)
-        mainContainer.addView(strip, LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
+        val d = resources.displayMetrics.density
+        val stripH = (42 * d).toInt()
+        mainContainer.addView(strip, LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, stripH))
         body.addView(keyboard, FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
         body.addView(tools, FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
         body.addView(emoji, FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
         mainContainer.addView(body, LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
         addView(mainContainer, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
 
-        val d = resources.displayMetrics.density
         val toastLp = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, android.view.Gravity.TOP or android.view.Gravity.CENTER_HORIZONTAL).apply {
             leftMargin = (12 * d).toInt()
             rightMargin = (12 * d).toInt()
@@ -154,21 +155,44 @@ class KeyboardPanel(context: Context) : FrameLayout(context) {
         setMeasuredDimension(width, targetH)
     }
 
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        val w = right - left
+        val h = bottom - top
+        val targetH = mainContainer.measuredHeight
+        val topPos = (h - targetH).coerceAtLeast(0)
+        mainContainer.layout(0, topPos, w, topPos + targetH)
+        if (toast.visibility != GONE) {
+            val toastW = toast.measuredWidth
+            val toastH = toast.measuredHeight
+            val toastL = (w - toastW) / 2
+            val toastT = topPos + (6 * resources.displayMetrics.density).toInt()
+            toast.layout(toastL, toastT, toastL + toastW, toastT + toastH)
+        }
+    }
+
     /** Ẩn/hiện thanh gợi ý (bản xem trước luyện vuốt không cần). */
     fun showStrip(show: Boolean) { strip.visibility = if (show) VISIBLE else GONE }
 
     override fun onDraw(canvas: Canvas) {
+        val top = mainContainer.top.toFloat()
+        val bottom = height.toFloat()
+        if (bottom <= top) return
+        canvas.save()
+        canvas.clipRect(0f, top, width.toFloat(), bottom)
         canvas.drawColor(style.background)
-        val bmp = style.wallpaper ?: return
-        if (width == 0 || height == 0) return
-        // center-crop ảnh vào khung hiện tại
-        val vw = width.toFloat(); val vh = height.toFloat()
-        val scale = maxOf(vw / bmp.width, vh / bmp.height)
-        val sw = (vw / scale).toInt().coerceAtMost(bmp.width)
-        val sh = (vh / scale).toInt().coerceAtMost(bmp.height)
-        val sx = (bmp.width - sw) / 2; val sy = (bmp.height - sh) / 2
-        src.set(sx, sy, sx + sw, sy + sh)
-        dst.set(0f, 0f, vw, vh)
-        canvas.drawBitmap(bmp, src, dst, paint)
+        val bmp = style.wallpaper
+        if (bmp != null && width > 0 && height > 0) {
+            val vw = width.toFloat()
+            val vh = bottom - top
+            val scale = maxOf(vw / bmp.width, vh / bmp.height)
+            val sw = (vw / scale).toInt().coerceAtMost(bmp.width)
+            val sh = (vh / scale).toInt().coerceAtMost(bmp.height)
+            val sx = (bmp.width - sw) / 2
+            val sy = (bmp.height - sh) / 2
+            src.set(sx, sy, sx + sw, sy + sh)
+            dst.set(0f, top, vw, bottom)
+            canvas.drawBitmap(bmp, src, dst, paint)
+        }
+        canvas.restore()
     }
 }
