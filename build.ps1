@@ -21,20 +21,35 @@ param(
     [string]$Variant = 'debug'
 )
 
-$ErrorActionPreference = 'Stop'
+# Continue: lệnh native (apksigner, adb) in ra stderr là chuyện thường — PS 5.1 coi là lỗi nếu Stop.
+# Lỗi thật được kiểm tra bằng $LASTEXITCODE / Test-Path rồi throw.
+$ErrorActionPreference = 'Continue'
 $root = $PSScriptRoot
 Set-Location $root
 
 # ── Môi trường ──────────────────────────────────────────────────────────────
 # PATH của máy có mục lỗi `C:\Program Files\dotnet"` làm worker test của Gradle không chạy được.
 $env:PATH = ($env:PATH -split ';' | Where-Object { $_ -notmatch '"' }) -join ';'
-if (-not $env:JAVA_HOME -or -not (Test-Path "$env:JAVA_HOME\bin\java.exe")) {
-    $jdk = Get-ChildItem 'C:\Program Files\Microsoft' -Directory -Filter 'jdk-17*' -ErrorAction SilentlyContinue | Select-Object -First 1
-    if ($jdk) { $env:JAVA_HOME = $jdk.FullName } else { throw 'Không tìm thấy JDK 17 — chạy: winget install -e --id Microsoft.OpenJDK.17' }
+if ($Target -ne 'help' -and $Target -ne 'key-password') {
+    if (-not (Test-Path 'local.properties')) { throw 'Chưa cài môi trường build — chạy  .\setup.cmd  một lần trước (xem README).' }
 }
-if (-not $env:ANDROID_HOME) { $env:ANDROID_HOME = 'C:\Android' }
-$adb = Join-Path $env:ANDROID_HOME 'platform-tools\adb.exe'
-$apksigner = Join-Path $env:ANDROID_HOME 'build-tools\35.0.0\apksigner.bat'
+if (-not $env:JAVA_HOME -or -not (Test-Path "$env:JAVA_HOME\bin\java.exe")) {
+    $jdk = foreach ($base in 'C:\Program Files\Microsoft', 'C:\Program Files\Eclipse Adoptium', 'C:\Program Files\Java', 'C:\Program Files\Zulu', 'C:\Program Files\Amazon Corretto') {
+        Get-ChildItem $base -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'jdk-?17|zulu.*17|^17' -and (Test-Path "$($_.FullName)\bin\java.exe") }
+    }
+    $jdk = $jdk | Select-Object -First 1
+    if ($jdk) { $env:JAVA_HOME = $jdk.FullName } else { throw 'Không tìm thấy JDK 17 — chạy  .\setup.cmd  (hoặc: winget install -e --id Microsoft.OpenJDK.17)' }
+}
+# SDK: ưu tiên sdk.dir trong local.properties (setup.cmd ghi), rồi ANDROID_HOME, rồi C:\Android.
+$sdkDir = if (Test-Path 'local.properties') {
+    (Get-Content 'local.properties' | Where-Object { $_ -match '^sdk\.dir=' } | Select-Object -First 1) -replace '^sdk\.dir=', '' -replace '\\:', ':' -replace '\\\\', '\'
+}
+if (-not $sdkDir) { $sdkDir = if ($env:ANDROID_HOME) { $env:ANDROID_HOME } else { 'C:\Android' } }
+$env:ANDROID_HOME = $sdkDir
+$adb = Join-Path $sdkDir 'platform-tools\adb.exe'
+$apksigner = Get-ChildItem (Join-Path $sdkDir 'build-tools') -Directory -ErrorAction SilentlyContinue |
+    Sort-Object { [version]($_.Name -replace '[^0-9.]', '') } -Descending |
+    ForEach-Object { Join-Path $_.FullName 'apksigner.bat' } | Where-Object { Test-Path $_ } | Select-Object -First 1
 
 $version = (Select-String -Path 'app\build.gradle.kts' -Pattern 'versionName = "([^"]+)"').Matches[0].Groups[1].Value
 $pkg = 'nm.txa.telex'
@@ -56,8 +71,11 @@ function Collect([string]$kind) {
         'release' { 'app\build\outputs\apk\release\app-release.apk', 'apk' }
         'aab'     { 'app\build\outputs\bundle\release\app-release.aab', 'aab' }
     }
+    $suffix = $kind
+    # Không có keystore.properties ⇒ Gradle xuất app-release-unsigned.apk
+    if ($kind -eq 'release' -and -not (Test-Path $src)) { $src = 'app\build\outputs\apk\release\app-release-unsigned.apk'; $suffix = 'release-unsigned' }
     if (-not (Test-Path $src)) { throw "Không thấy $src" }
-    $name = if ($kind -eq 'aab') { "txtelex-$version.aab" } else { "txtelex-$version-$kind.apk" }
+    $name = if ($kind -eq 'aab') { "txtelex-$version.aab" } else { "txtelex-$version-$suffix.apk" }
     $out = Join-Path $dist $name
     Copy-Item $src $out -Force
     $mb = '{0:N1}' -f ((Get-Item $out).Length / 1MB)
@@ -67,12 +85,12 @@ function Collect([string]$kind) {
 
 function RequireSigning {
     if (-not (Test-Path 'keystore.properties')) {
-        Write-Warning 'Thiếu keystore.properties ⇒ bản release sẽ KHÔNG được ký. Xem .\build.ps1 key-password.'
+        Write-Warning 'Thiếu keystore.properties ⇒ bản release sẽ KHÔNG được ký (không cài / nộp Play được). Xem README › Ký bản release; mẫu: keystore.properties.example'
     }
 }
 
 function VerifySig([string]$apk) {
-    if (Test-Path $apksigner) {
+    if ($apksigner -and (Test-Path $apksigner)) {
         $dn = & $apksigner verify --print-certs $apk 2>&1 | Select-String 'certificate DN' | Select-Object -First 1
         if ($dn) { Ok "Chữ ký: $($dn.Line.Split(':', 2)[1].Trim())" } else { Write-Warning 'APK chưa được ký' }
     }
