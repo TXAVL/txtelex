@@ -30,9 +30,11 @@ cd txtelex
 
 ### Các lệnh build
 
+Chạy `.\build.cmd` không tham số sẽ hiện **menu chọn số**. Gõ thẳng tên lệnh cũng được:
+
 | Lệnh | Kết quả trong `dist\` |
 |---|---|
-| `.\build.cmd` hoặc `.\build.cmd debug` | `txtelex-<ver>-debug.apk` (ký debug, cài thử) |
+| `.\build.cmd debug` | `txtelex-<ver>-debug.apk` (ký debug, cài thử) |
 | `.\build.cmd release` | `txtelex-<ver>-release.apk` (ký khoá release, R8 thu gọn) |
 | `.\build.cmd aab` | `txtelex-<ver>.aab` — file nộp Google Play |
 | `.\build.cmd all` | Chạy test + cả 3 file trên |
@@ -40,7 +42,14 @@ cd txtelex
 | `.\build.cmd run` | Build debug, cài lên điện thoại đang cắm USB, mở app |
 | `.\build.cmd install release` | Build + cài bản release lên điện thoại |
 | `.\build.cmd clean` | Dọn `build\` và `dist\` |
+| `.\build.cmd doctor` | Kiểm tra JDK, SDK, NDK, CMake, keystore, điện thoại, ổ đĩa |
+| `.\build.cmd keystore-export` | Gói keystore + mật khẩu thành `txtelex-keystore-<ngày>.txaks` (mã hoá) |
+| `.\build.cmd keystore-import -Path <file>` | Cài keystore từ file `.txaks` sang máy này |
 | `.\build.cmd key-password` | Xem mật khẩu keystore đã cất trong Windows Credential Manager |
+
+Xong mỗi lệnh, tool in bảng file kết quả (cỡ, SHA-256, ai ký). Khi lỗi, tool tự đọc log và in **nguyên nhân + cách sửa**:
+lỗi Kotlin kèm `file:dòng`, test hỏng kèm thông báo assert, sai mật khẩu keystore, thiếu SDK/NDK, lỗi mạng…
+Log Gradle đầy đủ nằm ở `build\txa-logs\`.
 
 Dùng Gradle trực tiếp cũng được (sau khi đã chạy `setup.cmd`):
 ```powershell
@@ -92,10 +101,19 @@ Set-Content local.properties 'sdk.dir=C\:\\Android'
 
 Bản **debug** không cần gì thêm. Bản **release / AAB** cần keystore — file này **không có trong repo** (cố ý).
 
-**Máy mới, dùng lại khoá cũ** (bắt buộc nếu đã phát hành trên Google Play — đổi khoá là không cập nhật được app):
-1. Chép file `txtelex-release.jks` từ nơi sao lưu sang máy mới (vd `C:\Users\<bạn>\keystores\`).
-2. Chép `keystore.properties.example` thành `keystore.properties` (cùng thư mục với `build.cmd`) rồi điền đường dẫn + mật khẩu.
-3. `.\build.cmd release` — dòng `✔ Chữ ký: CN=TxTelex 2027, … O=TXA STUDIO …` là đúng khoá.
+**Chuyển khoá sang máy khác** (bắt buộc dùng lại đúng khoá cũ — đổi khoá là không cập nhật được app trên Google Play):
+
+1. Trên máy đang có khoá: `.\build.cmd keystore-export` → đặt một passphrase (≥ 10 ký tự).
+   Ra file `dist\txtelex-keystore-<ngày>.txaks` chứa file `.jks`, alias và mật khẩu,
+   mã hoá AES-256-CBC + HMAC-SHA256, khoá dẫn xuất bằng PBKDF2-SHA256 300 000 vòng.
+2. Mang file sang máy mới: copy/paste qua Remote Desktop, Google Drive / OneDrive, Telegram (Saved Messages) hoặc USB.
+   **Gửi passphrase qua kênh khác** với file.
+3. Trên máy mới, trong thư mục repo: `.\build.cmd keystore-import -Path D:\txtelex-keystore-<ngày>.txaks`
+   → giải mã, đặt `.jks` vào `%USERPROFILE%\keystores\`, kiểm tra bằng `keytool`, tạo `keystore.properties`
+   và cất mật khẩu vào Windows Credential Manager.
+4. `.\build.cmd release` — cột *Ký bởi* hiện `✔ TXA STUDIO` là đúng khoá.
+
+Làm tay cũng được: chép file `.jks`, rồi chép `keystore.properties.example` thành `keystore.properties` và điền đường dẫn + mật khẩu.
 
 **Chưa có khoá** (chỉ làm MỘT lần cho cả đời app):
 ```powershell
@@ -137,6 +155,8 @@ hãng khác (Samsung, Xiaomi, Oppo…): https://developer.android.com/studio/run
 | `running scripts is disabled on this system` | Dùng `build.cmd` / `setup.cmd` (đã kèm `-ExecutionPolicy Bypass`) thay vì gọi `.ps1` trực tiếp |
 | `INSTALL_FAILED_UPDATE_INCOMPATIBLE` khi cài | Máy đang có bản ký khoá khác (debug ↔ release). Gỡ TxTelex cũ rồi cài lại |
 | Bản release báo *APK chưa được ký* | Thiếu / sai `keystore.properties` — xem mục **Ký bản release** |
+| `keystore-import` báo *Sai passphrase* | Gõ lại đúng passphrase đặt lúc export; vẫn lỗi thì file chép chưa trọn — chép lại |
+| Không rõ thiếu gì | `.\build.cmd doctor` |
 | Tải chậm / lỗi mạng khi build lần đầu | Gradle cần truy cập `dl.google.com`, `repo.maven.apache.org`, `services.gradle.org`; kiểm tra proxy / tường lửa |
 
 ---

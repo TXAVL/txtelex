@@ -31,15 +31,17 @@ $root = $PSScriptRoot
 $CMDLINE_TOOLS_URL = 'https://dl.google.com/android/repository/commandlinetools-win-11076708_latest.zip'
 $SDK_PACKAGES = @('platform-tools', 'platforms;android-35', 'build-tools;35.0.0', 'ndk;27.2.12479018', 'cmake;3.22.1')
 
-function Step($n, $msg) { Write-Host "`n[$n/5] $msg" -ForegroundColor Cyan }
-function Ok($msg) { Write-Host "  ✔ $msg" -ForegroundColor Green }
-function Info($msg) { Write-Host "  · $msg" -ForegroundColor Gray }
+. (Join-Path $root 'scripts\txa-ui.ps1')
+function Step($n, $msg) { Ui-Section "[$n/5] $msg" }
+function Ok($msg) { Ui-Ok $msg }
+function Info($msg) { Ui-Info $msg }
 
 # PATH một số máy có mục lỗi chứa dấu " (vd: C:\Program Files\dotnet") làm Java/Gradle hỏng.
 $env:PATH = ($env:PATH -split ';' | Where-Object { $_ -and $_ -notmatch '"' }) -join ';'
 
-Write-Host 'TxTelex — cài môi trường build' -ForegroundColor Magenta
-Write-Host "SDK: $SdkRoot"
+Ui-Banner 'SETUP  ·  môi trường build' "Android SDK: $SdkRoot  ·  cần Internet, lần đầu ~2–3 GB"
+$sw = [Diagnostics.Stopwatch]::StartNew()
+try {
 
 # ── 1. JDK 17 ───────────────────────────────────────────────────────────────
 Step 1 'JDK 17'
@@ -126,9 +128,17 @@ if (-not (Test-Path (Join-Path $root 'keystore.properties'))) {
     Info 'Chưa có keystore.properties ⇒ build debug bình thường; bản release sẽ không ký (xem README › Ký bản release).'
 }
 
-Write-Host "`n✔ Môi trường sẵn sàng." -ForegroundColor Green
-Write-Host '  Build:  .\build.cmd        (APK debug)'
-Write-Host '          .\build.cmd all    (test + debug + release + aab)'
+Ui-Box "MÔI TRƯỜNG SẴN SÀNG · $(Ui-Duration $sw.Elapsed)" @(
+    '.\build.cmd           menu chọn việc',
+    '.\build.cmd debug     APK debug',
+    '.\build.cmd all       test + debug + release + aab',
+    '.\build.cmd doctor    kiểm tra lại môi trường'
+) 'ok'
+} catch {
+    Ui-Box 'SETUP LỖI' @("$($_.Exception.Message)", '', '→ Sửa theo gợi ý rồi chạy lại  .\setup.cmd  (bước đã xong sẽ được bỏ qua).') 'error'
+    exit 1
+}
 if ($Build) {
     & (Join-Path $root 'build.ps1') debug
+    exit $LASTEXITCODE
 }

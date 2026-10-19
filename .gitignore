@@ -28,3 +28,6 @@ Thumbs.db
 
 # Kết quả build.ps1
 dist/
+
+# Gói keystore mã hoá (build.cmd keystore-export)
+*.txaks
