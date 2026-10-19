@@ -68,6 +68,8 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
         prefs = ImePrefs.of(this)
         val lm = UserLangModel(File(filesDir, Keys.USERLM_FILE), main)
         session = TypingSession(lm)
+        session.autoCorrectRejected = com.customkey.vietime.engine.AutoCorrect.Rejected.decode(prefs.getString(Keys.AUTO_CORRECT_REJECTED, null))
+        session.onRejectedChanged = { prefs.edit().putString(Keys.AUTO_CORRECT_REJECTED, session.autoCorrectRejected.encode()).apply() }
         lm.onReady = { refreshBar() }
         worker.post { session.seedLanguageModel() }
         custom = KeyboardCustomizer(this) { applyCustomization() }
@@ -238,6 +240,8 @@ class CustomImeService : InputMethodService(), KeyboardView.Listener, Suggestion
     }
 
     // MARK: KeyboardView.Listener
+
+    override fun onLetterTouch(dx: Float, dy: Float) = session.noteLetterTouch(dx, dy)
 
     override fun onLetter(ch: Char) { edit { session.letter(ch, proxy) }; strip?.showUndo(false); afterKey() }
 

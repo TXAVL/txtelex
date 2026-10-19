@@ -26,6 +26,8 @@ data class EngineSettings(
     var contextualEnglish: Boolean = true,
     /** Sửa dấu từ đã gõ xong — mặc định BẬT. */
     var reEditWords: Boolean = true,
+    /** Tự sửa lỗi chạm trượt khi gõ dấu cách (⌫ ngay sau đó = hoàn tác) — mặc định BẬT. */
+    var autoCorrect: Boolean = true,
     var shortcutsEnabled: Boolean = true,
     var shortcuts: ShortcutTable = ShortcutTable(),
 ) {
@@ -45,6 +47,7 @@ data class EngineSettings(
             s.autoFixAdjacent = b(Keys.AUTO_FIX_ADJACENT, s.autoFixAdjacent)
             s.contextualEnglish = b(Keys.CONTEXTUAL_ENGLISH, s.contextualEnglish)
             s.reEditWords = b(Keys.RE_EDIT_WORDS, s.reEditWords)
+            s.autoCorrect = b(Keys.AUTO_CORRECT, s.autoCorrect)
             s.shortcutsEnabled = b(Keys.SHORTCUTS_ENABLED, s.shortcutsEnabled)
             if (s.shortcutsEnabled) s.shortcuts = ShortcutTable(ShortcutFile.parse(get(Keys.SHORTCUTS) as? String))
             return s

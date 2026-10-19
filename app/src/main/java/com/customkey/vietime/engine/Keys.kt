@@ -64,7 +64,8 @@ object Keys {
 
     /** Key ảnh hưởng engine/EngineBridge — đổi lúc bàn phím đang mở thì áp ngay. */
     val ENGINE_KEYS = setOf(SIMPLE_TELEX, FREE_MARKING, QUICK_TELEX, MODERN_TONE, CONTEXTUAL_ENGLISH,
-        AUTO_FIX_ADJACENT, TEENCODE, AUTO_RESTORE, LIVE_SPELL_CHECK, SHORTCUTS_ENABLED, SHORTCUTS, VNI_MODE)
+        AUTO_FIX_ADJACENT, TEENCODE, AUTO_RESTORE, LIVE_SPELL_CHECK, SHORTCUTS_ENABLED, SHORTCUTS, VNI_MODE,
+        AUTO_CORRECT, RE_EDIT_WORDS)
     const val SHOW_SUGGESTIONS = "showSuggestions"
     /**
      * Chip "Thêm dấu" hiện TỰ ĐỘNG trên thanh gợi ý (Bool, mặc định TẮT — ưu tiên gõ trơn):

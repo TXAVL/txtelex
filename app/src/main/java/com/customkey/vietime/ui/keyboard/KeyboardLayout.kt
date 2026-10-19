@@ -60,14 +60,37 @@ object KeyboardLayout {
     private val BOT = "zxcvbnm"
     private val DIGITS = "1234567890"
 
-    /** Ký tự phụ khi giữ (Telex không cần dấu ở đây — engine lo; chỉ số + dấu câu). */
+    /**
+     * Ký tự phụ khi giữ phím chữ: số (hàng trên) + chữ có dấu tiếng Việt cho nguyên âm / đ, rồi
+     * dấu câu. Phần tử đầu = chọn sẵn khi popup mở.
+     */
     private val LETTER_ALTS: Map<Char, List<String>> = buildMap {
         TOP.forEachIndexed { i, c -> put(c, listOf(DIGITS[i].toString())) }
-        put('a', listOf("@")); put('s', listOf("#")); put('d', listOf("đ", "₫")); put('f', listOf("&"))
-        put('g', listOf("_")); put('h', listOf("-")); put('j', listOf("+")); put('k', listOf("(")); put('l', listOf(")"))
-        put('z', listOf("*")); put('x', listOf("\"")); put('c', listOf("'")); put('v', listOf(":"))
-        put('b', listOf(";")); put('n', listOf("!")); put('m', listOf("?"))
+        fun add(c: Char, vararg more: String) = put(c, getOrDefault(c, emptyList()) + more)
+        add('e', "é", "è", "ẻ", "ẽ", "ẹ", "ê", "ế", "ề")
+        add('y', "ý", "ỳ", "ỷ", "ỹ", "ỵ")
+        add('u', "ú", "ù", "ủ", "ũ", "ụ", "ư", "ứ", "ừ")
+        add('i', "í", "ì", "ỉ", "ĩ", "ị")
+        add('o', "ó", "ò", "ỏ", "õ", "ọ", "ô", "ơ", "ố", "ờ")
+        add('a', "á", "à", "ả", "ã", "ạ", "â", "ă", "@")
+        add('s', "#", "§"); add('d', "đ", "₫"); add('f', "&"); add('g', "_"); add('h', "-", "–", "—")
+        add('j', "+", "±"); add('k', "(", "<", "[", "{"); add('l', ")", ">", "]", "}")
+        add('z', "*", "★"); add('x', "\"", "“", "”", "«", "»"); add('c', "'", "‘", "’", "©"); add('v', ":", "…")
+        add('b', ";", "•"); add('n', "!", "¡", "ñ"); add('m', "?", "¿")
     }
+
+    /** Ký tự phụ cho phím ký hiệu (giữ phím ra biến thể). */
+    private val SYMBOL_ALTS: Map<String, List<String>> = mapOf(
+        "-" to listOf("–", "—", "_", "·"), "+" to listOf("±", "×", "÷"), "/" to listOf("÷", "\\", "|"),
+        "(" to listOf("<", "[", "{"), ")" to listOf(">", "]", "}"), "\"" to listOf("“", "”", "«", "»", "„"),
+        "'" to listOf("‘", "’", "‚", "‹", "›"), "!" to listOf("¡", "‼"), "?" to listOf("¿", "⁇", "⁈"),
+        "*" to listOf("★", "†", "‡", "※"), "&" to listOf("§", "¶"), "#" to listOf("№", "♯"),
+        "₫" to listOf("$", "€", "£", "¥", "₩", "¢", "₹", "₽"), "%" to listOf("‰", "‱"),
+        "=" to listOf("≠", "≈", "≤", "≥", "∞"), "<" to listOf("≤", "«", "‹"), ">" to listOf("≥", "»", "›"),
+        "0" to listOf("°", "∅", "⁰"), "1" to listOf("¹", "½", "⅓", "¼"), "2" to listOf("²", "⅔"), "3" to listOf("³", "¾"),
+        "." to listOf("…", "·", "•"), "," to listOf(";", "‚"), "^" to listOf("ˆ", "←", "↑", "→", "↓"),
+        "~" to listOf("≈", "∼"), "|" to listOf("¦", "‖"), "°" to listOf("℃", "℉", "′", "″"),
+    )
 
     fun rows(plane: KeyboardPlane, kind: FieldKind, enter: EnterAction, opts: LayoutOptions = LayoutOptions()): List<List<KeyDef>> {
         val enterKey = KeyDef(KeyAction.Enter, enterLabel(enter), 1.5f, modifier = true)
@@ -83,17 +106,19 @@ object KeyboardLayout {
                 rows
             }
             KeyboardPlane.SYMBOLS -> listOf(
-                DIGITS.map { KeyDef(KeyAction.Text(it.toString()), it.toString()) },
-                listOf("@", "#", "₫", "_", "&", "-", "+", "(", ")", "/").map { text(it) },
+                DIGITS.map { sym(it.toString()) },
+                listOf("@", "#", "₫", "_", "&", "-", "+", "(", ")", "/").map { sym(it) },
                 listOf(KeyDef(KeyAction.Plane(KeyboardPlane.SYMBOLS2), "=\\<", 1.5f, modifier = true)) +
-                    listOf("*", "\"", "'", ":", ";", "!", "?").map { text(it) } + back,
+                    listOf("*", "\"", "'", ":", ";", "!", "?").map { sym(it) } + back,
                 bottomRow(KeyDef(KeyAction.Plane(KeyboardPlane.LETTERS), "ABC", 1.5f, modifier = true), kind, enterKey, opts),
             )
+            // Như bản gốc: hàng 3 đủ % © ® ™ ✓ [ ] < > (phím chức năng hẹp lại cho vừa 11 ô).
             KeyboardPlane.SYMBOLS2 -> listOf(
-                listOf("~", "`", "|", "•", "√", "π", "÷", "×", "¶", "∆").map { text(it) },
-                listOf("£", "€", "¥", "$", "^", "°", "=", "{", "}", "\\").map { text(it) },
-                listOf(KeyDef(KeyAction.Plane(KeyboardPlane.SYMBOLS), "?123", 1.5f, modifier = true)) +
-                    listOf("%", "©", "®", "™", "✓", "[", "]").map { text(it) } + back,
+                listOf("~", "`", "|", "•", "√", "π", "÷", "×", "¶", "∆").map { sym(it) },
+                listOf("$", "£", "€", "¥", "^", "°", "=", "{", "}", "\\").map { sym(it) },
+                listOf(KeyDef(KeyAction.Plane(KeyboardPlane.SYMBOLS), "?123", 1.0f, modifier = true)) +
+                    listOf("%", "©", "®", "™", "✓", "[", "]", "<", ">").map { sym(it) } +
+                    KeyDef(KeyAction.Backspace, "⌫", 1.0f, modifier = true),
                 bottomRow(KeyDef(KeyAction.Plane(KeyboardPlane.LETTERS), "ABC", 1.5f, modifier = true), kind, enterKey, opts),
             )
             KeyboardPlane.NUMBER -> listOf(
@@ -113,6 +138,7 @@ object KeyboardLayout {
 
     private fun letter(c: Char) = KeyDef(KeyAction.Letter(c), c.toString(), alternates = LETTER_ALTS[c].orEmpty())
     private fun text(s: String) = KeyDef(KeyAction.Text(s), s)
+    private fun sym(s: String) = KeyDef(KeyAction.Text(s), s, alternates = SYMBOL_ALTS[s].orEmpty())
 
     private fun bottomRow(planeKey: KeyDef, kind: FieldKind, enter: KeyDef, opts: LayoutOptions): List<KeyDef> {
         val (left, right) = when (kind) {

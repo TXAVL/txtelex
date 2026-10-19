@@ -1,5 +1,7 @@
 package com.customkey.vietime.ime
 
+import com.customkey.vietime.engine.AdjacentKeyFixer
+import com.customkey.vietime.engine.AutoCorrect
 import com.customkey.vietime.engine.EngineBridge
 import com.customkey.vietime.engine.EngineSettings
 import com.customkey.vietime.engine.FieldTraits
@@ -30,6 +32,8 @@ data class Suggestion(val text: String, val kind: Kind, val payload: String? = n
         PASTE,
         /** Dán nhanh hình ảnh vừa copy từ clipboard/ảnh chụp màn hình. */
         PASTE_IMAGE,
+        /** "↩ chữ gốc" — hoàn tác lần tự sửa vừa rồi. */
+        UNDO_CORRECTION,
         /** Đúng chữ đang gõ (giữ nguyên). */
         LITERAL,
         /** Hoàn tất từ đang gõ. */
@@ -94,6 +98,7 @@ class TypingSession(
             it.shortcutsAllowed = !traits.urlField && !traits.passthrough
             if (english) it.setEnglish(true, NoText)
         }
+        armAutoCorrect()
         lastWord = null; lastWord2 = null
         clearSwipe(); deletedForUndo = null
         lastInsertWasSpace = false
@@ -104,8 +109,58 @@ class TypingSession(
     fun applySettings(s: EngineSettings) {
         settings = s
         bridge.applySettings(s)
+        armAutoCorrect()
         generation++
     }
+
+    // MARK: tự sửa lỗi chạm trượt
+
+    /** Từ người dùng từng hoàn tác tự sửa — không bao giờ sửa lại (IME nạp/lưu qua [onRejectedChanged]). */
+    var autoCorrectRejected = AutoCorrect.Rejected()
+    var onRejectedChanged: (() -> Unit)? = null
+    private val wordTouches = ArrayList<AutoCorrect.Touch>(12)
+    private var wordTouchesOk = false
+    private var pendingTouch: AutoCorrect.Touch? = null
+    /** Tự sửa đang bật ở ô này (IME chỉ cần gửi điểm chạm khi true). */
+    var autoCorrectOn = false; private set
+
+    private fun armAutoCorrect() {
+        autoCorrectOn = settings.autoCorrect && !settings.vniMode && AutoCorrect.fieldAllows(traits) && !traits.appNoSuggestions
+        wordTouches.clear(); wordTouchesOk = false
+        bridge.autoCorrector = if (autoCorrectOn) ::autoCorrection else null
+    }
+
+    /** IME gọi ngay trước [letter]: điểm chạm lệch so với tâm phím (theo cỡ phím). */
+    fun noteLetterTouch(dx: Float, dy: Float) { if (autoCorrectOn) pendingTouch = AutoCorrect.Touch(dx, dy) }
+
+    private fun noteTouch(fresh: Boolean) {
+        val t = pendingTouch; pendingTouch = null
+        if (!autoCorrectOn) return
+        if (fresh) { wordTouches.clear(); wordTouchesOk = true }
+        if (t == null) wordTouchesOk = false else if (wordTouchesOk) wordTouches.add(t)
+        if (wordTouches.size != bridge.rawWord.length) wordTouchesOk = false
+    }
+
+    /** Chỉ sửa khi có đủ điểm chạm cho đúng các phím của từ (từ nạp lại / vuốt ⇒ không sửa). */
+    private fun autoCorrection(raw: String): String? {
+        if (!wordTouchesOk || wordTouches.size != raw.length) return null
+        val b = bridge
+        return AutoCorrect.correction(raw, wordTouches, compose = { b.composeTrial(it) },
+            frequency = { VNSuggest.frequency(it) },
+            hasCompletion = { VNSuggest.matches(it, poolLimit = 1).isNotEmpty() },
+            isKnown = { w -> w in autoCorrectRejected || lm.isUserWord(w) || AutoCorrect.isEnglish(w) })
+    }
+
+    /** Vừa trả lại chữ gốc (⌫ / chip ↩): nhớ để không sửa lại. */
+    private fun takeRevert() {
+        val orig = bridge.revertedAutoCorrect ?: return
+        bridge.revertedAutoCorrect = null
+        if (autoCorrectRejected.add(orig)) onRejectedChanged?.invoke()
+        lastWord = null; lastWord2 = null
+    }
+
+    /** (chữ gốc, chữ đã sửa) nếu vừa tự sửa và chưa gõ gì thêm. */
+    val autoCorrectUndo: Pair<String, String>? get() = bridge.autoCorrectUndo
 
     fun finishInput() { bridge.reset(); clearSwipe(); runCatching { lm.save() } }
 
@@ -122,7 +177,9 @@ class TypingSession(
     fun letter(ch: Char, p: TextProxy) {
         settleSwipeIfEnglish(p)
         clearSwipe(); deletedForUndo = null
+        val fresh = !bridge.isComposing
         bridge.letter(ch, p)
+        noteTouch(fresh)
         lastInsertWasSpace = false
         generation++
     }
@@ -181,6 +238,8 @@ class TypingSession(
         // EngineBridge tự xử lý cả hai trường hợp: đang soạn (diff) và không soạn (deleteBackward,
         // hoặc mở lại từ vừa chốt để sửa dấu).
         bridge.backspace(p)
+        takeRevert()
+        wordTouchesOk = false
         lastInsertWasSpace = false
         generation++
     }
@@ -216,6 +275,15 @@ class TypingSession(
     /** Thanh gợi ý cho trạng thái hiện tại (đồng bộ, vài trăm µs). Rỗng = không hiện gì. */
     fun suggestions(p: TextProxy, max: Int = 3): List<Suggestion> {
         if (!traits.suggestionsAllowed || traits.passthrough || traits.isSecure) return emptyList()
+        // Vừa tự sửa ⇒ ô đầu là "↩ chữ gốc" (chạm = hoàn tác, như ⌫ ngay sau dấu cách).
+        val undo = if (!bridge.isComposing && swipeWord == null) bridge.autoCorrectUndo?.let {
+            Suggestion("↩ ${it.first}", Suggestion.Kind.UNDO_CORRECTION, it.first)
+        } else null
+        val base = baseSuggestions(p, max)
+        return if (undo != null) (listOf(undo) + base).take(max) else base
+    }
+
+    private fun baseSuggestions(p: TextProxy, max: Int): List<Suggestion> {
         swipeWord?.let { w ->
             return (listOf(Suggestion(w, Suggestion.Kind.LITERAL)) +
                 swipeAlts.filter { it != w }.map { Suggestion(it, Suggestion.Kind.SWIPE_ALT) }).take(max)
@@ -228,7 +296,12 @@ class TypingSession(
             val ctx = lastWord?.let { lm.nextWords(it, lastWord2, 12).toSet() } ?: emptySet()
             val ranked = SuggestRank.rankInline(pool, pmi, typed.codePointCount(0, typed.length), lm::count, ctx)
             val predicted = bridge.predictedCommit.ifEmpty { typed }
-            val words = (lm.manualCompletions(typed, 1) + ranked)
+            // Không có từ nào khớp ⇒ đề xuất bản sửa lỗi chạm trượt / gõ nhầm phím dấu (ô giữa).
+            val fix = if (pool.isEmpty() && settings.autoFixAdjacent && !settings.vniMode) {
+                val raw = bridge.rawWord
+                runCatching { AdjacentKeyFixer.lexiconCorrection(raw, bridge) ?: AdjacentKeyFixer.lexiconToneSlip(raw, bridge) }.getOrNull()
+            } else null
+            val words = (listOfNotNull(fix) + lm.manualCompletions(typed, 1) + ranked)
                 .map { matchCase(it, typed) }.filter { it != predicted }.distinct().toMutableList()
 
             // 1. Phím tắt gõ tắt (e.g. ko -> không, dc -> được)
@@ -304,6 +377,11 @@ class TypingSession(
     /** Chạm một ô gợi ý: thay từ đang soạn / từ vừa vuốt bằng [s], thêm dấu cách nếu là từ. */
     fun accept(s: Suggestion, p: TextProxy) {
         deletedForUndo = null
+        if (s.kind == Suggestion.Kind.UNDO_CORRECTION) {
+            if (bridge.revertAutoCorrect(p)) takeRevert()
+            generation++
+            return
+        }
         when {
             swipeWord != null -> {
                 val cur = swipeWord!!

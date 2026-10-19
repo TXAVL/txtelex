@@ -35,6 +35,8 @@ class KeyboardView(context: Context) : View(context) {
 
     interface Listener {
         fun onLetter(ch: Char)
+        /** Điểm chạm của phím chữ sắp [onLetter]: lệch so với tâm phím, theo cỡ phím (0 = giữa). */
+        fun onLetterTouch(dx: Float, dy: Float) {}
         fun onText(text: String)
         fun onSpace()
         fun onBackspace()
@@ -420,11 +422,15 @@ class KeyboardView(context: Context) : View(context) {
         val popup = altPopup
         if (popup != null && popup.key === k) {
             altPopup = null
-            listener?.onText(popup.items[popup.selected])
+            val item = popup.items[popup.selected]
+            val one = item.singleOrNull()
+            // Chữ có dấu (á, ư, đ…) đi qua bộ gõ như phím chữ — không cắt ngang từ đang soạn.
+            if (one != null && one.isLetter()) listener?.onLetter(if (shift != Shift.OFF) one.uppercaseChar() else one)
+            else listener?.onText(item)
             consumeShiftOnce()
             return
         }
-        if (!t.consumed) emitKey(k)
+        if (!t.consumed) emitKey(k, t)
     }
 
     /** Chốt phím chữ của ngón đang giữ (ngón khác chạm xuống). */
@@ -434,15 +440,18 @@ class KeyboardView(context: Context) : View(context) {
         if (a is KeyAction.Letter || a is KeyAction.Text) {
             t.consumed = true
             cancelScheduleFor(t)
-            emitKey(t.key)
+            emitKey(t.key, t)
         }
     }
 
-    private fun emitKey(k: LaidKey) {
+    private fun emitKey(k: LaidKey, t: Touch? = null) {
         when (val a = k.def.action) {
             is KeyAction.Letter -> {
                 val ch = if (shift != Shift.OFF) a.ch.uppercaseChar() else a.ch
                 lastLetterAt = SystemClock.uptimeMillis()
+                // Điểm chạm lệch so với tâm phím (theo cỡ phím) — cho tự sửa lỗi chạm trượt.
+                if (t != null && plane == KeyboardPlane.LETTERS) listener?.onLetterTouch(
+                    (t.downX - k.centerX) / k.width.coerceAtLeast(1f), (t.downY - k.centerY) / (k.bottom - k.top).coerceAtLeast(1f))
                 listener?.onLetter(ch)
                 consumeShiftOnce()
             }
