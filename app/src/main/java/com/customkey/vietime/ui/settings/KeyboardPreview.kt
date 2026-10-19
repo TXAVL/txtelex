@@ -168,6 +168,7 @@ fun KeyboardPreview(modifier: Modifier = Modifier, hint: String = "Gõ thử tr�
                         override fun onUndoDelete() {}
                     }
                     custom.reloadAll()
+                    sync()
                 }
             },
             update = { panel ->

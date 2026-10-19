@@ -8,6 +8,7 @@ import com.customkey.vietime.engine.SuggestRank
 import com.customkey.vietime.engine.SuggestionFill
 import com.customkey.vietime.engine.SwipeCandidate
 import com.customkey.vietime.engine.SwipeChoice
+import com.customkey.vietime.engine.SwipeEnglish
 import com.customkey.vietime.engine.SwipeSuggest
 import com.customkey.vietime.engine.TextProxy
 import com.customkey.vietime.engine.TypingHeuristics
@@ -251,21 +252,53 @@ class TypingSession(
             }
             return result
         }
-        val prev = lastWord ?: return emptyList()
-        if (bridge.englishMode) return emptyList()
-        val before = p.contextBeforeInput() ?: return emptyList()
-        if (before.isEmpty() || !before.last().isWhitespace()) return emptyList()
-        val personal = lm.nextWords(prev, lastWord2, 6)
-        val next = SuggestRank.nextFill(prev, lastWord2, personal,
-            { w -> lastWord2?.let { lm.trigramCount(it, prev, w) } ?: 0 }, need = max)
-        val padded = SuggestionFill.pad(next, emptyList(), max)
-        val emojis = runCatching { com.customkey.vietime.engine.EmojiSuggest.emojis(prev) }.getOrDefault(emptyList())
-        if (emojis.isNotEmpty() && max >= 3) {
-            val res = padded.take(max - 1).map { Suggestion(it, Suggestion.Kind.NEXT) }.toMutableList()
-            res.add(Suggestion(emojis.first(), Suggestion.Kind.NEXT))
-            return res
+        val before = p.contextBeforeInput()
+        val (ctxPrev, ctxPrev2) = extractContextWords(before)
+        val prev = lastWord ?: ctxPrev
+        val prev2 = lastWord2 ?: ctxPrev2
+        val isSentenceStart = isStartOfSentence(before)
+
+        // 1. Nếu có từ ngữ cảnh trước con trỏ (sau dấu cách)
+        if (prev != null && before != null && (before.isEmpty() || before.last().isWhitespace())) {
+            val personal = if (bridge.englishMode) {
+                lm.nextWords(prev, prev2, 12).filter { runCatching { SwipeEnglish.containsIfLoaded(it.lowercase()) }.getOrDefault(true) }
+            } else {
+                lm.nextWords(prev, prev2, 6)
+            }
+            val next = if (bridge.englishMode) {
+                SuggestionFill.pad(personal, defaultEnglishNext(prev), max)
+            } else {
+                val filled = SuggestRank.nextFill(prev, prev2, personal,
+                    { w -> prev2?.let { lm.trigramCount(it, prev, w) } ?: 0 }, need = max)
+                SuggestionFill.pad(filled, lm.topWords(max + 6), max)
+            }
+            val formatted = next.map { w ->
+                if (isSentenceStart) w.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() } else w
+            }
+            val emojis = runCatching { com.customkey.vietime.engine.EmojiSuggest.emojis(prev) }.getOrDefault(emptyList())
+            if (emojis.isNotEmpty() && max >= 3 && formatted.isNotEmpty()) {
+                val res = formatted.take(max - 1).map { Suggestion(it, Suggestion.Kind.NEXT) }.toMutableList()
+                res.add(Suggestion(emojis.first(), Suggestion.Kind.NEXT))
+                return res
+            }
+            if (formatted.isNotEmpty()) {
+                return formatted.take(max).map { Suggestion(it, Suggestion.Kind.NEXT) }
+            }
         }
-        return padded.take(max).map { Suggestion(it, Suggestion.Kind.NEXT) }
+
+        // 2. Khi chưa gõ gì (ô rỗng, hoặc chưa có từ trước): Dải auto-complete từ mở đầu câu
+        val topList = if (bridge.englishMode) {
+            val fromLm = lm.topWords(max + 6).filter { runCatching { SwipeEnglish.containsIfLoaded(it.lowercase()) }.getOrDefault(true) }
+            SuggestionFill.pad(fromLm, DEFAULT_EN_STARTERS, max)
+        } else {
+            val fromLm = lm.topWords(max + 6)
+            SuggestionFill.pad(fromLm, DEFAULT_VI_STARTERS, max)
+        }
+
+        val formattedTop = topList.map { w ->
+            if (isSentenceStart) w.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() } else w
+        }
+        return formattedTop.take(max).map { Suggestion(it, Suggestion.Kind.NEXT) }
     }
 
     /** Chạm một ô gợi ý: thay từ đang soạn / từ vừa vuốt bằng [s], thêm dấu cách nếu là từ. */
@@ -414,6 +447,37 @@ class TypingSession(
             typed.length > 1 && typed.all { !it.isLetter() || it.isUpperCase() } -> word.uppercase()
             typed.firstOrNull()?.isUpperCase() == true -> word.replaceFirstChar { it.uppercaseChar() }
             else -> word
+        }
+
+        private val DEFAULT_VI_STARTERS = listOf("Tôi", "Anh", "Em", "Dạ", "Xin", "Mình", "Chào", "Bạn", "Hôm nay", "Cảm ơn")
+        private val DEFAULT_EN_STARTERS = listOf("I", "The", "You", "We", "Hello", "Thanks", "Please", "How", "Yes", "Good")
+
+        private fun defaultEnglishNext(prev: String): List<String> = when (prev.lowercase()) {
+            "i" -> listOf("am", "have", "will", "would", "think", "can")
+            "you" -> listOf("are", "can", "have", "will", "know", "want")
+            "the" -> listOf("same", "first", "best", "new", "way", "time")
+            "we" -> listOf("are", "have", "will", "can", "need", "should")
+            "hello" -> listOf("there", "everyone", "how", "friend")
+            "thank", "thanks" -> listOf("you", "so", "a", "very")
+            else -> listOf("and", "the", "to", "is", "for", "in")
+        }
+
+        private fun extractContextWords(before: String?): Pair<String?, String?> {
+            if (before.isNullOrEmpty()) return null to null
+            val trimmed = before.trimEnd()
+            if (trimmed.isEmpty()) return null to null
+            val tokens = trimmed.split(Regex("[\\s,;!?\\n]+")).filter { it.isNotEmpty() }
+            val p1 = tokens.lastOrNull()?.filter { Character.isLetterOrDigit(it) }?.takeIf { it.isNotEmpty() }
+            val p2 = if (tokens.size >= 2) tokens[tokens.size - 2].filter { Character.isLetterOrDigit(it) }.takeIf { it.isNotEmpty() } else null
+            return p1 to p2
+        }
+
+        private fun isStartOfSentence(before: String?): Boolean {
+            if (before.isNullOrBlank()) return true
+            val trimmed = before.trimEnd()
+            if (trimmed.isEmpty()) return true
+            val lastChar = trimmed.last()
+            return lastChar in ".!?\n"
         }
     }
 }

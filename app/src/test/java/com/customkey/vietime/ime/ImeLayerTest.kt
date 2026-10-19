@@ -256,6 +256,25 @@ class TypingSessionTest {
         assertTrue(next.all { it.kind == Suggestion.Kind.NEXT })
     }
 
+    @Test fun idleSuggestionsAndContinuousAccept() {
+        val r = Rig()
+        // Khi chưa gõ gì: dải auto-complete hiển thị các từ mở đầu viết hoa
+        val idle = r.s.suggestions(r.proxy)
+        assertTrue(idle.isNotEmpty())
+        assertTrue(idle.all { it.kind == Suggestion.Kind.NEXT })
+        val firstPick = idle.first()
+        assertTrue(firstPick.text.first().isUpperCase())
+
+        // Chạm vào từ đầu tiên (ví dụ "Tôi" hoặc từ phổ biến)
+        r.proxy.edit { r.s.accept(firstPick, r.proxy) }
+        assertEquals(firstPick.text + " ", r.ed.text)
+
+        // Sau khi chèn: thanh gợi ý lập tức cập nhật các từ đi sau
+        val following = r.s.suggestions(r.proxy)
+        assertTrue(following.isNotEmpty())
+        assertTrue(following.all { it.kind == Suggestion.Kind.NEXT })
+    }
+
     @Test fun autoShiftAtSentenceStart() {
         val r = Rig()
         assertEquals(true, r.s.autoShift(r.proxy))
