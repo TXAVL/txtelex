@@ -8,19 +8,19 @@ import com.customkey.vietime.ui.keyboard.KeyboardStyle
  * SharedPreferences và test được trên JVM. [toStyle] chuyển sang [KeyboardStyle] để vẽ.
  */
 data class ThemeConfig(
-    val presetId: String = "neon",
-    val background: Int = 0xFF0A1024.toInt(),
-    val keyColor: Int = 0xFF1A2448.toInt(),
-    val modifierColor: Int = 0xFF111936.toInt(),
-    val labelColor: Int = 0xFFEFF4FF.toInt(),
-    val accentColor: Int = 0xFF00E5FF.toInt(),
+    val presetId: String = SYSTEM_ID,
+    val background: Int = 0xFFE7EAF2.toInt(),
+    val keyColor: Int = 0xFFFFFFFF.toInt(),
+    val modifierColor: Int = 0xFFD2DAEF.toInt(),
+    val labelColor: Int = 0xFF14171F.toInt(),
+    val accentColor: Int = 0xFF1668F0.toInt(),
     /** Độ đục nền phím 0…1 (thấp = lộ ảnh nền). */
     val keyOpacity: Float = 1f,
     /** Độ đục chữ trên phím 0…1. */
     val labelOpacity: Float = 1f,
-    val cornerRadiusDp: Float = 9f,
-    val borderWidthDp: Float = 1f,
-    val borderColor: Int = 0x3338E1FF,
+    val cornerRadiusDp: Float = 10f,
+    val borderWidthDp: Float = 0f,
+    val borderColor: Int = 0x331668F0,
     /** Có dùng ảnh nền riêng không (ảnh đã xử lý lưu ở [ThemeStore]). */
     val wallpaper: Boolean = false,
     /** Bán kính làm mờ ảnh nền 0…25. */
@@ -28,25 +28,41 @@ data class ThemeConfig(
     /** Lớp phủ tối lên ảnh nền 0…0.85. */
     val dim: Float = 0.35f,
 ) {
-    fun toStyle(wallpaperBitmap: Bitmap?): KeyboardStyle = KeyboardStyle(
-        background = background,
-        keyFill = keyColor,
-        modifierFill = modifierColor,
-        pressedFill = Colors.mix(keyColor, accentColor, 0.35f),
-        label = labelColor,
-        modifierLabel = Colors.mix(labelColor, accentColor, 0.35f),
-        accent = accentColor,
-        stripBackground = background,
-        stripText = labelColor,
-        divider = Colors.withAlpha(labelColor, 0.2f),
-        keyShadow = 0x55000000,
-        cornerRadiusDp = cornerRadiusDp.coerceIn(0f, 24f),
-        borderWidthDp = borderWidthDp.coerceIn(0f, 3f),
-        borderColor = borderColor,
-        keyOpacity = keyOpacity.coerceIn(0f, 1f),
-        labelOpacity = labelOpacity.coerceIn(0.2f, 1f),
-        wallpaper = if (wallpaper) wallpaperBitmap else null,
-    )
+    /** Bộ "Hệ thống" đổi màu theo chế độ sáng/tối của máy; các bộ khác giữ nguyên màu đã lưu. */
+    fun resolved(night: Boolean): ThemeConfig =
+        if (presetId != SYSTEM_ID) this
+        else (if (night) SYSTEM_DARK else this.copy(
+            background = 0xFFE7EAF2.toInt(), keyColor = 0xFFFFFFFF.toInt(), modifierColor = 0xFFD2DAEF.toInt(),
+            labelColor = 0xFF14171F.toInt(), accentColor = 0xFF1668F0.toInt(), borderColor = 0x331668F0,
+        )).copy(
+            presetId = SYSTEM_ID, keyOpacity = keyOpacity, labelOpacity = labelOpacity, cornerRadiusDp = cornerRadiusDp,
+            borderWidthDp = borderWidthDp, wallpaper = wallpaper, blur = blur, dim = dim,
+        )
+
+    fun toStyle(wallpaperBitmap: Bitmap?, night: Boolean = true): KeyboardStyle {
+        val c = resolved(night)
+        // Nền sáng: bóng phím nhẹ hơn, phím nhấn đậm hơn để thấy rõ khi chạm.
+        val light = Colors.luminance(c.keyColor) > 0.6f
+        return KeyboardStyle(
+            background = c.background,
+            keyFill = c.keyColor,
+            modifierFill = c.modifierColor,
+            pressedFill = Colors.mix(c.keyColor, c.accentColor, if (light) 0.22f else 0.35f),
+            label = c.labelColor,
+            modifierLabel = Colors.mix(c.labelColor, c.accentColor, 0.35f),
+            accent = c.accentColor,
+            stripBackground = c.background,
+            stripText = c.labelColor,
+            divider = Colors.withAlpha(c.labelColor, 0.2f),
+            keyShadow = if (light) 0x26000000 else 0x55000000,
+            cornerRadiusDp = c.cornerRadiusDp.coerceIn(0f, 24f),
+            borderWidthDp = c.borderWidthDp.coerceIn(0f, 3f),
+            borderColor = c.borderColor,
+            keyOpacity = c.keyOpacity.coerceIn(0f, 1f),
+            labelOpacity = c.labelOpacity.coerceIn(0.2f, 1f),
+            wallpaper = if (c.wallpaper) wallpaperBitmap else null,
+        )
+    }
 
     fun encode(): String = listOf(
         "preset" to presetId,
@@ -58,6 +74,13 @@ data class ThemeConfig(
     ).joinToString(";") { (k, v) -> "$k=$v" }
 
     companion object {
+        const val SYSTEM_ID = "system"
+
+        private val SYSTEM_DARK = ThemeConfig(
+            SYSTEM_ID, 0xFF14161C.toInt(), 0xFF3A3E4A.toInt(), 0xFF262932.toInt(),
+            0xFFF1F3F9.toInt(), 0xFF5B9CFF.toInt(), borderColor = 0x335B9CFF,
+        )
+
         private fun hex(c: Int) = String.format("%08X", c)
 
         /** Giải mã; khoá thiếu/hỏng ⇒ giữ mặc định của [base]. */
@@ -89,7 +112,9 @@ data class ThemePreset(val id: String, val name: String, val config: ThemeConfig
 
 object ThemePresets {
     val all: List<ThemePreset> = listOf(
-        ThemePreset("neon", "Neon", ThemeConfig()),
+        ThemePreset("system", "Hệ thống", ThemeConfig()),
+        ThemePreset("neon", "Neon", ThemeConfig("neon", 0xFF0A1024.toInt(), 0xFF1A2448.toInt(), 0xFF111936.toInt(),
+            0xFFEFF4FF.toInt(), 0xFF00E5FF.toInt(), cornerRadiusDp = 9f, borderWidthDp = 1f, borderColor = 0x3338E1FF)),
         ThemePreset("midnight", "Midnight", ThemeConfig("midnight", 0xFF000000.toInt(), 0xFF1C1C1E.toInt(), 0xFF121214.toInt(),
             0xFFFFFFFF.toInt(), 0xFF0A84FF.toInt(), borderWidthDp = 0f, cornerRadiusDp = 7f)),
         ThemePreset("aurora", "Aurora", ThemeConfig("aurora", 0xFF12052B.toInt(), 0xFF2A1458.toInt(), 0xFF1D0E40.toInt(),
@@ -111,6 +136,10 @@ object ThemePresets {
 
 /** Tiện ích màu ARGB thuần. */
 object Colors {
+    /** Máy đang ở chế độ tối? */
+    fun isNight(ctx: android.content.Context): Boolean =
+        (ctx.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) == android.content.res.Configuration.UI_MODE_NIGHT_YES
+
     fun withAlpha(c: Int, a: Float): Int = (c and 0x00FFFFFF) or ((255 * a.coerceIn(0f, 1f)).toInt() shl 24)
 
     fun mix(a: Int, b: Int, t: Float): Int {
@@ -119,6 +148,9 @@ object Colors {
         return (lerp(ch(a, 24), ch(b, 24)) shl 24) or (lerp(ch(a, 16), ch(b, 16)) shl 16) or
             (lerp(ch(a, 8), ch(b, 8)) shl 8) or lerp(ch(a, 0), ch(b, 0))
     }
+
+    /** Màu chữ (trắng/xanh đen) đọc rõ trên nền [bg]. */
+    fun onColor(bg: Int): Int = if (luminance(bg) < 0.55f) 0xFFFFFFFF.toInt() else 0xFF0A1024.toInt()
 
     /** Độ sáng cảm nhận 0…1 — chọn màu chữ tương phản. */
     fun luminance(c: Int): Float {
@@ -201,3 +233,4 @@ object ImageFx {
         }
     }
 }
+

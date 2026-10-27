@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "nm.txa.telex"
         minSdk = 26; targetSdk = 35
-        versionCode = 7; versionName = "0.6.0-alpha"
+        versionCode = 8; versionName = "0.7.0-alpha"
         // Bộ bắt crash native (libtxaguard.so) cho mọi CPU Android phổ biến.
         ndk { abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64", "x86") }
     }

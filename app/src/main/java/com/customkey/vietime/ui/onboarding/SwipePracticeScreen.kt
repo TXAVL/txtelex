@@ -96,10 +96,11 @@ fun SwipePracticeScreen(onBack: () -> Unit) {
 
     Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.spacedBy(14.dp)) {
         Column(Modifier.padding(horizontal = 18.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("‹", Modifier.clickable(onClick = onBack).padding(end = 12.dp), color = Tx.CyanSoft, fontSize = 30.sp)
-                Text("Luyện gõ vuốt", style = MaterialTheme.typography.titleLarge, color = Tx.Text)
+            Row(Modifier.clickable(onClick = onBack).padding(vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+                com.customkey.vietime.ui.theme.GlyphIcon(com.customkey.vietime.ui.theme.Glyph.Back, Tx.CyanSoft, 22.dp)
+                Text("Quay lại", color = Tx.CyanSoft, fontSize = 16.sp)
             }
+            Text("Luyện gõ vuốt", color = Tx.Text, style = MaterialTheme.typography.headlineMedium)
             GlassCard(glow = true) {
                 Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -127,7 +128,7 @@ fun SwipePracticeScreen(onBack: () -> Unit) {
             modifier = Modifier.fillMaxWidth(),
             factory = { ctx ->
                 KeyboardView(ctx).apply {
-                    style = com.customkey.vietime.customization.ThemeStore.load(ctx).toStyle(null)
+                    style = com.customkey.vietime.customization.ThemeStore.load(ctx).toStyle(null, com.customkey.vietime.customization.Colors.isNight(ctx))
                     spaceLabel = "Luyện vuốt"
                     listener = object : KeyboardView.Listener {
                         override fun onLetter(ch: Char) {}

@@ -88,8 +88,8 @@
 Sau khi cài: mở TxTelex → **Bước 1** bật bàn phím trong Cài đặt → **Bước 2** chọn TxTelex làm bàn phím → gõ thử
 `yeeu txa` → **yêu txa** ngay trong app.
 
-> Các bản v0.1.0 → v0.6.0-alpha trên Releases được ký bằng **khoá debug**. Từ bản ký release trở đi, máy đang cài bản
-> cũ phải **gỡ TxTelex cũ trước** (Android không cho cài đè khi khoá ký khác nhau). Nhớ **Sao lưu** cài đặt trong app trước khi gỡ.
+> Các bản v0.1.0 → v0.5.0-alpha trên Releases chỉ có APK ký bằng **khoá debug**. Từ v0.6.0-alpha có thêm bản ký release (TXA STUDIO).
+> Máy đang cài bản debug muốn chuyển sang bản release phải **gỡ TxTelex cũ trước** (Android không cho cài đè khi khoá ký khác nhau). Nhớ **Sao lưu** cài đặt trong app trước khi gỡ.
 
 Máy không hiện trong `adb devices`: cài driver USB — Google/Pixel: https://developer.android.com/studio/run/win-usb ·
 hãng khác (Samsung, Xiaomi, Oppo…): https://developer.android.com/studio/run/oem-usb
@@ -336,7 +336,8 @@ Package `engine/` không được import `android.*` hay `androidx.*`. Test `Req
 
 | Phiên bản | Nội dung chính |
 |---|---|
-| **v0.6.0-alpha** | Tự sửa chạm trượt, đủ ký tự `< >`, giữ phím ra chữ có dấu, bong bóng phím, chế độ một tay, vuốt tiếng Anh, thanh gợi ý mới (ô tốt nhất, hàng công cụ, chip số/email), bảng Sửa văn bản, đổi kiểu chữ, Gõ tắt, Sao lưu & khôi phục |
+| **v0.7.0-alpha** | Giao diện app làm lại: 4 tab (Kiểu gõ · Giao diện · Công cụ · Giới thiệu), thanh tab nổi, sáng/tối theo hệ thống; bàn phím mặc định theo hệ thống |
+| v0.6.0-alpha | Tự sửa chạm trượt, đủ ký tự `< >`, giữ phím ra chữ có dấu, bong bóng phím, chế độ một tay, vuốt tiếng Anh, thanh gợi ý mới (ô tốt nhất, hàng công cụ, chip số/email), bảng Sửa văn bản, đổi kiểu chữ, Gõ tắt, Sao lưu & khôi phục |
 | v0.5.0-alpha | Clipboard hình ảnh, dán nhanh từ thanh gợi ý, từ điển cá nhân, bảng Emoji đầy đủ |
 | v0.4.0-alpha | Hộp đen TXA: TxaLogger, TxaErrorScreen, bắt crash Java / native / treo |
 | v0.3.1-alpha | Sửa crash khi khởi động (ML Kit provider) |

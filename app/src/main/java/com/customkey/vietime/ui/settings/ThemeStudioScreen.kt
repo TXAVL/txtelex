@@ -136,11 +136,11 @@ fun ThemeStudioScreen(onBack: () -> Unit) {
         SectionLabel("Màu sắc")
         GlassCard {
             Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
-                ColorRow("Màu nhấn", cfg.accentColor) { update(cfg.copy(accentColor = it, borderColor = (it and 0x00FFFFFF) or 0x44000000)) }
-                ColorRow("Chữ trên phím", cfg.labelColor) { update(cfg.copy(labelColor = it)) }
-                ColorRow("Phím chữ", cfg.keyColor) { update(cfg.copy(keyColor = it)) }
-                ColorRow("Phím chức năng", cfg.modifierColor) { update(cfg.copy(modifierColor = it)) }
-                ColorRow("Nền bàn phím", cfg.background) { update(cfg.copy(background = it)) }
+                ColorRow("Màu nhấn", cfg.accentColor) { update(cfg.copy(presetId = "custom", accentColor = it, borderColor = (it and 0x00FFFFFF) or 0x44000000)) }
+                ColorRow("Chữ trên phím", cfg.labelColor) { update(cfg.copy(presetId = "custom", labelColor = it)) }
+                ColorRow("Phím chữ", cfg.keyColor) { update(cfg.copy(presetId = "custom", keyColor = it)) }
+                ColorRow("Phím chức năng", cfg.modifierColor) { update(cfg.copy(presetId = "custom", modifierColor = it)) }
+                ColorRow("Nền bàn phím", cfg.background) { update(cfg.copy(presetId = "custom", background = it)) }
             }
         }
     }

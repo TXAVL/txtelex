@@ -243,7 +243,7 @@ class ToolsPaneView(context: Context) : LinearLayout(context) {
                 val on = idx == accentIndex
                 r.addView(TextView(context).apply {
                     text = label; gravity = Gravity.CENTER; maxLines = 1
-                    setTextColor(if (on) 0xFF0A1024.toInt() else style.label)
+                    setTextColor(if (on) com.customkey.vietime.customization.Colors.onColor(style.accent) else style.label)
                     setTextSize(TypedValue.COMPLEX_UNIT_SP, if (small) 12.5f else 15f)
                     background = rounded(if (on) style.accent else withAlpha(style.keyFill, style.keyOpacity.coerceAtLeast(0.7f)), 10f)
                     setPadding((4 * d).toInt(), ((if (small) 9 else 12) * d).toInt(), (4 * d).toInt(), ((if (small) 9 else 12) * d).toInt())
@@ -260,7 +260,7 @@ class ToolsPaneView(context: Context) : LinearLayout(context) {
     private fun pill(t: String, selected: Boolean, onClick: () -> Unit) = TextView(context).apply {
         val s = style
         text = t; gravity = Gravity.CENTER
-        setTextColor(if (selected) 0xFF0A1024.toInt() else s.label)
+        setTextColor(if (selected) com.customkey.vietime.customization.Colors.onColor(s.accent) else s.label)
         setTypeface(typeface, if (selected) Typeface.BOLD else Typeface.NORMAL)
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
         background = rounded(if (selected) s.accent else s.modifierFill, 18f)

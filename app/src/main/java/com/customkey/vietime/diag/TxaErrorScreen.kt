@@ -241,7 +241,10 @@ fun TxaLogCenter(onBack: () -> Unit) {
     }
 
     Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
-        Text("‹ Quay lại", Modifier.clickable(onClick = onBack).padding(vertical = 6.dp), color = Tx.CyanSoft, fontWeight = FontWeight.SemiBold)
+        androidx.compose.foundation.layout.Row(Modifier.clickable(onClick = onBack).padding(vertical = 10.dp), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+            com.customkey.vietime.ui.theme.GlyphIcon(com.customkey.vietime.ui.theme.Glyph.Back, Tx.CyanSoft, 22.dp)
+            Text("Quay lại", color = Tx.CyanSoft, fontSize = 16.sp)
+        }
         Text("Nhật ký & báo lỗi", style = MaterialTheme.typography.titleLarge, color = Tx.Text)
         Text("TxTelex tự ghi lại sự cố (cả lỗi tầng native và treo máy) — chỉ lưu trong máy. Bấm xuất khi cần gửi cho TXA.",
             color = Tx.TextDim, style = MaterialTheme.typography.bodySmall)

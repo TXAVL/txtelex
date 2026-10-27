@@ -31,7 +31,7 @@ class ThemeConfigTest {
             val contrast = abs(Colors.luminance(p.config.keyColor) - Colors.luminance(p.config.labelColor))
             assertTrue("${p.id} chữ phải nổi trên phím ($contrast)", contrast > 0.5f)
         }
-        assertEquals("neon", ThemePresets.byId("không-có").id)
+        assertEquals("system", ThemePresets.byId("không-có").id)
     }
 
     @Test fun styleMapping() {

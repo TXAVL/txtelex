@@ -3,6 +3,7 @@ package com.customkey.vietime.ui.settings
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,6 +26,8 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,19 +35,28 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.customkey.vietime.customization.Colors
+import com.customkey.vietime.ui.theme.Glyph
+import com.customkey.vietime.ui.theme.GlyphIcon
+import com.customkey.vietime.ui.theme.LocalTx
 import com.customkey.vietime.ui.theme.Tx
 
-/** Khung màn tuỳ biến: tiêu đề + phần chỉnh cuộn được + bàn phím mẫu ghim ở đáy. */
+/** Khung màn tuỳ biến: nút quay lại + tiêu đề lớn, phần chỉnh cuộn được, bàn phím mẫu ghim ở đáy. */
 @Composable
 fun CustomizeScaffold(title: String, onBack: () -> Unit, preview: Boolean = true, content: @Composable ColumnScope.() -> Unit) {
+    val p = LocalTx.current
     Column(Modifier.fillMaxSize()) {
-        Row(Modifier.fillMaxWidth().padding(horizontal = 18.dp, vertical = 10.dp), verticalAlignment = Alignment.CenterVertically) {
-            Text("‹", Modifier.clickable(onClick = onBack).padding(end = 12.dp), color = Tx.CyanSoft, fontSize = 30.sp)
-            Text(title, style = MaterialTheme.typography.titleLarge, color = Tx.Text)
+        Row(
+            Modifier.clickable(remember { MutableInteractionSource() }, null, onClick = onBack).padding(start = 12.dp, end = 16.dp, top = 14.dp, bottom = 2.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            GlyphIcon(Glyph.Back, p.accent, 22.dp)
+            Spacer(Modifier.width(2.dp))
+            Text("Quay lại", color = p.accent, fontSize = 16.sp)
         }
+        Text(title, Modifier.padding(horizontal = 20.dp, vertical = 6.dp), color = p.label, style = MaterialTheme.typography.headlineMedium)
         Column(
-            Modifier.fillMaxWidth().weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 18.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp),
+            Modifier.fillMaxWidth().weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
             content()
             Spacer(Modifier.size(16.dp))
@@ -67,7 +79,7 @@ fun TxSlider(
         Slider(
             value = value, onValueChange = onChange, valueRange = range, steps = steps,
             onValueChangeFinished = onDone,
-            colors = SliderDefaults.colors(thumbColor = Tx.Cyan, activeTrackColor = Tx.Cyan, inactiveTrackColor = Tx.Stroke,
+            colors = SliderDefaults.colors(thumbColor = Color.White, activeTrackColor = Tx.Cyan, inactiveTrackColor = Tx.Glass,
                 activeTickColor = Color.Transparent, inactiveTickColor = Color.Transparent),
         )
     }
@@ -97,29 +109,27 @@ fun ColorRow(title: String, selected: Int, onPick: (Int) -> Unit) {
     }
 }
 
-/** Thẻ lựa chọn một trong nhiều (radio). */
+/** Dòng lựa chọn một trong nhiều: nền thẻ, dấu tích ở bên phải khi được chọn. */
 @Composable
 fun ChoiceRow(title: String, subtitle: String?, selected: Boolean, trailing: (@Composable () -> Unit)? = null, onClick: () -> Unit) {
-    val shape = RoundedCornerShape(16.dp)
+    val p = LocalTx.current
+    val shape = RoundedCornerShape(14.dp)
     Row(
-        Modifier.fillMaxWidth().background(if (selected) Tx.accentSoft else androidx.compose.ui.graphics.Brush.linearGradient(listOf(Tx.Glass, Tx.Glass)), shape)
-            .border(1.dp, if (selected) Tx.Cyan else Tx.Stroke, shape).clickable(onClick = onClick)
+        Modifier.fillMaxWidth().background(if (selected) p.accent.copy(alpha = 0.12f) else p.card, shape)
+            .border(1.5.dp, if (selected) p.accent else Color.Transparent, shape).clip(shape).clickable(onClick = onClick)
             .padding(horizontal = 14.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Box(Modifier.size(20.dp).border(2.dp, if (selected) Tx.Cyan else Tx.TextFaint, CircleShape), contentAlignment = Alignment.Center) {
-            if (selected) Box(Modifier.size(10.dp).background(Tx.Cyan, CircleShape))
-        }
-        Spacer(Modifier.width(12.dp))
         Column(Modifier.weight(1f)) {
-            Text(title, color = Tx.Text, style = MaterialTheme.typography.titleSmall)
-            if (subtitle != null) Text(subtitle, color = Tx.TextDim, style = MaterialTheme.typography.bodySmall)
+            Text(title, color = p.label, fontSize = 16.sp, fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal)
+            if (subtitle != null) Text(subtitle, color = p.secondary, fontSize = 12.5.sp, lineHeight = 17.sp)
         }
         trailing?.invoke()
+        if (selected) { Spacer(Modifier.width(8.dp)); GlyphIcon(Glyph.Check, p.accent, 20.dp) }
     }
 }
 
-/** Hộp nhập text giao diện Glassmorphism / Cyberpunk chuẩn. */
+/** Ô nhập chữ nền thẻ. */
 @Composable
 fun TxField(
     value: String,
@@ -132,15 +142,15 @@ fun TxField(
         onValueChange = onChange,
         modifier = modifier,
         label = { Text(label) },
-        shape = RoundedCornerShape(14.dp),
+        shape = RoundedCornerShape(12.dp),
         colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
             focusedBorderColor = Tx.Cyan,
-            unfocusedBorderColor = Tx.Stroke,
+            unfocusedBorderColor = Color.Transparent,
             focusedLabelColor = Tx.Cyan,
             unfocusedLabelColor = Tx.TextDim,
             cursorColor = Tx.Cyan,
-            focusedContainerColor = Tx.Glass,
-            unfocusedContainerColor = Tx.Glass,
+            focusedContainerColor = LocalTx.current.card,
+            unfocusedContainerColor = LocalTx.current.card,
         ),
     )
 }

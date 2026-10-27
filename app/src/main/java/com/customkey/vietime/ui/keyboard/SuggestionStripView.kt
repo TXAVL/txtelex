@@ -197,7 +197,7 @@ class SuggestionStripView(context: Context) : View(context) {
             chipPaint.color = s.accent
             rect.set(width - undoWidth + 6 * d, 6 * d, width - 6 * d, height - 6 * d)
             canvas.drawRoundRect(rect, 14 * d, 14 * d, chipPaint)
-            boldPaint.color = 0xFF0A1024.toInt()
+            boldPaint.color = com.customkey.vietime.customization.Colors.onColor(s.accent)
             canvas.drawText("↶ Hoàn tác", rect.centerX(), cy, boldPaint)
             boldPaint.color = s.stripText
         }

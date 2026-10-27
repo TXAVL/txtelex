@@ -1,21 +1,18 @@
 package com.customkey.vietime.ui.onboarding
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -26,120 +23,105 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.customkey.vietime.ui.theme.GhostButton
-import com.customkey.vietime.ui.theme.GlassCard
 import com.customkey.vietime.ui.theme.GradientButton
-import com.customkey.vietime.ui.theme.Tx
+import com.customkey.vietime.ui.theme.Glyph
+import com.customkey.vietime.ui.theme.GlyphIcon
+import com.customkey.vietime.ui.theme.LocalTx
+import com.customkey.vietime.ui.theme.TxDivider
+import com.customkey.vietime.ui.theme.TxRow
+import com.customkey.vietime.ui.theme.TxSection
 
 /**
- * Trình Setup 2 bước: Bước 1 mở Cài đặt hệ thống để BẬT bàn phím, Bước 2 mở hộp thoại CHỌN
- * bàn phím. Dấu tích cập nhật ngay nhờ [rememberImeStatus].
+ * Thẻ trạng thái bàn phím. Chưa sẵn sàng ⇒ 2 bước: bật TxTelex trong Cài đặt hệ thống, rồi chọn làm bàn phím
+ * đang dùng. Dấu tích cập nhật ngay nhờ [rememberImeStatus].
  */
 @Composable
 fun SetupCard(status: ImeStatus, onOpenImeSettings: () -> Unit, onPickIme: () -> Unit) {
-    GlassCard(glow = !status.selected) {
-        if (status.selected) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                StepDot(done = true, label = "✓")
+    val p = LocalTx.current
+    if (status.selected) {
+        TxSection {
+            Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                Box(Modifier.size(42.dp).background(p.green, CircleShape), contentAlignment = Alignment.Center) {
+                    GlyphIcon(Glyph.Check, Color.White, 24.dp)
+                }
                 Spacer(Modifier.width(14.dp))
                 Column(Modifier.weight(1f)) {
-                    Text("TxTelex đã sẵn sàng", style = MaterialTheme.typography.titleMedium, color = Tx.Text)
-                    Text("Gõ thử ngay bên dưới", style = MaterialTheme.typography.bodySmall, color = Tx.TextDim)
+                    Text("Bàn phím đã bật", color = p.label, fontSize = 17.sp, fontWeight = FontWeight.SemiBold)
+                    Text("Thử gõ ngay bên dưới.", color = p.secondary, fontSize = 14.sp)
                 }
-                GhostButton("Đổi", onClick = onPickIme)
+                Text("Đổi", Modifier.padding(start = 8.dp), color = p.accent, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
             }
-        } else {
-            Text("Kích hoạt bàn phím", style = MaterialTheme.typography.titleLarge, color = Tx.Text)
-            Text("Hai bước, chưa tới 10 giây.", style = MaterialTheme.typography.bodyMedium, color = Tx.TextDim)
-            Spacer(Modifier.height(16.dp))
-            Step(1, "Bật TxTelex", "Trong danh sách bàn phím của hệ thống", status.enabled,
-                "Mở cài đặt", enabled = true, onClick = onOpenImeSettings)
-            Box(Modifier.padding(start = 17.dp).width(2.dp).height(18.dp).background(if (status.enabled) Tx.Cyan else Tx.Stroke))
-            Step(2, "Chọn TxTelex", "Làm bàn phím đang dùng", status.selected,
-                "Chọn bàn phím", enabled = status.enabled, onClick = onPickIme)
+        }
+    } else {
+        TxSection(
+            header = "Kích hoạt bàn phím",
+            footer = "Hai bước, chưa tới 10 giây. Xong là gõ được tiếng Việt ở mọi ứng dụng.",
+        ) {
+            StepRow(1, "Bật TxTelex", "Trong danh sách bàn phím của hệ thống", status.enabled, "Mở cài đặt", true, onOpenImeSettings)
+            TxDivider()
+            StepRow(2, "Chọn TxTelex", "Làm bàn phím đang dùng", status.selected, "Chọn", status.enabled, onPickIme)
         }
     }
 }
 
 @Composable
-private fun Step(n: Int, title: String, sub: String, done: Boolean, action: String, enabled: Boolean, onClick: () -> Unit) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        StepDot(done, if (done) "✓" else n.toString(), active = enabled)
+private fun StepRow(n: Int, title: String, sub: String, done: Boolean, action: String, enabled: Boolean, onClick: () -> Unit) {
+    val p = LocalTx.current
+    Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
+        Box(
+            Modifier.size(32.dp).background(if (done) p.green else if (enabled) p.accent.copy(alpha = 0.14f) else p.fill, CircleShape),
+            contentAlignment = Alignment.Center,
+        ) {
+            if (done) GlyphIcon(Glyph.Check, Color.White, 18.dp)
+            else Text("$n", color = if (enabled) p.accent else p.tertiary, fontWeight = FontWeight.Bold, fontSize = 15.sp)
+        }
         Spacer(Modifier.width(14.dp))
-        Column(Modifier.weight(1f)) {
-            Text(title, style = MaterialTheme.typography.titleSmall, color = if (enabled || done) Tx.Text else Tx.TextFaint)
-            Text(sub, style = MaterialTheme.typography.bodySmall, color = Tx.TextDim)
+        Column(Modifier.weight(1f).padding(end = 8.dp)) {
+            Text(title, color = if (enabled || done) p.label else p.tertiary, fontSize = 16.sp, fontWeight = FontWeight.Medium)
+            Text(sub, color = p.secondary, fontSize = 12.5.sp)
         }
-        if (!done) GradientButton(action, enabled = enabled, onClick = onClick)
+        if (!done) GradientButton(action, enabled = enabled, onClick = onClick, modifier = Modifier.padding(0.dp))
     }
 }
 
-@Composable
-private fun StepDot(done: Boolean, label: String, active: Boolean = true) {
-    val m = Modifier.size(36.dp)
-    Box(
-        if (done) m.background(Tx.accent, CircleShape)
-        else m.border(1.5.dp, if (active) Tx.Cyan else Tx.Stroke, CircleShape),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(label, color = if (done) Tx.Night else if (active) Tx.Cyan else Tx.TextFaint,
-            fontWeight = FontWeight.ExtraBold, fontSize = 15.sp)
-    }
-}
-
-/**
- * Khu "Gõ thử tại đây": ô thường, ô URL (như thanh địa chỉ), ô số, ô mật khẩu (bàn phím phải
- * KHÔNG bỏ dấu). Mẹo cử chỉ ngay dưới.
- */
+/** Khu "Thử gõ": ô thường, ô URL (như thanh địa chỉ), ô số, ô mật khẩu (bàn phím phải KHÔNG bỏ dấu). */
 @Composable
 fun TypingSandbox() {
-    GlassCard {
-        Text("Gõ thử tại đây", style = MaterialTheme.typography.titleMedium, color = Tx.Text)
-        Row(Modifier.padding(top = 6.dp, bottom = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Text("Thử gõ ", style = MaterialTheme.typography.bodyMedium, color = Tx.TextDim)
-            Chip("yeeu txa")
-            Text("  →  ", color = Tx.Cyan, fontWeight = FontWeight.Bold)
-            Chip("yêu txa", highlight = true)
-        }
-        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+    val p = LocalTx.current
+    TxSection(
+        header = "Thử gõ",
+        footer = "Gõ yeeu txa → yêu txa. Ô mật khẩu cố ý không bỏ dấu.",
+    ) {
+        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             var normal by rememberSaveable { mutableStateOf("") }
             Field(normal, { normal = it }, "Ô thường", "yeeu txa, ddaauf tieen…", minLines = 2,
                 options = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences))
             var url by rememberSaveable { mutableStateOf("") }
-            Field(url, { url = it }, "Ô URL — như thanh địa chỉ", "github.com hoặc tìm kiếm tiếng Việt",
+            Field(url, { url = it }, "Ô URL (như thanh địa chỉ)", "github.com hoặc tìm kiếm tiếng Việt",
                 options = KeyboardOptions(keyboardType = KeyboardType.Uri, imeAction = ImeAction.Go))
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 var num by rememberSaveable { mutableStateOf("") }
-                Field(num, { num = it }, "Ô số", "123", Modifier.weight(1f),
-                    options = KeyboardOptions(keyboardType = KeyboardType.Number))
+                Field(num, { num = it }, "Ô số", "123", Modifier.weight(1f), options = KeyboardOptions(keyboardType = KeyboardType.Number))
                 var pw by rememberSaveable { mutableStateOf("") }
                 Field(pw, { pw = it }, "Mật khẩu", "không bỏ dấu", Modifier.weight(1f), password = true,
                     options = KeyboardOptions(keyboardType = KeyboardType.Password))
             }
         }
-        Spacer(Modifier.height(14.dp))
-        Tips()
+        Text(
+            "yeeu txa  →  yêu txa", Modifier.padding(start = 16.dp, bottom = 14.dp),
+            color = p.accent, fontFamily = FontFamily.Monospace, fontSize = 13.sp,
+        )
     }
-}
-
-@Composable
-private fun Chip(text: String, highlight: Boolean = false) {
-    val shape = RoundedCornerShape(8.dp)
-    Text(
-        text,
-        Modifier.background(if (highlight) Tx.accentSoft else Brush.linearGradient(listOf(Tx.Glass, Tx.Glass)), shape)
-            .border(1.dp, if (highlight) Tx.Cyan else Tx.Stroke, shape).padding(horizontal = 8.dp, vertical = 3.dp),
-        color = if (highlight) Tx.CyanSoft else Tx.Text, fontFamily = FontFamily.Monospace, fontSize = 14.sp,
-    )
 }
 
 @Composable
@@ -148,34 +130,33 @@ private fun Field(
     modifier: Modifier = Modifier.fillMaxWidth(), minLines: Int = 1, password: Boolean = false,
     options: KeyboardOptions,
 ) {
+    val p = LocalTx.current
     OutlinedTextField(
-        value, onChange, modifier, singleLine = minLines == 1, minLines = minLines,
-        label = { Text(label) }, placeholder = { Text(placeholder, color = Tx.TextFaint) },
-        visualTransformation = if (password) PasswordVisualTransformation() else androidx.compose.ui.text.input.VisualTransformation.None,
-        keyboardOptions = options, shape = RoundedCornerShape(14.dp),
+        value, onChange, modifier.fillMaxWidth(), singleLine = minLines == 1, minLines = minLines,
+        label = { Text(label) }, placeholder = { Text(placeholder, color = p.tertiary) },
+        visualTransformation = if (password) PasswordVisualTransformation() else VisualTransformation.None,
+        keyboardOptions = options, shape = RoundedCornerShape(12.dp),
         colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = Tx.Cyan, unfocusedBorderColor = Tx.Stroke,
-            focusedLabelColor = Tx.Cyan, unfocusedLabelColor = Tx.TextDim, cursorColor = Tx.Cyan,
-            focusedContainerColor = Tx.Glass, unfocusedContainerColor = Tx.Glass,
+            focusedBorderColor = p.accent, unfocusedBorderColor = p.separator,
+            focusedLabelColor = p.accent, unfocusedLabelColor = p.secondary, cursorColor = p.accent,
+            focusedContainerColor = p.bg, unfocusedContainerColor = p.bg,
         ),
     )
 }
 
+/** Mẹo cử chỉ — hiện trong tab Kiểu gõ. */
 @Composable
-private fun Tips() {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        for ((icon, t) in listOf(
-            "⇆" to "Giữ phím Cách rồi kéo để di chuyển con trỏ",
-            "🌐" to "Vuốt nhanh phím Cách để đổi Tiếng Việt ↔ English",
-            "⌫" to "Vuốt trái phím xoá để xoá cả từ, có Hoàn tác",
-            "✎" to "Gõ xong vẫn sửa dấu: thay ␣ ⌫ s → tháy",
-            "〰" to "Vuốt qua các chữ để gõ nguyên từ",
-        )) Row(verticalAlignment = Alignment.CenterVertically) {
-            Box(Modifier.size(26.dp).background(Tx.Glass, RoundedCornerShape(8.dp)), contentAlignment = Alignment.Center) {
-                Text(icon, color = Tx.Cyan, fontSize = 13.sp)
-            }
-            Spacer(Modifier.width(10.dp))
-            Text(t, style = MaterialTheme.typography.bodySmall, color = Tx.TextDim)
+fun GestureTips() {
+    TxSection(header = "Cử chỉ") {
+        val tips = listOf(
+            Triple(Glyph.Layout, "Giữ phím Cách rồi kéo", "Di chuyển con trỏ như trackpad"),
+            Triple(Glyph.Swipe, "Vuốt qua các chữ", "Gõ nguyên từ không cần nhấc tay"),
+            Triple(Glyph.Keyboard, "Vuốt nhanh phím Cách", "Đổi Tiếng Việt ↔ English"),
+            Triple(Glyph.Back, "Vuốt trái phím xoá", "Xoá cả từ, có Hoàn tác"),
+        )
+        tips.forEachIndexed { i, (g, t, s) ->
+            if (i > 0) TxDivider(62.dp)
+            TxRow(t, s, glyph = g, tint = LocalTx.current.accent)
         }
     }
 }

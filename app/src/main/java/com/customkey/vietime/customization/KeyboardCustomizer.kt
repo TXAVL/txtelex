@@ -96,7 +96,7 @@ class KeyboardCustomizer(context: Context, private val onChanged: () -> Unit) {
 
     /** Áp theme + bố cục lên khung bàn phím. */
     fun applyTo(panel: KeyboardPanel, wide: Boolean) {
-        panel.style = theme.toStyle(wallpaper)
+        panel.style = theme.toStyle(wallpaper, Colors.isNight(ctx))
         val kb = panel.keyboard
         kb.rowHeightDp = layout.rowHeightDp()
         kb.options = layout.options(wide)
