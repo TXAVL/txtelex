@@ -12,6 +12,7 @@ import android.os.Looper
 import android.os.SystemClock
 import android.view.MotionEvent
 import android.view.View
+import com.customkey.vietime.customization.Colors
 import com.customkey.vietime.engine.GestureClassifier
 import com.customkey.vietime.engine.SwipeLayout
 import com.customkey.vietime.engine.SwipePath
@@ -88,6 +89,9 @@ class KeyboardView(context: Context) : View(context) {
     var swipeTyping = false
         set(v) { field = v; publishSwipeLayout() }
 
+    /** Overlay vệt vuốt mượt mà dạng neon (SwipeTrailView). */
+    var swipeTrail: SwipeTrailView? = null
+
     var longPressDelayMs = 300L
 
     /** Bong bóng phóng to chữ khi bấm (KeyboardPanel vẽ, để hàng trên cùng lấn được lên thanh gợi ý). */
@@ -133,6 +137,7 @@ class KeyboardView(context: Context) : View(context) {
     private val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { textAlign = Paint.Align.CENTER }
     private val smallPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { textAlign = Paint.Align.CENTER }
     private val hintPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { textAlign = Paint.Align.RIGHT }
+    private val iconPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val trailPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE; strokeCap = Paint.Cap.ROUND; strokeJoin = Paint.Join.ROUND
     }
@@ -201,39 +206,96 @@ class KeyboardView(context: Context) : View(context) {
         val r = s.cornerRadiusDp * d
         for (k in keys) {
             val pressed = pressedKeys.contains(k)
+            val a = k.def.action
+            val isActionEnter = a is KeyAction.Enter
+            val isShiftActive = a is KeyAction.Shift && shift != Shift.OFF
             val fill = when {
                 pressed -> s.pressedFill
-                k.def.action is KeyAction.Shift && shift != Shift.OFF -> s.keyFill
+                isActionEnter -> s.accent
+                isShiftActive -> s.pressedFill
                 k.def.modifier -> s.modifierFill
                 else -> s.keyFill
             }
             rect.set(k.left + gx, k.top + gy, k.right - gx, k.bottom - gy)
-            if (s.keyOpacity >= 0.99f) {
-                rect.offset(0f, d); canvas.drawRoundRect(rect, r, r, shadowPaint); rect.offset(0f, -d)
+            if (s.keyOpacity >= 0.95f) {
+                rect.offset(0f, 1.2f * d)
+                canvas.drawRoundRect(rect, r, r, shadowPaint)
+                rect.offset(0f, -1.2f * d)
             }
             keyPaint.color = withAlpha(fill, s.keyOpacity)
             canvas.drawRoundRect(rect, r, r, keyPaint)
             if (s.borderWidthDp > 0f) canvas.drawRoundRect(rect, r, r, borderPaint)
-            drawLabel(canvas, k, pressed)
+            drawLabel(canvas, k, pressed, fill)
         }
         altPopup?.let { drawAltPopup(canvas, it) }
         if (trailActive) canvas.drawPath(trail, trailPaint)
     }
 
-    private fun drawLabel(canvas: Canvas, k: LaidKey, pressed: Boolean) {
+    private fun drawLabel(canvas: Canvas, k: LaidKey, pressed: Boolean, fill: Int = style.keyFill) {
         val s = style
         val color = withAlpha(if (k.def.modifier) s.modifierLabel else s.label, s.labelOpacity)
         val a = k.def.action
+        when (a) {
+            is KeyAction.Shift -> {
+                val iconId = when (shift) {
+                    Shift.LOCK -> ImeIcons.CAPS
+                    Shift.ON -> ImeIcons.SHIFT_FILL
+                    Shift.OFF -> ImeIcons.SHIFT
+                }
+                iconPaint.color = if (shift != Shift.OFF) s.accent else color
+                ImeIcons.draw(canvas, iconId, k.centerX, k.centerY, 22f * d, iconPaint)
+                return
+            }
+            is KeyAction.Backspace -> {
+                val iconId = if (pressed) ImeIcons.DELETE_FILL else ImeIcons.DELETE
+                iconPaint.color = color
+                ImeIcons.draw(canvas, iconId, k.centerX, k.centerY, 22f * d, iconPaint)
+                if (pressed) {
+                    iconPaint.color = fill
+                    ImeIcons.draw(canvas, ImeIcons.DELETE_X, k.centerX, k.centerY, 22f * d, iconPaint)
+                }
+                return
+            }
+            is KeyAction.Enter -> {
+                val enterIcon = when (enterAction) {
+                    EnterAction.SEARCH -> ImeIcons.SEARCH
+                    EnterAction.SEND -> ImeIcons.SEND
+                    EnterAction.GO, EnterAction.NEXT -> ImeIcons.ARROW_RIGHT
+                    EnterAction.DONE -> ImeIcons.CHECK
+                    else -> ImeIcons.RETURN
+                }
+                iconPaint.color = Colors.onColor(if (pressed) s.pressedFill else s.accent)
+                ImeIcons.draw(canvas, enterIcon, k.centerX, k.centerY, 22f * d, iconPaint)
+                return
+            }
+            is KeyAction.Globe -> {
+                iconPaint.color = color
+                ImeIcons.draw(canvas, ImeIcons.GLOBE, k.centerX, k.centerY, 21f * d, iconPaint)
+                return
+            }
+            is KeyAction.Emoji -> {
+                iconPaint.color = color
+                ImeIcons.draw(canvas, ImeIcons.FACE, k.centerX, k.centerY, 22f * d, iconPaint)
+                return
+            }
+            is KeyAction.Space -> {
+                if (spaceLabel.isNotEmpty()) {
+                    smallPaint.color = withAlpha(color, 0.72f)
+                    val y = k.centerY - (smallPaint.descent() + smallPaint.ascent()) / 2f
+                    canvas.drawText(spaceLabel, k.centerX, y, smallPaint)
+                }
+                return
+            }
+            else -> Unit
+        }
+
         val label = when (a) {
             is KeyAction.Letter -> if (shift != Shift.OFF) k.def.label.uppercase() else k.def.label
-            is KeyAction.Space -> spaceLabel
-            is KeyAction.Shift -> if (shift == Shift.LOCK) "⇪" else "⇧"
             else -> k.def.label
         }
         val paint = if (a is KeyAction.Letter || (a is KeyAction.Text && label.length == 1)) labelPaint else smallPaint
         paint.color = color
-        paint.typeface = if (a is KeyAction.Shift && shift != Shift.OFF) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
-        if (a is KeyAction.Shift && shift != Shift.OFF) paint.color = s.accent
+        paint.typeface = Typeface.DEFAULT
         val y = k.centerY - (paint.descent() + paint.ascent()) / 2f
         canvas.drawText(label, k.centerX, y, paint)
         // Gợi ý ký tự phụ (số hàng trên) ở góc phải trên.
@@ -245,20 +307,25 @@ class KeyboardView(context: Context) : View(context) {
 
     private fun drawAltPopup(canvas: Canvas, p: AltPopup) {
         val s = style
-        val r = s.cornerRadiusDp * d
-        rect.set(p.left, p.top, p.left + p.cell * p.items.size, p.top + p.height)
-        keyPaint.color = s.keyFill
+        val r = (s.cornerRadiusDp + 2f) * d
+        val totalW = p.cell * p.items.size
+        rect.set(p.left, p.top, p.left + totalW, p.top + p.height)
+        rect.offset(0f, 2f * d)
+        shadowPaint.color = s.keyShadow
         canvas.drawRoundRect(rect, r, r, shadowPaint)
+        rect.offset(0f, -2f * d)
+        keyPaint.color = s.keyFill
         canvas.drawRoundRect(rect, r, r, keyPaint)
+        if (s.borderWidthDp > 0f) canvas.drawRoundRect(rect, r, r, borderPaint)
         for ((i, it) in p.items.withIndex()) {
             val cx = p.left + p.cell * (i + 0.5f)
             if (i == p.selected) {
-                rect.set(p.left + p.cell * i + 2 * d, p.top + 2 * d, p.left + p.cell * (i + 1) - 2 * d, p.top + p.height - 2 * d)
+                rect.set(p.left + p.cell * i + 3 * d, p.top + 3 * d, p.left + p.cell * (i + 1) - 3 * d, p.top + p.height - 3 * d)
                 keyPaint.color = s.accent
-                canvas.drawRoundRect(rect, r, r, keyPaint)
+                canvas.drawRoundRect(rect, r - 2 * d, r - 2 * d, keyPaint)
             }
             val paint = if (it.length == 1) labelPaint else smallPaint
-            paint.color = if (i == p.selected) 0xFFFFFFFF.toInt() else s.label
+            paint.color = if (i == p.selected) Colors.onColor(s.accent) else s.label
             canvas.drawText(it, cx, p.top + p.height / 2f - (paint.descent() + paint.ascent()) / 2f, paint)
         }
     }
@@ -607,6 +674,7 @@ class KeyboardView(context: Context) : View(context) {
         classifier.end()
         swipePid = -1
         swiping = false
+        swipeTrail?.end(fade = false)
     }
 
     private fun swipeMove(e: MotionEvent, i: Int) {
@@ -620,7 +688,12 @@ class KeyboardView(context: Context) : View(context) {
     private fun swipePoint(x: Float, y: Float, t: Long) {
         val p = swipePath ?: return
         p.add(x, y, t / 1000.0)
-        if (swiping) { trail.lineTo(x, y); invalidate(); return }
+        if (swiping) {
+            trail.lineTo(x, y)
+            swipeTrail?.add(x, y, t)
+            invalidate()
+            return
+        }
         when (classifier.move(x / d, y / d, t)) {
             GestureClassifier.State.SWIPE -> beginSwipe(x, y)
             GestureClassifier.State.TAP -> stopSwipeTracking()
@@ -636,6 +709,8 @@ class KeyboardView(context: Context) : View(context) {
         altPopup = null
         trailActive = true
         trail.lineTo(x, y)
+        swipeTrail?.begin()
+        swipeTrail?.add(x, y)
         invalidate()
     }
 
@@ -648,6 +723,7 @@ class KeyboardView(context: Context) : View(context) {
         }
         stopSwipeTracking()
         trailActive = false; trail.reset()
+        swipeTrail?.end(fade = true)
         consumeShiftOnce()
         invalidate()
         if (p != null) {

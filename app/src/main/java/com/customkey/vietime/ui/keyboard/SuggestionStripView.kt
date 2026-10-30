@@ -35,9 +35,13 @@ class SuggestionStripView(context: Context) : View(context) {
     }
 
     /** Biểu tượng ở chế độ công cụ. */
-    enum class Tool(val icon: String, val label: String) {
-        EMOJI("😊", "Emoji"), CLIPBOARD("📋", "Clipboard"), EDIT("✂", "Sửa"),
-        TONES("✨", "Thêm dấu"), ONE_HAND("✋", "Một tay"), SETTINGS("⚙", "Cài đặt"),
+    enum class Tool(val iconId: Int, val label: String) {
+        EMOJI(ImeIcons.FACE, "Emoji"),
+        CLIPBOARD(ImeIcons.CLIPBOARD, "Clipboard"),
+        EDIT(ImeIcons.CURSOR, "Sửa"),
+        TONES(ImeIcons.SPARKLE, "Thêm dấu"),
+        ONE_HAND(ImeIcons.ONE_HAND, "Một tay"),
+        SETTINGS(ImeIcons.SETTINGS, "Cài đặt"),
     }
 
     var listener: Listener? = null
@@ -126,9 +130,9 @@ class SuggestionStripView(context: Context) : View(context) {
             chipPaint.color = if (pressed == TOOLS || toolsOpen) s.pressedFill else s.modifierFill
             rect.set(6 * d, 6 * d, left - 6 * d, height - 6 * d)
             canvas.drawRoundRect(rect, 10 * d, 10 * d, chipPaint)
-            boldPaint.color = s.accent
-            canvas.drawText(if (toolsOpen) "⌨" else "✦", rect.centerX(), cy, boldPaint)
-            boldPaint.color = s.stripText
+            iconPaint.color = if (toolsOpen) s.accent else s.stripText
+            val iconId = if (toolsOpen) ImeIcons.KB_DISMISS else ImeIcons.GRID
+            ImeIcons.draw(canvas, iconId, rect.centerX(), height / 2f, 19 * d, iconPaint)
         }
 
         val msg = message
@@ -140,7 +144,6 @@ class SuggestionStripView(context: Context) : View(context) {
             toolbarMode -> {
                 val tools = Tool.entries
                 val cell = avail / tools.size
-                val icy = height / 2f - (iconPaint.descent() + iconPaint.ascent()) / 2f
                 for ((i, t) in tools.withIndex()) {
                     val x0 = left + i * cell
                     if (pressed == TOOLBAR_BASE + i) {
@@ -148,7 +151,8 @@ class SuggestionStripView(context: Context) : View(context) {
                         rect.set(x0 + 4 * d, 6 * d, x0 + cell - 4 * d, height - 6 * d)
                         canvas.drawRoundRect(rect, 12 * d, 12 * d, chipPaint)
                     }
-                    canvas.drawText(t.icon, x0 + cell / 2f, icy, iconPaint)
+                    iconPaint.color = if (pressed == TOOLBAR_BASE + i) s.accent else s.stripText
+                    ImeIcons.draw(canvas, t.iconId, x0 + cell / 2f, height / 2f, 20 * d, iconPaint)
                 }
             }
             items.isNotEmpty() -> {
@@ -189,9 +193,8 @@ class SuggestionStripView(context: Context) : View(context) {
                 rect.set(x0 + 2 * d, 8 * d, x0 + collapseWidth - 4 * d, height - 8 * d)
                 canvas.drawRoundRect(rect, 10 * d, 10 * d, chipPaint)
             }
-            textPaint.color = withAlpha(s.stripText, 0.6f)
-            canvas.drawText(if (collapsed) "⌃" else "⌄", x0 + collapseWidth / 2f - d, cy, textPaint)
-            textPaint.color = s.stripText
+            iconPaint.color = withAlpha(s.stripText, 0.65f)
+            ImeIcons.draw(canvas, ImeIcons.CHEVRON_DOWN, x0 + collapseWidth / 2f, height / 2f, 16 * d, iconPaint, if (collapsed) 180f else 0f)
         }
         if (undo) {
             chipPaint.color = s.accent

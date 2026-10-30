@@ -1,6 +1,7 @@
 package com.customkey.vietime.ui.onboarding
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,6 +24,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -50,16 +52,24 @@ fun SetupCard(status: ImeStatus, onOpenImeSettings: () -> Unit, onPickIme: () ->
     val p = LocalTx.current
     if (status.selected) {
         TxSection {
-            Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                Modifier.fillMaxWidth().clickable(onClick = onPickIme).padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Box(Modifier.size(42.dp).background(p.green, CircleShape), contentAlignment = Alignment.Center) {
                     GlyphIcon(Glyph.Check, Color.White, 24.dp)
                 }
                 Spacer(Modifier.width(14.dp))
                 Column(Modifier.weight(1f)) {
-                    Text("Bàn phím đã bật", color = p.label, fontSize = 17.sp, fontWeight = FontWeight.SemiBold)
-                    Text("Thử gõ ngay bên dưới.", color = p.secondary, fontSize = 14.sp)
+                    Text("Bàn phím đang hoạt động", color = p.label, fontSize = 17.sp, fontWeight = FontWeight.SemiBold)
+                    Text("TxTelex đã sẵn sàng. Thử gõ bên dưới.", color = p.secondary, fontSize = 13.5.sp)
                 }
-                Text("Đổi", Modifier.padding(start = 8.dp), color = p.accent, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+                Box(
+                    Modifier.clip(CircleShape).background(p.accent.copy(alpha = 0.12f)).padding(horizontal = 12.dp, vertical = 6.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text("Đổi bàn phím", color = p.accent, fontSize = 13.5.sp, fontWeight = FontWeight.SemiBold)
+                }
             }
         }
     } else {

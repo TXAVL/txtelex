@@ -17,6 +17,8 @@ import android.widget.LinearLayout
 class KeyboardPanel(context: Context) : FrameLayout(context) {
     val strip = SuggestionStripView(context).also { it.drawsBackground = false }
     val keyboard = KeyboardView(context).also { it.drawsBackground = false }
+    /** Vệt sáng gõ vuốt mềm mại dạng neon overlay trên vùng phím. */
+    val swipeTrail = SwipeTrailView(context)
     /** Bảng công cụ (Clipboard / Mẫu câu…) — đè lên vùng phím, giữ nguyên chiều cao. */
     val tools = ToolsPaneView(context).also { it.visibility = GONE }
     /** Bảng emoji / kaomoji đầy đủ theo ref VietTelex. */
@@ -33,6 +35,7 @@ class KeyboardPanel(context: Context) : FrameLayout(context) {
             field = v
             strip.style = v
             keyboard.style = v
+            swipeTrail.trailColor = v.accent
             tools.style = v
             emoji.style = v
             toast.applyStyle(v)
@@ -111,24 +114,25 @@ class KeyboardPanel(context: Context) : FrameLayout(context) {
         val ox = (mainContainer.left + body.left + keyboard.left).toFloat()
         val oy = (mainContainer.top + body.top + keyboard.top).toFloat()
         val kh = k.bottom - k.top
-        val w = maxOf(k.width * 1.18f, 46 * d)
-        val h = kh * 1.3f
+        val kw = k.right - k.left
+        val w = maxOf(kw * 1.25f, 48 * d)
+        val h = kh * 1.25f
         var l = ox + k.centerX - w / 2f
         l = l.coerceIn(2 * d, width - w - 2 * d)
-        val bottom = oy + k.top + kh * 0.2f
+        val bottom = oy + k.top - 2.5f * d
         val top = (bottom - h).coerceAtLeast(0f)
         balloonRect.set(l, top, l + w, bottom)
-        val r = style.cornerRadiusDp * d * 1.4f
-        balloonShadow.color = 0x66000000
-        balloonRect.offset(0f, 2 * d); canvas.drawRoundRect(balloonRect, r, r, balloonShadow); balloonRect.offset(0f, -2 * d)
+        val r = 12 * d
+        balloonShadow.color = 0x55000000
+        balloonRect.offset(0f, 2.5f * d); canvas.drawRoundRect(balloonRect, r, r, balloonShadow); balloonRect.offset(0f, -2.5f * d)
         balloonPaint.color = style.keyFill or (0xFF shl 24)
         canvas.drawRoundRect(balloonRect, r, r, balloonPaint)
-        balloonPaint.color = style.accent and 0x00FFFFFF or (0x55 shl 24)
+        balloonPaint.color = if (style.borderWidthDp > 0f) style.borderColor else (style.accent and 0x00FFFFFF or (0x44 shl 24))
         balloonPaint.style = Paint.Style.STROKE; balloonPaint.strokeWidth = 1.2f * d
         canvas.drawRoundRect(balloonRect, r, r, balloonPaint)
         balloonPaint.style = Paint.Style.FILL
         balloonText.color = style.label or (0xFF shl 24)
-        balloonText.textSize = (if (label.length > 1) 20f else 30f) * resources.displayMetrics.scaledDensity * keyboard.labelScale
+        balloonText.textSize = (if (label.length > 1) 22f else 32f) * resources.displayMetrics.scaledDensity * keyboard.labelScale
         canvas.drawText(label, balloonRect.centerX(), balloonRect.centerY() - (balloonText.descent() + balloonText.ascent()) / 2f, balloonText)
     }
 
@@ -143,10 +147,12 @@ class KeyboardPanel(context: Context) : FrameLayout(context) {
         descendantFocusability = android.view.ViewGroup.FOCUS_BLOCK_DESCENDANTS
         setWillNotDraw(false)
         keyboard.onPreviewChanged = { invalidate() }
+        keyboard.swipeTrail = swipeTrail
         val d = resources.displayMetrics.density
         val stripH = (42 * d).toInt()
         mainContainer.addView(strip, LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, stripH))
         body.addView(keyboard, FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
+        body.addView(swipeTrail, FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
         body.addView(tools, FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
         body.addView(emoji, FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
         mainContainer.addView(body, LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))

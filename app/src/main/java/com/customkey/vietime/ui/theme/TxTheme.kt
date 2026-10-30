@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -75,6 +76,7 @@ class TxPalette(
     val dark: Boolean,
     val bg: Color,
     val card: Color,
+    val cardBorder: Color,
     val label: Color,
     val secondary: Color,
     val tertiary: Color,
@@ -89,7 +91,7 @@ class TxPalette(
 
 private val LightPalette = TxPalette(
     dark = false,
-    bg = Color(0xFFF2F3F7), card = Color.White,
+    bg = Color(0xFFF3F4F8), card = Color.White, cardBorder = Color(0x0F000000),
     label = Color(0xFF14171F), secondary = Color(0xFF6B7180), tertiary = Color(0xFFA2A8B5),
     separator = Color(0x1F14171F), fill = Color(0x14293A66),
     accent = Color(0xFF1668F0), onAccent = Color.White,
@@ -97,11 +99,11 @@ private val LightPalette = TxPalette(
 )
 private val DarkPalette = TxPalette(
     dark = true,
-    bg = Color(0xFF0B0D13), card = Color(0xFF171A23),
+    bg = Color(0xFF0F1117), card = Color(0xFF191D26), cardBorder = Color(0x1FFFFFFF),
     label = Color(0xFFF1F3F9), secondary = Color(0xFF9AA2B5), tertiary = Color(0xFF5E667A),
     separator = Color(0x2EFFFFFF), fill = Color(0x1FFFFFFF),
     accent = Color(0xFF5B9CFF), onAccent = Color(0xFF06101F),
-    green = Color(0xFF3BD67B), red = Color(0xFFFF5C6F), bar = Color(0xF2222633),
+    green = Color(0xFF3BD67B), red = Color(0xFFFF5C6F), bar = Color(0xF21F232E),
 )
 
 val LocalTx = staticCompositionLocalOf { LightPalette }
@@ -114,6 +116,7 @@ object Tx {
     val TextDim: Color @Composable get() = LocalTx.current.secondary
     val TextFaint: Color @Composable get() = LocalTx.current.tertiary
     val Stroke: Color @Composable get() = LocalTx.current.separator
+    val Border: Color @Composable get() = LocalTx.current.cardBorder
     val Glass: Color @Composable get() = LocalTx.current.fill
     val GlassStrong: Color @Composable get() = LocalTx.current.fill
     val Deep: Color @Composable get() = LocalTx.current.card
@@ -126,7 +129,7 @@ object Tx {
     val Red: Color @Composable get() = LocalTx.current.red
     val accent: Brush @Composable get() = SolidColor(LocalTx.current.accent)
     val accentSoft: Brush @Composable get() = SolidColor(LocalTx.current.accent.copy(alpha = 0.14f))
-    val border: Brush @Composable get() = SolidColor(LocalTx.current.separator)
+    val border: Brush @Composable get() = SolidColor(LocalTx.current.cardBorder)
     val background: Brush @Composable get() = SolidColor(LocalTx.current.bg)
 }
 
@@ -203,7 +206,13 @@ fun TxSection(header: String? = null, footer: String? = null, content: @Composab
     Column(Modifier.fillMaxWidth().padding(top = 10.dp)) {
         if (header != null) Text(header.uppercase(), Modifier.padding(start = 14.dp, bottom = 7.dp), color = p.secondary,
             fontSize = 12.sp, fontWeight = FontWeight.SemiBold, letterSpacing = 0.8.sp)
-        Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(16.dp)).background(p.card), content = content)
+        Column(
+            Modifier.fillMaxWidth()
+                .clip(RoundedCornerShape(18.dp))
+                .border(0.8.dp, p.cardBorder, RoundedCornerShape(18.dp))
+                .background(p.card),
+            content = content
+        )
         if (footer != null) Text(footer, Modifier.padding(start = 14.dp, end = 14.dp, top = 7.dp), color = p.secondary, fontSize = 12.5.sp, lineHeight = 17.sp)
     }
 }
@@ -272,7 +281,7 @@ fun TxSwitchRow(title: String, subtitle: String? = null, checked: Boolean, onCha
 
 // ───────────────────────────── thẻ + nút (tên cũ) ─────────────────────────────
 
-/** Thẻ bo tròn nền trắng/xám đậm. (Tên cũ "Glass" — giờ là thẻ phẳng, không còn viền neon.) */
+/** Thẻ bo tròn cao cấp với viền kính tinh tế (GlassCard). */
 @Composable
 fun GlassCard(
     modifier: Modifier = Modifier,
@@ -283,7 +292,9 @@ fun GlassCard(
 ) {
     val p = LocalTx.current
     Column(
-        modifier.fillMaxWidth().clip(RoundedCornerShape(16.dp))
+        modifier.fillMaxWidth()
+            .clip(RoundedCornerShape(18.dp))
+            .border(0.8.dp, if (glow) p.accent.copy(alpha = 0.4f) else p.cardBorder, RoundedCornerShape(18.dp))
             .background(if (glow) p.accent.copy(alpha = 0.12f) else p.card)
             .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier)
             .padding(padding),
@@ -337,8 +348,9 @@ fun TxFloatingTabBar(tabs: List<TxTabSpec>, selected: Int, collapsed: Boolean, o
     val pillW by animateDpAsState(with(density) { (sel?.second ?: 0).toDp() }, spec, label = "pw")
     val pillH by animateDpAsState(with(density) { (sel?.third ?: 0).toDp() }, spec, label = "ph")
     Box(
-        modifier.navigationBarsPadding().padding(bottom = 10.dp)
-            .shadow(14.dp, CircleShape, ambientColor = Color.Black.copy(0.25f), spotColor = Color.Black.copy(0.25f))
+        modifier.navigationBarsPadding().padding(bottom = 12.dp)
+            .shadow(16.dp, CircleShape, ambientColor = Color.Black.copy(0.2f), spotColor = Color.Black.copy(0.2f))
+            .border(0.8.dp, p.cardBorder, CircleShape)
             .background(p.bar, CircleShape).padding(5.dp),
     ) {
         if (sel != null) Box(Modifier.offset(x = pillX).size(pillW, pillH).background(p.accent, CircleShape))
